@@ -4,7 +4,7 @@
 #'              by Renjun Zhao, used for daily streamflow simulation.
 #' @param PREC Time series of precipitation (daily)
 #' @param EVAP Time series of pan evaporation or potential evapotranspiration 
-#' (daily), length must equal to \code{PREC}
+#' (daily), length must equal to `PREC`
 #' @param params Parameters (see below)
 #' @param area Basin area.
 #' 

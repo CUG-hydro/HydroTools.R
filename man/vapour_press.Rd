@@ -14,7 +14,7 @@ q2ea(q, p)
 
 q2RH(q, p, t)
 
-RH2q(RH, t)
+RH2q(RH, p, t)
 
 cal_es(t)
 }
@@ -35,4 +35,6 @@ Estimate saturation vapor pressure from air temperature.
 }
 \references{
 https://www.eol.ucar.edu/projects/ceop/dm/documents/refdata_report/eqns.html, Eq-17
+
+https://earthscience.stackexchange.com/questions/2360/how-do-i-convert-specific-humidity-to-relative-humidity
 }

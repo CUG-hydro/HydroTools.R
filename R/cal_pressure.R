@@ -27,12 +27,17 @@ q2RH <- function(q, p, t) {
   ea / es * 100
 }
 
+#' @references
+#' https://earthscience.stackexchange.com/questions/2360/how-do-i-convert-specific-humidity-to-relative-humidity
+#' 
 #' @rdname vapour_press
 #' @export
-RH2q <- function(RH, t) {
+RH2q <- function(RH, p, t) {
   # ea <- vapour_press(q, p)
   es <- cal_es(t)
   ea <- es * RH/100
+
+  ws = es / p 
   # ea / es * 100
 }
 
