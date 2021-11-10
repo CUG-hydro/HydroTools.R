@@ -1,0 +1,21 @@
+.Rproj.user
+.Rhistory
+.RData
+
+*.csv
+*.pdf
+
+PSO.out
+inst
+OUTPUT
+
+*.nc
+*.rda
+*.tif
+*.txt
+
+*/deprecated
+examples/
+# scripts/
+
+R/VIC5
