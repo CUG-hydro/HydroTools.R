@@ -9,6 +9,7 @@
 #'   vapor \eqn{L = 2.5 \times 10^6J/kg}
 #' - `Es.T0`: \eqn{e_s(T_0) = 6.11hPa} is the saturation vapor pressure at the
 #'   absolute zero \eqn{T_0 = 273.15K}.
+#' - `atm`: standard pressure at sea surface, `101.325 kPa`
 NULL
 
 #' @rdname constants
@@ -22,6 +23,10 @@ L <- 2.5e6
 #' @rdname constants
 #' @export
 Es.T0 <- 6.11
+
+#' @export
+#' @rdname constants
+atm = 101.325
 
 #' Molecular weight
 #' 

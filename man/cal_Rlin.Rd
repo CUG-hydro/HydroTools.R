@@ -14,8 +14,8 @@ cal_Rlin(temp, ea = NULL, s = 1, method = "KON")
 \item{s}{Cloud air emissivity, the ratio between acutal incomming shortwave
 radiation and clear sky incoming shortwave radiation.}
 
-\item{method}{The method to estimate the air emissivity. Must be one of
-'MAR', 'SWI', 'IJ', 'BRU', 'SAT', and 'KON'.}
+\item{method}{The method to esteimate the air emissivity. Must be one of
+'MAR', 'SWI', 'IJ', 'BRU', 'T', and 'KON'.}
 }
 \value{
 Incomming longwave radiation \verb{[W /m2]}.

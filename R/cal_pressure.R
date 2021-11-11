@@ -10,9 +10,17 @@
 #' @references
 #' https://www.eol.ucar.edu/projects/ceop/dm/documents/refdata_report/eqns.html, Eq-17
 #'
+#' @examples
+#' RH = 90
+#' p = atm
+#' t = 30
+#' q = RH2q(RH, p, t)
+#' RH2 = q2RH(q, p, t)
+#' e = q2ea(q, p)
+#' es = cal_es(t)
 #' @export
 vapour_press <- function(q, p) {
-    q * p / (0.622 + 0.378 * q)
+    q * p / (epsilon + (1 - epsilon) * q)
 }
 
 #' @export
@@ -37,9 +45,22 @@ RH2q <- function(RH, p, t) {
   es <- cal_es(t)
   ea <- es * RH/100
 
-  ws = es / p 
-  # ea / es * 100
+  # ws = epsilon * es / (p - es)
+  w <- epsilon * ea / (p - ea)
+  # w = RH/100 * ws 
+  w2q(w) # q: g / g
 }
+
+
+#' `w`: mix ratio, m_v / m_d
+#' @rdname vapour_press
+#' @export
+w2q <- function(w, p) w / (w + 1)
+
+#' @rdname vapour_press
+#' @export
+q2w <- function(q, p) q / (1 - q)
+
 
 #' Estimate saturation vapor pressure.
 #'
@@ -94,7 +115,7 @@ cal_ea <- function(tmin, tmax = NULL, rhmax = NULL, rhmean = NULL, rhmin = NULL)
 }
 
 #' Estimate the slope of the saturation vapour pressure curve.
-#'
+#' 
 #' @description Estimate the slope of the saturation vapour pressure curve
 #'              by providing a air temperature.
 #'

@@ -147,8 +147,8 @@ cal_Rln <- function(tmax, tmin, ea, Rs = NULL, Rso = NULL, cld = NULL) {
 #' @param ea Near surface actual vapour pressure `[kPa]`.
 #' @param s Cloud air emissivity, the ratio between acutal incomming shortwave
 #' radiation and clear sky incoming shortwave radiation.
-#' @param method The method to estimate the air emissivity. Must be one of 
-#' 'MAR', 'SWI', 'IJ', 'BRU', 'SAT', and 'KON'.
+#' @param method The method to esteimate the air emissivity. Must be one of 
+#' 'MAR', 'SWI', 'IJ', 'BRU', 'T', and 'KON'.
 #' 
 #' @return Incomming longwave radiation `[W /m2]`.
 #' @export

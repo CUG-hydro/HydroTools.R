@@ -5,6 +5,8 @@
 \alias{q2ea}
 \alias{q2RH}
 \alias{RH2q}
+\alias{w2q}
+\alias{q2w}
 \alias{cal_es}
 \title{Actual vapour pressure (kPa)}
 \usage{
@@ -15,6 +17,10 @@ q2ea(q, p)
 q2RH(q, p, t)
 
 RH2q(RH, p, t)
+
+w2q(w, p)
+
+q2w(q, p)
 
 cal_es(t)
 }
@@ -32,6 +38,15 @@ saturation vapor pressure \verb{[kPa]}.
 }
 \description{
 Estimate saturation vapor pressure from air temperature.
+}
+\examples{
+RH = 90
+p = atm
+t = 30
+q = RH2q(RH, p, t)
+RH2 = q2RH(q, p, t)
+e = q2ea(q, p)
+es = cal_es(t)
 }
 \references{
 https://www.eol.ucar.edu/projects/ceop/dm/documents/refdata_report/eqns.html, Eq-17

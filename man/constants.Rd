@@ -6,8 +6,11 @@
 \alias{T0}
 \alias{L}
 \alias{Es.T0}
+\alias{atm}
 \title{constants in meteorology}
 \format{
+An object of class \code{numeric} of length 1.
+
 An object of class \code{numeric} of length 1.
 
 An object of class \code{numeric} of length 1.
@@ -20,6 +23,8 @@ T0
 L
 
 Es.T0
+
+atm
 }
 \description{
 \itemize{
@@ -29,6 +34,7 @@ Kelvin \eqn{T_0} (K)
 vapor \eqn{L = 2.5 \times 10^6J/kg}
 \item \code{Es.T0}: \eqn{e_s(T_0) = 6.11hPa} is the saturation vapor pressure at the
 absolute zero \eqn{T_0 = 273.15K}.
+\item \code{atm}: standard pressure at sea surface, \verb{101.325 kPa}
 }
 }
 \keyword{datasets}
