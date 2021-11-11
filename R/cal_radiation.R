@@ -28,11 +28,11 @@
 #' Estimate daily daily extraterrestrial radiation.
 #' 
 #' @description Estimate daily daily extraterrestrial radiation `[MJ m-2 day-1]`.
-#'
+#' 
 #' @param lat Latitude `[degree]`.
 #' @param dates A R Date type of a vector of Date type. If not provided, it will
 #'              Regard the ssd series is begin on the first day of a year.
-#'
+#' 
 #' @return extraterrestrial radiation `[MJ m-2 day-1]`.
 #' @export
 cal_Ra <- function(lat, dates) {

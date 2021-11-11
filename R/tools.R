@@ -1,3 +1,5 @@
+.prj84 <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
+
 # remove NA_real_ and Inf values in Y_sim, Y_obs and w
 valid <- function(x) !is.na(x) & is.finite(x)
 

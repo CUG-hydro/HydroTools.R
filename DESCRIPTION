@@ -1,6 +1,6 @@
 Package: hydroTools
 Title: Tools for hydrological model
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person("Dongdong", "Kong", role = c("aut", "cre"), 
         email = "kongdd.sysu@gmail.com", comment = c(ORCID = "0000-0003-1836-8172")), 
@@ -12,8 +12,7 @@ Imports:
     VIC5, 
     foreach, iterators, magrittr, 
     lubridate,
-    matrixStats, 
-    sp, raster, terra, 
+    matrixStats, rtop, 
     readr, glue,
     data.table, 
     hydroGOF, maptools, ncdf4, shape, stringr,
@@ -22,7 +21,7 @@ Imports:
 Suggests: 
     testthat (>= 2.1.0),
     covr, 
-    rgeos
+    sp, raster, terra, rgeos
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

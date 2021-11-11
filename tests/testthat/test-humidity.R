@@ -26,3 +26,7 @@ test_that("humidity function works", {
 
     delta_es = delta_es(20)
 })
+
+yobs <- rnorm(100)
+#' ysim = yobs + rnorm(100)/4
+#' GOF(yobs, ysim)
