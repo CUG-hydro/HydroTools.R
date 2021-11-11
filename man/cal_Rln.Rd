@@ -2,7 +2,7 @@
 % Please edit documentation in R/cal_radiation.R
 \name{cal_Rln}
 \alias{cal_Rln}
-\title{Estimate net outgoing longwave radiation.}
+\title{Net outgoing longwave radiation.}
 \usage{
 cal_Rln(tmax, tmin, ea, Rs = NULL, Rso = NULL, cld = NULL)
 }
@@ -28,5 +28,5 @@ calculate net outgoing longwave radiation than Rso.}
 Net outgoing longwave radiation \verb{[MJ m-2 day-1]}
 }
 \description{
-Estimate net outgoing longwave radiation.
+Net outgoing longwave radiation.
 }

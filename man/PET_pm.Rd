@@ -17,7 +17,7 @@ PET_pm(
   z = NULL,
   ea = NULL,
   es = NULL,
-  rhmean = NULL,
+  RH_mean = NULL,
   pres = NULL,
   Rso = NULL,
   cld = NULL,
@@ -61,7 +61,7 @@ air temperature and mean relative humidity.}
 \item{es}{Saturated vapor pressure \verb{[kPa]}. Can be estimated by maximum or
 minimum air temperature if is not provided.}
 
-\item{rhmean}{Daily mean relative humidity \verb{[\%]}. If not provided then
+\item{RH_mean}{Daily mean relative humidity \verb{[\%]}. If not provided then
 the actual vapor pressure would be estimated by minimum air
 temperature.}
 

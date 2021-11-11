@@ -2,7 +2,7 @@
 % Please edit documentation in R/cal_radiation.R
 \name{cal_Rs}
 \alias{cal_Rs}
-\title{Estimate daily solar radiation.}
+\title{Daily inward shortwave solar radiation.}
 \usage{
 cal_Rs(ssd, lat, dates = NULL, a = 0.25, b = 0.5, cld = NULL)
 }
@@ -12,7 +12,7 @@ cal_Rs(ssd, lat, dates = NULL, a = 0.25, b = 0.5, cld = NULL)
 \item{lat}{Latitude \verb{[degree]}.}
 
 \item{dates}{A R Date type of a vector of Date type. If not provided, it will
-Regard the ssd series is begin on the first day of a year.}
+regard the ssd series is begin on the first day of a year.}
 
 \item{a}{Coefficient of the Angstrom formula. Determine the relationship
 between ssd and radiation. Default 0.25.}
@@ -26,13 +26,11 @@ calculate solar radiation rather than SSD and parameter a and b.}
 Solar radiation at crop surface \verb{[MJ m-2 day-1]}.
 }
 \description{
-Estimate daily solar radiation at crop surface \verb{[MJ m-2 day-1]}
-by providing sunshine duration (SSD) in hours or cloud cover
-in fraction.
+Estimate daily solar radiation at crop surface \verb{[MJ m-2 day-1]} by providing
+sunshine duration (SSD) in hours or cloud cover in fraction.
 }
 \references{
 Martinezlozano J A, Tena F, Onrubia J E, et al. The historical
-evolution of the Angstrom formula and its modifications: review
-and bibliography.\link{J}. Agricultural & Forest Meteorology, 1985,
-33(2):109-128.
+evolution of the Angstrom formula and its modifications: review and
+bibliography.\link{J}. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
 }

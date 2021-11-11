@@ -2,7 +2,7 @@
 % Please edit documentation in R/ET0_penman65.R
 \name{soil_heat_flux}
 \alias{soil_heat_flux}
-\title{Estimate monthly soil heat flux.}
+\title{Soil heat flux.}
 \usage{
 soil_heat_flux(t.p, t.n = NULL, t.c = NULL)
 }
@@ -17,7 +17,6 @@ soil_heat_flux(t.p, t.n = NULL, t.c = NULL)
 Soil heat flux \verb{[MJ m-2 day-1]}.
 }
 \description{
-Estimate monthly soil heat flux (G) from the mean air
-temperature of the previous, current or next month assuming
-as grass crop.
+Estimate monthly soil heat flux (G) from the mean air temperature of the
+previous, current or next month assuming as grass crop.
 }

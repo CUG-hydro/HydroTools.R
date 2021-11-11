@@ -1,9 +1,9 @@
 #' Estimate ET0 by FAO-56 Penman-Monteithe quation.
-#'
+#' 
 #' Estimate reference evapotranspiration (ET0) from a hypothetical short grass 
 #' reference surface using the FAO-56 Penman-Monteithe quation 
 #' (equation 6 in Allen et al. (1998))
-#'
+#' 
 #' @param Rs Incoming shortwave radiation at crop surface `[MJ m-2 day-1]`.
 #'           Can be calculated by [cal_Rs].
 #' @param tmax Daily maximum air temperature at 2m height `[deg Celsius]`.
@@ -28,7 +28,7 @@
 #'           air temperature and mean relative humidity.
 #' @param es Saturated vapor pressure `[kPa]`. Can be estimated by maximum or
 #'           minimum air temperature if is not provided.
-#' @param rhmean Daily mean relative humidity `[%]`. If not provided then
+#' @param RH_mean Daily mean relative humidity `[%]`. If not provided then
 #'               the actual vapor pressure would be estimated by minimum air
 #'               temperature.
 #' @param pres Air pressure `[kPa]`. If not provided, must provide z.
@@ -42,17 +42,17 @@
 #'
 #' @return Reference evapotranspiration ET0 from a hypothetical grass
 #'         reference surface `[mm day-1]`.
-#'
+#' 
 #' @export
 PET_pm <- function(Rs, tmax, tmin, ws, G = 0.0, h.ws = 10.0, albedo = 0.23,
                    delta = NULL, gamma = NULL, z = NULL, ea = NULL, es = NULL,
-                   rhmean = NULL, pres = NULL, Rso = NULL, cld = NULL,
+                   RH_mean = NULL, pres = NULL, Rso = NULL, cld = NULL,
                    tall_crop = FALSE){
 
   tas <- (tmax + tmin) / 2
   if(is.null(ea))
-    if(!is.null(rhmean)) {
-      ea <- cal_ea(tmin, tmax, rhmean = rhmean)
+    if(!is.null(RH_mean)) {
+      ea <- cal_ea(tmin, tmax, RH_mean = RH_mean)
     } else {
       # if no ea, let ea = es
       ea <- cal_es(tmin)
@@ -109,19 +109,15 @@ PET_hg <- function(tmax, tmin, tmean = NULL, Ra = NULL, lat = NULL, dates=NULL) 
   0.0023 * 0.408 * Ra * sqrt(tmax - tmin) * (tmean + 17.8)
 }
 
-# FAO-56 equations.
-
-#' Calculate psychrometric constant.
+#' Psychrometric constant
 #'
-#' @description Calculate psychrometric constant.
+#' psychrometric constant.
 #'
 #' @param pres Air pressure `[kPa]`.
-#'
 #' @param z Elevation above sea level `[m]`. Must provided if pres
 #'          are not provided.
 #'
 #' @return Psychrometric constant `[kPa degC-1]`.
-#'
 #' @export
 cal_gamma <- function(pres = NULL, z = NULL) {
   if (is.null(pres)) {
@@ -134,16 +130,14 @@ cal_gamma <- function(pres = NULL, z = NULL) {
   0.000665 * pres
 }
 
-#' Estimate monthly soil heat flux.
+#' Soil heat flux.
 #'
-#' @description Estimate monthly soil heat flux (G) from the mean air
-#'              temperature of the previous, current or next month assuming
-#'              as grass crop.
+#' Estimate monthly soil heat flux (G) from the mean air temperature of the 
+#' previous, current or next month assuming as grass crop.
 #'
 #' @param t.p Mean air temperature of the previous month `[Celsius]`.
 #' @param t.n Mean air temperature of the next month `[Celsius]`.
 #' @param t.c Mean air temperature of the current month `[Celsius]`.
-#'
 #'
 #' @return Soil heat flux `[MJ m-2 day-1]`.
 #' @export

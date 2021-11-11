@@ -4,14 +4,14 @@
 \alias{cal_ea}
 \title{Estimate actual vapor pressure.}
 \usage{
-cal_ea(tmin, tmax = NULL, rhmax = NULL, rhmean = NULL, rhmin = NULL)
+cal_ea(tmin, tmax = NULL, RH_max = NULL, RH_min = NULL, RH_mean = NULL)
 }
 \arguments{
 \item{tmin}{Daily minimum air temperature at 2m height \verb{[deg Celsius]}.}
 
 \item{tmax}{Daily maximum air temperature at 2m height \verb{[deg Celsius]}.}
 
-\item{rhmax, rhmean, rhmin}{Daily max, mean and min relative humidity \verb{[\%]}.}
+\item{RH_max, RH_mean, RH_min}{Daily max, mean and min relative humidity \verb{[\%]}.}
 }
 \value{
 Actual vapor pressure (i.e. avp or ea) \verb{[kPa]}.
@@ -21,15 +21,11 @@ Estimate actual vapor pressure by providing daily maximum and minimum
 air temperature, daily maximum, mean and minimum relative humidity.
 }
 \details{
-tmin must be provided.
-If tmax was not provided, avp will only estimated by tmin. If both rhmax and
-rhmin are provided, avp will be estimated by tmax, tmin, rhmax and rhmin.
-
-If rhmin was not provided but provided rhmean, avp will estimated by rhmean,
-tmax and tmin.
-
-If rhmin and rhmean are not provided, avp will estimated by rhmax, tmax and
-tmin.
-
-If rhmax, rhmean and rhmin are not provided, avp will only estimated by tmin.
+tmin must be provided. There are 4 options:
+\enumerate{
+\item \code{RH_max}, \code{RH_min} | \code{tmin}, \code{tmax}: \code{(es(tmax) * RH_min + es(tmin) * RH_max)/200}
+\item \code{RH_mean}          | \code{tmin}, \code{tmax}: \code{(es(tmax) + es(tmin)) * RH_mean/200}
+\item \code{RH_max}           | \code{tmin}        : \code{es(tmin) * RH_max / 100}
+\item \code{tmin}                             : \code{es(tmin)}
+}
 }

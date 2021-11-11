@@ -60,28 +60,27 @@ cal_Ra <- function(lat, dates) {
 #' @rdname cal_Ra
 ext_rad <- cal_Ra
 
-#' Estimate daily solar radiation.
+#' Daily inward shortwave solar radiation.
 #'
-#' @description Estimate daily solar radiation at crop surface `[MJ m-2 day-1]`
-#'              by providing sunshine duration (SSD) in hours or cloud cover
-#'              in fraction.
-#'
-#' @param ssd sunshine duration [hours].
-#' @param lat Latitude `[degree]`.
-#' @param dates A R Date type of a vector of Date type. If not provided, it will
-#'              Regard the ssd series is begin on the first day of a year.
-#' @param a Coefficient of the Angstrom formula. Determine the relationship
-#'          between ssd and radiation. Default 0.25.
+#' Estimate daily solar radiation at crop surface `[MJ m-2 day-1]` by providing 
+#' sunshine duration (SSD) in hours or cloud cover in fraction.
+#' 
+#' @param ssd sunshine duration [hours]. 
+#' @param lat Latitude `[degree]`. 
+#' @param dates A R Date type of a vector of Date type. If not provided, it will 
+#' regard the ssd series is begin on the first day of a year. 
+#' @param a Coefficient of the Angstrom formula. Determine the relationship 
+#' between ssd and radiation. Default 0.25. 
 #' @param b Coefficient of the Angstrom formula. Default 0.50.
 #' @param cld Cloud cover `[fraction]`. If provided it would be directly used to
-#'            calculate solar radiation rather than SSD and parameter a and b.
+#' calculate solar radiation rather than SSD and parameter a and b.
 #'
 #' @return Solar radiation at crop surface `[MJ m-2 day-1]`.
-#' 
-#' @references Martinezlozano J A, Tena F, Onrubia J E, et al. The historical
-#'             evolution of the Angstrom formula and its modifications: review
-#'             and bibliography.[J]. Agricultural & Forest Meteorology, 1985,
-#'             33(2):109-128.
+#'
+#' @references 
+#' Martinezlozano J A, Tena F, Onrubia J E, et al. The historical
+#' evolution of the Angstrom formula and its modifications: review and
+#' bibliography.[J]. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
 #' @export
 cal_Rs <- function(ssd, lat, dates = NULL, a = 0.25, b = 0.5, cld = NULL) {
   lat <- lat*pi/180
@@ -107,9 +106,9 @@ cal_Rs <- function(ssd, lat, dates = NULL, a = 0.25, b = 0.5, cld = NULL) {
   Rs
 }
 
-#' Estimate net outgoing longwave radiation.
-#'
-#' @description Estimate net outgoing longwave radiation.
+#' Net outgoing longwave radiation.
+#' 
+#' Net outgoing longwave radiation.
 #'
 #' @param tmax Daily maximum air temperature at 2m height `[deg Celsius]`.
 #' @param tmin Daily minimum air temperature at 2m height `[deg Celsius]`.

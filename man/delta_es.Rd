@@ -2,7 +2,7 @@
 % Please edit documentation in R/cal_pressure.R
 \name{delta_es}
 \alias{delta_es}
-\title{Estimate the slope of the saturation vapour pressure curve.}
+\title{The slope of the saturation vapour pressure curve.}
 \usage{
 delta_es(t)
 }
@@ -13,6 +13,5 @@ delta_es(t)
 Slope of the saturation vapour pressure curve.
 }
 \description{
-Estimate the slope of the saturation vapour pressure curve
-by providing a air temperature.
+the slope of the saturation vapour pressure curve by providing a air temperature.
 }

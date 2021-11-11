@@ -2,7 +2,7 @@
 % Please edit documentation in R/ET0_penman65.R
 \name{cal_gamma}
 \alias{cal_gamma}
-\title{Calculate psychrometric constant.}
+\title{Psychrometric constant}
 \usage{
 cal_gamma(pres = NULL, z = NULL)
 }
@@ -16,5 +16,5 @@ are not provided.}
 Psychrometric constant \verb{[kPa degC-1]}.
 }
 \description{
-Calculate psychrometric constant.
+psychrometric constant.
 }

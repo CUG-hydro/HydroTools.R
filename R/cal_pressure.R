@@ -81,43 +81,35 @@ cal_es <- function(t) {
 #' 
 #' @param tmax Daily maximum air temperature at 2m height `[deg Celsius]`.
 #' @param tmin Daily minimum air temperature at 2m height `[deg Celsius]`.
-#' @param rhmax,rhmean,rhmin Daily max, mean and min relative humidity `[%]`.
+#' @param RH_max,RH_mean,RH_min Daily max, mean and min relative humidity `[%]`.
 #'
-#' @details tmin must be provided. 
-#' If tmax was not provided, avp will only estimated by tmin. If both rhmax and 
-#' rhmin are provided, avp will be estimated by tmax, tmin, rhmax and rhmin.
+#' @details tmin must be provided. There are 4 options:
+#' 1. `RH_max`, `RH_min` | `tmin`, `tmax`: `(es(tmax) * RH_min + es(tmin) * RH_max)/200`
+#' 2. `RH_mean`          | `tmin`, `tmax`: `(es(tmax) + es(tmin)) * RH_mean/200`
+#' 3. `RH_max`           | `tmin`        : `es(tmin) * RH_max / 100`
+#' 4. `tmin`                             : `es(tmin)`
 #' 
-#' If rhmin was not provided but provided rhmean, avp will estimated by rhmean, 
-#' tmax and tmin.
-#' 
-#' If rhmin and rhmean are not provided, avp will estimated by rhmax, tmax and 
-#' tmin.
-#' 
-#' If rhmax, rhmean and rhmin are not provided, avp will only estimated by tmin.
-#'
 #' @return Actual vapor pressure (i.e. avp or ea) `[kPa]`.
 #' @export
-cal_ea <- function(tmin, tmax = NULL, rhmax = NULL, rhmean = NULL, rhmin = NULL) {
-  if(is.null(tmax))
-    return(cal_es(tmin))
+cal_ea <- function(tmin, tmax = NULL, RH_max = NULL, RH_min = NULL, RH_mean = NULL) {
+  if(!is.null(RH_max) && !is.null(RH_min))
+    return((cal_es(tmax) * RH_min + cal_es(tmin) * RH_max)/200)
+
+  if(!is.null(RH_max))
+    return(cal_es(tmin) * RH_max / 100)
   
-  if(!is.null(rhmax) && !is.null(rhmin))
-    return((cal_es(tmax) * rhmin + cal_es(tmin) * rhmax)/200)
-
-  if(!is.null(rhmean))
-    return((cal_es(tmax) + cal_es(tmin)) * rhmean/200)
-
-  if(!is.null(rhmax))
-    return(cal_es(tmin) * rhmax / 100)
-
-  if(is.null(rhmax) && is.null(rhmean) && is.null(rhmin))
+  if(is.null(RH_max) && is.null(RH_mean) && is.null(RH_min))
     return(cal_es(tmin))
+
+  if(!is.null(RH_mean))
+    return((cal_es(tmax) + cal_es(tmin)) * RH_mean/200)
+  # if(is.null(tmax))
+  return(cal_es(tmin))  
 }
 
-#' Estimate the slope of the saturation vapour pressure curve.
+#' The slope of the saturation vapour pressure curve.
 #' 
-#' @description Estimate the slope of the saturation vapour pressure curve
-#'              by providing a air temperature.
+#' the slope of the saturation vapour pressure curve by providing a air temperature.
 #'
 #' @param t Daily mean air temperature at 2m height `[deg Celsius]`.
 #'
