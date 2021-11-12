@@ -25,11 +25,15 @@ q2w(q, p)
 cal_es(t)
 }
 \arguments{
-\item{q}{specific humidity in kg/kg}
+\item{q}{specific humidity in kg/kg or g/g}
 
 \item{p}{surface air pressure}
 
 \item{t}{Air temperature \verb{[Celsius]}.}
+
+\item{RH}{relative humidity, in \%}
+
+\item{w}{mix ratio, m_w / m_d}
 }
 \value{
 e in the same unit as p

@@ -52,3 +52,14 @@ K2T <- function(x) x - 273.15
 #' @rdname unit_convert
 #' @export
 T2K <- function(x) x + 273.15
+
+#' @rdname unit_convert
+#' @export
+deg2rad <- function(deg) deg / 180 * pi
+
+#' @param rad angle in radian
+#' @param deg angle in degree
+#' 
+#' @rdname unit_convert
+#' @export
+rad2deg <- function(rad) rad / pi * 180

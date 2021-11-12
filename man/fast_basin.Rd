@@ -6,6 +6,9 @@
 \usage{
 fast_basin(dem = "dem.tif")
 }
+\arguments{
+\item{dem}{the path of dem file}
+}
 \description{
 \itemize{
 \item add "c:/Python27/ArcGIS10.2/python2.exe" into system path

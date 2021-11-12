@@ -4,15 +4,13 @@
 \alias{cal_Rs}
 \title{Daily inward shortwave solar radiation.}
 \usage{
-cal_Rs(ssd, lat, dates = NULL, a = 0.25, b = 0.5, cld = NULL)
+cal_Rs(lat, J, ssd = NULL, a = 0.25, b = 0.5, cld = NULL)
 }
 \arguments{
-\item{ssd}{sunshine duration \link{hours}.}
-
 \item{lat}{Latitude \verb{[degree]}.}
 
-\item{dates}{A R Date type of a vector of Date type. If not provided, it will
-regard the ssd series is begin on the first day of a year.}
+\item{ssd}{sunshine duration \link{hours}. If \code{ssd = NULL}, \code{Rs} is the clear-sky
+solar radiation.}
 
 \item{a}{Coefficient of the Angstrom formula. Determine the relationship
 between ssd and radiation. Default 0.25.}
@@ -21,6 +19,9 @@ between ssd and radiation. Default 0.25.}
 
 \item{cld}{Cloud cover \verb{[fraction]}. If provided it would be directly used to
 calculate solar radiation rather than SSD and parameter a and b.}
+
+\item{dates}{A R Date type of a vector of Date type. If not provided, it will
+regard the ssd series is begin on the first day of a year.}
 }
 \value{
 Solar radiation at crop surface \verb{[MJ m-2 day-1]}.
@@ -33,4 +34,7 @@ sunshine duration (SSD) in hours or cloud cover in fraction.
 Martinezlozano J A, Tena F, Onrubia J E, et al. The historical
 evolution of the Angstrom formula and its modifications: review and
 bibliography.\link{J}. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
+}
+\seealso{
+\code{\link[=cal_Ra]{cal_Ra()}}
 }

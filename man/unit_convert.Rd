@@ -9,6 +9,8 @@
 \alias{W2mm}
 \alias{K2T}
 \alias{T2K}
+\alias{deg2rad}
+\alias{rad2deg}
 \title{unit convertion}
 \usage{
 R2Q(R, area = dt * 3.6, dt = 24)
@@ -24,6 +26,10 @@ W2mm(x, tmean = 0)
 K2T(x)
 
 T2K(x)
+
+deg2rad(deg)
+
+rad2deg(rad)
 }
 \arguments{
 \item{R}{runoff (mm per dt)}
@@ -31,6 +37,10 @@ T2K(x)
 \item{area}{basin area (km^2), if area = ,}
 
 \item{dt}{time duration (hour)}
+
+\item{deg}{angle in degree}
+
+\item{rad}{angle in radian}
 }
 \description{
 \itemize{

@@ -1,106 +1,98 @@
-# #' Extraterrestrial radiation
-# #' 
-# #' @param lat latitude
-# #' @param doy doy is the number of the day in the year between 1 (1 January) 
-# #' and 365 or 366 (31 December)
-# #' 
-# #' @return Ra, MJ m-2 d-1
-# #' @export 
-# cal_Ra <- function(lat, doy) {
-#     # solar declination, rad (1 rad = 57.2957795 deg)
-#     delta <- 0.409*sin(0.0172*doy-1.39)
-#     # relative distance Earth-Sun, []
-#     dr <- 1 + 0.033*cos(0.0172*doy)
-#     # sunset hour angle, rad
-#     latr <- lat/57.2957795 # (180/pi)
-#     sset <- -tan(latr)*tan(delta)
-    
-#     omegas <- sset*0
-#     omegas[abs(sset)<=1] <- acos(sset[abs(sset)<=1])
-#     # correction for high latitudes
-#     omegas[sset<(-1)] <- max(omegas)
-#     # Ra, MJ m-2 d-1
-#     Ra <- 37.6*dr*(omegas*sin(latr)*sin(delta)+cos(latr)*cos(delta)*sin(omegas))
-#     Ra <- ifelse(Ra<0,0,Ra)
-#     Ra
-# }
 
-#' Estimate daily daily extraterrestrial radiation.
+#' Daily extraterrestrial radiation.
 #' 
-#' @description Estimate daily daily extraterrestrial radiation `[MJ m-2 day-1]`.
+#' @description Estimate daily extraterrestrial radiation `[MJ m-2 day-1]`.
 #' 
 #' @param lat Latitude `[degree]`.
-#' @param dates A R Date type of a vector of Date type. If not provided, it will
-#'              Regard the ssd series is begin on the first day of a year.
+#' @param J `doy` vector.
 #' 
 #' @return extraterrestrial radiation `[MJ m-2 day-1]`.
+#' @seealso [cal_Rs()]
+#' @importFrom lubridate yday is.Date
 #' @export
-cal_Ra <- function(lat, dates) {
-  lat <- lat * pi/180
-  if (is.numeric(dates)) {
-    J <- dates
-  } else {
-    J <- as.double(format(dates, '%j'))
-  }
+cal_Ra <- function(lat, J) {
+  J %<>% check_doy()
+  dr <- 1 + 0.033 * cos(pi * J / 182.5) # Allen, Eq. 23
+  sigma <- 0.409 * sin(pi * J / 182.5 - 1.39) # Allen, Eq. 24
 
-  dr <- 1 + 0.033 * cos(pi * J/182.5)
-  delta <- 0.408 * sin(pi * J/182.5 - 1.39)
-
-  tmpv <- tan(lat) * tan(delta)
-  tmpv[tmpv > 1.] <- 1.
-  tmpv[tmpv < -1.] <- -1.
-
-  ws <- acos(-tmpv)
-  Ra <- 118.08 * dr/pi * (ws * sin(lat) * sin(delta) + cos(lat) *
-                            cos(delta) * sin(ws))
+  ws <- cal_ws(lat, J)
+  # 24 * 60 * 0.082 = 118.08
+  lat %<>% deg2rad()
+  Ra <- 118.08 * dr / pi * (ws * sin(lat) * sin(sigma) + cos(lat) * cos(sigma) * sin(ws)) # Allen, Eq. 21
+  Ra <- ifelse(Ra < 0, 0, Ra)
   Ra
 }
+# cal_Ra(20, 1)
+# [1] 25.84874
 
 #' @export
 #' @rdname cal_Ra
 ext_rad <- cal_Ra
+
+#' @name cal_ssd
+#' @title sunset hour angle
+#' @description Calculating sunset hour angle (`ws`) according to Allen Eq. 25.
+#' @inheritParams cal_Ra
+#' @export
+NULL
+
+#' @rdname cal_ssd
+#' @export
+cal_ws <- function(lat, J) {
+  lat %<>% deg2rad()
+  sigma <- 0.409 * sin(pi * J / 182.5 - 1.39) # Allen, Eq. 24
+
+  tmp <- clamp(-tan(lat) * tan(sigma), c(-1, 1))
+  ws <- acos(tmp) # Eq. 25
+  ws
+}
+
+#' @rdname cal_ssd
+#' @export
+ws2ssd <- function(ws) ws / pi * 24 # Ge ChaoXiao, Eq. 2-18
+
+#' @rdname cal_ssd
+#' @export
+cal_ssd <- function(lat, J) cal_ws(lat, J) %>% ws2ssd()
+
 
 #' Daily inward shortwave solar radiation.
 #'
 #' Estimate daily solar radiation at crop surface `[MJ m-2 day-1]` by providing 
 #' sunshine duration (SSD) in hours or cloud cover in fraction.
 #' 
-#' @param ssd sunshine duration [hours]. 
-#' @param lat Latitude `[degree]`. 
+#' @param lat Latitude `[degree]`.
 #' @param dates A R Date type of a vector of Date type. If not provided, it will 
 #' regard the ssd series is begin on the first day of a year. 
+#' @param ssd sunshine duration [hours]. If `ssd = NULL`, `Rs` is the clear-sky 
+#' solar radiation.
 #' @param a Coefficient of the Angstrom formula. Determine the relationship 
 #' between ssd and radiation. Default 0.25. 
 #' @param b Coefficient of the Angstrom formula. Default 0.50.
 #' @param cld Cloud cover `[fraction]`. If provided it would be directly used to
 #' calculate solar radiation rather than SSD and parameter a and b.
-#'
+#' 
 #' @return Solar radiation at crop surface `[MJ m-2 day-1]`.
-#'
+#' 
 #' @references 
 #' Martinezlozano J A, Tena F, Onrubia J E, et al. The historical
 #' evolution of the Angstrom formula and its modifications: review and
 #' bibliography.[J]. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
+#' @seealso [cal_Ra()]
 #' @export
-cal_Rs <- function(ssd, lat, dates = NULL, a = 0.25, b = 0.5, cld = NULL) {
-  lat <- lat*pi/180
-  if (is.null(dates)) {
-    J <- rep_len(c(1:365, 1:365, 1:365, 1:366), length(ssd))
-  } else {
-    J <- as.double(format(dates, '%j'))
-  }
+cal_Rs <- function(lat, J, ssd = NULL, a = 0.25, b = 0.5, cld = NULL) {
+  # if (is.null(J)) {
+  #   J <- rep_len(c(1:365, 1:365, 1:365, 1:366), length(ssd))
+  # }
+  J %>% check_doy()
+  Ra = cal_Ra(lat, J)
 
-  delta <- 0.408 * sin(pi * J/182.5 - 1.39)
-  tmpv <- tan(lat*pi/180) * tan(delta)
-  tmpv[tmpv > 1.] <- 1.; tmpv[tmpv < -1.] <- -1.
-  ws <- acos(-tmpv)
-
-  Ra <- 24*60*0.082 * dr/pi * (ws * sin(lat) * sin(delta) + cos(lat) *
-                          cos(delta) * sin(ws))
   if(!is.null(cld)) {
     Rs <- (1. - cld) * Ra
   } else {
-    N <- ws * 24/pi
+    # N <- ws * 24/pi # Ge ChaoXiao, Eq. 2-18
+    N <- cal_ssd(lat, J)
+    if (is.null(ssd)) ssd = N
     Rs <- (a + b * ssd/N) * Ra
   }
   Rs
@@ -109,7 +101,7 @@ cal_Rs <- function(ssd, lat, dates = NULL, a = 0.25, b = 0.5, cld = NULL) {
 #' Net outgoing longwave radiation.
 #' 
 #' Net outgoing longwave radiation.
-#'
+#' 
 #' @param tmax Daily maximum air temperature at 2m height `[deg Celsius]`.
 #' @param tmin Daily minimum air temperature at 2m height `[deg Celsius]`.
 #' @param Rs Incoming shortwave radiation at crop surface `[MJ m-2 day-1]`.
@@ -121,9 +113,9 @@ cal_Rs <- function(ssd, lat, dates = NULL, a = 0.25, b = 0.5, cld = NULL) {
 #'            `[MJ m-2 day-1]`.
 #' @param cld Cloud cover `[fraction]`. If provided it would be directly used to
 #'            calculate net outgoing longwave radiation than Rso.
-#'
+#' 
 #' @return Net outgoing longwave radiation `[MJ m-2 day-1]`
-#'
+#' 
 #' @export
 cal_Rln <- function(tmax, tmin, ea, Rs = NULL, Rso = NULL, cld = NULL) {
   if((is.null(Rs) || is.null(Rso)) && is.null(cld))

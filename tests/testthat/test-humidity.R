@@ -1,8 +1,3 @@
-maxError <- function(yobs, ysim, maxE = 0.005){
-    re = abs(ysim - yobs) #/yobs
-    # print(re)
-    expect_lte(re, maxE)
-}
 
 test_that("humidity function works", {
     RH = 90
@@ -12,7 +7,7 @@ test_that("humidity function works", {
     RH2 = q2RH(q, p, t)
     e = q2ea(q, p)
 
-    maxError(q2RH(q, p, t), RH, 1e-7)
+    max_MAE(q2RH(q, p, t), RH, 1e-7)
 
     e1 = cal_ea(20)
     expect_equal(e1, cal_ea(20, 30))

@@ -2,7 +2,7 @@
 
 #' Actual vapour pressure (kPa)
 #'
-#' @param q specific humidity in kg/kg
+#' @param q specific humidity in kg/kg or g/g
 #' @param p surface air pressure
 #' 
 #' @return e in the same unit as p
@@ -27,6 +27,7 @@ vapour_press <- function(q, p) {
 #' @rdname vapour_press
 q2ea <- vapour_press
 
+#' @param t air temperature, in degC
 #' @rdname vapour_press
 #' @export
 q2RH <- function(q, p, t) {
@@ -35,6 +36,7 @@ q2RH <- function(q, p, t) {
   ea / es * 100
 }
 
+#' @param RH relative humidity, in %
 #' @references
 #' https://earthscience.stackexchange.com/questions/2360/how-do-i-convert-specific-humidity-to-relative-humidity
 #' 
@@ -52,7 +54,7 @@ RH2q <- function(RH, p, t) {
 }
 
 
-#' `w`: mix ratio, m_v / m_d
+#' @param w mix ratio, m_w / m_d
 #' @rdname vapour_press
 #' @export
 w2q <- function(w, p) w / (w + 1)

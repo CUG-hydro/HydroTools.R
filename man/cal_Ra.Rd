@@ -3,21 +3,23 @@
 \name{cal_Ra}
 \alias{cal_Ra}
 \alias{ext_rad}
-\title{Estimate daily daily extraterrestrial radiation.}
+\title{Daily extraterrestrial radiation.}
 \usage{
-cal_Ra(lat, dates)
+cal_Ra(lat, J)
 
-ext_rad(lat, dates)
+ext_rad(lat, J)
 }
 \arguments{
 \item{lat}{Latitude \verb{[degree]}.}
 
-\item{dates}{A R Date type of a vector of Date type. If not provided, it will
-Regard the ssd series is begin on the first day of a year.}
+\item{J}{\code{doy} vector.}
 }
 \value{
 extraterrestrial radiation \verb{[MJ m-2 day-1]}.
 }
 \description{
-Estimate daily daily extraterrestrial radiation \verb{[MJ m-2 day-1]}.
+Estimate daily extraterrestrial radiation \verb{[MJ m-2 day-1]}.
+}
+\seealso{
+\code{\link[=cal_Rs]{cal_Rs()}}
 }

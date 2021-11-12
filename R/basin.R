@@ -2,6 +2,8 @@
 #'
 #' @description
 #' - add "c:/Python27/ArcGIS10.2/python2.exe" into system path
+#' 
+#' @param dem the path of dem file
 #' @export
 fast_basin <- function(dem = "dem.tif") {
   tool <- system.file("python/fastbasin.bat", package = "hydroTools")
