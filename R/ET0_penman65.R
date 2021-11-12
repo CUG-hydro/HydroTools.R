@@ -50,21 +50,22 @@ PET_pm <- function(Rs, tmax, tmin, ws, G = 0.0, h.ws = 10.0, albedo = 0.23,
                    tall_crop = FALSE){
 
   tas <- (tmax + tmin) / 2
-  if(is.null(ea))
-    if(!is.null(RH_mean)) {
+  if(is.null(ea)) {
+    if (!is.null(RH_mean)) {
       ea <- cal_ea(tmin, tmax, RH_mean = RH_mean)
     } else {
       # if no ea, let ea = es
       ea <- cal_es(tmin)
     }
+  }
 
   if (is.null(es)) es <- (cal_es(tmax) + cal_es(tmin)) / 2
   if(is.null(delta)) delta <- delta_es(tas)
 
-  Rl <- cal_Rln(tmax, tmin, ea, Rs, Rso, cld)
-  Rn <- Rs * (1 - albedo) - Rl
+  Rln <- cal_Rln(tmax, tmin, ea, Rs, Rso, cld)
+  Rn <- Rs * (1 - albedo) - Rln
   Rn[Rn < 0] <- 0
-
+  
   if(is.null(gamma)) gamma <- cal_gamma(pres, z)
 
   if(tall_crop) {

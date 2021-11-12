@@ -1,38 +1,7 @@
-
-#' Daily extraterrestrial radiation.
-#' 
-#' @description Estimate daily extraterrestrial radiation `[MJ m-2 day-1]`.
-#' 
-#' @param lat Latitude `[degree]`.
-#' @param J `doy` vector.
-#' 
-#' @return extraterrestrial radiation `[MJ m-2 day-1]`.
-#' @seealso [cal_Rs()]
-#' @importFrom lubridate yday is.Date
-#' @export
-cal_Ra <- function(lat, J) {
-  J %<>% check_doy()
-  dr <- 1 + 0.033 * cos(pi * J / 182.5) # Allen, Eq. 23
-  sigma <- 0.409 * sin(pi * J / 182.5 - 1.39) # Allen, Eq. 24
-
-  ws <- cal_ws(lat, J)
-  # 24 * 60 * 0.082 = 118.08
-  lat %<>% deg2rad()
-  Ra <- 118.08 * dr / pi * (ws * sin(lat) * sin(sigma) + cos(lat) * cos(sigma) * sin(ws)) # Allen, Eq. 21
-  Ra <- ifelse(Ra < 0, 0, Ra)
-  Ra
-}
-# cal_Ra(20, 1)
-# [1] 25.84874
-
-#' @export
-#' @rdname cal_Ra
-ext_rad <- cal_Ra
-
 #' @name cal_ssd
 #' @title sunset hour angle
 #' @description Calculating sunset hour angle (`ws`) according to Allen Eq. 25.
-#' @inheritParams cal_Ra
+#' @inheritParams rad_ext
 #' @export
 NULL
 
@@ -55,11 +24,38 @@ ws2ssd <- function(ws) ws / pi * 24 # Ge ChaoXiao, Eq. 2-18
 #' @export
 cal_ssd <- function(lat, J) cal_ws(lat, J) %>% ws2ssd()
 
+#' Daily extraterrestrial radiation.
+#'
+#' @description Estimate daily extraterrestrial radiation `[MJ m-2 day-1]`.
+#'
+#' @param lat Latitude `[degree]`.
+#' @param J `doy` vector.
+#'
+#' @return extraterrestrial radiation `[MJ m-2 day-1]`.
+#' @seealso [cal_Rs()]
+#'
+#' @examples
+#' cal_Ra(20, 1)
+#' # [1] 25.84874
+#' @importFrom lubridate yday is.Date
+#' @export
+rad_ext <- function(lat, J) {
+  J %<>% check_doy()
+  dr <- 1 + 0.033 * cos(pi * J / 182.5) # Allen, Eq. 23
+  sigma <- 0.409 * sin(pi * J / 182.5 - 1.39) # Allen, Eq. 24
+
+  ws <- cal_ws(lat, J)
+  # 24 * 60 * 0.082 = 118.08
+  lat %<>% deg2rad()
+  Ra <- 118.08 * dr / pi * (ws * sin(lat) * sin(sigma) + cos(lat) * cos(sigma) * sin(ws)) # Allen, Eq. 21
+  Ra <- ifelse(Ra < 0, 0, Ra)
+  Ra
+}
 
 #' Daily inward shortwave solar radiation.
 #'
-#' Estimate daily solar radiation at crop surface `[MJ m-2 day-1]` by providing 
-#' sunshine duration (SSD) in hours or cloud cover in fraction.
+#' Daily inward shortwave solar radiation at crop surface `[MJ m-2 day-1]` by 
+#' providing sunshine duration (SSD) in hours or cloud cover in fraction.
 #' 
 #' @param lat Latitude `[degree]`.
 #' @param dates A R Date type of a vector of Date type. If not provided, it will 
@@ -80,15 +76,13 @@ cal_ssd <- function(lat, J) cal_ws(lat, J) %>% ws2ssd()
 #' bibliography.[J]. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
 #' @seealso [cal_Ra()]
 #' @export
-cal_Rs <- function(lat, J, ssd = NULL, a = 0.25, b = 0.5, cld = NULL) {
-  # if (is.null(J)) {
-  #   J <- rep_len(c(1:365, 1:365, 1:365, 1:366), length(ssd))
-  # }
+rad_surf <- function(lat, J, ssd = NULL, a = 0.25, b = 0.5, cld = NULL) {
   J %>% check_doy()
   Ra = cal_Ra(lat, J)
 
   if(!is.null(cld)) {
-    Rs <- (1. - cld) * Ra
+    # Rs <- (1. - cld) * Ra
+    Rs <- (1. - cld) * Ra * (a + b) # also named as R_so
   } else {
     # N <- ws * 24/pi # Ge ChaoXiao, Eq. 2-18
     N <- cal_ssd(lat, J)
@@ -98,15 +92,23 @@ cal_Rs <- function(lat, J, ssd = NULL, a = 0.25, b = 0.5, cld = NULL) {
   Rs
 }
 
+#' @export
+#' @rdname rad_ext
+cal_Ra <- rad_ext
+
+#' @export
+#' @rdname rad_surf
+cal_Rs <- rad_surf
+
 #' Net outgoing longwave radiation.
 #' 
 #' Net outgoing longwave radiation.
 #' 
 #' @param tmax Daily maximum air temperature at 2m height `[deg Celsius]`.
 #' @param tmin Daily minimum air temperature at 2m height `[deg Celsius]`.
-#' @param Rs Incoming shortwave radiation at crop surface `[MJ m-2 day-1]`.
 #' @param ea Actual vapor pressure `[kPa]`. Can be estimated by maximum or minimum
 #'           air temperature and mean relative humidity.
+#' @param Rs Incoming shortwave radiation at crop surface `[MJ m-2 day-1]`.
 #' @param Rso Clear sky incoming shortwave radiation, i. e. extraterrestrial
 #'            radiation multiply by clear sky transmissivity (i. e. a + b,
 #'            a and b are coefficients of Angstrom formula. Normally 0.75)
@@ -130,7 +132,7 @@ cal_Rln <- function(tmax, tmin, ea, Rs = NULL, Rso = NULL, cld = NULL) {
 }
 
 #' Estimate Incoming longwave radiation.
-#'
+#' 
 #' @description Estimate Incoming longwave radiation. Not included in FAO56 
 #' paper but added for convinience.
 #' 

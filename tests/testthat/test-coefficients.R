@@ -1,4 +1,4 @@
-context("test-coefficients")
+context("coefficients")
 
 test_that("R2_sign works", {
     expect_silent(R2_critical <- R2_sign(30, NumberOfPredictor = 2, alpha = 0.05))
