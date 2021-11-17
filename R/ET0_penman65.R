@@ -37,7 +37,7 @@
 #' @param Rso Clear sky incoming shortwave radiation, i. e. extraterrestrial
 #'            radiation multiply by clear sky transmissivity (i. e. a + b + 2E-5*elev`[m]`,
 #'            a + b are coefficients of Angstrom formula. Normally 0.75)
-#'            `[MJ m-2 day-1]`. Ext. rad. can be calculated by [ext_rad].
+#'            `[MJ m-2 day-1]`. Ext. rad. can be calculated by [rad_ext].
 #'            Should be provided if `cld` is not provided.
 #'
 #' @return Reference evapotranspiration ET0 from a hypothetical grass
@@ -106,7 +106,7 @@ PET_pm <- function(Rs, tmax, tmin, ws, G = 0.0, h.ws = 10.0, albedo = 0.23,
 #' @export
 PET_hg <- function(tmax, tmin, tmean = NULL, Ra = NULL, lat = NULL, dates=NULL) {
   if(is.null(tmean)) tmean <- (tmax + tmin) / 2
-  if(is.null(Ra)) Ra <- ext_rad(lat, dates)
+  if(is.null(Ra)) Ra <- rad_ext(lat, dates)
   0.0023 * 0.408 * Ra * sqrt(tmax - tmin) * (tmean + 17.8)
 }
 

@@ -3,6 +3,7 @@ runningId <- function(i, step = 1, N, prefix = "") {
     if (mod(i, step) == 0) cat(sprintf("[%s] running%s %d ...\n", prefix, perc, i))    
 }
 
+#' @importFrom foreach %do% foreach
 apply_row <- function(mat, by, FUN = rowMeans2, ...) {
     if (length(by) != ncol(mat)) {
         stop('Length of by is not equal to ncol of mat')

@@ -70,7 +70,7 @@ temperature.}
 \item{Rso}{Clear sky incoming shortwave radiation, i. e. extraterrestrial
 radiation multiply by clear sky transmissivity (i. e. a + b + 2E-5*elev\verb{[m]},
 a + b are coefficients of Angstrom formula. Normally 0.75)
-\verb{[MJ m-2 day-1]}. Ext. rad. can be calculated by \link{ext_rad}.
+\verb{[MJ m-2 day-1]}. Ext. rad. can be calculated by \link{rad_ext}.
 Should be provided if \code{cld} is not provided.}
 
 \item{cld}{Cloud cover \verb{[fraction]}. If provided it would be directly used to

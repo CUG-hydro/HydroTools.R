@@ -212,7 +212,7 @@ Lohmann_UH <- function(file_dir, soil_params, stn_x, stn_y, fract = NULL,
                        arcinfo = TRUE) {
 
   ################################################################### dir2river
-  d_coor = raster_info(file_dir)
+  d_coor = rast_info(file_dir)
   csize = median(diff(d_coor$lon))
   xll = d_coor$lon[1]
   yll = d_coor$lat[1]

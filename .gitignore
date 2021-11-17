@@ -6,12 +6,12 @@
 *.pdf
 
 PSO.out
-inst
+# inst
 OUTPUT
 
 *.nc
 *.rda
-*.tif
+# *.tif
 *.txt
 
 */deprecated

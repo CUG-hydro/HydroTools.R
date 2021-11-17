@@ -1,6 +1,6 @@
 
 #' @export 
-plot_ysim <- function(ysim, yobs, date = NULL) {
+plot_gof <- function(ysim, yobs, date = NULL) {
     par(mar = c(3, 2, 2, 1), mgp = c(3, 0.6, 0), mfrow = c(1, 2))
 
     if (is.null(date)) date <- seq_along(ysim)

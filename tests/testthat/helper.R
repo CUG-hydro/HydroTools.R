@@ -1,4 +1,3 @@
-
 # absolute value
 max_MAE <- function(yobs, ysim, maxE = 0.005) {
     re <- abs(ysim - yobs) # /yobs
