@@ -22,6 +22,7 @@ Imports:
 Suggests: 
     testthat (>= 2.1.0),
     covr, 
+    scales, 
     sp, rgdal, raster
 License: MIT + file LICENSE
 Encoding: UTF-8
