@@ -52,6 +52,10 @@ rad_ext <- function(lat, J) {
   Ra
 }
 
+#' @export
+#' @rdname rad_ext
+cal_Ra <- rad_ext
+
 #' Daily inward shortwave solar radiation.
 #'
 #' Daily inward shortwave solar radiation at crop surface `[MJ m-2 day-1]` by 
@@ -71,9 +75,11 @@ rad_ext <- function(lat, J) {
 #' @return Solar radiation at crop surface `[MJ m-2 day-1]`.
 #' 
 #' @references 
-#' Martinezlozano J A, Tena F, Onrubia J E, et al. The historical
-#' evolution of the Angstrom formula and its modifications: review and
-#' bibliography.[J]. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
+#' 1. Martinezlozano J A, Tena F, Onrubia J E, et al. The historical
+#'    evolution of the Angstrom formula and its modifications: review and
+#'    bibliography.[J]. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
+#' 2. https://github.com/sbegueria/SPEI/blob/master/R/penman.R
+#' 
 #' @seealso [cal_Ra()]
 #' @export
 rad_surf <- function(lat, J, ssd = NULL, a = 0.25, b = 0.5, cld = NULL) {
@@ -82,23 +88,90 @@ rad_surf <- function(lat, J, ssd = NULL, a = 0.25, b = 0.5, cld = NULL) {
 
   if(!is.null(cld)) {
     # Rs <- (1. - cld) * Ra
-    Rs <- (1. - cld) * Ra * (a + b) # also named as R_so
+    # Rs <- (1. - cld) * Ra * (a + b) # also named asR_so
+    nN = (1 - cld) 
   } else {
     # N <- ws * 24/pi # Ge ChaoXiao, Eq. 2-18
     N <- cal_ssd(lat, J)
     if (is.null(ssd)) ssd = N
-    Rs <- (a + b * ssd/N) * Ra
+    nN = ssd / N
   }
+  Rs <- (a + b * nN) * Ra
   Rs
 }
 
 #' @export
-#' @rdname rad_ext
-cal_Ra <- rad_ext
-
-#' @export
 #' @rdname rad_surf
 cal_Rs <- rad_surf
+
+
+#' Surface net shortwave radiation
+#' 
+#' @param J integer, day of year
+#' @param lat float, latitude 
+#' @param ssd numeric vector, sun shine duration (hour)
+#' @param RH numeric vector, relative humidity (%)
+#' @param Tmin,Tmax numeric vector, min and max 2m-air temperature (degC)
+#' @param cld (optional) cloud coverage (0-1). At least one of `cld` and `ssd` 
+#' should be provided. If `cld` is not null, `ssd` will be ignored.
+#' 
+#' @param Z (optional) elevation (m), for the calculation of `Rso`
+#' @param albedo (optional), `Rsn = (1 - albedo) Rs`
+#' 
+#' @return radiation in `[MJ d-1]`
+#' - `Rn`  : Surface net radiation
+#' - `Rln` : Surface outward net longwave radiation (negative means outgoing)
+#' - `Rsn` : Surface downward net shortwave radiation
+#' - `Rs`  : Surface downward shortwave radiation
+#' - `Rso` : Clear-sky surface downward shortwave radiation
+#' - `Ra`  : Extraterrestrial radiation
+#' 
+#' @author
+#' Xie YuXuan and Kong Dongdong
+#' 
+#' @examples
+#' cal_Rn(lat = 30, J = 1, ssd = 10, RH = 70, Tmin = 20, Tmax = 30)
+#' 
+#' @export
+cal_Rn <- function(lat, J, ssd = 10, RH, Tmin, Tmax, 
+  cld = NULL, 
+  albedo = 0.23, Z = 0, ...) 
+{ 
+  dlt <- 0.409 * sin(J * 2 * pi / 365 - 1.39) # 太阳磁偏角delta,J为日序(1-365或366)
+  ws <- acos(-tan(lat*pi/180)*tan(dlt))       # 时角; 日出时角/日落时角
+  
+  N <- 24*ws/pi # 最大可能日照时数(h)  
+  dr <- 1+0.033*cos(J*2*pi/365) # 日地平均距离
+  
+  # 星际辐射/日地球外辐射:大气圈外接受的阳光辐射能量（可查表）
+  as    <- 0.25  # 星际辐射回归系数
+  bs    <- 0.5   # 星际辐射到地球的衰减系数
+  Gsc   <- 0.082 # 太阳常数(MJ/m^2*min)
+
+  Ra  <- 24*60/pi*Gsc*dr*(ws*sin(lat*pi/180)*sin(dlt)+cos(lat*pi/180)*cos(dlt)*sin(ws)) 
+
+  if (is.null(cld)) {
+    nN = ssd / N
+  } else {
+    nN = 1 - cld
+  }
+
+  Rs  <- (as + bs * nN) * Ra # Rs为太阳辐射(n/N日照系数)
+  Rsn <- (1 - albedo) * Rs # 太阳净辐射
+  Rso <- (0.75 + 2 * Z / (10^5)) * Ra # 计算晴空辐射, FAO56, Eq. 37
+
+  ## longwave radiation 
+  es = (cal_es(Tmax) + cal_es(Tmin))/2
+  ea = es * RH/100
+  
+  T0 = 273.15
+  # net outgoing longwave radiation [MJ m-2 day-1]
+  sigma <- 4.903 / (10^9) #  斯蒂芬-玻尔兹曼常数, [MJ K-4 m-2]
+  Rln = -sigma * ( ((Tmax + T0)^4 + (Tmin + T0)^4) / 2) * 
+    (0.34 - 0.14 * sqrt(ea)) * (1.35 * Rs / Rso - 0.35) 
+  Rn = Rsn + Rln 
+  data.table(Rn, Rsn, Rln, Rs, Rso, Ra)
+}
 
 #' Net outgoing longwave radiation.
 #' 
@@ -171,3 +244,4 @@ cal_Rlin <- function(temp, ea = NULL, s = 1, method = 'KON') {
   ep_a <- 1 - s + s*ep_ac
   ep_a * 5.67e-8 * temp**4
 }
+

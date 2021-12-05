@@ -22,7 +22,7 @@ cal_lambda(Tair)
 
 cal_slope(Tair)
 
-cal_gamma(Pa, lambda = 2.5)
+cal_gamma(Tair, Pa = atm)
 
 cal_bowen(Tair, Pa = atm)
 
@@ -31,7 +31,9 @@ cal_Pa(z = NULL)
 \arguments{
 \item{z.wind}{Height where measure the wind speed \verb{[m]}. Default 10m.}
 
-\item{Tdew}{dew temperature, (\link{deg Celsius})}
+\item{Tair}{2m air temperature, (\verb{[deg Celsius]})}
+
+\item{Tdew}{dew temperature, (\verb{[deg Celsius]})}
 
 \item{Pa}{land surface Air pressure \verb{[kPa]}.}
 
@@ -42,11 +44,21 @@ are not provided.}
 \itemize{
 \item \code{lambda}: latent heat of vaporization, about \verb{[2.5 MJ kg-1]}.
 \item \code{slope}: The slope of the saturation vapour pressure curve at certain air
-temperature \code{Tair} (\link{deg Celsius}), \verb{[kPa degC-1]}.
-\item \code{gamma}: psychrometric constant (\verb{[kPa degC-1]}), \code{Cp * Pa / (epsilon * lambda)}.
+temperature \code{Tair}, \verb{[kPa degC-1]}.
+\item \code{gamma}: psychrometric constant (\verb{[kPa degC-1]}), \code{Cp*Pa/(epsilon*lambda)}.
 \item \code{U2}: 10m wind speed (m/s). According to wind profile relationship, convert U_z to U_2.
 \item \code{es}: saturation vapor pressure (kPa)
 }
+}
+\examples{
+cal_VPD(10, 5)
+
+par(mfrow = c(2, 2), mar = c(3, 1.8, 2, 1), mgp = c(2, 0.6, 0))
+Tair = -10:50
+plot(cal_es(-10:50), main = "es (kPa)", xlab = "Tair")
+plot(cal_bowen(-10:50), main = "Bowen ratio", xlab = "Tair")
+plot(cal_slope(-10:50), main = "slope (kPa/degC)", xlab = "Tair")
+plot(cal_gamma(-10:50), main = "gamma (kPa/degC)", xlab = "Tair")
 }
 \references{
 \enumerate{

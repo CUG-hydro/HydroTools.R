@@ -34,9 +34,12 @@ Daily inward shortwave solar radiation at crop surface \verb{[MJ m-2 day-1]} by
 providing sunshine duration (SSD) in hours or cloud cover in fraction.
 }
 \references{
-Martinezlozano J A, Tena F, Onrubia J E, et al. The historical
+\enumerate{
+\item Martinezlozano J A, Tena F, Onrubia J E, et al. The historical
 evolution of the Angstrom formula and its modifications: review and
 bibliography.\link{J}. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
+\item https://github.com/sbegueria/SPEI/blob/master/R/penman.R
+}
 }
 \seealso{
 \code{\link[=cal_Ra]{cal_Ra()}}
