@@ -62,3 +62,7 @@ Rw <- R / Mw * 1000
 #' @rdname R
 #' @export
 Rd <- R / Md * 1000
+
+#' @rdname R
+#' @export
+Cp = 1.013 * 1e-3 # MJ kg-1 degC-1

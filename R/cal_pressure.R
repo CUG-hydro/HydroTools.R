@@ -108,16 +108,3 @@ cal_ea <- function(tmin, tmax = NULL, RH_max = NULL, RH_min = NULL, RH_mean = NU
   # if(is.null(tmax))
   return(cal_es(tmin))  
 }
-
-#' The slope of the saturation vapour pressure curve.
-#' 
-#' the slope of the saturation vapour pressure curve by providing a air temperature.
-#'
-#' @param t Daily mean air temperature at 2m height `[deg Celsius]`.
-#'
-#' @return Slope of the saturation vapour pressure curve.
-#' @export
-delta_es <- function(t) {
-  4098 * (0.6108 * exp((17.27 * t) / (t + 237.3))) /
-    (t + 237.3)**2
-}

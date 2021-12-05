@@ -5,8 +5,11 @@
 \alias{R}
 \alias{Rw}
 \alias{Rd}
+\alias{Cp}
 \title{Specific gas constants}
 \format{
+An object of class \code{numeric} of length 1.
+
 An object of class \code{numeric} of length 1.
 
 An object of class \code{numeric} of length 1.
@@ -19,6 +22,8 @@ R
 Rw
 
 Rd
+
+Cp
 }
 \description{
 \itemize{

@@ -60,7 +60,7 @@ PET_pm <- function(Rs, tmax, tmin, ws, G = 0.0, h.ws = 10.0, albedo = 0.23,
   }
 
   if (is.null(es)) es <- (cal_es(tmax) + cal_es(tmin)) / 2
-  if(is.null(delta)) delta <- delta_es(tas)
+  if(is.null(delta)) delta <- cal_slope(tas)
 
   Rln <- cal_Rln(tmax, tmin, ea, Rs, Rso, cld)
   Rn <- Rs * (1 - albedo) - Rln
@@ -108,27 +108,6 @@ PET_hg <- function(tmax, tmin, tmean = NULL, Ra = NULL, lat = NULL, dates=NULL) 
   if(is.null(tmean)) tmean <- (tmax + tmin) / 2
   if(is.null(Ra)) Ra <- rad_ext(lat, dates)
   0.0023 * 0.408 * Ra * sqrt(tmax - tmin) * (tmean + 17.8)
-}
-
-#' Psychrometric constant
-#'
-#' psychrometric constant.
-#'
-#' @param pres Air pressure `[kPa]`.
-#' @param z Elevation above sea level `[m]`. Must provided if pres
-#'          are not provided.
-#'
-#' @return Psychrometric constant `[kPa degC-1]`.
-#' @export
-cal_gamma <- function(pres = NULL, z = NULL) {
-  if (is.null(pres)) {
-    if (is.null(z)) {
-      stop("If pres is null, must provide z (elevation).")
-    } else {
-      pres <- 101.3 * ((293.0 - (0.0065 * z)) / 293.0)**5.26
-    }
-  }
-  0.000665 * pres
 }
 
 #' Soil heat flux.
