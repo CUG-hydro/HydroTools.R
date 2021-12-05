@@ -2,8 +2,12 @@
 #' @title Potential Evapotranspiration models
 #' 
 #' @description
-#' - `ET0_PM93`: Penman equation simplified by Shuttleworth 1993
-#' - `ET0_PM98`: Penman-Monteith reference crop evapotranspiration, FAO56
+#' - `ET0_eq`   : Equilibrium evaporation, `slope / (slope + gamma) * Rn`
+#' - `ET0_PT72` : Priestley Taylor 1972, `ET0_PT72 = ET0_eq * 1.26`
+#' - `ET0_PM93` : Penman equation simplified by Shuttleworth 1993
+#' - `ET0_PM98` : Penman-Monteith reference crop evapotranspiration, FAO56
+#' 
+#' @example R/example/ex-ET0.R
 #' 
 #' @references
 #' 1. https://en.wikipedia.org/w/index.php?title=Penman_equation

@@ -18,6 +18,5 @@ test_that("humidity function works", {
 
     e3 = cal_ea(20, RH_max = 80)
     expect_true(e1 > e3)
-
-    delta_es = delta_es(20)
+    # delta_es = delta_es(20)
 })

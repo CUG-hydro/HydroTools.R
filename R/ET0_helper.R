@@ -4,9 +4,10 @@
 #' @description
 #' - `lambda`: latent heat of vaporization, about `[2.5 MJ kg-1]`.
 #' - `slope`: The slope of the saturation vapour pressure curve at certain air
-#'   temperature `t` ([deg Celsius]), `[kPa degC-1]`.
+#'   temperature `Tair` ([deg Celsius]), `[kPa degC-1]`.
 #' - `gamma`: psychrometric constant (`[kPa degC-1]`), `Cp * Pa / (epsilon * lambda)`.
 #' - `U2`: 10m wind speed (m/s). According to wind profile relationship, convert U_z to U_2.
+#' - `es`: saturation vapor pressure (kPa)
 #' 
 #' @inheritParams cal_es
 #' 
@@ -29,6 +30,14 @@ cal_U2 <- function(Uz, z.wind = 10) {
 
 #' @rdname ET0_helper
 #' @export
+cal_es <- function(Tair) {
+    0.6108 * exp((17.27 * Tair) / (Tair + 237.3))
+}
+
+#' @param Tdew dew temperature, ([deg Celsius])
+#' 
+#' @rdname ET0_helper
+#' @export
 cal_VPD <- function(Tair, Tdew) {
     ea <- cal_es(Tdew)
     es <- cal_es(Tair)
@@ -37,20 +46,20 @@ cal_VPD <- function(Tair, Tdew) {
 
 #' @rdname ET0_helper
 #' @export
-cal_lambda <- function(t) {
-    (2500 - t * 2.2) / 1000
+cal_lambda <- function(Tair) {
+    (2500 - Tair * 2.2) / 1000
 }
 
 #' @rdname ET0_helper
 #' @export
-cal_slope <- function(t) {
-    4098 * (0.6108 * exp((17.27 * t) / (t + 237.3))) /
-        (t + 237.3)**2
+cal_slope <- function(Tair) {
+    4098 * (0.6108 * exp((17.27 * Tair) / (Tair + 237.3))) /
+        (Tair + 237.3)**2
 }
 
-#' @rdname ET0_helper
-#' @export
-delta_es = cal_slope
+# #' @rdname ET0_helper
+# #' @export
+# delta_es = cal_slope
 
 #' @param Pa land surface Air pressure `[kPa]`.
 #' @rdname ET0_helper
@@ -62,7 +71,9 @@ cal_gamma <- function(Pa, lambda = 2.5) {
 
 #' @rdname ET0_helper
 #' @export
-cal_bowen <- function(gamma, slope) {
+cal_bowen <- function(Tair, Pa = atm) {
+    gamma = cal_gamma(Pa, cal_lambda(Tair))
+    slope = cal_slope(Tair)
     gamma / slope
 }
 

@@ -3,10 +3,10 @@
 \name{ET0_helper}
 \alias{ET0_helper}
 \alias{cal_U2}
+\alias{cal_es}
 \alias{cal_VPD}
 \alias{cal_lambda}
 \alias{cal_slope}
-\alias{delta_es}
 \alias{cal_gamma}
 \alias{cal_bowen}
 \alias{cal_Pa}
@@ -14,24 +14,24 @@
 \usage{
 cal_U2(Uz, z.wind = 10)
 
+cal_es(Tair)
+
 cal_VPD(Tair, Tdew)
 
-cal_lambda(t)
+cal_lambda(Tair)
 
-cal_slope(t)
-
-delta_es(t)
+cal_slope(Tair)
 
 cal_gamma(Pa, lambda = 2.5)
 
-cal_bowen(gamma, slope)
+cal_bowen(Tair, Pa = atm)
 
 cal_Pa(z = NULL)
 }
 \arguments{
 \item{z.wind}{Height where measure the wind speed \verb{[m]}. Default 10m.}
 
-\item{t}{Air temperature \verb{[Celsius]}.}
+\item{Tdew}{dew temperature, (\link{deg Celsius})}
 
 \item{Pa}{land surface Air pressure \verb{[kPa]}.}
 
@@ -42,9 +42,10 @@ are not provided.}
 \itemize{
 \item \code{lambda}: latent heat of vaporization, about \verb{[2.5 MJ kg-1]}.
 \item \code{slope}: The slope of the saturation vapour pressure curve at certain air
-temperature \code{t} (\link{deg Celsius}), \verb{[kPa degC-1]}.
+temperature \code{Tair} (\link{deg Celsius}), \verb{[kPa degC-1]}.
 \item \code{gamma}: psychrometric constant (\verb{[kPa degC-1]}), \code{Cp * Pa / (epsilon * lambda)}.
 \item \code{U2}: 10m wind speed (m/s). According to wind profile relationship, convert U_z to U_2.
+\item \code{es}: saturation vapor pressure (kPa)
 }
 }
 \references{

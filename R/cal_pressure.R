@@ -13,11 +13,11 @@
 #' @examples
 #' RH = 90
 #' p = atm
-#' t = 30
-#' q = RH2q(RH, p, t)
-#' RH2 = q2RH(q, p, t)
+#' Tair = 30
+#' q = RH2q(RH, p, Tair)
+#' RH2 = q2RH(q, p, Tair)
 #' e = q2ea(q, p)
-#' es = cal_es(t)
+#' es = cal_es(Tair)
 #' @export
 vapour_press <- function(q, p) {
     q * p / (epsilon + (1 - epsilon) * q)
@@ -27,12 +27,12 @@ vapour_press <- function(q, p) {
 #' @rdname vapour_press
 q2ea <- vapour_press
 
-#' @param t air temperature, in degC
+#' @param Tair air temperature, in degC
 #' @rdname vapour_press
 #' @export
-q2RH <- function(q, p, t) {
+q2RH <- function(q, p, Tair) {
   ea <- vapour_press(q, p)
-  es <- cal_es(t)
+  es <- cal_es(Tair)
   ea / es * 100
 }
 
@@ -42,9 +42,9 @@ q2RH <- function(q, p, t) {
 #' 
 #' @rdname vapour_press
 #' @export
-RH2q <- function(RH, p, t) {
+RH2q <- function(RH, p, Tair) {
   # ea <- vapour_press(q, p)
-  es <- cal_es(t)
+  es <- cal_es(Tair)
   ea <- es * RH/100
 
   # ws = epsilon * es / (p - es)
@@ -63,18 +63,6 @@ w2q <- function(w, p) w / (w + 1)
 #' @export
 q2w <- function(q, p) q / (1 - q)
 
-
-#' Estimate saturation vapor pressure.
-#'
-#' Estimate saturation vapor pressure from air temperature.
-#' @param t Air temperature `[Celsius]`.
-#' @return saturation vapor pressure `[kPa]`.
-#' 
-#' @export
-#' @rdname vapour_press
-cal_es <- function(t) {
-    0.6108 * exp((17.27 * t) / (t + 237.3))
-}
 
 #' Estimate actual vapor pressure.
 #'

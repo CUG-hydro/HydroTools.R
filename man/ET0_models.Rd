@@ -31,9 +31,16 @@ ET0_PT72(Rn, Tair, D, Pa = atm, alpha = 1.26, ...)
 }
 \description{
 \itemize{
-\item \code{ET0_PM93}: Penman equation simplified by Shuttleworth 1993
-\item \code{ET0_PM98}: Penman-Monteith reference crop evapotranspiration, FAO56
+\item \code{ET0_eq}   : Equilibrium evaporation, \code{slope / (slope + gamma) * Rn}
+\item \code{ET0_PT72} : Priestley Taylor 1972, \code{ET0_PT72 = ET0_eq * 1.26}
+\item \code{ET0_PM93} : Penman equation simplified by Shuttleworth 1993
+\item \code{ET0_PM98} : Penman-Monteith reference crop evapotranspiration, FAO56
 }
+}
+\examples{
+et0_pt = ET0_PT72(250, 25, 1)
+et0_pm93 = ET0_PM93(250, 25, 1, wind = 2)
+et0_pm98 = ET0_PM98(250, 25, 1, wind = 2)
 }
 \references{
 \enumerate{

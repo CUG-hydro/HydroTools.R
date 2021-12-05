@@ -7,29 +7,26 @@
 \alias{RH2q}
 \alias{w2q}
 \alias{q2w}
-\alias{cal_es}
 \title{Actual vapour pressure (kPa)}
 \usage{
 vapour_press(q, p)
 
 q2ea(q, p)
 
-q2RH(q, p, t)
+q2RH(q, p, Tair)
 
-RH2q(RH, p, t)
+RH2q(RH, p, Tair)
 
 w2q(w, p)
 
 q2w(q, p)
-
-cal_es(t)
 }
 \arguments{
 \item{q}{specific humidity in kg/kg or g/g}
 
 \item{p}{surface air pressure}
 
-\item{t}{Air temperature \verb{[Celsius]}.}
+\item{Tair}{air temperature, in degC}
 
 \item{RH}{relative humidity, in \%}
 
@@ -37,20 +34,18 @@ cal_es(t)
 }
 \value{
 e in the same unit as p
-
-saturation vapor pressure \verb{[kPa]}.
 }
 \description{
-Estimate saturation vapor pressure from air temperature.
+Actual vapour pressure (kPa)
 }
 \examples{
 RH = 90
 p = atm
-t = 30
-q = RH2q(RH, p, t)
-RH2 = q2RH(q, p, t)
+Tair = 30
+q = RH2q(RH, p, Tair)
+RH2 = q2RH(q, p, Tair)
 e = q2ea(q, p)
-es = cal_es(t)
+es = cal_es(Tair)
 }
 \references{
 https://www.eol.ucar.edu/projects/ceop/dm/documents/refdata_report/eqns.html, Eq-17
