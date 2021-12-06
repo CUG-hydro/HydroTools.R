@@ -14,7 +14,8 @@ The goal of hydroTools is to ...
 You can install the released version of hydroTools from github:
 
 ``` r
-remotes::install_github("rpkgs/hydroTools")
+remotes::install_gitlab("r-pkgs/hydroTools")
+# remotes::install_github("rpkgs/hydroTools") # github may not work
 ```
 
 ## Example
