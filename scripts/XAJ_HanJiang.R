@@ -8,20 +8,14 @@ shp <- read_sf(glue("{indir}/ChinaBasins_(塔河+雅江+长江+黄河+珠江)-sp
 lst <- readRDS(glue("{indir}/ChinaBasins_气象驱动-sp375.RDS"))                  # meteorological forcing
 load(glue("{indir}/ChinaBasins_(塔河+雅江+长江+黄河+珠江)-sp375_v0.1.0.rda"))   # runoff data
 
-# site <- "安康"
-site <- "河津"
-shp_i <- shp %>% subset(name == site)
-lat <- st_coordinates(shp_i) %>% {mean(.[, 2]) }
-area <- shp_i$area_w_km2 * 1e4 # km^2
+get_input <- function(site) {
+  shp_i <- shp %>% subset(name == site)
+  lat <- st_coordinates(shp_i) %>% {mean(.[, 2]) }
+  area <- shp_i$area_w_km2 * 1e4 # km^2
 
-
-# srad: `W m-2`
-# lrad: `W m-2`
-# MJ m-2 d-1
-{
-  forcing <- lst[[site]][year(date) >= 2002] %>%
-        set_names(c("date", "Rl", "prcp", "Pa", "q", "Rs", "Tavg", "Tmax", "Tmin", "U10"))
-  dat = forcing %>%
+  forcing <- lst[[site]][year(date) >= 2012] %>%
+    set_names(c("date", "Rl", "prcp", "Pa", "q", "Rs", "Tavg", "Tmax", "Tmin", "U10"))
+  forcing = forcing %>%
     mutate(
       prcp = round(prcp * 24, 2), # mm hr-1, mm/d
       Pa = Pa / 1e3, # Pa, kPa
@@ -35,11 +29,30 @@ area <- shp_i$area_w_km2 * 1e4 # km^2
       Rn = cal_Rn(lat, date, Rs, Tmin, Tmax, ea = ea)$Rn,
       ET0 = ET0_FAO98(Rn, Tavg, Pa, D, U10, z.wind = 10)$ET0
     )
-  df <- df_river[name == site][year(date) >= 2002, -(1:2)] %>%
-    merge(dat[, .(date, prcp, ET0)])
+  data = df_river[name == site][year(date) >= 2002, -(1:2)] %>%
+    dplyr::rename(Qobs = Q) %>%
+    merge(forcing[, .(date, prcp, ET0)])
+  list(data = data, area = area, lat = lat, site = site)
 }
+# srad: `W m-2`
+# lrad: `W m-2`
+# MJ m-2 d-1
 
-## version 1, daily scale
-r_day <- df %$% XAJ_calib(Q, prcp, ET0, area, dt = 24)
-plot_calib(r_day, "XAJ_daily.pdf")
+# site <- "安康"
+sites = c("府谷", "吴堡", "龙门", "河津", "潼关", "三门峡", "花园口")
 
+# tmp = foreach(site = sites, i = icount()) %do% {
+site = "河津"
+    input = get_input(site)
+    ## XAJ, daily scale
+    df = input$data
+    res_daily <- XAJ_calib(df$Qobs, df$prcp, df$ET0, date = df$date,
+                          input$area, dt = 24, maxn = 1000)
+    plot_calib(res_daily$data, main = site)
+
+    outfile = glue("XAJ_daily_{site}.pdf")
+    write_fig({
+      par(family = "rTimes")
+      plot_calib(res_daily$data, main = site)
+    }, outfile)
+# }

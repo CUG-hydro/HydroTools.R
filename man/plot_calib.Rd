@@ -4,10 +4,10 @@
 \alias{plot_calib}
 \title{plot_calib}
 \usage{
-plot_calib(data, file = "output.pdf")
+plot_calib(data, ...)
 }
 \arguments{
-\item{data}{with the columns of \code{date}, \code{prcp}, \code{Q},  \code{Qobs}}
+\item{data}{with the columns of \code{date}, \code{prcp}, \code{Qsim},  \code{Qobs}}
 }
 \description{
 plot_calib
