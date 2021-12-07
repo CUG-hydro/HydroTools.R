@@ -8,7 +8,13 @@
 #' - `gamma`: psychrometric constant (`[kPa degC-1]`), `Cp*Pa/(epsilon*lambda)`.
 #' - `U2`: 10m wind speed (m/s). According to wind profile relationship, convert U_z to U_2.
 #' - `es`: saturation vapor pressure (kPa)
-#' 
+#' - `ea`: actual vapor pressure (kPa)
+#'      1. `RH_mean` | `Tmin`, `Tmax`: `(es(Tmax) + es(Tmin)) * RH_mean/200`
+#'      2. `Tmin`                    : `es(Tmin)`
+#' - `cal_Tv`: vitual temperature
+#'      1. Tair + q
+#'      2. Tair + ea/Pa
+#'      3. `1.01 * (Tair + 273)` , FAO56 Eq. 3-7
 #' @references 
 #' 1. Allen, R. G., & Luis S. Pereira. (1998). Crop
 #'    evapotranspiration-Guidelines for computing crop water requirements-FAO
@@ -35,6 +41,28 @@ cal_U2 <- function(Uz, z.wind = 10) {
     Uz * 4.87 / log(67.8 * z.wind - 5.42)
 }
 
+
+#' @param Tmax Daily maximum air temperature at 2m height `[deg Celsius]`.
+#' @param Tmin Daily minimum air temperature at 2m height `[deg Celsius]`.
+#' @param RH_max,RH_mean,RH_min Daily max, mean and min relative humidity `[%]`.
+#' 
+#' @rdname ET0_helper
+#' @export
+cal_ea <- function(Tmin, Tmax = NULL, RH_mean = NULL) {
+    # if(!is.null(RH_max) && !is.null(RH_min))
+    #   return((cal_es(Tmax) * RH_min + cal_es(Tmin) * RH_max)/200)
+    # if(!is.null(RH_max))
+    #   return(cal_es(Tmin) * RH_max / 100)
+    # if(is.null(RH_max) && is.null(RH_mean) && is.null(RH_min))
+    #   return(cal_es(Tmin))
+    if (!is.null(RH_mean)) {
+        return((cal_es(Tmax) + cal_es(Tmin)) * RH_mean / 200)
+    }
+    return(cal_es(Tmin))
+}
+# ' 1. `RH_max`, `RH_min` | `Tmin`, `Tmax`: `(es(Tmax) * RH_min + es(Tmin) * RH_max)/200`
+# ' 3. `RH_max`           | `Tmin`        : `es(Tmin) * RH_max / 100`
+
 #' @rdname ET0_helper
 #' @export
 cal_es <- function(Tair) {
@@ -46,7 +74,7 @@ cal_es <- function(Tair) {
 #' 
 #' @rdname ET0_helper
 #' @export
-cal_VPD <- function(Tair, Tdew) {
+cal_VPD <- function(Tair, Tdew = NULL) {
     ea <- cal_es(Tdew)
     es <- cal_es(Tair)
     es - ea
@@ -93,4 +121,41 @@ cal_bowen <- function(Tair, Pa = atm) {
 #' @export
 cal_Pa <- function(z = NULL) {
     101.3 * ((293.0 - (0.0065 * z)) / 293.0)**5.26 # Eq. 7
+}
+
+
+#' @rdname ET0_helper
+#' @export
+cal_rH <- function(U2, h = 0.12) {
+    k <- 0.41 # Karman's constant
+    d <- 2 / 3 * h
+    z_om <- 0.123 * h
+    z_oh <- 0.1 * z_om
+    z_m <- z_h <- 2
+
+    log((z_m - d) / z_om) * log((z_h - d) / z_oh) /
+        (k^2 * U2)
+}
+
+
+#' @rdname ET0_helper
+#' @export
+cal_TvK <- function(Tair, q = NULL, ea = NULL, Pa = atm) {
+    if (is.null(q) && !is.null(ea)) {
+        # ea
+        Tair * (1 + (1 - epsilon) * ea / Pa) + T0
+    } else if (!is.null(q) && is.null(ea)) {
+        # q
+        Tair * (1 + (1 - epsilon) / epsilon * q) + T0 # to degK
+    } else {
+        1.01 * (Tair + 273) # Eq. 3-7
+    }
+}
+
+#' @rdname ET0_helper
+#' @export
+cal_rou_a <- function(Tair, Pa = atm, q = NULL, ea = NULL) {
+    # Tv = cal_TvK(Tair)
+    # R = 0.287 # kJ kg-1 K-1
+    3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5
 }

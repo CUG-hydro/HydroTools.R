@@ -3,27 +3,30 @@
 \name{ET0_models}
 \alias{ET0_models}
 \alias{ET0_eq}
-\alias{ET0_PM93}
-\alias{ET0_PM98}
+\alias{ET0_Penman54}
+\alias{ET0_Monteith65}
 \alias{ET0_PT72}
+\alias{ET0_FAO98}
 \title{Potential Evapotranspiration models}
 \usage{
-ET0_eq(Rn, Tair, D, Pa = atm, ...)
+ET0_eq(Rn, Tair, Pa = atm, ...)
 
-ET0_PM93(Rn, Tair, D, Pa = atm, wind, z.wind = 10)
+ET0_Penman54(Rn, Tair, Pa = atm, D, wind, z.wind = 10)
 
-ET0_PM98(Rn, Tair, D, Pa = atm, wind, z.wind = 10, tall_crop = FALSE)
+ET0_Monteith65(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rs = 70, ...)
 
-ET0_PT72(Rn, Tair, D, Pa = atm, alpha = 1.26, ...)
+ET0_PT72(Rn, Tair, Pa = atm, alpha = 1.26, ...)
+
+ET0_FAO98(Rn, Tair, Pa = atm, D, wind, z.wind = 10, tall_crop = FALSE)
 }
 \arguments{
 \item{Rn}{land surface net radiation, W m-2}
 
 \item{Tair}{2m air temperature (degC)}
 
-\item{D}{vapor pressure deficit (kPa)}
-
 \item{Pa}{surface air pressure (kPa)}
+
+\item{D}{vapor pressure deficit (kPa)}
 
 \item{wind}{wind speed at the height of \code{z.wind}}
 
@@ -32,22 +35,29 @@ ET0_PT72(Rn, Tair, D, Pa = atm, alpha = 1.26, ...)
 \description{
 \itemize{
 \item \code{ET0_eq}   : Equilibrium evaporation, \code{slope / (slope + gamma) * Rn}
+\item \code{ET0_Penman54} : Penman 1954 equation simplified by Shuttleworth 1993
+\item \code{ET0_Monteith65}: Penman-Monteith 1965
 \item \code{ET0_PT72} : Priestley Taylor 1972, \code{ET0_PT72 = ET0_eq * 1.26}
-\item \code{ET0_PM93} : Penman equation simplified by Shuttleworth 1993
-\item \code{ET0_PM98} : Penman-Monteith reference crop evapotranspiration, FAO56
+\item \code{ET0_FAO98} : Penman-Monteith reference crop evapotranspiration, FAO56
 }
 }
 \examples{
-et0_pt = ET0_PT72(250, 25, 1)
-et0_pm93 = ET0_PM93(250, 25, 1, wind = 2)
-et0_pm98 = ET0_PM98(250, 25, 1, wind = 2)
+et0_pt = ET0_PT72(250, 25, D = 1)
+et0_penman54 = ET0_Penman54(250, 25, D = 1, wind = 2)
+et0_fa098 = ET0_FAO98(250, 25, D = 1, wind = 2)
 }
 \references{
 \enumerate{
-\item https://en.wikipedia.org/w/index.php?title=Penman_equation
+\item Penman equation. Wikipedia 2021.
+\url{https://en.wikipedia.org/w/index.php?title=Penman_equation}
 \item Allen, R. G., & Luis S. Pereira. (1998). Crop
 evapotranspiration-Guidelines for computing crop water requirements-FAO
 Irrigation and drainage paper 56. European Journal of Agronomy, 34(3),
-144–152. doi:10.1016/j.eja.2010.12.001
+144-152. \url{doi:10.1016/j.eja.2010.12.001}
+\item Allen, R. G., Pereira, L. S., Raes, D., & Smith, M. (1998). FAO Irrigation
+and drainage paper No. 56. Rome: Food and Agriculture Organization of the
+United Nations, 56(97), e156.
+\item Chapter 2 - FAO Penman-Monteith equation,
+\url{https://www.fao.org/3/x0490E/x0490e06.htm}
 }
 }

@@ -9,14 +9,15 @@ test_that("humidity function works", {
 
     max_MAE(q2RH(q, p, t), RH, 1e-7)
 
-    e1 = cal_ea(20)
+    # If no RH, it is `ea = es(Tmin)`
+    e1 = cal_ea(20) 
     expect_equal(e1, cal_ea(20, 30))
 
-    e2 = cal_ea(20, 25, 60, 80)
-    expect_equal(e2, cal_ea(20, 25, 60, 80, 65))
-    expect_true(e2 < cal_ea(20, 25, RH_mean = 80))
+    e2 = cal_ea(20, 25, 60)
+    # expect_equal(e2, cal_ea(20, 25, 60))
+    # expect_true(e2 < cal_ea(20, 25, RH_mean = 80))
 
-    e3 = cal_ea(20, RH_max = 80)
-    expect_true(e1 > e3)
+    # e3 = cal_ea(20, RH_max = 80)
+    # expect_true(e1 > e3)
     # delta_es = delta_es(20)
 })

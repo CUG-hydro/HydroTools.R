@@ -3,48 +3,51 @@
 \name{vapour_press}
 \alias{vapour_press}
 \alias{q2ea}
+\alias{ea2VPD}
 \alias{q2RH}
 \alias{RH2q}
 \alias{w2q}
 \alias{q2w}
-\title{Actual vapour pressure (kPa)}
+\title{Helper functions for vapour pressure}
 \usage{
-vapour_press(q, p)
+q2ea(q, Pa)
 
-q2ea(q, p)
+ea2VPD(ea, RH)
 
-q2RH(q, p, Tair)
+vapour_press(q, Pa)
 
-RH2q(RH, p, Tair)
+q2RH(q, Pa, Tair)
 
-w2q(w, p)
+RH2q(RH, Pa, Tair)
 
-q2w(q, p)
+w2q(w, Pa)
+
+q2w(q, Pa)
 }
 \arguments{
 \item{q}{specific humidity in kg/kg or g/g}
 
-\item{p}{surface air pressure}
-
-\item{Tair}{air temperature, in degC}
+\item{Pa}{surface air pressure}
 
 \item{RH}{relative humidity, in \%}
+
+\item{Tair}{air temperature, in degC}
 
 \item{w}{mix ratio, m_w / m_d}
 }
 \value{
-e in the same unit as p
+e in the same unit as Pa
 }
 \description{
-Actual vapour pressure (kPa)
+Helper functions for vapour pressure
 }
 \examples{
 RH = 90
-p = atm
+Pa = atm
 Tair = 30
-q = RH2q(RH, p, Tair)
-RH2 = q2RH(q, p, Tair)
-e = q2ea(q, p)
+q = RH2q(RH, Pa, Tair)
+RH2 = q2RH(q, Pa, Tair)
+e = q2ea(q, Pa)
 es = cal_es(Tair)
 }
 \references{

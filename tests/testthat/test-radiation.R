@@ -8,6 +8,6 @@ test_that("radiation function works", {
     # Ra
     Ra = cal_Ra(20, 1)
     Rs = cal_Rs(20, 1)
-    expect_equal(Ra * 0.75, Rs) # `[MJ m-2 day-1]`
+    expect_equal(Ra * 0.75, Rs$Rs) # `[MJ m-2 day-1]`
 })
 

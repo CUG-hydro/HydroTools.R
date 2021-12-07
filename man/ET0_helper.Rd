@@ -3,6 +3,7 @@
 \name{ET0_helper}
 \alias{ET0_helper}
 \alias{cal_U2}
+\alias{cal_ea}
 \alias{cal_es}
 \alias{cal_VPD}
 \alias{cal_lambda}
@@ -10,13 +11,18 @@
 \alias{cal_gamma}
 \alias{cal_bowen}
 \alias{cal_Pa}
+\alias{cal_rH}
+\alias{cal_TvK}
+\alias{cal_rou_a}
 \title{helper functions for potential evapotranspiration (ET0)}
 \usage{
 cal_U2(Uz, z.wind = 10)
 
+cal_ea(Tmin, Tmax = NULL, RH_mean = NULL)
+
 cal_es(Tair)
 
-cal_VPD(Tair, Tdew)
+cal_VPD(Tair, Tdew = NULL)
 
 cal_lambda(Tair)
 
@@ -27,9 +33,19 @@ cal_gamma(Tair, Pa = atm)
 cal_bowen(Tair, Pa = atm)
 
 cal_Pa(z = NULL)
+
+cal_rH(U2, h = 0.12)
+
+cal_TvK(Tair, q = NULL, ea = NULL, Pa = atm)
+
+cal_rou_a(Tair, Pa = atm, q = NULL, ea = NULL)
 }
 \arguments{
 \item{z.wind}{Height where measure the wind speed \verb{[m]}. Default 10m.}
+
+\item{Tmin}{Daily minimum air temperature at 2m height \verb{[deg Celsius]}.}
+
+\item{Tmax}{Daily maximum air temperature at 2m height \verb{[deg Celsius]}.}
 
 \item{Tair}{2m air temperature, (\verb{[deg Celsius]})}
 
@@ -39,6 +55,8 @@ cal_Pa(z = NULL)
 
 \item{z}{Elevation above sea level \verb{[m]}. Must provided if pres
 are not provided.}
+
+\item{RH_max, RH_mean, RH_min}{Daily max, mean and min relative humidity \verb{[\%]}.}
 }
 \description{
 \itemize{
@@ -48,6 +66,17 @@ temperature \code{Tair}, \verb{[kPa degC-1]}.
 \item \code{gamma}: psychrometric constant (\verb{[kPa degC-1]}), \code{Cp*Pa/(epsilon*lambda)}.
 \item \code{U2}: 10m wind speed (m/s). According to wind profile relationship, convert U_z to U_2.
 \item \code{es}: saturation vapor pressure (kPa)
+\item \code{ea}: actual vapor pressure (kPa)
+\enumerate{
+\item \code{RH_mean} | \code{Tmin}, \code{Tmax}: \code{(es(Tmax) + es(Tmin)) * RH_mean/200}
+\item \code{Tmin}                    : \code{es(Tmin)}
+}
+\item \code{cal_Tv}: vitual temperature
+\enumerate{
+\item Tair + q
+\item Tair + ea/Pa
+\item \code{1.01 * (Tair + 273)} , FAO56 Eq. 3-7
+}
 }
 }
 \examples{

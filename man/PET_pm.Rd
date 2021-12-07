@@ -5,22 +5,21 @@
 \title{Estimate ET0 by FAO-56 Penman-Monteithe quation.}
 \usage{
 PET_pm(
+  date,
   Rs,
-  tmax,
-  tmin,
-  ws,
-  G = 0,
-  h.ws = 10,
-  albedo = 0.23,
-  delta = NULL,
-  gamma = NULL,
-  z = NULL,
+  Tmax,
+  Tmin,
+  Uz,
+  z.wind = 10,
   ea = NULL,
   es = NULL,
   RH_mean = NULL,
-  pres = NULL,
+  Pa = NULL,
   Rso = NULL,
   cld = NULL,
+  Z = 0,
+  lat = NULL,
+  albedo = 0.23,
   tall_crop = FALSE
 )
 }
@@ -28,32 +27,13 @@ PET_pm(
 \item{Rs}{Incoming shortwave radiation at crop surface \verb{[MJ m-2 day-1]}.
 Can be calculated by \link{cal_Rs}.}
 
-\item{tmax}{Daily maximum air temperature at 2m height \verb{[deg Celsius]}.}
+\item{Tmax}{Daily maximum air temperature at 2m height \verb{[deg Celsius]}.}
 
-\item{tmin}{Daily minimum air temperature at 2m height \verb{[deg Celsius]}.}
+\item{Tmin}{Daily minimum air temperature at 2m height \verb{[deg Celsius]}.}
 
-\item{ws}{Wind speed \verb{[m s-1]}.}
+\item{Uz}{Wind speed \verb{[m s-1]}.}
 
-\item{G}{Soil heat flux \verb{[MJ m-2 day-1]}. Normally set to 0.0 when the time
-steps are less than 10 days. Should be calculated in monthly or
-longer time step. Can be calculated using function \link{soil_heat_flux}.
-Default 0.0.}
-
-\item{h.ws}{Height where measure the wind speed \verb{[m]}. Default 10m.}
-
-\item{albedo}{Albedo of the crop as the proportion of gross incoming solar
-radiation that is reflected by the surface. Default 0.23
-(i. e. the value of the short grass reference crop defined
-by the FAO).}
-
-\item{delta}{Slope of the saturation vapour pressure curve. Can be estimated
-by air temperature if is not provided.}
-
-\item{gamma}{Psychrometric constant \verb{[kPa Celsius -1]}. Can be estimated
-by the air pressure or elevation if is not provided.}
-
-\item{z}{Elevation above sea level \verb{[m]}. Must provided if gamma and pres
-are not provided.}
+\item{z.wind}{Height where measure the wind speed \verb{[m]}. Default 10m.}
 
 \item{ea}{Actual vapor pressure \verb{[kPa]}. Can be estimated by maximum or minimum
 air temperature and mean relative humidity.}
@@ -65,16 +45,35 @@ minimum air temperature if is not provided.}
 the actual vapor pressure would be estimated by minimum air
 temperature.}
 
-\item{pres}{Air pressure \verb{[kPa]}. If not provided, must provide z.}
+\item{Pa}{Air pressure \verb{[kPa]}. If not provided, must provide z.}
 
 \item{Rso}{Clear sky incoming shortwave radiation, i. e. extraterrestrial
 radiation multiply by clear sky transmissivity (i. e. a + b + 2E-5*elev\verb{[m]},
 a + b are coefficients of Angstrom formula. Normally 0.75)
-\verb{[MJ m-2 day-1]}. Ext. rad. can be calculated by \link{rad_ext}.
+\verb{[MJ m-2 day-1]}. Ext. rad. can be calculated by \link{cal_Ra}.
 Should be provided if \code{cld} is not provided.}
 
 \item{cld}{Cloud cover \verb{[fraction]}. If provided it would be directly used to
 calculate net outgoing longwave radiation than Rso.}
+
+\item{albedo}{Albedo of the crop as the proportion of gross incoming solar
+radiation that is reflected by the surface. Default 0.23
+(i. e. the value of the short grass reference crop defined
+by the FAO).}
+
+\item{G}{Soil heat flux \verb{[MJ m-2 day-1]}. Normally set to 0.0 when the time
+steps are less than 10 days. Should be calculated in monthly or
+longer time step. Can be calculated using function \link{soil_heat_flux}.
+Default 0.0.}
+
+\item{delta}{Slope of the saturation vapour pressure curve. Can be estimated
+by air temperature if is not provided.}
+
+\item{gamma}{Psychrometric constant \verb{[kPa Celsius -1]}. Can be estimated
+by the air pressure or elevation if is not provided.}
+
+\item{z}{Elevation above sea level \verb{[m]}. Must provided if gamma and Pa
+are not provided.}
 }
 \value{
 Reference evapotranspiration ET0 from a hypothetical grass

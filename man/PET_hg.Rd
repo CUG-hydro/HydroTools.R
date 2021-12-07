@@ -4,21 +4,24 @@
 \alias{PET_hg}
 \title{Estimate ET0 by Hargreaves equation.}
 \usage{
-PET_hg(tmax, tmin, tmean = NULL, Ra = NULL, lat = NULL, dates = NULL)
+PET_hg(Tmax, Tmin, Tavg = NULL, Ra = NULL, lat = NULL, dates = NULL)
 }
 \arguments{
-\item{tmax}{Daily maximum air temperature at 2m height \verb{[deg Celsius]}.}
+\item{Tmax}{Daily maximum air temperature at 2m height \verb{[deg Celsius]}.}
 
-\item{tmin}{Daily minimum air temperature at 2m height \verb{[deg Celsius]}.}
+\item{Tmin}{Daily minimum air temperature at 2m height \verb{[deg Celsius]}.}
 
-\item{tmean}{Daily mean air temperature at 2m height \verb{[deg Celsius]}. If not
-provided it would estimated by averaging the tmax and tmin.}
+\item{Tavg}{Daily mean air temperature at 2m height \verb{[deg Celsius]}. If not
+provided it would estimated by averaging the Tmax and tmin.}
 
 \item{Ra}{Clear sky incoming shortwave radiation, i. e. extraterrestrial
 radiation multiply by clear sky transmissivity (i. e. a + b, a and b are
 coefficients of Angstrom formula. Normally 0.75) \verb{[MJ m-2 day-1]}. If not
-provided, must provide lat and dates. @param lat Latitude \verb{[degree]}. @param
-dates A R Date type of a vector of Date type. If not provided, it will Regard
+provided, must provide lat and dates.}
+
+\item{lat}{Latitude \verb{[degree]}.}
+
+\item{dates}{A R Date type of a vector of Date type. If not provided, it will Regard
 the ssd series is begin on the first day of a year.}
 }
 \value{
