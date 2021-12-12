@@ -2,7 +2,7 @@
 % Please edit documentation in R/cal_Rn.R
 \name{cal_Rn}
 \alias{cal_Rn}
-\title{Surface net shortwave radiation}
+\title{Surface net radiation}
 \usage{
 cal_Rn(
   lat,
@@ -51,7 +51,10 @@ radiation in \verb{[MJ d-1]}
 }
 }
 \description{
-Surface net shortwave radiation
+Surface net radiation
+}
+\note{
+\code{Rn} might <= 0. Users need to constrain the min value by \code{pmax(Rn, 0)}.
 }
 \examples{
 cal_Rn(lat = 30, J = 1, RH = 70, Tmin = 20, Tmax = 30, ssd = 10)

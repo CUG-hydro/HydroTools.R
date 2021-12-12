@@ -1,5 +1,5 @@
-#' Surface net shortwave radiation
-#'
+#' Surface net radiation
+#' 
 #' @param J integer, day of year
 #' @param lat float, latitude
 #' @param ssd numeric vector, sun shine duration (hour)
@@ -21,6 +21,9 @@
 #' - `Rso` : Clear-sky surface downward shortwave radiation
 #' - `Ra`  : Extraterrestrial radiation
 #'
+#' @note
+#' `Rn` might <= 0. Users need to constrain the min value by `pmax(Rn, 0)`.
+#' 
 #' @author
 #' Xie YuXuan and Kong Dongdong
 #'
@@ -79,6 +82,8 @@ cal_Rn <- function(lat, J, Rs = NULL, Tmin, Tmax,
   sigma <- 4.903 / (10^9) #  斯蒂芬-玻尔兹曼常数, [MJ K-4 m-2]
   Rln = -sigma * ( ((Tmax + T0)^4 + (Tmin + T0)^4) / 2) *
     (0.34 - 0.14 * sqrt(ea)) * (1.35 * Rs / Rso - 0.35)
-  Rn = Rsn + Rln
+  Rn = Rsn + Rln 
+  # Rn = pmax(Rsn + Rln, 0) # make sure Rn not less zero
+  # whether to use this constraint, it is determined by the user.
   data.table(Rn, Rsn, Rln, Rs, Rso, Ra)
 }

@@ -7,9 +7,9 @@ Authors@R: c(
     person("Ruida", "Zhong", email = "zrd2017@163.com", role = c("aut", "ctb")))
 Description: What the package does (one paragraph).
 Depends:
-    R (>= 3.1)
+    R (>= 3.6)
 Imports: 
-    VIC5, 
+    VIC5 (>= 0.2.4), 
     foreach, iterators, magrittr, 
     raster,
     lubridate,

@@ -18,7 +18,7 @@ make_monthdate <- function(x) {
 }
 
 XAJ_goal <- function(par, Qobs, prcp, ET0, area, date = NULL, dt = 24, index = "KGE") {
-  r = XAJ::XAJ(prcp, ET0, par, area = area, dt = dt)
+  r = VIC5::XAJ(prcp, ET0, par, area = area, dt = dt)
 
   Q = r$Q
   if (length(Qobs) < length(prcp)) {
@@ -34,7 +34,7 @@ XAJ_goal <- function(par, Qobs, prcp, ET0, area, date = NULL, dt = 24, index = "
 
 #' XAJ model Parameter calibration
 #'
-#' @inheritParams XAJ::XAJ
+#' @inheritParams VIC5::XAJ
 #' @inheritParams rtop::sceua
 #'
 #' @param Qobs Observed Total runoff, (m^3/s)
@@ -61,7 +61,7 @@ XAJ_calib <- function(Qobs, prcp, ET0, area, dt = 24, date = NULL,
   # The optimized best parameter
   opt = l_opt$par %>% set_names(rownames(d_par))
 
-  r = XAJ::XAJ(prcp, ET0, opt, area = area, dt = dt)
+  r = VIC5::XAJ(prcp, ET0, opt, area = area, dt = dt)
 
   # output data
   data = data.table(prcp, ET0, Qobs, Qsim = r$Q)
@@ -81,7 +81,7 @@ XAJ_calib <- function(Qobs, prcp, ET0, area, dt = 24, date = NULL,
 #'
 #' @export
 XAJ_predict <- function(model, newdata) {
-  res = XAJ::XAJ(newdata$prcp, newdata$ET0, model$par, area = model$area, dt = model$dt)
+  res = VIC5::XAJ(newdata$prcp, newdata$ET0, model$par, area = model$area, dt = model$dt)
   # Qsim = res$Q
   cbind(newdata, Qsim = res$Q)
   # date = newdata$date
@@ -108,7 +108,7 @@ plot_calib <- function(data, ...) {
   # write_fig({
     par(mar = c(3.5, 3.5, 2, 1), mgp = c(1.8, 0.6, 0))
     plot(date, data$Qobs, type = "l", col = "black",
-         xlab = "date", ylab = expression(Q * "(" * m^3 * ")"))
+         xlab = "Date", ylab = expression(Q * "(" * m^3 * ")"))
     lines(date, data$Qsim, col = "red")
 
     par(new = TRUE)
