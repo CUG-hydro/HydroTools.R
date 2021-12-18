@@ -3,7 +3,7 @@
 #'
 #' @description
 #' - `ET0_eq`   : Equilibrium evaporation, `slope / (slope + gamma) * Rn`
-#' - `ET0_Penman54` : Penman 1954 equation simplified by Shuttleworth 1993
+#' - `ET0_Penman48` : Penman 1948 equation simplified by Shuttleworth 1993
 #' - `ET0_Monteith65`: Penman-Monteith 1965
 #' - `ET0_PT72` : Priestley Taylor 1972, `ET0_PT72 = ET0_eq * 1.26`
 #' - `ET0_FAO98` : Penman-Monteith reference crop evapotranspiration, FAO56
@@ -50,7 +50,7 @@ ET0_eq <- function(Rn, Tair, Pa = atm, ...) {
 #' @importFrom dplyr mutate
 #' @rdname ET0_models
 #' @export
-ET0_Penman54 <- function(Rn, Tair, Pa = atm, D,
+ET0_Penman48 <- function(Rn, Tair, Pa = atm, D,
     wind, z.wind = 10)
 {
     dat = ET0_eq(Rn, Tair, Pa)
