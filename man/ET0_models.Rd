@@ -3,7 +3,7 @@
 \name{ET0_models}
 \alias{ET0_models}
 \alias{ET0_eq}
-\alias{ET0_Penman54}
+\alias{ET0_Penman48}
 \alias{ET0_Monteith65}
 \alias{ET0_PT72}
 \alias{ET0_FAO98}
@@ -11,7 +11,7 @@
 \usage{
 ET0_eq(Rn, Tair, Pa = atm, ...)
 
-ET0_Penman54(Rn, Tair, Pa = atm, D, wind, z.wind = 10)
+ET0_Penman48(Rn, Tair, Pa = atm, D, wind, z.wind = 10)
 
 ET0_Monteith65(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rs = 70, ...)
 
@@ -35,7 +35,7 @@ ET0_FAO98(Rn, Tair, Pa = atm, D, wind, z.wind = 10, tall_crop = FALSE)
 \description{
 \itemize{
 \item \code{ET0_eq}   : Equilibrium evaporation, \code{slope / (slope + gamma) * Rn}
-\item \code{ET0_Penman54} : Penman 1954 equation simplified by Shuttleworth 1993
+\item \code{ET0_Penman48} : Penman 1948 equation simplified by Shuttleworth 1993
 \item \code{ET0_Monteith65}: Penman-Monteith 1965
 \item \code{ET0_PT72} : Priestley Taylor 1972, \code{ET0_PT72 = ET0_eq * 1.26}
 \item \code{ET0_FAO98} : Penman-Monteith reference crop evapotranspiration, FAO56
@@ -43,7 +43,7 @@ ET0_FAO98(Rn, Tair, Pa = atm, D, wind, z.wind = 10, tall_crop = FALSE)
 }
 \examples{
 et0_pt = ET0_PT72(250, 25, D = 1)
-et0_penman54 = ET0_Penman54(250, 25, D = 1, wind = 2)
+et0_penman54 = ET0_Penman48(250, 25, D = 1, wind = 2)
 et0_fa098 = ET0_FAO98(250, 25, D = 1, wind = 2)
 }
 \references{
