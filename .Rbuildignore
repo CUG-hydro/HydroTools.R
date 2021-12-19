@@ -1,0 +1,9 @@
+^hydroTools\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^data-raw$
+^OUTPUT$
+^scripts$
+^tests$
+^\.github$
+^examples$
