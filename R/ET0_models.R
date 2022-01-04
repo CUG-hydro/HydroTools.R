@@ -1,4 +1,4 @@
-#' @name ET0_models
+#' @name ET0_models 
 #' @title Potential Evapotranspiration models
 #'
 #' @description
@@ -7,20 +7,22 @@
 #' - `ET0_Monteith65`: Penman-Monteith 1965
 #' - `ET0_PT72` : Priestley Taylor 1972, `ET0_PT72 = ET0_eq * 1.26`
 #' - `ET0_FAO98` : Penman-Monteith reference crop evapotranspiration, FAO56
-#' 
+#'
 #' @example R/example/ex-ET0.R
 #'
 #' @references
-#' 1. Penman equation. Wikipedia 2021. 
+#' 1. Penman equation. Wikipedia 2021.
 #'    <https://en.wikipedia.org/w/index.php?title=Penman_equation>
-#' 2. Allen, R. G., & Luis S. Pereira. (1998). Crop
+#' 2. Shuttleworth, W. J. (1993) Evaporation. In: Handbook of Hydrology (ed. by
+#'    D. Maidment). McGraw-Hill, New York.
+#' 3. Allen, R. G., & Luis S. Pereira. (1998). Crop
 #'    evapotranspiration-Guidelines for computing crop water requirements-FAO
-#'    Irrigation and drainage paper 56. European Journal of Agronomy, 34(3), 
+#'    Irrigation and drainage paper 56. European Journal of Agronomy, 34(3),
 #'    144-152. <doi:10.1016/j.eja.2010.12.001>
-#' 3. Allen, R. G., Pereira, L. S., Raes, D., & Smith, M. (1998). FAO Irrigation
+#' 4. Allen, R. G., Pereira, L. S., Raes, D., & Smith, M. (1998). FAO Irrigation
 #'    and drainage paper No. 56. Rome: Food and Agriculture Organization of the
 #'    United Nations, 56(97), e156.
-#' 4. Chapter 2 - FAO Penman-Monteith equation,
+#' 5. Chapter 2 - FAO Penman-Monteith equation,
 #'    <https://www.fao.org/3/x0490E/x0490e06.htm>
 NULL
 
@@ -107,4 +109,31 @@ ET0_FAO98 <- function(Rn, Tair, Pa = atm, D,
         Evp = gamma * p1 / (Tair + 273.15) * U2 * D / (slope + (gamma * (1 + p2 * U2))),
         ET0 = Eeq + Evp
     )
+}
+
+#' Estimate ET0 by Hargreaves equation.
+#' 
+#' @description Estimate reference evapotranspiration (ET0) from a hypothetical 
+#' short grass reference surface using the the Hargreaves equation.
+#' 
+#' @param Tmax Daily maximum air temperature at 2m height `[deg Celsius]`.
+#' @param Tmin Daily minimum air temperature at 2m height `[deg Celsius]`.
+#' @param Tavg Daily mean air temperature at 2m height `[deg Celsius]`. If not
+#' provided it would estimated by averaging the Tmax and tmin.
+#' @param Ra  Clear sky incoming shortwave radiation, i. e. extraterrestrial
+#' radiation multiply by clear sky transmissivity (i. e. a + b, a and b are
+#' coefficients of Angstrom formula. Normally 0.75) `[MJ m-2 day-1]`. If not
+#' provided, must provide lat and dates. 
+#' @param lat Latitude `[degree]`. 
+#' @param dates A R Date type of a vector of Date type. If not provided, it will Regard
+#' the ssd series is begin on the first day of a year.
+#' 
+#' @return Reference evapotranspiration ET0 from a hypothetical grass reference
+#' surface `[mm day-1]`.
+#' 
+#' @export
+PET_hg <- function(Tmax, Tmin, Tavg = NULL, Ra = NULL, lat = NULL, dates=NULL) {
+  if(is.null(Tavg)) Tavg <- (Tmax + Tmin) / 2
+  if(is.null(Ra)) Ra <- cal_Ra(lat, dates)
+  0.0023 * 0.408 * Ra * sqrt(Tmax - Tmin) * (Tavg + 17.8)
 }

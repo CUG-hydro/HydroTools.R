@@ -50,6 +50,8 @@ et0_fao98 = ET0_FAO98(250, 25, D = 1, wind = 2)
 \enumerate{
 \item Penman equation. Wikipedia 2021.
 \url{https://en.wikipedia.org/w/index.php?title=Penman_equation}
+\item Shuttleworth, W. J. (1993) Evaporation. In: Handbook of Hydrology (ed. by
+D. Maidment). McGraw-Hill, New York.
 \item Allen, R. G., & Luis S. Pereira. (1998). Crop
 evapotranspiration-Guidelines for computing crop water requirements-FAO
 Irrigation and drainage paper 56. European Journal of Agronomy, 34(3),

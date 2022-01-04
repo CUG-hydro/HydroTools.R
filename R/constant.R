@@ -5,11 +5,16 @@
 #' @description
 #' - `T0`: [Absolute zero](https://en.wikipedia.org/wiki/Absolute_zero) in
 #'   Kelvin \eqn{T_0} (K)
-#' - `L`: [Latent heat](https://en.wikipedia.org/wiki/Latent_heat) of water
-#'   vapor \eqn{L = 2.5 \times 10^6J/kg}
+#' 
 #' - `Es.T0`: \eqn{e_s(T_0) = 6.11hPa} is the saturation vapor pressure at the
 #'   absolute zero \eqn{T_0 = 273.15K}.
+#'
+#' - `L`: [Latent heat](https://en.wikipedia.org/wiki/Latent_heat) of water
+#'   vapor \eqn{L = 2.5 \times 10^6J/kg}
+#' 
 #' - `atm`: standard pressure at sea surface, `101.325 kPa`
+#' 
+#' - `Cp`: specific heat at constant pressure, `1.013 * 1e-3 MJ kg-1 degC-1`
 NULL
 
 #' @rdname constants

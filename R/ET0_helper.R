@@ -159,3 +159,24 @@ cal_rou_a <- function(Tair, Pa = atm, q = NULL, ea = NULL) {
     # R = 0.287 # kJ kg-1 K-1
     3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5
 }
+
+#' Soil heat flux.
+#'
+#' Estimate monthly soil heat flux (G) from the mean air temperature of the 
+#' previous, current or next month assuming as grass crop.
+#'
+#' @param t.p Mean air temperature of the previous month `[Celsius]`.
+#' @param t.n Mean air temperature of the next month `[Celsius]`.
+#' @param t.c Mean air temperature of the current month `[Celsius]`.
+#'
+#' @return Soil heat flux `[MJ m-2 day-1]`.
+#' @export
+soil_heat_flux <- function(t.p, t.n = NULL, t.c = NULL) {
+  if (!is.null(t.n)) {
+    return(0.07 * (t.n - t.p))
+  }
+  if (!is.null(t.c)) {
+    return(0.14 * (t.c - t.p))
+  }
+  stop("Temperature of the next time step or the current time step must provide one.")
+}
