@@ -7,7 +7,7 @@
 #' @param cld (optional) cloud coverage (0-1). At least one of `cld` and `ssd`
 #' should be provided. If `cld` is not null, `ssd` will be ignored.
 #'
-#' @param ea Vapor pressure
+#' @param ea Actual vapor pressure (kPa)
 #' @param RH Relative humidity (%). If `ea` provided, `RH` will be ignored.
 #'
 #' @param Z (optional) elevation (m), for the calculation of `Rso`

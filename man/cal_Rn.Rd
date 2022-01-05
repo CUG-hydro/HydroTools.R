@@ -26,7 +26,7 @@ cal_Rn(
 
 \item{Tmin, Tmax}{numeric vector, min and max 2m-air temperature (degC)}
 
-\item{ea}{Vapor pressure}
+\item{ea}{Actual vapor pressure (kPa)}
 
 \item{RH}{Relative humidity (\%). If \code{ea} provided, \code{RH} will be ignored.}
 

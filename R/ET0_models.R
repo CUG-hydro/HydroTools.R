@@ -1,4 +1,4 @@
-#' @name ET0_models 
+#' @name ET0_models
 #' @title Potential Evapotranspiration models
 #'
 #' @description
@@ -26,6 +26,7 @@
 #'    <https://www.fao.org/3/x0490E/x0490e06.htm>
 NULL
 
+
 #' @param Rn net radiation (W m-2)
 #' @param Tair 2m air temperature (degC)
 #' @param D vapor pressure deficit (kPa)
@@ -40,7 +41,7 @@ ET0_eq <- function(Rn, Tair, Pa = atm, ...) {
     lambda <- cal_lambda(Tair) # MJ kg-1
     slope <- cal_slope(Tair) # kPa degC-1
     gamma <- Cp * Pa / (epsilon * lambda) # kPa degC-1
-    
+
     coef_W2mm <- 0.086400 / lambda
     Eeq <- slope / (slope + gamma) * Rn * coef_W2mm
 
@@ -57,7 +58,10 @@ ET0_Penman48 <- function(Rn, Tair, Pa = atm, D,
 {
     dat = ET0_eq(Rn, Tair, Pa)
     U2 = cal_U2(wind, z.wind)
-
+    # rou_a * Cp * dT / rH (MJ m-2 s-1)
+    # rou_a ≈ 1.225 kg/m3
+    # rou_a * Cp / rH = f(U2)
+    # `f(U2) = 2.6 * (1 + 0.54U2)` is equivalent to Shuttleworth1993
     mutate(dat,
         Evp = gamma / (slope + gamma) * 6.43 * (1 + 0.536 * U2) * D / lambda,
         ET0 = Evp + Eeq)
@@ -72,7 +76,10 @@ ET0_Monteith65 <- function(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rs = 70, ..
 
     coef_W2mm <- 0.086400 / dat$lambda
     rou_a = 3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5, kg m-3
-
+    # Cp = 1.013 * 1e-3 # MJ kg-1 degC-1
+    # rou_a * Cp * dT * gH (in MJ m-2 s-1)
+    # = kg m-3 * MJ kg-1 degC-1 * degC * m s-1
+    # = MJ m-2 s-1
     dat %>% mutate(
         Eeq = slope / (slope + (gamma * (1 + rs / rH))) * Rn * coef_W2mm,
         Evp = (rou_a * Cp * D / rH) / (slope + (gamma * (1 + rs / rH))) * 86400 / lambda,
@@ -112,10 +119,10 @@ ET0_FAO98 <- function(Rn, Tair, Pa = atm, D,
 }
 
 #' Estimate ET0 by Hargreaves equation.
-#' 
-#' @description Estimate reference evapotranspiration (ET0) from a hypothetical 
+#'
+#' @description Estimate reference evapotranspiration (ET0) from a hypothetical
 #' short grass reference surface using the the Hargreaves equation.
-#' 
+#'
 #' @param Tmax Daily maximum air temperature at 2m height `[deg Celsius]`.
 #' @param Tmin Daily minimum air temperature at 2m height `[deg Celsius]`.
 #' @param Tavg Daily mean air temperature at 2m height `[deg Celsius]`. If not
@@ -123,14 +130,14 @@ ET0_FAO98 <- function(Rn, Tair, Pa = atm, D,
 #' @param Ra  Clear sky incoming shortwave radiation, i. e. extraterrestrial
 #' radiation multiply by clear sky transmissivity (i. e. a + b, a and b are
 #' coefficients of Angstrom formula. Normally 0.75) `[MJ m-2 day-1]`. If not
-#' provided, must provide lat and dates. 
-#' @param lat Latitude `[degree]`. 
+#' provided, must provide lat and dates.
+#' @param lat Latitude `[degree]`.
 #' @param dates A R Date type of a vector of Date type. If not provided, it will Regard
 #' the ssd series is begin on the first day of a year.
-#' 
+#'
 #' @return Reference evapotranspiration ET0 from a hypothetical grass reference
 #' surface `[mm day-1]`.
-#' 
+#'
 #' @export
 PET_hg <- function(Tmax, Tmin, Tavg = NULL, Ra = NULL, lat = NULL, dates=NULL) {
   if(is.null(Tavg)) Tavg <- (Tmax + Tmin) / 2

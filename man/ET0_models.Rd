@@ -45,6 +45,7 @@ ET0_FAO98(Rn, Tair, Pa = atm, D, wind, z.wind = 10, tall_crop = FALSE)
 et0_pt = ET0_PT72(250, 25, D = 1)
 et0_penman48 = ET0_Penman48(250, 25, D = 1, wind = 2)
 et0_fao98 = ET0_FAO98(250, 25, D = 1, wind = 2)
+ET0_Monteith65(250, 25, D = 1, wind = 2)
 }
 \references{
 \enumerate{
