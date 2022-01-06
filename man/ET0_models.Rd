@@ -13,7 +13,17 @@ ET0_eq(Rn, Tair, Pa = atm, ...)
 
 ET0_Penman48(Rn, Tair, Pa = atm, D, wind, z.wind = 10)
 
-ET0_Monteith65(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rs = 70, ...)
+ET0_Monteith65(
+  Rn,
+  Tair,
+  Pa = atm,
+  D,
+  wind,
+  z.wind = 10,
+  rs = 70,
+  rH = NULL,
+  ...
+)
 
 ET0_PT72(Rn, Tair, Pa = atm, alpha = 1.26, ...)
 

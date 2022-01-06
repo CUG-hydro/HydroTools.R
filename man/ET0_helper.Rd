@@ -12,6 +12,7 @@
 \alias{cal_bowen}
 \alias{cal_Pa}
 \alias{cal_rH}
+\alias{cal_rH2}
 \alias{cal_TvK}
 \alias{cal_rou_a}
 \title{helper functions for potential evapotranspiration (ET0)}
@@ -35,6 +36,8 @@ cal_bowen(Tair, Pa = atm)
 cal_Pa(z = NULL)
 
 cal_rH(U2, h = 0.12)
+
+cal_rH2(U2, Tair, Pa = atm)
 
 cal_TvK(Tair, q = NULL, ea = NULL, Pa = atm)
 

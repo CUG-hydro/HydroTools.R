@@ -19,7 +19,8 @@ cal_Ts(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rH = NULL, rs = 0, ...)
 
 \item{z.wind}{Height where measure the wind speed \verb{[m]}. Default 10m.}
 
-\item{rs}{If \code{rs = 0}, Monteith 1965 leaf evaporation Equation becomes Penman 1948 water evaporation.
+\item{rs}{If \code{rs = 0}, Monteith 1965 leaf evaporation Equation becomes Penman
+1948 water evaporation.
 ignore the influence of Ts on net cal_radiation}
 }
 \description{

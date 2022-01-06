@@ -69,11 +69,11 @@ ET0_Penman48 <- function(Rn, Tair, Pa = atm, D,
 
 #' @rdname ET0_models
 #' @export
-ET0_Monteith65 <- function(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rs = 70, ...) {
+ET0_Monteith65 <- function(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rs = 70, rH = NULL, ...) {
     dat = ET0_eq(Rn, Tair, Pa)
     U2 = cal_U2(wind, z.wind)
-    rH = cal_rH(U2, h = 0.12)
-
+    if (is.null(rH)) rH = cal_rH(U2, h = 0.12)
+    
     coef_W2mm <- 0.086400 / dat$lambda
     rou_a = 3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5, kg m-3
     # Cp = 1.013 * 1e-3 # MJ kg-1 degC-1

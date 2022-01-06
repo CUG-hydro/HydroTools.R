@@ -1,5 +1,3 @@
-
-
 #' @rdname GOF
 #' @export
 NSE <- function(yobs, ysim, w, ...) {
@@ -142,11 +140,11 @@ GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
         AI = 1 - sum( (ysim - yobs)^2 ) / sum( (abs(ysim - y_mean) + abs(yobs - y_mean))^2 )
     }
 
-    out <- c(RMSE = RMSE, KGE = KGE, NSE = NSE, MAE = MAE, AI = AI,
-             Bias = Bias, Bias_perc = Bias_perc, n_sim = n_sim)
+    out <- c(NSE = NSE, KGE = KGE, RMSE = RMSE, MAE = MAE, 
+             Bias = Bias, Bias_perc = Bias_perc, AI = AI, n_sim = n_sim)
 
-    if (include.r) out <- c(out, R2 = R2, R = R, pvalue = pvalue)
-    if (include.cv) out <- c(out, obs = CV_obs, sim = CV_sim)
+    if (include.r) out <- c(R2 = R2, out, R = R, pvalue = pvalue)
+    if (include.cv) out <- c(out, CV_obs = CV_obs, CV_sim = CV_sim)
     return(out)
 }
 
@@ -245,7 +243,6 @@ cv_coef <- function(x, w) {
     cv <- sd / mean
     c(mean = mean, sd = sd, cv = cv) # quickly return
 }
-
 
 #' Critical value of determined correlation
 #'

@@ -2,20 +2,22 @@
 #'
 #' Evaporative surface temperature (land surface, Tland; or leaf surface Tleaf).
 #' Land surface temperature infered by Monteith 1965 Equation.
-#' 
+#'
 #' @details
 #'- `rH`: aerodynamic resistance of heat
 #'- `rs`: stamotal resistance of water
-#' 
+#'
 #' @inheritParams ET0_Penman48
-#' @param rs If `rs = 0`, Monteith 1965 leaf evaporation Equation becomes Penman 1948 water evaporation.
+#' @param rs If `rs = 0`, Monteith 1965 leaf evaporation Equation becomes Penman
+#' 1948 water evaporation.
 #' ignore the influence of Ts on net cal_radiation
-#' 
+#'
 #' @example R/example/ex-cal_Ts.R
 #' @export
 cal_Ts <- function(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rH = NULL, rs = 0, ...) {
     U2 = cal_U2(wind, z.wind)
     rH = cal_rH(U2, h = 0.12)
+    rH = cal_rH2(U2, Tair, Pa) # ET_cr推导结果可能会更好
 
     # gamma_star = gamma * gH / gw
     gamma = cal_gamma(Tair, Pa)
@@ -29,20 +31,38 @@ cal_Ts <- function(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rH = NULL, rs = 0, 
     # = MJ m-2 s-1
 
     # MJ m-2 s-1 * 1e6 = W m-2, then having the same unit as Rn
-    dat_ET = ET0_Monteith65(Rn, Tair, Pa = Pa, D, wind, z.wind, rs = rs)
-    Ts = Tair + gamma_star / (slope + gamma_star) * ( Rn / (rou_a * Cp / rH * 1e6) - D / gamma_star)
-    dat_ET$Ts = Ts
-    dat_ET
+    # dat_ET = ET0_Monteith65(Rn, Tair, Pa = Pa, D, wind, z.wind, rs = rs)
+    # Ts = Tair + dt
+    dT = gamma_star / (slope + gamma_star) * ( Rn / (rou_a * Cp / rH * 1e6) - D / gamma_star)
+    dT
+    # dat_ET$Ts = Ts
+    # dat_ET
 }
 
 #' wetbulb temperature
-#' 
+#'
 #' @inheritParams ET0_Monteith65
 #' @inheritParams cal_Rn
 #' @export
 cal_Tw <- function(ea, Tair, Pa = atm) {
+    n <- length(ea)
+    ans <- rep(NA_real_, n)
+    if (length(Pa) != length(ea) && length(Pa) == 1) Pa <- rep(Pa, n)
+
+    for (i in 1:n) {
+        temp <- ea[i] + Tair[i] + Pa[i]
+        if (!is.na(temp)) {
+            ans[i] <- cal_Tw_default(ea[i], Tair[i], Pa[i])
+        }
+    }
+    ans
+}
+
+#' @rdname cal_Tw
+#' @export
+cal_Tw_default <- function(ea, Tair, Pa = atm) {
     ea = pmin(ea, cal_ea(Tair)) # make sure ea in a reasonable range
-    gamma = cal_gamma(Tair, Pa)
+    gamma = cal_gamma(Tair, Pa) # lambda changes slightly as Tair changes
     # lambda = cal_lambda(Tair)
 
     goal <- function(Tw) {

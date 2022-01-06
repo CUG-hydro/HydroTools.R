@@ -2,9 +2,12 @@
 % Please edit documentation in R/cal_Ts.R
 \name{cal_Tw}
 \alias{cal_Tw}
+\alias{cal_Tw_default}
 \title{wetbulb temperature}
 \usage{
 cal_Tw(ea, Tair, Pa = atm)
+
+cal_Tw_default(ea, Tair, Pa = atm)
 }
 \arguments{
 \item{ea}{Actual vapor pressure (kPa)}
