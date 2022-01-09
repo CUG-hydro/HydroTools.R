@@ -78,7 +78,7 @@ cal_Ra <- function(lat, J) {
 #'    bibliography.[J]. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
 #' 2. https://github.com/sbegueria/SPEI/blob/master/R/penman.R
 #' 
-#' @seealso [cal_Ra()]
+#' @seealso [cal_Ra()], [cal_Rn()]
 #' @export
 cal_Rs <- function(lat, J, ssd = NULL, cld = NULL, Z = 0, 
   albedo = 0.23, 
@@ -176,4 +176,3 @@ cal_Rlin <- function(temp, ea = NULL, s = 1, method = 'KON') {
   ep_a <- 1 - s + s*ep_ac
   ep_a * 5.67e-8 * temp**4
 }
-

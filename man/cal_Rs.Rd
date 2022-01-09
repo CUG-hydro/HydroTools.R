@@ -43,5 +43,5 @@ bibliography.\link{J}. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
 }
 }
 \seealso{
-\code{\link[=cal_Ra]{cal_Ra()}}
+\code{\link[=cal_Ra]{cal_Ra()}}, \code{\link[=cal_Rn]{cal_Rn()}}
 }

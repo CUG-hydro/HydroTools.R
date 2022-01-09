@@ -1,3 +1,7 @@
+library(dplyr)
+library(hydroTools)
+library(lubridate)
+
 #! /usr/bin/Rscript --no-init-file
 # Dongdong Kong ----------------------------------------------------------------
 # Copyright (c) 2021 Dongdong Kong. All rights reserved.

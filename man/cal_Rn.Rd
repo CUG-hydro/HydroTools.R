@@ -7,13 +7,13 @@
 cal_Rn(
   lat,
   J,
-  Rs = NULL,
   Tmin,
   Tmax,
   ea = NULL,
   RH,
   ssd = NULL,
   cld = NULL,
+  Rs = NULL,
   albedo = 0.23,
   Z = 0,
   ...
@@ -34,6 +34,9 @@ cal_Rn(
 
 \item{cld}{(optional) cloud coverage (0-1). At least one of \code{cld} and \code{ssd}
 should be provided. If \code{cld} is not null, \code{ssd} will be ignored.}
+
+\item{Rs}{(optional) Surface downward shortwave radiation (MJ m-2 d-1). If not
+specified, Rs will be calculated by \code{(as + bs * nN) * Ra}.}
 
 \item{albedo}{(optional), \verb{Rsn = (1 - albedo) Rs}}
 
@@ -58,7 +61,9 @@ Surface net radiation
 }
 \examples{
 cal_Rn(lat = 30, J = 1, RH = 70, Tmin = 20, Tmax = 30, ssd = 10)
-
+}
+\seealso{
+\code{\link[=cal_Ra]{cal_Ra()}}, \code{\link[=cal_Rs]{cal_Rs()}}
 }
 \author{
 Xie YuXuan and Kong Dongdong

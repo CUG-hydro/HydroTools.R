@@ -8,14 +8,15 @@
 #'- `rs`: stamotal resistance of water
 #'
 #' @inheritParams ET0_Penman48
+#' @inheritParams cal_rH
 #' @param rs If `rs = 0`, Monteith 1965 leaf evaporation Equation becomes Penman
 #' 1948 water evaporation.
 #' ignore the influence of Ts on net cal_radiation
 #'
 #' @example R/example/ex-cal_Ts.R
 #' @export
-cal_Ts <- function(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rH = NULL, rs = 0, ...) {
-    U2 = cal_U2(wind, z.wind)
+cal_Ts <- function(Rn, Tair, D, U2, Pa = atm, rH = NULL, rs = 0, ...) {
+    # U2 = cal_U2(wind, z.wind)
     rH = cal_rH(U2, h = 0.12)
     rH = cal_rH2(U2, Tair, Pa) # ET_cr推导结果可能会更好
 

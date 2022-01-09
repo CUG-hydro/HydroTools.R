@@ -2,14 +2,17 @@
 #' 
 #' @param J integer, day of year
 #' @param lat float, latitude
-#' @param ssd numeric vector, sun shine duration (hour)
 #' @param Tmin,Tmax numeric vector, min and max 2m-air temperature (degC)
-#' @param cld (optional) cloud coverage (0-1). At least one of `cld` and `ssd`
-#' should be provided. If `cld` is not null, `ssd` will be ignored.
 #'
 #' @param ea Actual vapor pressure (kPa)
 #' @param RH Relative humidity (%). If `ea` provided, `RH` will be ignored.
-#'
+#' 
+#' @param ssd numeric vector, sun shine duration (hour)
+#' @param cld (optional) cloud coverage (0-1). At least one of `cld` and `ssd`
+#' should be provided. If `cld` is not null, `ssd` will be ignored.
+#' @param Rs (optional) Surface downward shortwave radiation (MJ m-2 d-1). If not
+#' specified, Rs will be calculated by `(as + bs * nN) * Ra`.
+#' 
 #' @param Z (optional) elevation (m), for the calculation of `Rso`
 #' @param albedo (optional), `Rsn = (1 - albedo) Rs`
 #'
@@ -26,14 +29,15 @@
 #' 
 #' @author
 #' Xie YuXuan and Kong Dongdong
-#'
+#' @seealso [cal_Ra()], [cal_Rs()]
+#' 
 #' @examples
 #' cal_Rn(lat = 30, J = 1, RH = 70, Tmin = 20, Tmax = 30, ssd = 10)
-#'
 #' @export
-cal_Rn <- function(lat, J, Rs = NULL, Tmin, Tmax,
+cal_Rn <- function(lat, J, Tmin, Tmax,
   ea = NULL, RH,
   ssd = NULL, cld = NULL,
+  Rs = NULL, 
   albedo = 0.23, Z = 0, ...)
 {
   J %<>% check_doy()
@@ -45,12 +49,12 @@ cal_Rn <- function(lat, J, Rs = NULL, Tmin, Tmax,
   dr <- 1+0.033*cos(J*2*pi/365) # 日地平均距离
 
   # 星际辐射/日地球外辐射:大气圈外接受的阳光辐射能量（可查表）
-  as    <- 0.25  # 星际辐射回归系数
-  bs    <- 0.5   # 星际辐射到地球的衰减系数
-  Gsc   <- 0.082 # 太阳常数(MJ/m^2*min)
+  as  <- 0.25  # 星际辐射回归系数
+  bs  <- 0.5   # 星际辐射到地球的衰减系数
+  Gsc <- 0.082 # 太阳常数(MJ/m^2*min)
 
   Ra  <- 24*60/pi*Gsc*dr*(ws*sin(lat*pi/180)*sin(dlt)+cos(lat*pi/180)*cos(dlt)*sin(ws))
-
+  
   if (!is.null(cld)) {
     nN = (1 - cld)
   } else {
@@ -63,8 +67,7 @@ cal_Rn <- function(lat, J, Rs = NULL, Tmin, Tmax,
   if (is.null(Rs)) {
     # Rs <- (1. - cld) * Ra
     # Rs <- (1. - cld) * Ra * (a + b) # also named as R_so
-
-    # https://github.com/sbegueria/SPEI/blob/master/R/penman.R
+    ## https://github.com/sbegueria/SPEI/blob/master/R/penman.R
     Rs  <- (as + bs * nN) * Ra # Rs为太阳辐射(n/N日照系数)
   }
 

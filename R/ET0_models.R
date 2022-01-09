@@ -99,6 +99,7 @@ ET0_PT72 <- function(Rn, Tair, Pa = atm, alpha = 1.26, ...) {
 ET0_FAO98 <- function(Rn, Tair, Pa = atm, D,
     wind, z.wind = 10, tall_crop = FALSE)
 {
+    U2 = cal_U2(wind, z.wind)
     if (tall_crop) {
         p1 <- 1600
         p2 <- 0.38
@@ -108,7 +109,6 @@ ET0_FAO98 <- function(Rn, Tair, Pa = atm, D,
     }
 
     dat = ET0_eq(Rn, Tair, Pa)
-    U2 = cal_U2(wind, z.wind)
     coef_W2mm <- 0.086400 / dat$lambda
 
     dat %>% mutate(

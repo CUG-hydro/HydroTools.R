@@ -4,20 +4,16 @@
 \alias{cal_Ts}
 \title{Evaporative surface temperature}
 \usage{
-cal_Ts(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rH = NULL, rs = 0, ...)
+cal_Ts(Rn, Tair, D, U2, Pa = atm, rH = NULL, rs = 0, ...)
 }
 \arguments{
 \item{Rn}{land surface net radiation, W m-2}
 
 \item{Tair}{2m air temperature (degC)}
 
-\item{Pa}{surface air pressure (kPa)}
-
 \item{D}{vapor pressure deficit (kPa)}
 
-\item{wind}{wind speed at the height of \code{z.wind}}
-
-\item{z.wind}{Height where measure the wind speed \verb{[m]}. Default 10m.}
+\item{Pa}{surface air pressure (kPa)}
 
 \item{rs}{If \code{rs = 0}, Monteith 1965 leaf evaporation Equation becomes Penman
 1948 water evaporation.
@@ -37,11 +33,10 @@ Land surface temperature infered by Monteith 1965 Equation.
 library(dplyr)
 # The relationship of Rn, Ts
 Rn = 0:200
-dat = cal_Ts(Rn, 25, D = 1, wind = 2, z.wind = 2)
-
-plot(Rn, dat$Ts, type = "l", main = "(a) Ts ~ Rn")
-plot(Rn, dat$Eeq, type = "l", main = "(b) Eeq ~ Rn")
-# plot(Rn, dat$Evp, type = "l") # a constant value
-dat \%<>\% mutate(Rn = Rn, bowen = ET0 / (Rn * 0.086400 / lambda - ET0))
-plot(bowen ~ Rn, dat, type = "l", main = "(b) Eeq ~ Rn")
+dT = cal_Ts(Rn, 25, D = 1, U2 = 2)
+# plot(Rn, dat$Ts, type = "l", main = "(a) Ts ~ Rn")
+# plot(Rn, dat$Eeq, type = "l", main = "(b) Eeq ~ Rn")
+# # plot(Rn, dat$Evp, type = "l") # a constant value
+# dat \%<>\% mutate(Rn = Rn, bowen = ET0 / (Rn * 0.086400 / lambda - ET0))
+# plot(bowen ~ Rn, dat, type = "l", main = "(b) Eeq ~ Rn")
 }
