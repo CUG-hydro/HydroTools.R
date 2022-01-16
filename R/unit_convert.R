@@ -30,6 +30,16 @@ MJ_2W <- function(x) {
     x / 86400 * 1e6
 }
 
+# ' MJ m-2 day-1 equivalent evaporation (mm/day)
+# ' 
+# ' 1 mm day-1 = 2.45 MJ m-2 day-1
+#' @references http://www.fao.org/3/X0490E/x0490e0i.htm
+#' @rdname unit_convert
+#' @export
+MJ_2mm <- function(x) {
+    x/2.45
+}
+
 #' @rdname unit_convert
 #' @export
 W2_MJ <- function(x) {

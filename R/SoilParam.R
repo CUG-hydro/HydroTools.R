@@ -14,16 +14,13 @@
 #'
 #' @return %v
 #' 
-#' @references
-#' Saxton, K. E., & Rawls, W. J. (2006). Soil water characteristic estimates by 
-#'  texture and organic matter for hydrologic solutions. Soil Science Society of 
-#'  America Journal, 70(5), 1569-1578. https://doi.org/10.2136/sssaj2005.0117
-#' 
-#' @examples
-#' S = C = 0.20; OM = 2.5
-#' wilting_point(S, C, OM)  # 13.8%
-#' field_capacity(S, C, OM) # 32.1%
-#' saturated_mois(S, C, OM) # 48.2%
+#' @references 
+#' 1. Saxton, K. E., & Rawls, W. J. (2006). Soil water characteristic estimates
+#'    by texture and organic matter for hydrologic solutions. Soil Science
+#'    Society of America Journal, 70(5), 1569-1578. <doi:10.2136/sssaj2005.0117>
+#'
+#' @examples S = C = 0.20; OM = 2.5 wilting_point(S, C, OM)  # 13.8%
+#' field_capacity(S, C, OM) # 32.1% saturated_mois(S, C, OM) # 48.2%
 NULL
 
 #' @rdname SPAW
@@ -32,34 +29,34 @@ wilting_point <- function(S, C, OM){
     theta_1500t = -0.024*S + 0.487*C + 0.006*OM +
         0.005*(S*OM) - 0.013*(C*OM) +
         0.068*(S*C) + 0.031
-
-    theta_1500t + (0.14*theta_1500t - 0.02)
+    # Eq. 1, theta_1500 (1500 kPa moisture), %v
+    theta_1500t + (0.14 * theta_1500t - 0.02) 
 }
 
-# Eq. 2
 #' @rdname SPAW
 #' @export
 field_capacity <- function(S, C, OM){
     theta_33t = -0.251*S + 0.195*C + 0.011*OM +
         0.006*(S*OM) - 0.027*(C*OM) +
         0.452*(S*C) + 0.299
-    theta_33t + (1.283*theta_33t^2 - 0.374*theta_33t - 0.015)
+    # Eq. 2, theta_33 (33 kPa moisture), %v
+    theta_33t + (1.283 * theta_33t^2 - 0.374 * theta_33t - 0.015) 
 }
 
-# Eq. 3
+
 theta_S_33 <- function(S, C, OM){
     theta_S_33_t = 0.278*S + 0.034*C + 0.022*OM -
         0.018*(S*OM) - 0.027*(C*OM) - 0.584*(S*C) + 0.078
+    # Eq. 3, 
     theta_S_33_t + 0.636*theta_S_33_t - 0.107
 }
 
-# Eq. 5 (theta_S)
 #' @rdname SPAW
 #' @export
 saturated_mois <- function(S, C, OM){
     theta33 = theta_33(S, C, OM)
     thetaS_33 = theta_S_33(S, C, OM)
-
+    # Eq. 5 (theta_S)
     theta33 + thetaS_33 - 0.097*S + 0.043
 }
 

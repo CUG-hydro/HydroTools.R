@@ -37,13 +37,13 @@ Wilting point, field capacity and saturated moisture
 }
 }
 \examples{
-S = C = 0.20; OM = 2.5
-wilting_point(S, C, OM)  # 13.8\%
-field_capacity(S, C, OM) # 32.1\%
-saturated_mois(S, C, OM) # 48.2\%
+S = C = 0.20; OM = 2.5 wilting_point(S, C, OM)  # 13.8\%
+field_capacity(S, C, OM) # 32.1\% saturated_mois(S, C, OM) # 48.2\%
 }
 \references{
-Saxton, K. E., & Rawls, W. J. (2006). Soil water characteristic estimates by
-texture and organic matter for hydrologic solutions. Soil Science Society of
-America Journal, 70(5), 1569-1578. https://doi.org/10.2136/sssaj2005.0117
+\enumerate{
+\item Saxton, K. E., & Rawls, W. J. (2006). Soil water characteristic estimates
+by texture and organic matter for hydrologic solutions. Soil Science
+Society of America Journal, 70(5), 1569-1578. \url{doi:10.2136/sssaj2005.0117}
+}
 }

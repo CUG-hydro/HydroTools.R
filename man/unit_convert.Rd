@@ -5,6 +5,7 @@
 \alias{R2Q}
 \alias{Q2R}
 \alias{MJ_2W}
+\alias{MJ_2mm}
 \alias{W2_MJ}
 \alias{W2mm}
 \alias{K2T}
@@ -18,6 +19,8 @@ R2Q(R, area = dt * 3.6, dt = 24)
 Q2R(Q, area = dt * 3.6, dt = 24)
 
 MJ_2W(x)
+
+MJ_2mm(x)
 
 W2_MJ(x)
 
@@ -47,4 +50,7 @@ rad2deg(rad)
 \item \code{R2Q}: Q(m^3/s) = R(mm) * area (km^2) * 1000/(3600*24)
 \item \code{W2mm}: 1 MJ /m2/day  =0.408 mm /day, 1 Watt /m2 = 0.0864 MJ /m2/day
 }
+}
+\references{
+http://www.fao.org/3/X0490E/x0490e0i.htm
 }
