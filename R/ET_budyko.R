@@ -60,6 +60,7 @@ budyko_goal <- function(AET.P, PET.P, par = 2, method = "Fu1981", ...) {
 #' @param ... ignored
 #' 
 #' @rdname budyko
+#' @importFrom purrr map
 #' @export
 budyko_fit <- function(AET.P, PET.P, par = 2, method = "Fu1981", ...) {
     methods = c("budyko", "Fu1981", "Zhang2001", "Yang2008", "Pike1964")

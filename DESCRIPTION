@@ -15,7 +15,7 @@ Imports:
     lubridate,
     matrixStats, rtop, 
     readr, glue,
-    data.table, dplyr, 
+    data.table, dplyr, purrr, 
     hydroGOF, maptools, ncdf4, shape, stringr,
     abind,
     methods

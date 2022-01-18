@@ -37,8 +37,10 @@ Wilting point, field capacity and saturated moisture
 }
 }
 \examples{
-S = C = 0.20; OM = 2.5 wilting_point(S, C, OM)  # 13.8\%
-field_capacity(S, C, OM) # 32.1\% saturated_mois(S, C, OM) # 48.2\%
+S = C = 0.20; OM = 2.5 
+wilting_point(S, C, OM)  # 13.8\%
+field_capacity(S, C, OM) # 32.1\% 
+saturated_mois(S, C, OM) # 48.2\%
 }
 \references{
 \enumerate{

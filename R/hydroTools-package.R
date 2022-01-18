@@ -2,7 +2,7 @@
 #' @import magrittr
 #' @importFrom graphics abline axis legend lines par points
 #' @importFrom methods as
-#' @importFrom stats convolve cor.test median qf rnorm runif sd
+#' @importFrom stats convolve cor.test median qf rnorm runif sd nls predict
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage
