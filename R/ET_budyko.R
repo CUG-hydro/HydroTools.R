@@ -45,6 +45,16 @@ budyko <- function(PET.P, par = 2, method = "Fu1981") {
     }
 }
 
+#' @param PET potential evapotranspiration (mm)
+#' @param P precipitation (mm)
+#' 
+#' @rdname budyko
+#' @export
+ET_budyko <- function (PET, P, par = 2, method = "Fu1981", ...) {
+    PET.P = PET / P
+    budyko(PET.P, par = par, method = method, ...) * P
+}
+
 #' @rdname budyko
 #' @export
 budyko_goal <- function(AET.P, PET.P, par = 2, method = "Fu1981", ...) {

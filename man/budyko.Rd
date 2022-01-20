@@ -2,11 +2,14 @@
 % Please edit documentation in R/ET_budyko.R
 \name{budyko}
 \alias{budyko}
+\alias{ET_budyko}
 \alias{budyko_goal}
 \alias{budyko_fit}
 \title{Budyko Curve}
 \usage{
 budyko(PET.P, par = 2, method = "Fu1981")
+
+ET_budyko(PET, P, par = 2, method = "Fu1981", ...)
 
 budyko_goal(AET.P, PET.P, par = 2, method = "Fu1981", ...)
 
@@ -25,6 +28,10 @@ budyko_fit(AET.P, PET.P, par = 2, method = "Fu1981", ...)
 
 \item{method}{one of \code{c("budyko", "Fu1981", "Zhang2001", "Yang2008", "Pike1964")},
 or \code{all}.}
+
+\item{PET}{potential evapotranspiration (mm)}
+
+\item{P}{precipitation (mm)}
 
 \item{...}{ignored}
 }
