@@ -12,6 +12,8 @@
 #' @param C the weight ratio of Clay, (weight ratio, 0-1)
 #' @param OM the percentage of Organic Matter, (%w, 0-100)
 #'
+#' @note
+#' The unit of `OM` is `%w`, which is different from `S` and `C`.
 #' @return %v
 #' 
 #' @references 

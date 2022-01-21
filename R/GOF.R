@@ -61,6 +61,7 @@ NSE <- function(yobs, ysim, w, ...) {
 #' GOF(yobs, ysim)
 #' 
 #' @importFrom hydroGOF KGE
+#' @importFrom dplyr tibble
 #' @export
 GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
     if (missing(w)) w <- rep(1, length(yobs))
@@ -140,11 +141,9 @@ GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
         AI = 1 - sum( (ysim - yobs)^2 ) / sum( (abs(ysim - y_mean) + abs(yobs - y_mean))^2 )
     }
 
-    out <- c(NSE = NSE, KGE = KGE, RMSE = RMSE, MAE = MAE, 
-             Bias = Bias, Bias_perc = Bias_perc, AI = AI, n_sim = n_sim)
-
-    if (include.r) out <- c(R2 = R2, out, R = R, pvalue = pvalue)
-    if (include.cv) out <- c(out, CV_obs = CV_obs, CV_sim = CV_sim)
+    out <- tibble(R, pvalue, R2, NSE, KGE, RMSE, MAE, 
+             Bias, Bias_perc, AI = AI, n_sim = n_sim)
+    if (include.cv) out <- cbind(out, CV_obs, CV_sim)
     return(out)
 }
 

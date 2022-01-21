@@ -7,9 +7,17 @@
 #' - `ET0_Monteith65`: Penman-Monteith 1965
 #' - `ET0_PT72` : Priestley Taylor 1972, `ET0_PT72 = ET0_eq * 1.26`
 #' - `ET0_FAO98` : Penman-Monteith reference crop evapotranspiration, FAO56
-#'
+#' 
+#' @return 
+#' - `lambda`: Latent heat of vaporization, about `[2.5 MJ kg-1]`.
+#' - `slope` : The slope of the saturation vapour pressure curve at certain air
+#'             temperature Tair, `[kPa degC-1]`.
+#' - `gamma` : Psychrometric constant ([kPa degC-1]), `Cp*Pa/(epsilon*lambda)`
+#' - `Eeq`   : Equilibrium (radiative) evaporation, mm
+#' - `Evp`   : Aerodynamic evaporation, mm
+#' - `ET0`   : Potential evapotranspiration, mm
+#' 
 #' @example R/example/ex-ET0.R
-#'
 #' @references
 #' 1. Penman equation. Wikipedia 2021.
 #'    <https://en.wikipedia.org/w/index.php?title=Penman_equation>
@@ -54,7 +62,7 @@ ET0_eq <- function(Rn, Tair, Pa = atm, ...) {
 #' @rdname ET0_models
 #' @export
 ET0_Penman48 <- function(Rn, Tair, Pa = atm, D,
-    wind, z.wind = 10)
+    wind, z.wind = 2)
 {
     dat = ET0_eq(Rn, Tair, Pa)
     U2 = cal_U2(wind, z.wind)
@@ -69,7 +77,7 @@ ET0_Penman48 <- function(Rn, Tair, Pa = atm, D,
 
 #' @rdname ET0_models
 #' @export
-ET0_Monteith65 <- function(Rn, Tair, Pa = atm, D, wind, z.wind = 10, rs = 70, rH = NULL, ...) {
+ET0_Monteith65 <- function(Rn, Tair, Pa = atm, D, wind, z.wind = 2, rs = 70, rH = NULL, ...) {
     dat = ET0_eq(Rn, Tair, Pa)
     U2 = cal_U2(wind, z.wind)
     if (is.null(rH)) rH = cal_rH(U2, h = 0.12)
@@ -97,7 +105,7 @@ ET0_PT72 <- function(Rn, Tair, Pa = atm, alpha = 1.26, ...) {
 #' @rdname ET0_models
 #' @export
 ET0_FAO98 <- function(Rn, Tair, Pa = atm, D,
-    wind, z.wind = 10, tall_crop = FALSE)
+    wind, z.wind = 2, tall_crop = FALSE)
 {
     U2 = cal_U2(wind, z.wind)
     if (tall_crop) {

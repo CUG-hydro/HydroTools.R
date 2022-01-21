@@ -84,7 +84,7 @@ budyko_fit <- function(AET.P, PET.P, par = 2, method = "Fu1981", ...) {
         l = nls(formula = AET.P ~ budyko(PET.P, par, method = method), data, start = c(par = 2))
         s = summary(l)
         par = s$coefficients[, 1]
-        ysim = predict(l)
+        ysim = predict(l, data)
         gof = GOF(AET.P, ysim)
         listk(method, par, gof)
     }

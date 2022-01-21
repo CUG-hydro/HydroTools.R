@@ -36,6 +36,9 @@ Wilting point, field capacity and saturated moisture
 \item \verb{saturated moisture}: Saturation (0 kPa moisture), \%v, (Eq. 5)
 }
 }
+\note{
+The unit of \code{OM} is \verb{\%w}, which is different from \code{S} and \code{C}.
+}
 \examples{
 S = C = 0.20; OM = 2.5 
 wilting_point(S, C, OM)  # 13.8\%

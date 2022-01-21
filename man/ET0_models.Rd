@@ -11,7 +11,7 @@
 \usage{
 ET0_eq(Rn, Tair, Pa = atm, ...)
 
-ET0_Penman48(Rn, Tair, Pa = atm, D, wind, z.wind = 10)
+ET0_Penman48(Rn, Tair, Pa = atm, D, wind, z.wind = 2)
 
 ET0_Monteith65(
   Rn,
@@ -19,7 +19,7 @@ ET0_Monteith65(
   Pa = atm,
   D,
   wind,
-  z.wind = 10,
+  z.wind = 2,
   rs = 70,
   rH = NULL,
   ...
@@ -27,7 +27,7 @@ ET0_Monteith65(
 
 ET0_PT72(Rn, Tair, Pa = atm, alpha = 1.26, ...)
 
-ET0_FAO98(Rn, Tair, Pa = atm, D, wind, z.wind = 10, tall_crop = FALSE)
+ET0_FAO98(Rn, Tair, Pa = atm, D, wind, z.wind = 2, tall_crop = FALSE)
 }
 \arguments{
 \item{Rn}{land surface net radiation, W m-2}
@@ -41,6 +41,17 @@ ET0_FAO98(Rn, Tair, Pa = atm, D, wind, z.wind = 10, tall_crop = FALSE)
 \item{wind}{wind speed at the height of \code{z.wind}}
 
 \item{z.wind}{Height where measure the wind speed \verb{[m]}. Default 10m.}
+}
+\value{
+\itemize{
+\item \code{lambda}: Latent heat of vaporization, about \verb{[2.5 MJ kg-1]}.
+\item \code{slope} : The slope of the saturation vapour pressure curve at certain air
+temperature Tair, \verb{[kPa degC-1]}.
+\item \code{gamma} : Psychrometric constant (\link{kPa degC-1}), \code{Cp*Pa/(epsilon*lambda)}
+\item \code{Eeq}   : Equilibrium (radiative) evaporation, mm
+\item \code{Evp}   : Aerodynamic evaporation, mm
+\item \code{ET0}   : Potential evapotranspiration, mm
+}
 }
 \description{
 \itemize{
