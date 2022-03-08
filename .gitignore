@@ -13,9 +13,11 @@ OUTPUT
 *.rda
 # *.tif
 *.txt
-
 */deprecated
+debug.R
+
 examples/
+*/temp/
 # scripts/
 
 R/VIC5

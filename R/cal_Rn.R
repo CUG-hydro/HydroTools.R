@@ -10,12 +10,13 @@
 #' @param ssd numeric vector, sun shine duration (hour)
 #' @param cld (optional) cloud coverage (0-1). At least one of `cld` and `ssd`
 #' should be provided. If `cld` is not null, `ssd` will be ignored.
-#' @param Rs (optional) Surface downward shortwave radiation (MJ m-2 d-1). If not
-#' specified, Rs will be calculated by `(as + bs * nN) * Ra`.
+#' @param Rs (optional) Surface downward shortwave radiation (MJ m-2 d-1). 
+#' - If not provided, `Rs` will be calculated by `(as + bs * nN) * Ra`.
+#' - If provided, `ssd` and `cld` will be ignored.
 #' 
 #' @param Z (optional) elevation (m), for the calculation of `Rso`
 #' @param albedo (optional), `Rsn = (1 - albedo) Rs`
-#'
+#' 
 #' @return radiation in `[MJ d-1]`
 #' - `Rn`  : Surface net radiation
 #' - `Rln` : Surface outward net longwave radiation (negative means outgoing)
@@ -55,16 +56,16 @@ cal_Rn <- function(lat, J, Tmin, Tmax,
 
   Ra  <- 24*60/pi*Gsc*dr*(ws*sin(lat*pi/180)*sin(dlt)+cos(lat*pi/180)*cos(dlt)*sin(ws))
   
-  if (!is.null(cld)) {
-    nN = (1 - cld)
-  } else {
-    N <- ws/pi * 24 # Ge ChaoXiao, Eq. 2-18
-    # N <- cal_ssd(lat, J)
-    if (is.null(ssd)) ssd = N
-    nN = ssd / N
-  }
-
   if (is.null(Rs)) {
+    if (!is.null(cld)) {
+      nN = (1 - cld)
+    } else {
+      N <- ws/pi * 24 # Ge ChaoXiao, Eq. 2-18
+      # N <- cal_ssd(lat, J)
+      if (is.null(ssd)) ssd = N
+      nN = ssd / N
+    }
+    
     # Rs <- (1. - cld) * Ra
     # Rs <- (1. - cld) * Ra * (a + b) # also named as R_so
     ## https://github.com/sbegueria/SPEI/blob/master/R/penman.R

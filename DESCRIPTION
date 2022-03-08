@@ -10,20 +10,21 @@ Depends:
     R (>= 3.6)
 Imports: 
     VIC5 (>= 0.2.4), 
-    foreach, iterators, magrittr, 
-    raster,
+    foreach, magrittr, 
     lubridate,
     matrixStats, rtop, 
-    readr, glue,
-    data.table, dplyr, purrr, 
-    hydroGOF, maptools, ncdf4, shape, stringr,
+    glue, ggplot2,
+    dplyr, purrr, broom, 
+    data.table, 
+    hydroGOF, stringr,
     abind,
+    grid, gridtext, gggrid, 
     methods
 Suggests: 
     testthat (>= 2.1.0),
     covr, 
     scales, 
-    sp, rgdal, raster
+    sf
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
