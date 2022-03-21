@@ -2,29 +2,52 @@
 % Please edit documentation in R/cal_pressure.R
 \name{vapour_press}
 \alias{vapour_press}
-\alias{q2ea}
-\alias{ea2VPD}
-\alias{q2RH}
-\alias{RH2q}
 \alias{w2q}
 \alias{q2w}
+\alias{q2ea}
+\alias{w2ea}
+\alias{ea2VPD}
+\alias{q2RH}
+\alias{q_from_RH}
+\alias{RH2q}
+\alias{Tdew2q}
+\alias{Tdew2w}
+\alias{Tdew2RH}
+\alias{Tdew_from_q}
+\alias{Tdew_from_w}
 \title{Helper functions for vapour pressure}
 \usage{
+w2q(w)
+
+q2w(q, Pa)
+
 q2ea(q, Pa)
+
+w2ea(w, Pa)
 
 ea2VPD(ea, RH)
 
 vapour_press(q, Pa)
 
-q2RH(q, Pa, Tair)
+q2RH(q, Tair, Pa)
 
-RH2q(RH, Pa, Tair)
+q_from_RH(RH, Tair, Pa)
 
-w2q(w, Pa)
+RH2q(RH, Tair, Pa)
 
-q2w(q, Pa)
+Tdew2q(Tdew, Pa)
+
+Tdew2w(Tdew, Pa)
+
+Tdew2RH(Tdew, Tair)
+
+Tdew_from_q(q, Pa)
+
+Tdew_from_w(w, Pa)
 }
 \arguments{
+\item{w}{mix ratio, m_w / m_d}
+
 \item{q}{specific humidity in kg/kg or g/g}
 
 \item{Pa}{surface air pressure}
@@ -32,8 +55,6 @@ q2w(q, Pa)
 \item{RH}{relative humidity, in \%}
 
 \item{Tair}{air temperature, in degC}
-
-\item{w}{mix ratio, m_w / m_d}
 }
 \value{
 e in the same unit as Pa

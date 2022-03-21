@@ -23,6 +23,10 @@ T0 <- 273.15
 
 #' @rdname constants
 #' @export
+K0 <- 273.15
+
+#' @rdname constants
+#' @export
 L <- 2.5e6
 
 #' @rdname constants
@@ -56,13 +60,13 @@ epsilon <- Mw / Md
 #' - `R`: [gas constant](https://en.wikipedia.org/wiki/Gas_constant), J/(mol K)
 #' - `Rw`: [Specific gas constant](https://en.wikipedia.org/wiki/Gas_constant#Specific_gas_constant)
 #' of water vapor \eqn{R_w = \frac{1000R}{M_w} = 461.52J/(kg K)}.
-#' - `Rd`: Specific gas constant of dry air.
+#' - `Rd`: Specific gas constant of dry air (J/(kg K)).
 #' @export
 R <- 8.3144621 # J/(mol K)
 
 #' @rdname R
 #' @export
-Rw <- R / Mw * 1000
+Rw <- R / Mw * 1000 # J/(kg K)
 
 #' @rdname R
 #' @export

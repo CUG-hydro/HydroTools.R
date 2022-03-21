@@ -4,6 +4,7 @@
 \name{constants}
 \alias{constants}
 \alias{T0}
+\alias{K0}
 \alias{L}
 \alias{Es.T0}
 \alias{atm}
@@ -16,9 +17,13 @@ An object of class \code{numeric} of length 1.
 An object of class \code{numeric} of length 1.
 
 An object of class \code{numeric} of length 1.
+
+An object of class \code{numeric} of length 1.
 }
 \usage{
 T0
+
+K0
 
 L
 

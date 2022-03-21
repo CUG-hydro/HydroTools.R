@@ -11,7 +11,7 @@
 #' - `ea`: actual vapor pressure (kPa)
 #'      1. `RH_mean` | `Tmin`, `Tmax`: `(es(Tmax) + es(Tmin)) * RH_mean/200`
 #'      2. `Tmin`                    : `es(Tmin)`
-#' - `cal_Tv`: vitual temperature
+#' - `cal_TvK`: vitual temperature (K)
 #'      1. Tair + q
 #'      2. Tair + ea/Pa
 #'      3. `1.01 * (Tair + 273)` , FAO56 Eq. 3-7
@@ -63,12 +63,6 @@ cal_ea <- function(Tmin, Tmax = NULL, RH_mean = NULL) {
 # ' 1. `RH_max`, `RH_min` | `Tmin`, `Tmax`: `(es(Tmax) * RH_min + es(Tmin) * RH_max)/200`
 # ' 3. `RH_max`           | `Tmin`        : `es(Tmin) * RH_max / 100`
 
-#' @rdname ET0_helper
-#' @export
-cal_es <- function(Tair) {
-    0.6108 * exp((17.27 * Tair) / (Tair + 237.3))
-}
-
 #' @param Tdew dew temperature, (`[deg Celsius]`)
 #' @param Tair 2m air temperature, (`[deg Celsius]`)
 #' 
@@ -83,6 +77,7 @@ cal_VPD <- function(Tair, Tdew = NULL) {
 #' @rdname ET0_helper
 #' @export
 cal_lambda <- function(Tair) {
+    # MJ kg-1
     (2500 - Tair * 2.2) / 1000
 }
 
@@ -148,15 +143,16 @@ cal_rH2 <- function(U2, Tair, Pa = atm) {
     rH
 }
 
+# vitual temperature
 #' @rdname ET0_helper
 #' @export
 cal_TvK <- function(Tair, q = NULL, ea = NULL, Pa = atm) {
     if (is.null(q) && !is.null(ea)) {
         # ea
-        Tair * (1 + (1 - epsilon) * ea / Pa) + T0
+        (Tair + K0) * (1 + (1 - epsilon) * ea / Pa)
     } else if (!is.null(q) && is.null(ea)) {
         # q
-        Tair * (1 + (1 - epsilon) / epsilon * q) + T0 # to degK
+        (Tair + K0) * (1 + (1 - epsilon) / epsilon * q) # to degK
     } else {
         1.01 * (Tair + 273) # Eq. 3-7
     }

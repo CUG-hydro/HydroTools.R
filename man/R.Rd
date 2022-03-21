@@ -30,7 +30,7 @@ Cp
 \item \code{R}: \href{https://en.wikipedia.org/wiki/Gas_constant}{gas constant}, J/(mol K)
 \item \code{Rw}: \href{https://en.wikipedia.org/wiki/Gas_constant#Specific_gas_constant}{Specific gas constant}
 of water vapor \eqn{R_w = \frac{1000R}{M_w} = 461.52J/(kg K)}.
-\item \code{Rd}: Specific gas constant of dry air.
+\item \code{Rd}: Specific gas constant of dry air (J/(kg K)).
 }
 }
 \keyword{datasets}

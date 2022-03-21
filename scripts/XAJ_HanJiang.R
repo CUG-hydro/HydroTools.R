@@ -22,7 +22,7 @@ get_input <- function(site) {
       Tavg = K2T(Tavg),
       Tmax = K2T(Tmax),
       Tmin = K2T(Tmin),
-      # RH = q2RH(q, Pa, Tavg), # kg/kg, kPa
+      # RH = q2RH(q, Tavg, Pa), # kg/kg, kPa
       ea = q2ea(q, Pa),
       # D2 = cal_es(Tavg) - ea,
       D = (cal_es(Tmin) + cal_es(Tmax))/2 - ea,

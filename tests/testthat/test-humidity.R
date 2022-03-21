@@ -3,11 +3,11 @@ test_that("humidity function works", {
     RH = 90
     p = atm
     t = 30
-    q = RH2q(RH, p, t)
-    RH2 = q2RH(q, p, t)
+    q = RH2q(RH, t, p)
+    RH2 = q2RH(q, t, p)
     e = q2ea(q, p)
 
-    max_MAE(q2RH(q, p, t), RH, 1e-7)
+    max_MAE(q2RH(q, t, p), RH, 1e-7)
 
     # If no RH, it is `ea = es(Tmin)`
     e1 = cal_ea(20) 
