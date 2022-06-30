@@ -5,9 +5,25 @@
 \alias{ET_CR_Ma2021}
 \title{ET complementary}
 \usage{
-ET_CR_Xiao2020(Rn, Tair, D, U2, Pa = atm)
+ET_CR_Xiao2020(
+  Rn,
+  Tair,
+  D,
+  U2,
+  Pa = atm,
+  method = c("simple", "full", "ma2021"),
+  rs = 0
+)
 
-ET_CR_Ma2021(Rn, Tair, D, U2, Pa = atm, method = c("simple", "full", "ma2021"))
+ET_CR_Ma2021(
+  Rn,
+  Tair,
+  D,
+  U2,
+  Pa = atm,
+  method = c("simple", "full", "ma2021"),
+  rs = 0
+)
 }
 \arguments{
 \item{Rn}{land surface net radiation, W m-2}

@@ -101,10 +101,11 @@ plot_calib <- function(data, ...) {
   if (is.null(date)) date = 1:nrow(data)
 
   gof = GOF(data$Qobs, data$Qsim) %>% as.list()
+  # TODO: update plot_runoff
   str_gof = do.call(sprintf,
     c("NSE=%.3f, KGE=%.3f, RMSE=%.1f, \nBias=%.1f, R2=%.3f, n=%d",
     gof[c("NSE", "KGE", "RMSE", "Bias", "R2", "n_sim")] %>% as.list()))
-
+  
   # write_fig({
     par(mar = c(3.5, 3.5, 2, 1), mgp = c(1.8, 0.6, 0))
     plot(date, data$Qobs, type = "l", col = "black",
