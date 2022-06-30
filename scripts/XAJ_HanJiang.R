@@ -14,7 +14,7 @@ get_input <- function(site) {
   area <- shp_i$area_w_km2 * 1e4 # km^2
 
   forcing <- lst[[site]][year(date) >= 2012] %>%
-    set_names(c("date", "Rl", "prcp", "Pa", "q", "Rs", "Tavg", "Tmax", "Tmin", "U10"))
+    set_names(c("date", "Rl", "prcp", "Pa", "q", "Rsi", "Tavg", "Tmax", "Tmin", "U10"))
   forcing = forcing %>%
     mutate(
       prcp = round(prcp * 24, 2), # mm hr-1, mm/d
@@ -26,7 +26,7 @@ get_input <- function(site) {
       ea = q2ea(q, Pa),
       # D2 = cal_es(Tavg) - ea,
       D = (cal_es(Tmin) + cal_es(Tmax))/2 - ea,
-      Rn = cal_Rn(lat, date, Rs, Tmin, Tmax, ea = ea)$Rn,
+      Rn = cal_Rn(lat, date, Rsi, Tmin, Tmax, ea = ea)$Rn,
       ET0 = ET0_FAO98(Rn, Tavg, Pa, D, U10, z.wind = 10)$ET0
     )
   data = df_river[name == site][year(date) >= 2002, -(1:2)] %>%

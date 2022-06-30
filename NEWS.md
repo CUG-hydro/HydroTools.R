@@ -1,3 +1,7 @@
+# hydroTools 0.1.7
+
+- change radiation variable names
+
 # hydroTools 0.1.5
 
 - add `cal_Ts` and `cal_Tw`
@@ -14,3 +18,4 @@
 - Added a `NEWS.md` file to track changes to the package.
 - fix `INFILT` data range, `Kstat` unit error reported by He YaNan
 - `VIC_vegParam` works
+

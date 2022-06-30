@@ -4,7 +4,17 @@
 \alias{cal_Ts}
 \title{Evaporative surface temperature}
 \usage{
-cal_Ts(Rn, Tair, D, U2, Pa = atm, rH = NULL, rs = 0, ...)
+cal_Ts(
+  Rn,
+  Tair,
+  D,
+  U2,
+  Pa = atm,
+  rH = NULL,
+  rs = 0,
+  method = c("simple", "full", "ma2021"),
+  ...
+)
 }
 \arguments{
 \item{Rn}{land surface net radiation, W m-2}
@@ -18,6 +28,12 @@ cal_Ts(Rn, Tair, D, U2, Pa = atm, rH = NULL, rs = 0, ...)
 \item{rs}{If \code{rs = 0}, Monteith 1965 leaf evaporation Equation becomes Penman
 1948 water evaporation.
 ignore the influence of Ts on net cal_radiation}
+
+\item{method}{\itemize{
+\item \code{simple}: Monteith 1965 Equation
+\item \code{full} (not finished): Yang 2019
+\item \code{ma2021}: Ma 2021
+}}
 }
 \description{
 Evaporative surface temperature (land surface, Tland; or leaf surface Tleaf).
@@ -33,10 +49,23 @@ Land surface temperature infered by Monteith 1965 Equation.
 library(dplyr)
 # The relationship of Rn, Ts
 Rn = 0:200
-dT = cal_Ts(Rn, 25, D = 1, U2 = 2)
+cal_Ts(Rn, 25, D = 1, U2 = 2)
+cal_Ts(200, 25, D = 1, U2 = 2)
 # plot(Rn, dat$Ts, type = "l", main = "(a) Ts ~ Rn")
 # plot(Rn, dat$Eeq, type = "l", main = "(b) Eeq ~ Rn")
 # # plot(Rn, dat$Evp, type = "l") # a constant value
 # dat \%<>\% mutate(Rn = Rn, bowen = ET0 / (Rn * 0.086400 / lambda - ET0))
 # plot(bowen ~ Rn, dat, type = "l", main = "(b) Eeq ~ Rn")
+}
+\references{
+\enumerate{
+\item Monteith, J. P. (1965). An introduction to environmental physics.
+\item Yang, Y., & Roderick, M. L. (2019). Radiation, surface temperature and
+evaporation over wet surfaces. Quarterly Journal of the Royal
+Meteorological Society, 145(720), 1118–1129.
+https://doi.org/10.1002/qj.3481
+\item Ma, N., Szilagyi, J., & Zhang, Y. (2021). Calibration-Free Complementary
+Relationship Estimates Terrestrial Evapotranspiration Globally. Water
+Resources Research, 57(9), 1–27. https://doi.org/10.1029/2021WR029691
+}
 }

@@ -135,7 +135,7 @@ ET0_FAO98 <- function(Rn, Tair, Pa = atm, D,
 #' @param Tmin Daily minimum air temperature at 2m height `[deg Celsius]`.
 #' @param Tavg Daily mean air temperature at 2m height `[deg Celsius]`. If not
 #' provided it would estimated by averaging the Tmax and tmin.
-#' @param Ra  Clear sky incoming shortwave radiation, i. e. extraterrestrial
+#' @param Rsi_toa  Clear sky incoming shortwave radiation, i. e. extraterrestrial
 #' radiation multiply by clear sky transmissivity (i. e. a + b, a and b are
 #' coefficients of Angstrom formula. Normally 0.75) `[MJ m-2 day-1]`. If not
 #' provided, must provide lat and dates.
@@ -147,8 +147,8 @@ ET0_FAO98 <- function(Rn, Tair, Pa = atm, D,
 #' surface `[mm day-1]`.
 #'
 #' @export
-PET_hg <- function(Tmax, Tmin, Tavg = NULL, Ra = NULL, lat = NULL, dates=NULL) {
+PET_hg <- function(Tmax, Tmin, Tavg = NULL, Rsi_toa = NULL, lat = NULL, dates=NULL) {
   if(is.null(Tavg)) Tavg <- (Tmax + Tmin) / 2
-  if(is.null(Ra)) Ra <- cal_Ra(lat, dates)
-  0.0023 * 0.408 * Ra * sqrt(Tmax - Tmin) * (Tavg + 17.8)
+  if(is.null(Rsi_toa)) Rsi_toa <- cal_Rsi_toa(lat, dates)
+  0.0023 * 0.408 * Rsi_toa * sqrt(Tmax - Tmin) * (Tavg + 17.8)
 }

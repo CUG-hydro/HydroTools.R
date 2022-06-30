@@ -1,5 +1,5 @@
 test_that("ET0 models work", {
-    Ra = cal_Rn(lat = 30, J = 1, ssd = 10, RH = 70, Tmin = 20, Tmax = 30, cld = 0.2)
+    Rsi_toa = cal_Rn(lat = 30, J = 1, ssd = 10, RH = 70, Tmin = 20, Tmax = 30, cld = 0.2)
 
     et0_pt72 = ET0_PT72(250, 25, D = 1)
     et0_pm54 = ET0_Penman48(250, 25, D = 1, wind = 2)

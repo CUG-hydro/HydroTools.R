@@ -10,27 +10,27 @@
 #' @param ssd numeric vector, sun shine duration (hour)
 #' @param cld (optional) cloud coverage (0-1). At least one of `cld` and `ssd`
 #' should be provided. If `cld` is not null, `ssd` will be ignored.
-#' @param Rs (optional) Surface downward shortwave radiation (MJ m-2 d-1). 
-#' - If not provided, `Rs` will be calculated by `(as + bs * nN) * Ra`.
+#' @param Rsi (optional) Surface downward shortwave radiation (MJ m-2 d-1). 
+#' - If not provided, `Rsi` will be calculated by `(as + bs * nN) * Rsi_toa`.
 #' - If provided, `ssd` and `cld` will be ignored.
 #' 
-#' @param Z (optional) elevation (m), for the calculation of `Rso`
-#' @param albedo (optional), `Rsn = (1 - albedo) Rs`
+#' @param Z (optional) elevation (m), for the calculation of `Rsi_o`
+#' @param albedo (optional), `Rsn = (1 - albedo) Rsi`
 #' 
 #' @return radiation in `[MJ d-1]`
 #' - `Rn`  : Surface net radiation
 #' - `Rln` : Surface outward net longwave radiation (negative means outgoing)
 #' - `Rsn` : Surface downward net shortwave radiation
-#' - `Rs`  : Surface downward shortwave radiation
-#' - `Rso` : Clear-sky surface downward shortwave radiation
-#' - `Ra`  : Extraterrestrial radiation
-#'
+#' - `Rsi`  : Surface downward shortwave radiation (Rsi)
+#' - `Rsi_o` : Clear-sky surface downward shortwave radiation
+#' - `Rsi_toa`  : Extraterrestrial radiation (top of atmosphere, Rsi_toa)
+#' 
 #' @note
 #' `Rn` might <= 0. Users need to constrain the min value by `pmax(Rn, 0)`.
 #' 
 #' @author
 #' Xie YuXuan and Kong Dongdong
-#' @seealso [cal_Ra()], [cal_Rs()]
+#' @seealso [cal_Rsi_toa()], [cal_Rsi()]
 #' 
 #' @examples
 #' cal_Rn(lat = 30, J = 1, RH = 70, Tmin = 20, Tmax = 30, ssd = 10)
@@ -38,7 +38,7 @@
 cal_Rn <- function(lat, J, Tmin, Tmax,
   ea = NULL, RH,
   ssd = NULL, cld = NULL,
-  Rs = NULL, 
+  Rsi = NULL, 
   albedo = 0.23, Z = 0, ...)
 {
   J %<>% check_doy()
@@ -54,9 +54,9 @@ cal_Rn <- function(lat, J, Tmin, Tmax,
   bs  <- 0.5   # 星际辐射到地球的衰减系数
   Gsc <- 0.082 # 太阳常数(MJ/m^2*min)
 
-  Ra  <- 24*60/pi*Gsc*dr*(ws*sin(lat*pi/180)*sin(dlt)+cos(lat*pi/180)*cos(dlt)*sin(ws))
+  Rsi_toa  <- 24*60/pi*Gsc*dr*(ws*sin(lat*pi/180)*sin(dlt)+cos(lat*pi/180)*cos(dlt)*sin(ws))
   
-  if (is.null(Rs)) {
+  if (is.null(Rsi)) {
     if (!is.null(cld)) {
       nN = (1 - cld)
     } else {
@@ -66,14 +66,14 @@ cal_Rn <- function(lat, J, Tmin, Tmax,
       nN = ssd / N
     }
     
-    # Rs <- (1. - cld) * Ra
-    # Rs <- (1. - cld) * Ra * (a + b) # also named as R_so
+    # Rsi <- (1. - cld) * Rsi_toa
+    # Rsi <- (1. - cld) * Rsi_toa * (a + b) # also named as R_so
     ## https://github.com/sbegueria/SPEI/blob/master/R/penman.R
-    Rs  <- (as + bs * nN) * Ra # Rs为太阳辐射(n/N日照系数)
+    Rsi  <- (as + bs * nN) * Rsi_toa # Rs为太阳辐射(n/N日照系数), Rsi
   }
 
-  Rsn <- (1 - albedo) * Rs # 太阳净辐射
-  Rso <- (0.75 + 2 * Z / (10^5)) * Ra # 计算晴空辐射, FAO56, Eq. 37
+  Rsn <- (1 - albedo) * Rsi # 太阳净辐射
+  Rsi_o <- (0.75 + 2 * Z / (10^5)) * Rsi_toa # 计算晴空辐射, FAO56, Eq. 37
 
   ## longwave radiation
   if (is.null(ea)) {
@@ -85,9 +85,9 @@ cal_Rn <- function(lat, J, Tmin, Tmax,
   # net outgoing longwave radiation [MJ m-2 day-1]
   sigma <- 4.903 / (10^9) #  斯蒂芬-玻尔兹曼常数, [MJ K-4 m-2]
   Rln = -sigma * ( ((Tmax + T0)^4 + (Tmin + T0)^4) / 2) *
-    (0.34 - 0.14 * sqrt(ea)) * (1.35 * Rs / Rso - 0.35)
+    (0.34 - 0.14 * sqrt(ea)) * (1.35 * Rsi / Rsi_o - 0.35)
   Rn = Rsn + Rln 
   # Rn = pmax(Rsn + Rln, 0) # make sure Rn not less zero
   # whether to use this constraint, it is determined by the user.
-  data.table(Rn, Rsn, Rln, Rs, Rso, Ra)
+  data.table(Rn, Rsn, Rln, Rsi, Rsi_o, Rsi_toa) # Rsi, 
 }

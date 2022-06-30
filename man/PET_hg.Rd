@@ -4,7 +4,7 @@
 \alias{PET_hg}
 \title{Estimate ET0 by Hargreaves equation.}
 \usage{
-PET_hg(Tmax, Tmin, Tavg = NULL, Ra = NULL, lat = NULL, dates = NULL)
+PET_hg(Tmax, Tmin, Tavg = NULL, Rsi_toa = NULL, lat = NULL, dates = NULL)
 }
 \arguments{
 \item{Tmax}{Daily maximum air temperature at 2m height \verb{[deg Celsius]}.}
@@ -14,7 +14,7 @@ PET_hg(Tmax, Tmin, Tavg = NULL, Ra = NULL, lat = NULL, dates = NULL)
 \item{Tavg}{Daily mean air temperature at 2m height \verb{[deg Celsius]}. If not
 provided it would estimated by averaging the Tmax and tmin.}
 
-\item{Ra}{Clear sky incoming shortwave radiation, i. e. extraterrestrial
+\item{Rsi_toa}{Clear sky incoming shortwave radiation, i. e. extraterrestrial
 radiation multiply by clear sky transmissivity (i. e. a + b, a and b are
 coefficients of Angstrom formula. Normally 0.75) \verb{[MJ m-2 day-1]}. If not
 provided, must provide lat and dates.}

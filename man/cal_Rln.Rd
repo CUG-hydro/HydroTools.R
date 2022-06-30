@@ -2,9 +2,21 @@
 % Please edit documentation in R/cal_radiation.R
 \name{cal_Rln}
 \alias{cal_Rln}
+\alias{cal_Rln_yang2019}
 \title{Net outgoing longwave radiation.}
 \usage{
-cal_Rln(tmax, tmin, ea, Rs = NULL, Rso = NULL, cld = NULL)
+cal_Rln(tmax, tmin, ea, Rsi = NULL, Rsi_o = NULL, cld = NULL)
+
+cal_Rln_yang2019(
+  Ts,
+  Rsi,
+  Rsi_toa,
+  lat = 30,
+  emiss = 0.96,
+  n1 = 2.52,
+  n2 = 2.37,
+  n3 = 0.035
+)
 }
 \arguments{
 \item{tmax}{Daily maximum air temperature at 2m height \verb{[deg Celsius]}.}
@@ -14,19 +26,32 @@ cal_Rln(tmax, tmin, ea, Rs = NULL, Rso = NULL, cld = NULL)
 \item{ea}{Actual vapor pressure \verb{[kPa]}. Can be estimated by maximum or minimum
 air temperature and mean relative humidity.}
 
-\item{Rs}{Incoming shortwave radiation at crop surface \verb{[MJ m-2 day-1]}.}
+\item{Rsi}{Surface incoming short-wave radiation (Rsi)}
 
-\item{Rso}{Clear sky incoming shortwave radiation, i. e. extraterrestrial
+\item{Rsi_o}{Clear sky incoming shortwave radiation, i. e. extraterrestrial
 radiation multiply by clear sky transmissivity (i. e. a + b,
 a and b are coefficients of Angstrom formula. Normally 0.75)
 \verb{[MJ m-2 day-1]}.}
 
 \item{cld}{Cloud cover \verb{[fraction]}. If provided it would be directly used to
 calculate net outgoing longwave radiation than Rso.}
+
+\item{Rsi_toa}{incoming short-wave radiation at the top of the atmosphere}
 }
 \value{
 Net outgoing longwave radiation \verb{[MJ m-2 day-1]}
 }
 \description{
 Net outgoing longwave radiation.
+}
+\references{
+\enumerate{
+\item Yang, Y., & Roderick, M. L. (2019). Radiation, surface temperature and
+evaporation over wet surfaces. Quarterly Journal of the Royal
+Meteorological Society, 145(720), 1118–1129.
+https://doi.org/10.1002/qj.3481
+\item Tu, Z., & Yang, Y. (2022). On the Estimation of Potential Evaporation
+Under Wet and Dry Conditions. Water Resources Research, 58(4).
+https://doi.org/10.1029/2021wr031486
+}
 }

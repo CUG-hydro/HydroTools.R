@@ -2,9 +2,12 @@
 % Please edit documentation in R/ET_CR.R
 \name{ET_CR_Xiao2020}
 \alias{ET_CR_Xiao2020}
+\alias{ER_CR_Ma2021}
 \title{ET complementary}
 \usage{
 ET_CR_Xiao2020(Rn, Tair, D, U2, Pa = atm)
+
+ER_CR_Ma2021(Rn, Tair, D, U2, Pa = atm)
 }
 \arguments{
 \item{Rn}{land surface net radiation, W m-2}
@@ -21,7 +24,7 @@ ET_CR_Xiao2020(Rn, Tair, D, U2, Pa = atm)
 ET complementary
 }
 \examples{
-ET_CR_Xiao2020(250, 25, D = 1, U2 = 2)
+ET_CR_Xiao2020(250, 25, D = 1, U2 = 2) 
 }
 \references{
 \enumerate{
@@ -29,5 +32,8 @@ ET_CR_Xiao2020(250, 25, D = 1, U2 = 2)
 Gioli, B. (2020). Stomatal response to decreased relative humidity
 constrains the acceleration of terrestrial evapotranspiration.
 Environmental Research Letters, 15(9). doi:10.1088/1748-9326/ab9967
+\item Ma, N., Szilagyi, J., & Zhang, Y. (2021). Calibration-Free Complementary
+Relationship Estimates Terrestrial Evapotranspiration Globally. Water
+Resources Research, 57(9), 1–27. https://doi.org/10.1029/2021WR029691
 }
 }

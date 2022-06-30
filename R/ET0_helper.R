@@ -135,7 +135,7 @@ cal_rH <- function(U2, h = 0.12) {
 #' @rdname ET0_helper
 #' @export
 cal_rH2 <- function(U2, Tair, Pa = atm) {
-    # `f(U2) = 2.6 * (1 + 0.54U2)` is equivalent to Shuttleworth1993  
+    # `f(U2) = 2.6 * (1 + 0.54U2)` is equivalent to Shuttleworth1993
     # rou_a * Cp / rH = f(U2)
     f_U2 = 2.6 * (1 + 0.54*U2)
     rou_a = 3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5, kg m-3

@@ -13,7 +13,7 @@ cal_Rn(
   RH,
   ssd = NULL,
   cld = NULL,
-  Rs = NULL,
+  Rsi = NULL,
   albedo = 0.23,
   Z = 0,
   ...
@@ -35,15 +35,15 @@ cal_Rn(
 \item{cld}{(optional) cloud coverage (0-1). At least one of \code{cld} and \code{ssd}
 should be provided. If \code{cld} is not null, \code{ssd} will be ignored.}
 
-\item{Rs}{(optional) Surface downward shortwave radiation (MJ m-2 d-1).
+\item{Rsi}{(optional) Surface downward shortwave radiation (MJ m-2 d-1).
 \itemize{
-\item If not provided, \code{Rs} will be calculated by \code{(as + bs * nN) * Ra}.
+\item If not provided, \code{Rsi} will be calculated by \code{(as + bs * nN) * Rsi_toa}.
 \item If provided, \code{ssd} and \code{cld} will be ignored.
 }}
 
-\item{albedo}{(optional), \verb{Rsn = (1 - albedo) Rs}}
+\item{albedo}{(optional), \verb{Rsn = (1 - albedo) Rsi}}
 
-\item{Z}{(optional) elevation (m), for the calculation of \code{Rso}}
+\item{Z}{(optional) elevation (m), for the calculation of \code{Rsi_o}}
 }
 \value{
 radiation in \verb{[MJ d-1]}
@@ -51,9 +51,9 @@ radiation in \verb{[MJ d-1]}
 \item \code{Rn}  : Surface net radiation
 \item \code{Rln} : Surface outward net longwave radiation (negative means outgoing)
 \item \code{Rsn} : Surface downward net shortwave radiation
-\item \code{Rs}  : Surface downward shortwave radiation
-\item \code{Rso} : Clear-sky surface downward shortwave radiation
-\item \code{Ra}  : Extraterrestrial radiation
+\item \code{Rsi}  : Surface downward shortwave radiation (Rsi)
+\item \code{Rsi_o} : Clear-sky surface downward shortwave radiation
+\item \code{Rsi_toa}  : Extraterrestrial radiation (top of atmosphere, Rsi_toa)
 }
 }
 \description{
@@ -66,7 +66,7 @@ Surface net radiation
 cal_Rn(lat = 30, J = 1, RH = 70, Tmin = 20, Tmax = 30, ssd = 10)
 }
 \seealso{
-\code{\link[=cal_Ra]{cal_Ra()}}, \code{\link[=cal_Rs]{cal_Rs()}}
+\code{\link[=cal_Rsi_toa]{cal_Rsi_toa()}}, \code{\link[=cal_Rsi]{cal_Rsi()}}
 }
 \author{
 Xie YuXuan and Kong Dongdong
