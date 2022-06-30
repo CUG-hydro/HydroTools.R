@@ -88,6 +88,9 @@
     <loc>/reference/cv_coef.html</loc>
   </url>
   <url>
+    <loc>/reference/grid_date.html</loc>
+  </url>
+  <url>
     <loc>/reference/hydroTools-package.html</loc>
   </url>
   <url>
@@ -98,6 +101,9 @@
   </url>
   <url>
     <loc>/reference/plot_calib.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plot_runoff.html</loc>
   </url>
   <url>
     <loc>/reference/reexports.html</loc>
