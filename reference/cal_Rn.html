@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hydroTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -47,56 +47,80 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cal_Rn</span><span class="op">(</span>
-  <span class="va">lat</span>,
-  <span class="va">J</span>,
-  <span class="va">Tmin</span>,
-  <span class="va">Tmax</span>,
-  ea <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">RH</span>,
-  ssd <span class="op">=</span> <span class="cn">NULL</span>,
-  cld <span class="op">=</span> <span class="cn">NULL</span>,
-  Rs <span class="op">=</span> <span class="cn">NULL</span>,
-  albedo <span class="op">=</span> <span class="fl">0.23</span>,
-  Z <span class="op">=</span> <span class="fl">0</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cal_Rn</span><span class="op">(</span></span>
+<span>  <span class="va">lat</span>,</span>
+<span>  <span class="va">J</span>,</span>
+<span>  <span class="va">Tmin</span>,</span>
+<span>  <span class="va">Tmax</span>,</span>
+<span>  ea <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">RH</span>,</span>
+<span>  ssd <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cld <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  Rsi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  albedo <span class="op">=</span> <span class="fl">0.23</span>,</span>
+<span>  Z <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>lat</dt>
 <dd><p>float, latitude</p></dd>
+
+
 <dt>J</dt>
 <dd><p>integer, day of year</p></dd>
+
+
 <dt>Tmin, Tmax</dt>
 <dd><p>numeric vector, min and max 2m-air temperature (degC)</p></dd>
+
+
 <dt>ea</dt>
 <dd><p>Actual vapor pressure (kPa)</p></dd>
+
+
 <dt>RH</dt>
 <dd><p>Relative humidity (%). If <code>ea</code> provided, <code>RH</code> will be ignored.</p></dd>
+
+
 <dt>ssd</dt>
 <dd><p>numeric vector, sun shine duration (hour)</p></dd>
+
+
 <dt>cld</dt>
 <dd><p>(optional) cloud coverage (0-1). At least one of <code>cld</code> and <code>ssd</code>
 should be provided. If <code>cld</code> is not null, <code>ssd</code> will be ignored.</p></dd>
-<dt>Rs</dt>
-<dd><p>(optional) Surface downward shortwave radiation (MJ m-2 d-1).</p><ul><li><p>If not provided, <code>Rs</code> will be calculated by <code>(as + bs * nN) * Ra</code>.</p></li>
+
+
+<dt>Rsi</dt>
+<dd><p>(optional) Surface downward shortwave radiation (MJ m-2 d-1).</p><ul><li><p>If not provided, <code>Rsi</code> will be calculated by <code>(as + bs * nN) * Rsi_toa</code>.</p></li>
 <li><p>If provided, <code>ssd</code> and <code>cld</code> will be ignored.</p></li>
 </ul></dd>
+
+
 <dt>albedo</dt>
-<dd><p>(optional), <code>Rsn = (1 - albedo) Rs</code></p></dd>
+<dd><p>(optional), <code>Rsn = (1 - albedo) Rsi</code></p></dd>
+
+
 <dt>Z</dt>
-<dd><p>(optional) elevation (m), for the calculation of <code>Rso</code></p></dd>
+<dd><p>(optional) elevation (m), for the calculation of <code>Rsi_o</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>radiation in <code>[MJ d-1]</code></p><ul><li><p><code>Rn</code>  : Surface net radiation</p></li>
+    
+
+<p>radiation in <code>[MJ d-1]</code></p>
+
+
+<ul><li><p><code>Rn</code>  : Surface net radiation</p></li>
 <li><p><code>Rln</code> : Surface outward net longwave radiation (negative means outgoing)</p></li>
 <li><p><code>Rsn</code> : Surface downward net shortwave radiation</p></li>
-<li><p><code>Rs</code>  : Surface downward shortwave radiation</p></li>
-<li><p><code>Rso</code> : Clear-sky surface downward shortwave radiation</p></li>
-<li><p><code>Ra</code>  : Extraterrestrial radiation</p></li>
+<li><p><code>Rsi</code>  : Surface downward shortwave radiation (Rsi)</p></li>
+<li><p><code>Rsi_o</code> : Clear-sky surface downward shortwave radiation</p></li>
+<li><p><code>Rsi_toa</code>  : Extraterrestrial radiation (top of atmosphere, Rsi_toa)</p></li>
 </ul></div>
     <div id="note">
     <h2>Note</h2>
@@ -104,7 +128,7 @@ should be provided. If <code>cld</code> is not null, <code>ssd</code> will be ig
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p><code><a href="cal_Ra.html">cal_Ra()</a></code>, <code><a href="cal_Rs.html">cal_Rs()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="cal_Rsi_toa.html">cal_Rsi_toa()</a></code>, <code><a href="cal_Rsi.html">cal_Rsi()</a></code></p></div>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -113,8 +137,8 @@ should be provided. If <code>cld</code> is not null, <code>ssd</code> will be ig
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">cal_Rn</span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">30</span>, J <span class="op">=</span> <span class="fl">1</span>, RH <span class="op">=</span> <span class="fl">70</span>, Tmin <span class="op">=</span> <span class="fl">20</span>, Tmax <span class="op">=</span> <span class="fl">30</span>, ssd <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Rn      Rsn      Rln       Rs      Rso       Ra</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">cal_Rn</span><span class="op">(</span>lat <span class="op">=</span> <span class="fl">30</span>, J <span class="op">=</span> <span class="fl">1</span>, RH <span class="op">=</span> <span class="fl">70</span>, Tmin <span class="op">=</span> <span class="fl">20</span>, Tmax <span class="op">=</span> <span class="fl">30</span>, ssd <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Rn      Rsn      Rln      Rsi    Rsi_o  Rsi_toa</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1: 6.557457 11.45757 -4.90011 14.87996 14.98944 19.98592</span>
 </code></pre></div>
     </div>
@@ -130,7 +154,7 @@ should be provided. If <code>cld</code> is not null, <code>ssd</code> will be ig
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hydroTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -47,41 +47,58 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">XAJ_calib</span><span class="op">(</span>
-  <span class="va">Qobs</span>,
-  <span class="va">prcp</span>,
-  <span class="va">ET0</span>,
-  <span class="va">area</span>,
-  dt <span class="op">=</span> <span class="fl">24</span>,
-  date <span class="op">=</span> <span class="cn">NULL</span>,
-  maxn <span class="op">=</span> <span class="fl">1000</span>,
-  seed <span class="op">=</span> <span class="fl">1</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">XAJ_calib</span><span class="op">(</span></span>
+<span>  <span class="va">Qobs</span>,</span>
+<span>  <span class="va">prcp</span>,</span>
+<span>  <span class="va">ET0</span>,</span>
+<span>  <span class="va">area</span>,</span>
+<span>  dt <span class="op">=</span> <span class="fl">24</span>,</span>
+<span>  date <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  maxn <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>Qobs</dt>
 <dd><p>Observed Total runoff, (m^3/s)</p></dd>
+
+
 <dt>prcp</dt>
 <dd><p>Precipitation (mm/d)</p></dd>
+
+
 <dt>ET0</dt>
 <dd><p>Pan evaporation or potential evapotranspiration (mm/d)</p></dd>
+
+
 <dt>area</dt>
 <dd><p>basin area (km^2).</p></dd>
+
+
 <dt>dt</dt>
 <dd><p>time step (hour)</p></dd>
+
+
 <dt>date</dt>
 <dd><p>(optional) corresponding date of <code>Qobs</code></p></dd>
+
+
 <dt>maxn</dt>
 <dd><p>the maximum number of function evaluations</p></dd>
+
+
 <dt>seed</dt>
 <dd><p>(can be ignored) starting number of random number generator,
 see <code><a href="https://rdrr.io/r/base/Random.html" class="external-link">base::set.seed()</a></code> for details.
 This parameter is to make sure optimization result is same in different tries.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>ignored</p></dd>
+
 </dl></div>
 
   </div>
@@ -96,7 +113,7 @@ This parameter is to make sure optimization result is same in different tries.</
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

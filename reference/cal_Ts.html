@@ -18,7 +18,7 @@ Land surface temperature infered by Monteith 1965 Equation."><!-- mathjax --><sc
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hydroTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -49,23 +49,49 @@ Land surface temperature infered by Monteith 1965 Equation.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cal_Ts</span><span class="op">(</span><span class="va">Rn</span>, <span class="va">Tair</span>, <span class="va">D</span>, <span class="va">U2</span>, Pa <span class="op">=</span> <span class="va">atm</span>, rH <span class="op">=</span> <span class="cn">NULL</span>, rs <span class="op">=</span> <span class="fl">0</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cal_Ts</span><span class="op">(</span></span>
+<span>  <span class="va">Rn</span>,</span>
+<span>  <span class="va">Tair</span>,</span>
+<span>  <span class="va">D</span>,</span>
+<span>  <span class="va">U2</span>,</span>
+<span>  Pa <span class="op">=</span> <span class="va">atm</span>,</span>
+<span>  rH <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rs <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"simple"</span>, <span class="st">"full"</span>, <span class="st">"ma2021"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>Rn</dt>
 <dd><p>land surface net radiation, W m-2</p></dd>
+
+
 <dt>Tair</dt>
 <dd><p>2m air temperature (degC)</p></dd>
+
+
 <dt>D</dt>
 <dd><p>vapor pressure deficit (kPa)</p></dd>
+
+
 <dt>Pa</dt>
 <dd><p>surface air pressure (kPa)</p></dd>
+
+
 <dt>rs</dt>
 <dd><p>If <code>rs = 0</code>, Monteith 1965 leaf evaporation Equation becomes Penman
 1948 water evaporation.
 ignore the influence of Ts on net cal_radiation</p></dd>
+
+
+<dt>method</dt>
+<dd><ul><li><p><code>simple</code>: Monteith 1965 Equation</p></li>
+<li><p><code>full</code> (not finished): Yang 2019</p></li>
+<li><p><code>ma2021</code>: Ma 2021</p></li>
+</ul></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -73,10 +99,22 @@ ignore the influence of Ts on net cal_radiation</p></dd>
 <ul><li><p><code>rH</code>: aerodynamic resistance of heat</p></li>
 <li><p><code>rs</code>: stamotal resistance of water</p></li>
 </ul></div>
+    <div id="references">
+    <h2>References</h2>
+    
+<ol><li><p>Monteith, J. P. (1965). An introduction to environmental physics.</p></li>
+<li><p>Yang, Y., &amp; Roderick, M. L. (2019). Radiation, surface temperature and
+evaporation over wet surfaces. Quarterly Journal of the Royal
+Meteorological Society, 145(720), 1118–1129.
+https://doi.org/10.1002/qj.3481</p></li>
+<li><p>Ma, N., Szilagyi, J., &amp; Zhang, Y. (2021). Calibration-Free Complementary
+Relationship Estimates Terrestrial Evapotranspiration Globally. Water
+Resources Research, 57(9), 1–27. https://doi.org/10.1029/2021WR029691</p></li>
+</ol></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘dplyr’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:stats’:</span>
@@ -85,14 +123,42 @@ ignore the influence of Ts on net cal_radiation</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
-<span class="r-in"><span class="co"># The relationship of Rn, Ts</span></span>
-<span class="r-in"><span class="va">Rn</span> <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">200</span></span>
-<span class="r-in"><span class="va">dT</span> <span class="op">=</span> <span class="fu">cal_Ts</span><span class="op">(</span><span class="va">Rn</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span>, U2 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># plot(Rn, dat$Ts, type = "l", main = "(a) Ts ~ Rn")</span></span>
-<span class="r-in"><span class="co"># plot(Rn, dat$Eeq, type = "l", main = "(b) Eeq ~ Rn")</span></span>
-<span class="r-in"><span class="co"># # plot(Rn, dat$Evp, type = "l") # a constant value</span></span>
-<span class="r-in"><span class="co"># dat %&lt;&gt;% mutate(Rn = Rn, bowen = ET0 / (Rn * 0.086400 / lambda - ET0))</span></span>
-<span class="r-in"><span class="co"># plot(bowen ~ Rn, dat, type = "l", main = "(b) Eeq ~ Rn")</span></span>
+<span class="r-in"><span><span class="co"># The relationship of Rn, Ts</span></span></span>
+<span class="r-in"><span><span class="va">Rn</span> <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">200</span></span></span>
+<span class="r-in"><span><span class="fu">cal_Ts</span><span class="op">(</span><span class="va">Rn</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span>, U2 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] 21.09641 21.10062 21.10483 21.10904 21.11325 21.11745 21.12166 21.12587</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [9] 21.13008 21.13429 21.13850 21.14271 21.14692 21.15113 21.15534 21.15955</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [17] 21.16376 21.16796 21.17217 21.17638 21.18059 21.18480 21.18901 21.19322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] 21.19743 21.20164 21.20585 21.21006 21.21427 21.21847 21.22268 21.22689</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [33] 21.23110 21.23531 21.23952 21.24373 21.24794 21.25215 21.25636 21.26057</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] 21.26478 21.26898 21.27319 21.27740 21.28161 21.28582 21.29003 21.29424</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [49] 21.29845 21.30266 21.30687 21.31108 21.31529 21.31950 21.32370 21.32791</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [57] 21.33212 21.33633 21.34054 21.34475 21.34896 21.35317 21.35738 21.36159</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [65] 21.36580 21.37001 21.37421 21.37842 21.38263 21.38684 21.39105 21.39526</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] 21.39947 21.40368 21.40789 21.41210 21.41631 21.42052 21.42472 21.42893</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] 21.43314 21.43735 21.44156 21.44577 21.44998 21.45419 21.45840 21.46261</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [89] 21.46682 21.47103 21.47523 21.47944 21.48365 21.48786 21.49207 21.49628</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] 21.50049 21.50470 21.50891 21.51312 21.51733 21.52154 21.52574 21.52995</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [105] 21.53416 21.53837 21.54258 21.54679 21.55100 21.55521 21.55942 21.56363</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [113] 21.56784 21.57205 21.57625 21.58046 21.58467 21.58888 21.59309 21.59730</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [121] 21.60151 21.60572 21.60993 21.61414 21.61835 21.62256 21.62676 21.63097</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [129] 21.63518 21.63939 21.64360 21.64781 21.65202 21.65623 21.66044 21.66465</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [137] 21.66886 21.67307 21.67728 21.68148 21.68569 21.68990 21.69411 21.69832</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [145] 21.70253 21.70674 21.71095 21.71516 21.71937 21.72358 21.72779 21.73199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [153] 21.73620 21.74041 21.74462 21.74883 21.75304 21.75725 21.76146 21.76567</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [161] 21.76988 21.77409 21.77830 21.78250 21.78671 21.79092 21.79513 21.79934</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [169] 21.80355 21.80776 21.81197 21.81618 21.82039 21.82460 21.82881 21.83301</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [177] 21.83722 21.84143 21.84564 21.84985 21.85406 21.85827 21.86248 21.86669</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [185] 21.87090 21.87511 21.87932 21.88352 21.88773 21.89194 21.89615 21.90036</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [193] 21.90457 21.90878 21.91299 21.91720 21.92141 21.92562 21.92983 21.93403</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [201] 21.93824</span>
+<span class="r-in"><span><span class="fu">cal_Ts</span><span class="op">(</span><span class="fl">200</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span>, U2 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21.93824</span>
+<span class="r-in"><span><span class="co"># plot(Rn, dat$Ts, type = "l", main = "(a) Ts ~ Rn")</span></span></span>
+<span class="r-in"><span><span class="co"># plot(Rn, dat$Eeq, type = "l", main = "(b) Eeq ~ Rn")</span></span></span>
+<span class="r-in"><span><span class="co"># # plot(Rn, dat$Evp, type = "l") # a constant value</span></span></span>
+<span class="r-in"><span><span class="co"># dat %&lt;&gt;% mutate(Rn = Rn, bowen = ET0 / (Rn * 0.086400 / lambda - ET0))</span></span></span>
+<span class="r-in"><span><span class="co"># plot(bowen ~ Rn, dat, type = "l", main = "(b) Eeq ~ Rn")</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -107,7 +173,7 @@ ignore the influence of Ts on net cal_radiation</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

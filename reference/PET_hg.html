@@ -18,7 +18,7 @@ short grass reference surface using the the Hargreaves equation."><!-- mathjax -
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hydroTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -49,32 +49,45 @@ short grass reference surface using the the Hargreaves equation.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">PET_hg</span><span class="op">(</span><span class="va">Tmax</span>, <span class="va">Tmin</span>, Tavg <span class="op">=</span> <span class="cn">NULL</span>, Ra <span class="op">=</span> <span class="cn">NULL</span>, lat <span class="op">=</span> <span class="cn">NULL</span>, dates <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">PET_hg</span><span class="op">(</span><span class="va">Tmax</span>, <span class="va">Tmin</span>, Tavg <span class="op">=</span> <span class="cn">NULL</span>, Rsi_toa <span class="op">=</span> <span class="cn">NULL</span>, lat <span class="op">=</span> <span class="cn">NULL</span>, dates <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>Tmax</dt>
 <dd><p>Daily maximum air temperature at 2m height <code>[deg Celsius]</code>.</p></dd>
+
+
 <dt>Tmin</dt>
 <dd><p>Daily minimum air temperature at 2m height <code>[deg Celsius]</code>.</p></dd>
+
+
 <dt>Tavg</dt>
 <dd><p>Daily mean air temperature at 2m height <code>[deg Celsius]</code>. If not
 provided it would estimated by averaging the Tmax and tmin.</p></dd>
-<dt>Ra</dt>
+
+
+<dt>Rsi_toa</dt>
 <dd><p>Clear sky incoming shortwave radiation, i. e. extraterrestrial
 radiation multiply by clear sky transmissivity (i. e. a + b, a and b are
 coefficients of Angstrom formula. Normally 0.75) <code>[MJ m-2 day-1]</code>. If not
 provided, must provide lat and dates.</p></dd>
+
+
 <dt>lat</dt>
 <dd><p>Latitude <code>[degree]</code>.</p></dd>
+
+
 <dt>dates</dt>
 <dd><p>A R Date type of a vector of Date type. If not provided, it will Regard
 the ssd series is begin on the first day of a year.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Reference evapotranspiration ET0 from a hypothetical grass reference
+    
+
+<p>Reference evapotranspiration ET0 from a hypothetical grass reference
 surface <code>[mm day-1]</code>.</p>
     </div>
 
@@ -90,7 +103,7 @@ surface <code>[mm day-1]</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

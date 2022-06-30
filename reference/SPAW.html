@@ -22,7 +22,7 @@ saturated moisture: Saturation (0 kPa moisture), %v, (Eq. 5)
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hydroTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -54,29 +54,38 @@ saturated moisture: Saturation (0 kPa moisture), %v, (Eq. 5)
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">wilting_point</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span>
-
-<span class="fu">field_capacity</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span>
-
-<span class="fu">saturated_mois</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span>
-
-<span class="fu">wilting_point_salinity</span><span class="op">(</span>S <span class="op">=</span> <span class="fl">0.2</span>, C <span class="op">=</span> <span class="fl">0.2</span>, OM <span class="op">=</span> <span class="fl">2.5</span>, EC <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wilting_point</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">field_capacity</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">saturated_mois</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">wilting_point_salinity</span><span class="op">(</span>S <span class="op">=</span> <span class="fl">0.2</span>, C <span class="op">=</span> <span class="fl">0.2</span>, OM <span class="op">=</span> <span class="fl">2.5</span>, EC <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>S</dt>
 <dd><p>the weight ratio of Sand, (weight ratio, 0-1)</p></dd>
+
+
 <dt>C</dt>
 <dd><p>the weight ratio of Clay, (weight ratio, 0-1)</p></dd>
+
+
 <dt>OM</dt>
 <dd><p>the percentage of Organic Matter, (%w, 0-100)</p></dd>
+
+
 <dt>EC</dt>
 <dd><p>Electrical conductance of a saturated soil extract (dS/m = mili-mho/cm)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>%v</p>
+    
+
+<p>%v</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -92,12 +101,12 @@ Society of America Journal, 70(5), 1569-1578. <a href="doi:10.2136/sssaj2005.011
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">S</span> <span class="op">=</span> <span class="va">C</span> <span class="op">=</span> <span class="fl">0.20</span>; <span class="va">OM</span> <span class="op">=</span> <span class="fl">2.5</span> </span>
-<span class="r-in"><span class="fu">wilting_point</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span>  <span class="co"># 13.8%</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">S</span> <span class="op">=</span> <span class="va">C</span> <span class="op">=</span> <span class="fl">0.20</span>; <span class="va">OM</span> <span class="op">=</span> <span class="fl">2.5</span> </span></span>
+<span class="r-in"><span><span class="fu">wilting_point</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span>  <span class="co"># 13.8%</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1365448</span>
-<span class="r-in"><span class="fu">field_capacity</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span> <span class="co"># 32.1% </span></span>
+<span class="r-in"><span><span class="fu">field_capacity</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span> <span class="co"># 32.1% </span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3208775</span>
-<span class="r-in"><span class="fu">saturated_mois</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span> <span class="co"># 48.2%</span></span>
+<span class="r-in"><span><span class="fu">saturated_mois</span><span class="op">(</span><span class="va">S</span>, <span class="va">C</span>, <span class="va">OM</span><span class="op">)</span> <span class="co"># 48.2%</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.482125</span>
 </code></pre></div>
     </div>
@@ -113,7 +122,7 @@ Society of America Journal, 70(5), 1569-1578. <a href="doi:10.2136/sssaj2005.011
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

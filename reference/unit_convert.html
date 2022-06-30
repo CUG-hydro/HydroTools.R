@@ -22,7 +22,7 @@ W2mm: 1 MJ /m2/day  =0.408 mm /day, 1 Watt /m2 = 0.0864 MJ /m2/day
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hydroTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -54,39 +54,48 @@ W2mm: 1 MJ /m2/day  =0.408 mm /day, 1 Watt /m2 = 0.0864 MJ /m2/day
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">R2Q</span><span class="op">(</span><span class="va">R</span>, area <span class="op">=</span> <span class="va">dt</span> <span class="op">*</span> <span class="fl">3.6</span>, dt <span class="op">=</span> <span class="fl">24</span><span class="op">)</span>
-
-<span class="fu">Q2R</span><span class="op">(</span><span class="va">Q</span>, area <span class="op">=</span> <span class="va">dt</span> <span class="op">*</span> <span class="fl">3.6</span>, dt <span class="op">=</span> <span class="fl">24</span><span class="op">)</span>
-
-<span class="fu">MJ_2W</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">MJ_2mm</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">W2_MJ</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">W2mm</span><span class="op">(</span><span class="va">x</span>, tmean <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-
-<span class="fu">K2T</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">T2K</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-
-<span class="fu">deg2rad</span><span class="op">(</span><span class="va">deg</span><span class="op">)</span>
-
-<span class="fu">rad2deg</span><span class="op">(</span><span class="va">rad</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">R2Q</span><span class="op">(</span><span class="va">R</span>, area <span class="op">=</span> <span class="va">dt</span> <span class="op">*</span> <span class="fl">3.6</span>, dt <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">Q2R</span><span class="op">(</span><span class="va">Q</span>, area <span class="op">=</span> <span class="va">dt</span> <span class="op">*</span> <span class="fl">3.6</span>, dt <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">MJ_2W</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">MJ_2mm</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">W2_MJ</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">W2mm</span><span class="op">(</span><span class="va">x</span>, tmean <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">K2T</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">T2K</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">deg2rad</span><span class="op">(</span><span class="va">deg</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">rad2deg</span><span class="op">(</span><span class="va">rad</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>R</dt>
 <dd><p>runoff (mm per dt)</p></dd>
+
+
 <dt>area</dt>
 <dd><p>basin area (km^2), if area = ,</p></dd>
+
+
 <dt>dt</dt>
 <dd><p>time duration (hour)</p></dd>
+
+
 <dt>deg</dt>
 <dd><p>angle in degree</p></dd>
+
+
 <dt>rad</dt>
 <dd><p>angle in radian</p></dd>
+
 </dl></div>
     <div id="references">
     <h2>References</h2>
@@ -105,7 +114,7 @@ W2mm: 1 MJ /m2/day  =0.408 mm /day, 1 Watt /m2 = 0.0864 MJ /m2/day
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -58,10 +58,7 @@
     <loc>/reference/budyko.html</loc>
   </url>
   <url>
-    <loc>/reference/cal_Ra.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_Rlin.html</loc>
+    <loc>/reference/cal_Rli.html</loc>
   </url>
   <url>
     <loc>/reference/cal_Rln.html</loc>
@@ -70,7 +67,10 @@
     <loc>/reference/cal_Rn.html</loc>
   </url>
   <url>
-    <loc>/reference/cal_Rs.html</loc>
+    <loc>/reference/cal_Rsi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cal_Rsi_toa.html</loc>
   </url>
   <url>
     <loc>/reference/cal_Ts.html</loc>

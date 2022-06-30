@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hydroTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -47,13 +47,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">budyko</span><span class="op">(</span><span class="va">PET.P</span>, par <span class="op">=</span> <span class="fl">2</span>, method <span class="op">=</span> <span class="st">"Fu1981"</span><span class="op">)</span>
-
-<span class="fu">ET_budyko</span><span class="op">(</span><span class="va">PET</span>, <span class="va">P</span>, par <span class="op">=</span> <span class="fl">2</span>, method <span class="op">=</span> <span class="st">"Fu1981"</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">budyko_goal</span><span class="op">(</span><span class="va">AET.P</span>, <span class="va">PET.P</span>, par <span class="op">=</span> <span class="fl">2</span>, method <span class="op">=</span> <span class="st">"Fu1981"</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">budyko_fit</span><span class="op">(</span><span class="va">AET.P</span>, <span class="va">PET.P</span>, par <span class="op">=</span> <span class="fl">2</span>, method <span class="op">=</span> <span class="st">"Fu1981"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">budyko</span><span class="op">(</span><span class="va">PET.P</span>, par <span class="op">=</span> <span class="fl">2</span>, method <span class="op">=</span> <span class="st">"Fu1981"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ET_budyko</span><span class="op">(</span><span class="va">PET</span>, <span class="va">P</span>, par <span class="op">=</span> <span class="fl">2</span>, method <span class="op">=</span> <span class="st">"Fu1981"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">budyko_goal</span><span class="op">(</span><span class="va">AET.P</span>, <span class="va">PET.P</span>, par <span class="op">=</span> <span class="fl">2</span>, method <span class="op">=</span> <span class="st">"Fu1981"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">budyko_fit</span><span class="op">(</span><span class="va">AET.P</span>, <span class="va">PET.P</span>, par <span class="op">=</span> <span class="fl">2</span>, method <span class="op">=</span> <span class="st">"Fu1981"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -64,17 +64,28 @@
 <li><p><code>AET.P</code>: <code>AET / P</code></p></li>
 <li><p><code>PET.P</code>: <code>PET / P</code></p></li>
 </ul></dd>
+
+
 <dt>par</dt>
 <dd><p>scalar value, the parameter of Budyko curve</p></dd>
+
+
 <dt>method</dt>
 <dd><p>one of <code>c("budyko", "Fu1981", "Zhang2001", "Yang2008", "Pike1964")</code>,
 or <code>all</code>.</p></dd>
+
+
 <dt>PET</dt>
 <dd><p>potential evapotranspiration (mm)</p></dd>
+
+
 <dt>P</dt>
 <dd><p>precipitation (mm)</p></dd>
+
+
 <dt>...</dt>
 <dd><p>ignored</p></dd>
+
 </dl></div>
     <div id="references">
     <h2>References</h2>
@@ -102,7 +113,7 @@ Research. <a href="doi:10.1029/2007WR006135">doi:10.1029/2007WR006135</a></p></l
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

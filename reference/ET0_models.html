@@ -25,7 +25,7 @@ ET0_FAO98 : Penman-Monteith reference crop evapotranspiration, FAO56
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hydroTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -60,45 +60,58 @@ ET0_FAO98 : Penman-Monteith reference crop evapotranspiration, FAO56
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ET0_eq</span><span class="op">(</span><span class="va">Rn</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">ET0_Penman48</span><span class="op">(</span><span class="va">Rn</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span>, <span class="va">D</span>, <span class="va">wind</span>, z.wind <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-
-<span class="fu">ET0_Monteith65</span><span class="op">(</span>
-  <span class="va">Rn</span>,
-  <span class="va">Tair</span>,
-  Pa <span class="op">=</span> <span class="va">atm</span>,
-  <span class="va">D</span>,
-  <span class="va">wind</span>,
-  z.wind <span class="op">=</span> <span class="fl">2</span>,
-  rs <span class="op">=</span> <span class="fl">70</span>,
-  rH <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">ET0_PT72</span><span class="op">(</span><span class="va">Rn</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span>, alpha <span class="op">=</span> <span class="fl">1.26</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">ET0_FAO98</span><span class="op">(</span><span class="va">Rn</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span>, <span class="va">D</span>, <span class="va">wind</span>, z.wind <span class="op">=</span> <span class="fl">2</span>, tall_crop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ET0_eq</span><span class="op">(</span><span class="va">Rn</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ET0_Penman48</span><span class="op">(</span><span class="va">Rn</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span>, <span class="va">D</span>, <span class="va">wind</span>, z.wind <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ET0_Monteith65</span><span class="op">(</span></span>
+<span>  <span class="va">Rn</span>,</span>
+<span>  <span class="va">Tair</span>,</span>
+<span>  Pa <span class="op">=</span> <span class="va">atm</span>,</span>
+<span>  <span class="va">D</span>,</span>
+<span>  <span class="va">wind</span>,</span>
+<span>  z.wind <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  rs <span class="op">=</span> <span class="fl">70</span>,</span>
+<span>  rH <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ET0_PT72</span><span class="op">(</span><span class="va">Rn</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span>, alpha <span class="op">=</span> <span class="fl">1.26</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ET0_FAO98</span><span class="op">(</span><span class="va">Rn</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span>, <span class="va">D</span>, <span class="va">wind</span>, z.wind <span class="op">=</span> <span class="fl">2</span>, tall_crop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>Rn</dt>
 <dd><p>land surface net radiation, W m-2</p></dd>
+
+
 <dt>Tair</dt>
 <dd><p>2m air temperature (degC)</p></dd>
+
+
 <dt>Pa</dt>
 <dd><p>surface air pressure (kPa)</p></dd>
+
+
 <dt>D</dt>
 <dd><p>vapor pressure deficit (kPa)</p></dd>
+
+
 <dt>wind</dt>
 <dd><p>wind speed at the height of <code>z.wind</code></p></dd>
+
+
 <dt>z.wind</dt>
 <dd><p>Height where measure the wind speed <code>[m]</code>. Default 10m.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <ul><li><p><code>lambda</code>: Latent heat of vaporization, about <code>[2.5 MJ kg-1]</code>.</p></li>
+    
+
+<ul><li><p><code>lambda</code>: Latent heat of vaporization, about <code>[2.5 MJ kg-1]</code>.</p></li>
 <li><p><code>slope</code> : The slope of the saturation vapour pressure curve at certain air
 temperature Tair, <code>[kPa degC-1]</code>.</p></li>
 <li><p><code>gamma</code> : Psychrometric constant (kPa degC-1), <code>Cp*Pa/(epsilon*lambda)</code></p></li>
@@ -126,10 +139,10 @@ United Nations, 56(97), e156.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">et0_pt</span> <span class="op">=</span> <span class="fu">ET0_PT72</span><span class="op">(</span><span class="fl">250</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">et0_penman48</span> <span class="op">=</span> <span class="fu">ET0_Penman48</span><span class="op">(</span><span class="fl">250</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span>, wind <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">et0_fao98</span> <span class="op">=</span> <span class="fu">ET0_FAO98</span><span class="op">(</span><span class="fl">250</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span>, wind <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ET0_Monteith65</span><span class="op">(</span><span class="fl">250</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span>, wind <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">et0_pt</span> <span class="op">=</span> <span class="fu">ET0_PT72</span><span class="op">(</span><span class="fl">250</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">et0_penman48</span> <span class="op">=</span> <span class="fu">ET0_Penman48</span><span class="op">(</span><span class="fl">250</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span>, wind <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">et0_fao98</span> <span class="op">=</span> <span class="fu">ET0_FAO98</span><span class="op">(</span><span class="fl">250</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span>, wind <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ET0_Monteith65</span><span class="op">(</span><span class="fl">250</span>, <span class="fl">25</span>, D <span class="op">=</span> <span class="fl">1</span>, wind <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    lambda     slope      gamma      Eeq      Evp      ET0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1:  2.445 0.1886818 0.06749253 5.525415 1.341156 6.866571</span>
 </code></pre></div>
@@ -146,7 +159,7 @@ United Nations, 56(97), e156.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hydroTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -47,51 +47,62 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">w2q</span><span class="op">(</span><span class="va">w</span><span class="op">)</span>
-
-<span class="fu">q2w</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span>
-
-<span class="fu">q2ea</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span>
-
-<span class="fu">w2ea</span><span class="op">(</span><span class="va">w</span>, <span class="va">Pa</span><span class="op">)</span>
-
-<span class="fu">ea2VPD</span><span class="op">(</span><span class="va">ea</span>, <span class="va">RH</span><span class="op">)</span>
-
-<span class="fu">vapour_press</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span>
-
-<span class="fu">q2RH</span><span class="op">(</span><span class="va">q</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span>
-
-<span class="fu">q_from_RH</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span>
-
-<span class="fu">RH2q</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span>
-
-<span class="fu">Tdew2q</span><span class="op">(</span><span class="va">Tdew</span>, <span class="va">Pa</span><span class="op">)</span>
-
-<span class="fu">Tdew2w</span><span class="op">(</span><span class="va">Tdew</span>, <span class="va">Pa</span><span class="op">)</span>
-
-<span class="fu">Tdew2RH</span><span class="op">(</span><span class="va">Tdew</span>, <span class="va">Tair</span><span class="op">)</span>
-
-<span class="fu">Tdew_from_q</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span>
-
-<span class="fu">Tdew_from_w</span><span class="op">(</span><span class="va">w</span>, <span class="va">Pa</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">w2q</span><span class="op">(</span><span class="va">w</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">q2w</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">q2ea</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">w2ea</span><span class="op">(</span><span class="va">w</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ea2VPD</span><span class="op">(</span><span class="va">ea</span>, <span class="va">RH</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">vapour_press</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">q2RH</span><span class="op">(</span><span class="va">q</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">q_from_RH</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">RH2q</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">Tdew2q</span><span class="op">(</span><span class="va">Tdew</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">Tdew2w</span><span class="op">(</span><span class="va">Tdew</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">Tdew2RH</span><span class="op">(</span><span class="va">Tdew</span>, <span class="va">Tair</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">Tdew_from_q</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">Tdew_from_w</span><span class="op">(</span><span class="va">w</span>, <span class="va">Pa</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>w</dt>
 <dd><p>mix ratio, m_w / m_d</p></dd>
+
+
 <dt>q</dt>
 <dd><p>specific humidity in kg/kg or g/g</p></dd>
+
+
 <dt>Pa</dt>
 <dd><p>surface air pressure</p></dd>
+
+
 <dt>RH</dt>
 <dd><p>relative humidity, in %</p></dd>
+
+
 <dt>Tair</dt>
 <dd><p>air temperature, in degC</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>e in the same unit as Pa</p>
+    
+
+<p>e in the same unit as Pa</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -101,13 +112,13 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">RH</span> <span class="op">=</span> <span class="fl">90</span></span>
-<span class="r-in"><span class="va">Pa</span> <span class="op">=</span> <span class="va">atm</span></span>
-<span class="r-in"><span class="va">Tair</span> <span class="op">=</span> <span class="fl">30</span></span>
-<span class="r-in"><span class="va">q</span> <span class="op">=</span> <span class="fu">RH2q</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Pa</span>, <span class="va">Tair</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">RH2</span> <span class="op">=</span> <span class="fu">q2RH</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span>, <span class="va">Tair</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">e</span> <span class="op">=</span> <span class="fu">q2ea</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">es</span> <span class="op">=</span> <span class="fu"><a href="ET0_helper.html">cal_es</a></span><span class="op">(</span><span class="va">Tair</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">RH</span> <span class="op">=</span> <span class="fl">90</span></span></span>
+<span class="r-in"><span><span class="va">Pa</span> <span class="op">=</span> <span class="va">atm</span></span></span>
+<span class="r-in"><span><span class="va">Tair</span> <span class="op">=</span> <span class="fl">30</span></span></span>
+<span class="r-in"><span><span class="va">q</span> <span class="op">=</span> <span class="fu">RH2q</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Pa</span>, <span class="va">Tair</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">RH2</span> <span class="op">=</span> <span class="fu">q2RH</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span>, <span class="va">Tair</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">e</span> <span class="op">=</span> <span class="fu">q2ea</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">es</span> <span class="op">=</span> <span class="fu"><a href="ET0_helper.html">cal_es</a></span><span class="op">(</span><span class="va">Tair</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -122,7 +133,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

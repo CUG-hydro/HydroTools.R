@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hydroTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -47,33 +47,74 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cal_Rln</span><span class="op">(</span><span class="va">tmax</span>, <span class="va">tmin</span>, <span class="va">ea</span>, Rs <span class="op">=</span> <span class="cn">NULL</span>, Rso <span class="op">=</span> <span class="cn">NULL</span>, cld <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cal_Rln</span><span class="op">(</span><span class="va">tmax</span>, <span class="va">tmin</span>, <span class="va">ea</span>, Rsi <span class="op">=</span> <span class="cn">NULL</span>, Rsi_o <span class="op">=</span> <span class="cn">NULL</span>, cld <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">cal_Rln_yang2019</span><span class="op">(</span></span>
+<span>  <span class="va">Ts</span>,</span>
+<span>  <span class="va">Rsi</span>,</span>
+<span>  <span class="va">Rsi_toa</span>,</span>
+<span>  lat <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  emiss <span class="op">=</span> <span class="fl">0.96</span>,</span>
+<span>  n1 <span class="op">=</span> <span class="fl">2.52</span>,</span>
+<span>  n2 <span class="op">=</span> <span class="fl">2.37</span>,</span>
+<span>  n3 <span class="op">=</span> <span class="fl">0.035</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>tmax</dt>
 <dd><p>Daily maximum air temperature at 2m height <code>[deg Celsius]</code>.</p></dd>
+
+
 <dt>tmin</dt>
 <dd><p>Daily minimum air temperature at 2m height <code>[deg Celsius]</code>.</p></dd>
+
+
 <dt>ea</dt>
 <dd><p>Actual vapor pressure <code>[kPa]</code>. Can be estimated by maximum or minimum
 air temperature and mean relative humidity.</p></dd>
-<dt>Rs</dt>
-<dd><p>Incoming shortwave radiation at crop surface <code>[MJ m-2 day-1]</code>.</p></dd>
-<dt>Rso</dt>
+
+
+<dt>Rsi</dt>
+<dd><p>Surface incoming short-wave radiation (Rsi)</p></dd>
+
+
+<dt>Rsi_o</dt>
 <dd><p>Clear sky incoming shortwave radiation, i. e. extraterrestrial
 radiation multiply by clear sky transmissivity (i. e. a + b,
 a and b are coefficients of Angstrom formula. Normally 0.75)
 <code>[MJ m-2 day-1]</code>.</p></dd>
+
+
 <dt>cld</dt>
 <dd><p>Cloud cover <code>[fraction]</code>. If provided it would be directly used to
 calculate net outgoing longwave radiation than Rso.</p></dd>
+
+
+<dt>Rsi_toa</dt>
+<dd><p>incoming short-wave radiation at the top of the atmosphere</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Net outgoing longwave radiation <code>[MJ m-2 day-1]</code></p>
+    
+
+<p>Net outgoing longwave radiation <code>[MJ m-2 day-1]</code></p>
+
+
     </div>
+    <div id="references">
+    <h2>References</h2>
+    
+<ol><li><p>Yang, Y., &amp; Roderick, M. L. (2019). Radiation, surface temperature and
+evaporation over wet surfaces. Quarterly Journal of the Royal
+Meteorological Society, 145(720), 1118–1129.
+https://doi.org/10.1002/qj.3481</p></li>
+<li><p>Tu, Z., &amp; Yang, Y. (2022). On the Estimation of Potential Evaporation
+Under Wet and Dry Conditions. Water Resources Research, 58(4).
+https://doi.org/10.1029/2021wr031486</p></li>
+</ol></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -87,7 +128,7 @@ calculate net outgoing longwave radiation than Rso.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
