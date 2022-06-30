@@ -29,7 +29,9 @@
 #' 
 #' @example R/example/ex-cal_Ts.R
 #' @export
-cal_Ts <- function(Rn, Tair, D, U2, Pa = atm, rH = NULL, rs = 0, method = c("simple", "full", "ma2021"), ...) {
+cal_Ts <- function(Rn, Tair, D, U2, Pa = atm, rH = NULL, rs = 0, 
+    method = c("simple", "full", "ma2021"), ...) 
+{
     # U2 = cal_U2(wind, z.wind)
     ## ET_cr推导结果可能会更好
     # rH = cal_rH(U2, h = 0.12)  # FAO98
@@ -71,7 +73,7 @@ cal_Ts <- function(Rn, Tair, D, U2, Pa = atm, rH = NULL, rs = 0, method = c("sim
                 (Rn - Rln) / (rou_a * Cp / rH * 1e6) - D / gamma_star) + Tair
             Tw_new - Tw # abs error as the goal function
         }
-        Tw <- uniroot(goal, c(-50, 0) + Tair)$root # 不考虑凝结, 则Tw < Tair
+        Tw <- uniroot(goal, c(-50, 50) + Tair)$root # 不考虑凝结, 则Tw < Tair
     } else if (method == "ma2021") {
         ## solution3: Maning 2021, Eq. 6
         Ep <- ET0_Monteith65(Rn, Tair, Pa = Pa, D, U2, z.wind = 2, rs = rs)$ET0

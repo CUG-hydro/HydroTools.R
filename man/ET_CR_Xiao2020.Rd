@@ -2,12 +2,12 @@
 % Please edit documentation in R/ET_CR.R
 \name{ET_CR_Xiao2020}
 \alias{ET_CR_Xiao2020}
-\alias{ER_CR_Ma2021}
+\alias{ET_CR_Ma2021}
 \title{ET complementary}
 \usage{
 ET_CR_Xiao2020(Rn, Tair, D, U2, Pa = atm)
 
-ER_CR_Ma2021(Rn, Tair, D, U2, Pa = atm)
+ET_CR_Ma2021(Rn, Tair, D, U2, Pa = atm, method = c("simple", "full", "ma2021"))
 }
 \arguments{
 \item{Rn}{land surface net radiation, W m-2}
@@ -24,7 +24,8 @@ ER_CR_Ma2021(Rn, Tair, D, U2, Pa = atm)
 ET complementary
 }
 \examples{
-ET_CR_Xiao2020(250, 25, D = 1, U2 = 2) 
+ET_CR_Xiao2020(250, 25, D = 1, U2 = 2)
+ET_CR_Ma2021(250, 25, D = 1, U2 = 2)
 }
 \references{
 \enumerate{

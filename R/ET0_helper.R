@@ -163,7 +163,8 @@ cal_TvK <- function(Tair, q = NULL, ea = NULL, Pa = atm) {
 cal_rou_a <- function(Tair, Pa = atm, q = NULL, ea = NULL) {
     # Tv = cal_TvK(Tair)
     # R = 0.287 # kJ kg-1 K-1
-    3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5
+    # 是否考虑ea，差别在0.2%
+    3.486 * Pa / cal_TvK(Tair, q, ea, Pa) # FAO56, Eq. 3-5, kg/m^3
 }
 
 #' Soil heat flux.
