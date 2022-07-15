@@ -85,10 +85,16 @@
     <loc>/reference/constants.html</loc>
   </url>
   <url>
+    <loc>/reference/convert_temperature.html</loc>
+  </url>
+  <url>
     <loc>/reference/cv_coef.html</loc>
   </url>
   <url>
     <loc>/reference/grid_date.html</loc>
+  </url>
+  <url>
+    <loc>/reference/heat_index.html</loc>
   </url>
   <url>
     <loc>/reference/hydroTools-package.html</loc>
