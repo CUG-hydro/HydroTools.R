@@ -44,6 +44,8 @@ should be provided. If \code{cld} is not null, \code{ssd} will be ignored.}
 \item{albedo}{(optional), \verb{Rsn = (1 - albedo) Rsi}}
 
 \item{Z}{(optional) elevation (m), for the calculation of \code{Rsi_o}}
+
+\item{...}{ignored}
 }
 \value{
 radiation in \verb{[MJ d-1]}

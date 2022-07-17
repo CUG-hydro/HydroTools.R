@@ -8,6 +8,8 @@ plot_calib(data, ...)
 }
 \arguments{
 \item{data}{with the columns of \code{date}, \code{prcp}, \code{Qsim},  \code{Qobs}}
+
+\item{...}{others to plot precipitation}
 }
 \description{
 plot_calib

@@ -34,6 +34,8 @@ or \code{all}.}
 \item{P}{precipitation (mm)}
 
 \item{...}{ignored}
+
+\item{AET.P}{\code{AET / P}}
 }
 \description{
 Budyko Curve

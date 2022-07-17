@@ -11,6 +11,12 @@ plot_runoff(df_q, df_prcp = NULL, xlim = NULL, ylim2 = c(50, 0), ...)
 At least one of \code{Qsim} and \code{Qobs} should be provided.}
 
 \item{df_prcp}{A data.frame with the columns of \code{date}, \code{prcp}}
+
+\item{xlim}{limit of x axis}
+
+\item{ylim2}{limit of second y axis (for precipitation)}
+
+\item{...}{other parameters passed to \code{\link[=plot]{plot()}} for precipitation plot}
 }
 \description{
 plot_runoff

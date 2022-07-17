@@ -41,6 +41,12 @@ rad2deg(rad)
 
 \item{dt}{time duration (hour)}
 
+\item{Q}{runoff flow (m^3/s)}
+
+\item{x}{scalar or numeric vector}
+
+\item{tmean}{daily mean temperature}
+
 \item{deg}{angle in degree}
 
 \item{rad}{angle in radian}

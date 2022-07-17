@@ -52,9 +52,13 @@ Tdew_from_w(w, Pa)
 
 \item{Pa}{surface air pressure}
 
+\item{ea}{actual vapor pressure (kPa)}
+
 \item{RH}{relative humidity, in \%}
 
 \item{Tair}{air temperature, in degC}
+
+\item{Tdew}{dew temperature (in degC)}
 }
 \value{
 e in the same unit as Pa

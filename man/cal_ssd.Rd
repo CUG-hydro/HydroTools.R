@@ -16,6 +16,8 @@ cal_ssd(lat, J)
 \item{lat}{Latitude \verb{[degree]}.}
 
 \item{J}{\code{doy} vector.}
+
+\item{ws}{sunset hour angle}
 }
 \description{
 Calculating sunset hour angle (\code{ws}) according to Allen Eq. 25.

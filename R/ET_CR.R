@@ -2,7 +2,10 @@
 #'
 #' @inheritParams ET0_Penman48
 #' @param U2 2m wind speed (m/s)
-#'
+#' @param method method for `Tw` calculation (not used in `ET_CR_Xiao2020`), see 
+#' reference for details
+#' @param rs stamotal conductance for water on capony scale
+#' 
 #' @references
 #' 1. Xiao, M., Yu, Z., Kong, D., Gu, X., Mammarella, I., Montagnani, L., …
 #'    Gioli, B. (2020). Stomatal response to decreased relative humidity

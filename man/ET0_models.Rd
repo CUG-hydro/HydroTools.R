@@ -41,13 +41,17 @@ ET0_FAO98(Rn, Tair, Pa = atm, D, wind, z.wind = 2, tall_crop = FALSE)
 \item{wind}{wind speed at the height of \code{z.wind}}
 
 \item{z.wind}{Height where measure the wind speed \verb{[m]}. Default 10m.}
+
+\item{alpha}{albedo \verb{[0-1]}}
+
+\item{tall_crop}{tall crop or not, see FAO1998 for details}
 }
 \value{
 \itemize{
 \item \code{lambda}: Latent heat of vaporization, about \verb{[2.5 MJ kg-1]}.
 \item \code{slope} : The slope of the saturation vapour pressure curve at certain air
 temperature Tair, \verb{[kPa degC-1]}.
-\item \code{gamma} : Psychrometric constant (\link{kPa degC-1}), \code{Cp*Pa/(epsilon*lambda)}
+\item \code{gamma} : Psychrometric constant (\verb{[kPa degC-1]}), \code{Cp*Pa/(epsilon*lambda)}
 \item \code{Eeq}   : Equilibrium (radiative) evaporation, mm
 \item \code{Evp}   : Aerodynamic evaporation, mm
 \item \code{ET0}   : Potential evapotranspiration, mm

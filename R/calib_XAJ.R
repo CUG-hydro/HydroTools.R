@@ -13,9 +13,6 @@ ub <- d_par$upper
 par0 <- d_par$par
 # ------------------------------------------------------------------------------
 
-make_monthdate <- function(x) {
-    x %>% {lubridate::make_date(year(.), month(.), 1)}
-}
 
 XAJ_goal <- function(par, Qobs, prcp, ET0, area, date = NULL, dt = 24, index = "KGE") {
   r = VIC5::XAJ(prcp, ET0, par, area = area, dt = dt)
@@ -94,7 +91,8 @@ XAJ_predict <- function(model, newdata) {
 #' plot_calib
 #'
 #' @param data with the columns of `date`, `prcp`, `Qsim`,  `Qobs`
-#'
+#' @param ... others to plot precipitation
+#' 
 #' @export
 plot_calib <- function(data, ...) {
   date = data$date

@@ -5,6 +5,7 @@
 #' - `P`: Precipitation
 #' - `AET.P`: `AET / P`
 #' - `PET.P`: `PET / P`
+#' @param AET.P `AET / P`
 #' @param par scalar value, the parameter of Budyko curve
 #' @param method one of `c("budyko", "Fu1981", "Zhang2001", "Yang2008", "Pike1964")`, 
 #' or `all`.

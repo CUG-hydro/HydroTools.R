@@ -16,6 +16,8 @@ cal_ws <- function(lat, J) {
   ws
 }
 
+#' @param ws sunset hour angle
+#' 
 #' @rdname cal_ssd
 #' @export
 ws2ssd <- function(ws) ws / pi * 24 # Ge ChaoXiao, Eq. 2-18
@@ -52,14 +54,18 @@ cal_Rsi_toa <- function(lat, J) {
   Rsi_toa
 }
 
+# ' @param dates A R Date type of a vector of Date type. If not provided, it will
+# ' regard the ssd series is begin on the first day of a year. 
+
 #' Daily inward shortwave solar radiation.
 #'
 #' Daily inward shortwave solar radiation at crop surface `[MJ m-2 day-1]` by 
 #' providing sunshine duration (SSD) in hours or cloud cover in fraction.
 #' 
 #' @param lat Latitude `[degree]`.
-#' @param dates A R Date type of a vector of Date type. If not provided, it will 
-#' regard the ssd series is begin on the first day of a year. 
+#' @param J day of year
+#' @param Z elevation (m)
+#' 
 #' @param ssd sunshine duration [hours]. If `ssd = NULL`, `Rsi` is the clear-sky 
 #' solar radiation.
 #' @param cld Cloud cover `[fraction]`. If provided it would be directly used to
@@ -139,6 +145,10 @@ cal_Rln <- function(tmax, tmin, ea, Rsi = NULL, Rsi_o = NULL, cld = NULL) {
 #' @rdname cal_Rln
 #' @param Rsi Surface incoming short-wave radiation (Rsi)
 #' @param Rsi_toa incoming short-wave radiation at the top of the atmosphere
+#' @param Ts land surface temperature
+#' @param emiss Emissivity
+#' @param lat latitude (in deg)
+#' @param n1,n2,n3 parameter for `delta_T`, see Yang 2019 for details
 #' 
 #' @references 
 #' 1. Yang, Y., & Roderick, M. L. (2019). Radiation, surface temperature and

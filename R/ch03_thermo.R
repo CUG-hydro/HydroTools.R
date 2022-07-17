@@ -53,7 +53,7 @@ theta <- function(T0, P0) {
 theta_wet <- function(T0, P0, Td) {
   theta_d = dry_adiabat(T0, P0, 100) # hPa
   
-  T_lcl = LCL(T0, PO, Td)["T_lcl"]
+  T_lcl = LCL(T0, P0, Td)["T_lcl"]
   Lv = cal_lambda(T0) #* 1e6
   # Lv = 2.5 * 1e6 MJ kg-1
   w = Tdew2w(Td, P0) # 

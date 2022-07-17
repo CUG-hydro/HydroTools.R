@@ -39,6 +39,9 @@ grid_date <- function(x, col = "grey60", lty = 3, lwd = 0.4, ...) {
 #' @param df_prcp A data.frame with the columns of `date`, `prcp`
 #' @param df_q A data.frame with the columns of `date`, `Qsim`, `Qobs`. 
 #' At least one of `Qsim` and `Qobs` should be provided.
+#' @param xlim limit of x axis
+#' @param ylim2 limit of second y axis (for precipitation)
+#' @param ... other parameters passed to [plot()] for precipitation plot
 #' 
 #' @export
 plot_runoff <- function(df_q, df_prcp = NULL, xlim = NULL, ylim2 = c(50, 0), ...) {

@@ -23,7 +23,11 @@ cal_Ts(
 
 \item{D}{vapor pressure deficit (kPa)}
 
+\item{U2}{wind speed at 2m}
+
 \item{Pa}{surface air pressure (kPa)}
+
+\item{rH}{conductance for heat}
 
 \item{rs}{If \code{rs = 0}, Monteith 1965 leaf evaporation Equation becomes Penman
 1948 water evaporation.
@@ -34,6 +38,8 @@ ignore the influence of Ts on net cal_radiation}
 \item \code{full} (not finished): Yang 2019
 \item \code{ma2021}: Ma 2021
 }}
+
+\item{...}{ignored}
 }
 \description{
 Evaporative surface temperature (land surface, Tland; or leaf surface Tleaf).

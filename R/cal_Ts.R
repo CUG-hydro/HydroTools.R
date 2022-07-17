@@ -12,6 +12,9 @@
 #' @param rs If `rs = 0`, Monteith 1965 leaf evaporation Equation becomes Penman
 #' 1948 water evaporation.
 #' ignore the influence of Ts on net cal_radiation
+#' @param rH conductance for heat
+#' @param ... ignored 
+#' 
 #' @param method
 #' - `simple`: Monteith 1965 Equation
 #' - `full` (not finished): Yang 2019

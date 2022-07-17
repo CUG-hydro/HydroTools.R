@@ -17,6 +17,8 @@ GOF(yobs, ysim, w, include.cv = FALSE, include.r = TRUE)
 \item{w}{Numeric vector, weights of every points. If w included, when
 calculating mean, Bias, MAE, RMSE and NSE, w will be taken into considered.}
 
+\item{...}{ignored}
+
 \item{include.cv}{If true, cv will be included.}
 
 \item{include.r}{If true, r and R2 will be included.}

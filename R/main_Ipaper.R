@@ -3,19 +3,19 @@ runningId <- function(i, step = 1, N, prefix = "") {
     if (mod(i, step) == 0) cat(sprintf("[%s] running%s %d ...\n", prefix, perc, i))    
 }
 
-#' @importFrom foreach %do% foreach
-apply_row <- function(mat, by, FUN = rowMeans2, ...) {
-    if (length(by) != ncol(mat)) {
-        stop('Length of by is not equal to ncol of mat')
-    }
-    grps <- unique(by) %>% sort()
+# #' @importFrom foreach %do% foreach
+# apply_row <- function(mat, by, FUN = rowMeans2, ...) {
+#     if (length(by) != ncol(mat)) {
+#         stop('Length of by is not equal to ncol of mat')
+#     }
+#     grps <- unique(by) %>% sort()
 
-    foreach(grp = grps, .combine = cbind) %do% {
-        I <- which(by == grp)
-        FUN(mat[, I], na.rm = TRUE, ...)
-    } %>% set_colnames(grps) %>% 
-    set_rownames(rownames(mat))
-}
+#     foreach(grp = grps, .combine = cbind) %do% {
+#         I <- which(by == grp)
+#         FUN(mat[, I], na.rm = TRUE, ...)
+#     } %>% set_colnames(grps) %>% 
+#     set_rownames(rownames(mat))
+# }
 
 # ' @importFrom base intersect setdiff union
 #' @importFrom data.table data.table is.data.table as.data.table

@@ -1,3 +1,5 @@
+#' @param ... ignored
+#' 
 #' @rdname GOF
 #' @export
 NSE <- function(yobs, ysim, w, ...) {

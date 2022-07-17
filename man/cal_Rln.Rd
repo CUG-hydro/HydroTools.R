@@ -36,7 +36,15 @@ a and b are coefficients of Angstrom formula. Normally 0.75)
 \item{cld}{Cloud cover \verb{[fraction]}. If provided it would be directly used to
 calculate net outgoing longwave radiation than Rso.}
 
+\item{Ts}{land surface temperature}
+
 \item{Rsi_toa}{incoming short-wave radiation at the top of the atmosphere}
+
+\item{lat}{latitude (in deg)}
+
+\item{emiss}{Emissivity}
+
+\item{n1, n2, n3}{parameter for \code{delta_T}, see Yang 2019 for details}
 }
 \value{
 Net outgoing longwave radiation \verb{[MJ m-2 day-1]}

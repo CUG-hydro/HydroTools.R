@@ -2,14 +2,11 @@
 % Please edit documentation in R/heat_index.R
 \name{heat_index}
 \alias{heat_index}
-\alias{heat_index_julia}
 \alias{.heat.index}
 \alias{heat_index_vec}
-\title{Algorithm for heat.index function.}
+\title{heat index (Human-perceived temperature)}
 \usage{
 heat_index(t, rh)
-
-heat_index_julia(t, rh)
 
 .heat.index(t = NA, rh = NA)
 
@@ -27,7 +24,7 @@ A numeric scalar of heat index, in celsius
 \code{heat_index} converts a numeric scalar of temperature
 (in Fahrenheit) and a numeric scalar of relative humidity (in \%)
 to heat index (in Fahrenheit). This function is not meant to be used
-outside of the \code{\link[=heat.index]{heat.index()}} function.
+outside of the \code{\link[=heat_index_vec]{heat_index_vec()}} function.
 }
 \details{
 If an impossible value of relative humidity is given
@@ -49,7 +46,7 @@ heat_index(t[i], rh[i])
 heat_index_vec(t[i], rh[i])
 # heat_index_julia(t[i], rh[i])
 
-julia_setup()
+# julia_setup()
 r <- heat_index(t, rh)
 r_vec <- heat_index_vec(t, rh)
 # r_jl <- heat_index_julia(t, rh)
@@ -60,11 +57,11 @@ r_vec <- heat_index_vec(t, rh)
 all.equal(r, r_vec)
 # all.equal(r_jl, r_vec)
 
-microbenchmark::microbenchmark(
-    r2 <- heat_index(t, rh),
-    r1 <- heat_index_julia(t, rh)
-    # r_vec <- heat_index_vec(t, rh)
-)
+# microbenchmark::microbenchmark(
+#     r2 <- heat_index(t, rh),
+#     r1 <- heat_index_julia(t, rh)
+#     # r_vec <- heat_index_vec(t, rh)
+# )
 }
 \references{
 \enumerate{

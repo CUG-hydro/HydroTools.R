@@ -49,40 +49,6 @@ A numeric vector of temperature values in the new unit.
 This function allows you to convert a vector of temperature values between
 Fahrenheit, Celsius, and degrees Kelvin.
 }
-\examples{
-data(lyon)
-lyon$TemperatureF <- convert_temperature(lyon$TemperatureC,
-    old_metric = "c", new_metric = "f"
-)
-lyon
-
-data(norfolk)
-norfolk$TempC <- convert_temperature(norfolk$TemperatureF,
-    old_metric = "f", new_metric = "c"
-)
-norfolk
-
-data(angeles)
-angeles$TemperatureC <- convert_temperature(angeles$TemperatureK,
-    old_metric = "kelvin", new_metric = "celsius"
-)
-angeles
-# Convert from Celsius
-data(lyon)
-lyon$TemperatureF <- celsius.to.fahrenheit(lyon$TemperatureC)
-lyon$TemperatureK <- celsius.to.kelvin(lyon$TemperatureC)
-lyon
-# Convert from Fahrenheit
-data(norfolk)
-norfolk$TempC <- fahrenheit.to.celsius(norfolk$TemperatureF)
-norfolk$TemperatureK <- fahrenheit.to.kelvin(norfolk$TemperatureF)
-norfolk
-# Convert from Kelvin
-data(angeles)
-angeles$TemperatureC <- kelvin.to.celsius(angeles$TemperatureK)
-angeles$TemperatureF <- kelvin.to.fahrenheit(angeles$TemperatureK)
-angeles
-}
 \references{
 \enumerate{
 \item \href{http://www.wpc.ncep.noaa.gov/html/heatindex.shtml}{online heat index calculator}

@@ -16,6 +16,7 @@
 #' 
 #' @param Z (optional) elevation (m), for the calculation of `Rsi_o`
 #' @param albedo (optional), `Rsn = (1 - albedo) Rsi`
+#' @param ... ignored
 #' 
 #' @return radiation in `[MJ d-1]`
 #' - `Rn`  : Surface net radiation

@@ -64,6 +64,8 @@ cal_es_CC <- function(Tair) {
     # 0.6108 * exp((17.27 * Tair) / (Tair + 237.3))
 }
 
+#' @param ea actual vapor pressure (kPa)
+#' 
 #' @rdname vapour_press
 #' @export
 ea2VPD <- function(ea, RH) {
@@ -104,6 +106,8 @@ q_from_RH <- function(RH, Tair, Pa) {
 #' @export
  RH2q <- q_from_RH
 
+#' @param Tdew dew temperature (in degC)
+#' 
 #' @rdname vapour_press
 #' @export
 Tdew2q <- function(Tdew, Pa) {

@@ -12,7 +12,7 @@
 #' - `lambda`: Latent heat of vaporization, about `[2.5 MJ kg-1]`.
 #' - `slope` : The slope of the saturation vapour pressure curve at certain air
 #'             temperature Tair, `[kPa degC-1]`.
-#' - `gamma` : Psychrometric constant ([kPa degC-1]), `Cp*Pa/(epsilon*lambda)`
+#' - `gamma` : Psychrometric constant (`[kPa degC-1]`), `Cp*Pa/(epsilon*lambda)`
 #' - `Eeq`   : Equilibrium (radiative) evaporation, mm
 #' - `Evp`   : Aerodynamic evaporation, mm
 #' - `ET0`   : Potential evapotranspiration, mm
@@ -35,12 +35,13 @@
 NULL
 
 
+#' @inheritParams cal_U2
 #' @param Rn net radiation (W m-2)
 #' @param Tair 2m air temperature (degC)
 #' @param D vapor pressure deficit (kPa)
 #' @param Pa surface air pressure (kPa)
 #' @param wind wind speed at the height of `z.wind`
-#' @inheritParams cal_U2
+#' @param alpha albedo `[0-1]`
 #'
 #' @rdname ET0_models
 #' @export
@@ -102,6 +103,8 @@ ET0_PT72 <- function(Rn, Tair, Pa = atm, alpha = 1.26, ...) {
     mutate(dat, ET0 = Eeq * alpha)
 }
 
+#' @param tall_crop tall crop or not, see FAO1998 for details
+#' 
 #' @rdname ET0_models
 #' @export
 ET0_FAO98 <- function(Rn, Tair, Pa = atm, D,

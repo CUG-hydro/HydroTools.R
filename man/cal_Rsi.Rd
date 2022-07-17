@@ -9,19 +9,20 @@ cal_Rsi(lat, J, ssd = NULL, cld = NULL, Z = 0, a = 0.25, b = 0.5)
 \arguments{
 \item{lat}{Latitude \verb{[degree]}.}
 
+\item{J}{day of year}
+
 \item{ssd}{sunshine duration \link{hours}. If \code{ssd = NULL}, \code{Rsi} is the clear-sky
 solar radiation.}
 
 \item{cld}{Cloud cover \verb{[fraction]}. If provided it would be directly used to
 calculate solar radiation rather than SSD and parameter a and b.}
 
+\item{Z}{elevation (m)}
+
 \item{a}{Coefficient of the Angstrom formula. Determine the relationship
 between ssd and radiation. Default 0.25.}
 
 \item{b}{Coefficient of the Angstrom formula. Default 0.50.}
-
-\item{dates}{A R Date type of a vector of Date type. If not provided, it will
-regard the ssd series is begin on the first day of a year.}
 }
 \value{
 A data.table, solar radiation at crop surface \verb{[MJ m-2 day-1]}.

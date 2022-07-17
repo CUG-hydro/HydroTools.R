@@ -8,15 +8,11 @@ Description: What the package does (one paragraph).
 Depends:
     R (>= 3.6)
 Imports: 
-    VIC5 (>= 0.2.4), 
-    foreach, magrittr, 
+    VIC5 (>= 0.2.4), rtop, hydroGOF, 
+    magrittr, 
     lubridate,
-    matrixStats, rtop, 
-    glue, ggplot2,
-    dplyr, purrr, broom, 
+    dplyr, purrr, 
     data.table, 
-    hydroGOF, stringr,
-    abind,
     methods
 Suggests: 
     testthat (>= 2.1.0),

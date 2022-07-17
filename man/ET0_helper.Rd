@@ -44,11 +44,15 @@ cal_rou_a(Tair, Pa = atm, q = NULL, ea = NULL)
 cal_es(Tair)
 }
 \arguments{
+\item{Uz}{wind speed at height \code{z.wind}}
+
 \item{z.wind}{Height where measure the wind speed \verb{[m]}. Default 10m.}
 
-\item{Tmin}{Daily minimum air temperature at 2m height \verb{[deg Celsius]}.}
+\item{Tmin}{Daily minimum air temperature at 2m height \verb{[deg Celsius]}}
 
-\item{Tmax}{Daily maximum air temperature at 2m height \verb{[deg Celsius]}.}
+\item{Tmax}{Daily maximum air temperature at 2m height \verb{[deg Celsius]}}
+
+\item{RH_mean}{daily mean relative humidity \verb{[\%]}}
 
 \item{Tair}{2m air temperature, (\verb{[deg Celsius]})}
 
@@ -59,7 +63,21 @@ cal_es(Tair)
 \item{z}{Elevation above sea level \verb{[m]}. Must provided if pres
 are not provided.}
 
-\item{RH_max, RH_mean, RH_min}{Daily max, mean and min relative humidity \verb{[\%]}.}
+\item{U2}{wind speed at 2m}
+
+\item{h}{canopy height (m), for the calculation of the following intermediate
+variables:
+\itemize{
+\item \code{d}: zero plane displacement height (m)
+\item \code{z_om}: roughness length governing momentum transfer (m)
+\item \code{z_oh}: roughness length governing transfer of heat and vapour (m)
+\item \code{z_h} : height of humidity measurements (m)
+\item \code{z_m} : height of wind measurements (m)
+}}
+
+\item{q}{specific humidity (g/g)}
+
+\item{ea}{actual vapor pressure (kPa)}
 }
 \description{
 \itemize{
@@ -86,7 +104,7 @@ temperature \code{Tair}, \verb{[kPa degC-1]}.
 cal_VPD(10, 5)
 
 par(mfrow = c(2, 2), mar = c(3, 1.8, 2, 1), mgp = c(2, 0.6, 0))
-Tair = -10:50
+Tair <- -10:50
 plot(cal_es(-10:50), main = "es (kPa)", xlab = "Tair")
 plot(cal_bowen(-10:50), main = "Bowen ratio", xlab = "Tair")
 plot(cal_slope(-10:50), main = "slope (kPa/degC)", xlab = "Tair")

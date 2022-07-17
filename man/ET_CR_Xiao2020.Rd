@@ -35,6 +35,11 @@ ET_CR_Ma2021(
 \item{U2}{2m wind speed (m/s)}
 
 \item{Pa}{surface air pressure (kPa)}
+
+\item{method}{method for \code{Tw} calculation (not used in \code{ET_CR_Xiao2020}), see
+reference for details}
+
+\item{rs}{stamotal conductance for water on capony scale}
 }
 \description{
 ET complementary

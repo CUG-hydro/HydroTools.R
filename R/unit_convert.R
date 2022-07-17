@@ -4,6 +4,8 @@
 #' @description 
 #' - `R2Q`: Q(m^3/s) = R(mm) * area (km^2) * 1000/(3600*24)
 #' - `W2mm`: 1 MJ /m2/day  =0.408 mm /day, 1 Watt /m2 = 0.0864 MJ /m2/day
+#' 
+#' @param Q runoff flow (m^3/s)
 #' @param R runoff (mm per dt)
 #' @param area basin area (km^2), if area = ,
 #' @param dt time duration (hour)
@@ -46,8 +48,9 @@ W2_MJ <- function(x) {
     x / 1e6 * 86400
 }
 
-#' @rdname unit_convert
+#' @param tmean daily mean temperature
 #' 
+#' @rdname unit_convert
 #' @export 
 W2mm <- function(x, tmean = 0) {
     Cp <- 4.2 * 0.242 # specific heat at constant pressure, 1.013 [kJ kg-1 0C-1]
@@ -55,6 +58,8 @@ W2mm <- function(x, tmean = 0) {
     x / lamada * 86400 * 10^-3 # W M-2 to mm
 }
 
+#' @param x scalar or numeric vector
+#' 
 #' @rdname unit_convert
 #' @export
 K2T <- function(x) x - 273.15
