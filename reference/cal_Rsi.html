@@ -58,6 +58,10 @@ providing sunshine duration (SSD) in hours or cloud cover in fraction.</p>
 <dd><p>Latitude <code>[degree]</code>.</p></dd>
 
 
+<dt>J</dt>
+<dd><p>day of year</p></dd>
+
+
 <dt>ssd</dt>
 <dd><p>sunshine duration hours. If <code>ssd = NULL</code>, <code>Rsi</code> is the clear-sky
 solar radiation.</p></dd>
@@ -68,6 +72,10 @@ solar radiation.</p></dd>
 calculate solar radiation rather than SSD and parameter a and b.</p></dd>
 
 
+<dt>Z</dt>
+<dd><p>elevation (m)</p></dd>
+
+
 <dt>a</dt>
 <dd><p>Coefficient of the Angstrom formula. Determine the relationship
 between ssd and radiation. Default 0.25.</p></dd>
@@ -75,11 +83,6 @@ between ssd and radiation. Default 0.25.</p></dd>
 
 <dt>b</dt>
 <dd><p>Coefficient of the Angstrom formula. Default 0.50.</p></dd>
-
-
-<dt>dates</dt>
-<dd><p>A R Date type of a vector of Date type. If not provided, it will
-regard the ssd series is begin on the first day of a year.</p></dd>
 
 </dl></div>
     <div id="value">
