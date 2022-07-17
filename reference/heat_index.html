@@ -123,21 +123,20 @@ Roger Peng <a href="mailto:rdpeng@gmail.com">rdpeng@gmail.com</a></p>
 <span class="r-in"><span><span class="fu">heat_index</span><span class="op">(</span><span class="va">t</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">rh</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -36.93694</span>
 <span class="r-in"><span><span class="fu">heat_index_vec</span><span class="op">(</span><span class="va">t</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">rh</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_dim(., dim):</span> could not find function "set_dim"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -36.93694</span>
 <span class="r-in"><span><span class="co"># heat_index_julia(t[i], rh[i])</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">julia_setup</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in julia_setup():</span> could not find function "julia_setup"</span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">heat_index</span><span class="op">(</span><span class="va">t</span>, <span class="va">rh</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r_vec</span> <span class="op">&lt;-</span> <span class="fu">heat_index_vec</span><span class="op">(</span><span class="va">t</span>, <span class="va">rh</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_dim(., dim):</span> could not find function "set_dim"</span>
 <span class="r-in"><span><span class="co"># r_jl &lt;- heat_index_julia(t, rh)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># add tests for julia NA values</span></span></span>
 <span class="r-in"><span><span class="co"># r1 &lt;- heat_index_julia(t*NA, rh*NA)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">r</span>, <span class="va">r_vec</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in mode(current):</span> object 'r_vec' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="co"># all.equal(r_jl, r_vec)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">microbenchmark</span><span class="fu">::</span><span class="fu">microbenchmark</span><span class="op">(</span></span></span>
