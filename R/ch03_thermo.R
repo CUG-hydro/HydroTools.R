@@ -46,12 +46,12 @@ Pwet_adiabat <- function(T0, P0, w0, T) {
 
 #' @export
 theta <- function(T0, P0) {
-  dry_adiabat(T0, P0, 100) # kPa
+  Tdry_adiabat(T0, P0, 100) # kPa
 }
 
 #' @export
 theta_wet <- function(T0, P0, Td) {
-  theta_d = dry_adiabat(T0, P0, 100) # hPa
+  theta_d = Tdry_adiabat(T0, P0, 100) # hPa
   
   T_lcl = LCL(T0, P0, Td)["T_lcl"]
   Lv = cal_lambda(T0) #* 1e6

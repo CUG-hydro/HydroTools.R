@@ -1,10 +1,10 @@
-set_lims <- function(date_begin = 2012, date_end = date_begin) {
-  if (is.numeric(date_begin)) date_begin %<>% make_datetime(., 1, 1)
-  if (is.numeric(date_end)) date_end %<>% make_datetime(., 12, 31, 23)
-
-  lims <- c(date_begin, date_end)
-  list(scale_x_datetime(limits = lims))
-}
+# set_lims <- function(date_begin = 2012, date_end = date_begin) {
+#   if (is.numeric(date_begin)) date_begin %<>% make_datetime(., 1, 1)
+#   if (is.numeric(date_end)) date_end %<>% make_datetime(., 12, 31, 23)
+# 
+#   lims <- c(date_begin, date_end)
+#   list(scale_x_datetime(limits = lims))
+# }
 
 # year vertical grids
 #' grid_date

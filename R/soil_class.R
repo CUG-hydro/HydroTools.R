@@ -1,3 +1,11 @@
+#' USDA soil class classification
+#'
+#' @docType data
+#'
+#' @references
+#' 1. https://en.wikipedia.org/wiki/Soil_texture
+"usda_sf"
+
 # ' @importFrom sf st_polygon st_intersects st_sfc st_sf
 #' @importFrom purrr map_int
 usda_list2sf <- function(usda_tt) {
