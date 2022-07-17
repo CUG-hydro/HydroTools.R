@@ -109,63 +109,6 @@ Brooke Anderson <a href="mailto:brooke.anderson@colostate.edu">brooke.anderson@c
 Roger Peng <a href="mailto:rdpeng@gmail.com">rdpeng@gmail.com</a></p>
     </div>
 
-    <div id="ref-examples">
-    <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lyon</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘lyon’ not found</span>
-<span class="r-in"><span><span class="va">lyon</span><span class="op">$</span><span class="va">TemperatureF</span> <span class="op">&lt;-</span> <span class="fu">convert_temperature</span><span class="op">(</span><span class="va">lyon</span><span class="op">$</span><span class="va">TemperatureC</span>,</span></span>
-<span class="r-in"><span>    old_metric <span class="op">=</span> <span class="st">"c"</span>, new_metric <span class="op">=</span> <span class="st">"f"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in func(temperature):</span> object 'lyon' not found</span>
-<span class="r-in"><span><span class="va">lyon</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'lyon' not found</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">norfolk</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘norfolk’ not found</span>
-<span class="r-in"><span><span class="va">norfolk</span><span class="op">$</span><span class="va">TempC</span> <span class="op">&lt;-</span> <span class="fu">convert_temperature</span><span class="op">(</span><span class="va">norfolk</span><span class="op">$</span><span class="va">TemperatureF</span>,</span></span>
-<span class="r-in"><span>    old_metric <span class="op">=</span> <span class="st">"f"</span>, new_metric <span class="op">=</span> <span class="st">"c"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in func(temperature):</span> object 'norfolk' not found</span>
-<span class="r-in"><span><span class="va">norfolk</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'norfolk' not found</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">angeles</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘angeles’ not found</span>
-<span class="r-in"><span><span class="va">angeles</span><span class="op">$</span><span class="va">TemperatureC</span> <span class="op">&lt;-</span> <span class="fu">convert_temperature</span><span class="op">(</span><span class="va">angeles</span><span class="op">$</span><span class="va">TemperatureK</span>,</span></span>
-<span class="r-in"><span>    old_metric <span class="op">=</span> <span class="st">"kelvin"</span>, new_metric <span class="op">=</span> <span class="st">"celsius"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in func(temperature):</span> object 'angeles' not found</span>
-<span class="r-in"><span><span class="va">angeles</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'angeles' not found</span>
-<span class="r-in"><span><span class="co"># Convert from Celsius</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">lyon</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘lyon’ not found</span>
-<span class="r-in"><span><span class="va">lyon</span><span class="op">$</span><span class="va">TemperatureF</span> <span class="op">&lt;-</span> <span class="fu">celsius.to.fahrenheit</span><span class="op">(</span><span class="va">lyon</span><span class="op">$</span><span class="va">TemperatureC</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in celsius.to.fahrenheit(lyon$TemperatureC):</span> object 'lyon' not found</span>
-<span class="r-in"><span><span class="va">lyon</span><span class="op">$</span><span class="va">TemperatureK</span> <span class="op">&lt;-</span> <span class="fu">celsius.to.kelvin</span><span class="op">(</span><span class="va">lyon</span><span class="op">$</span><span class="va">TemperatureC</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in celsius.to.kelvin(lyon$TemperatureC):</span> object 'lyon' not found</span>
-<span class="r-in"><span><span class="va">lyon</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'lyon' not found</span>
-<span class="r-in"><span><span class="co"># Convert from Fahrenheit</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">norfolk</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘norfolk’ not found</span>
-<span class="r-in"><span><span class="va">norfolk</span><span class="op">$</span><span class="va">TempC</span> <span class="op">&lt;-</span> <span class="fu">fahrenheit.to.celsius</span><span class="op">(</span><span class="va">norfolk</span><span class="op">$</span><span class="va">TemperatureF</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in fahrenheit.to.celsius(norfolk$TemperatureF):</span> object 'norfolk' not found</span>
-<span class="r-in"><span><span class="va">norfolk</span><span class="op">$</span><span class="va">TemperatureK</span> <span class="op">&lt;-</span> <span class="fu">fahrenheit.to.kelvin</span><span class="op">(</span><span class="va">norfolk</span><span class="op">$</span><span class="va">TemperatureF</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in fahrenheit.to.kelvin(norfolk$TemperatureF):</span> object 'norfolk' not found</span>
-<span class="r-in"><span><span class="va">norfolk</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'norfolk' not found</span>
-<span class="r-in"><span><span class="co"># Convert from Kelvin</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">angeles</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘angeles’ not found</span>
-<span class="r-in"><span><span class="va">angeles</span><span class="op">$</span><span class="va">TemperatureC</span> <span class="op">&lt;-</span> <span class="fu">kelvin.to.celsius</span><span class="op">(</span><span class="va">angeles</span><span class="op">$</span><span class="va">TemperatureK</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in kelvin.to.celsius(angeles$TemperatureK):</span> object 'angeles' not found</span>
-<span class="r-in"><span><span class="va">angeles</span><span class="op">$</span><span class="va">TemperatureF</span> <span class="op">&lt;-</span> <span class="fu">kelvin.to.fahrenheit</span><span class="op">(</span><span class="va">angeles</span><span class="op">$</span><span class="va">TemperatureK</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in kelvin.to.fahrenheit(angeles$TemperatureK):</span> object 'angeles' not found</span>
-<span class="r-in"><span><span class="va">angeles</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'angeles' not found</span>
-</code></pre></div>
-    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
