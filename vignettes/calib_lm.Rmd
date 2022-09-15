@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 > 谢宇轩&孔冬冬
 
-# 1. Write your simulation function and prepare your inputs
+# 1. 模型函数与输入数据
 
 ```{r}
 library(hydroTools)
@@ -53,7 +53,7 @@ fun_predict(x, par) # test above function
 goal(par, x, yobs)
 ```
 
-# 2. Parameter optimization 
+# 2. 参数优化
 
 ```{r}
 par_u = c(6, 6)   # upper boundary of par
@@ -67,7 +67,7 @@ opt = rtop::sceua(goal, par = par0, lower = par_l, upper = par_u,
 par_opt = opt$par # SCEUA生成的最优参数
 ```
 
-# 3. Visualization
+# 3. 结果展示
 ```{r}
 ysim = fun_predict(x, par_opt)
 dat = data.frame(x, yobs, ysim)
