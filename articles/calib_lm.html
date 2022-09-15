@@ -91,7 +91,7 @@
 <p>谢宇轩&amp;孔冬冬</p>
 </blockquote>
 <div class="section level2">
-<h2 id="write-your-simulation-function-and-prepare-your-inputs">1. Write your simulation function and prepare your inputs<a class="anchor" aria-label="anchor" href="#write-your-simulation-function-and-prepare-your-inputs"></a>
+<h2 id="模型函数与输入数据">1. 模型函数与输入数据<a class="anchor" aria-label="anchor" href="#%E6%A8%A1%E5%9E%8B%E5%87%BD%E6%95%B0%E4%B8%8E%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">hydroTools</span><span class="op">)</span></span>
@@ -129,7 +129,7 @@
 <span><span class="co">#&gt; [1] 55.93361</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="parameter-optimization">2. Parameter optimization<a class="anchor" aria-label="anchor" href="#parameter-optimization"></a>
+<h2 id="参数优化">2. 参数优化<a class="anchor" aria-label="anchor" href="#%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">par_u</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span>   <span class="co"># upper boundary of par</span></span>
@@ -177,7 +177,7 @@
 <span><span class="va">par_opt</span> <span class="op">=</span> <span class="va">opt</span><span class="op">$</span><span class="va">par</span> <span class="co"># SCEUA生成的最优参数</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="visualization">3. Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
+<h2 id="结果展示">3. 结果展示<a class="anchor" aria-label="anchor" href="#%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"></a>
 </h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ysim</span> <span class="op">=</span> <span class="fu">fun_predict</span><span class="op">(</span><span class="va">x</span>, <span class="va">par_opt</span><span class="op">)</span></span>
