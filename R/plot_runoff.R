@@ -44,7 +44,9 @@ grid_date <- function(x, col = "grey60", lty = 3, lwd = 0.4, ...) {
 #' @param ... other parameters passed to [plot()] for precipitation plot
 #' 
 #' @export
-plot_runoff <- function(df_q, df_prcp = NULL, xlim = NULL, ylim2 = c(50, 0), ...) {
+plot_runoff <- function(df_q, df_prcp = NULL, xlim = NULL, ylim2 = c(50, 0), 
+  legend.position = c(1, 1), legend.justification = c(1, 1),
+  ...) {
   if (is.null(xlim)) {
     # 确保prcp和Q的xlim相同
     lim1 = range(df_prcp$date, na.rm = TRUE)
@@ -83,8 +85,20 @@ plot_runoff <- function(df_q, df_prcp = NULL, xlim = NULL, ylim2 = c(50, 0), ...
   legend(corners[1], corners[4], legend = c("Qobs", "Qsim"),
          yjust = 0, col = c("black", "red"), bty = "n",
          lty = 1, ncol = 3)
+
   # TODO: 调整gof的位置
-  legend("topright", str_gof, text.col = "red", bty = "n")
+  norm_trans <- function(xy) {
+    usr = par("usr") # (x1, x2, y1, y2)
+    xrange = diff(usr[1:2])
+    yrange = diff(usr[3:4])
+    c(xy[1] * xrange + usr[1], xy[2] * yrange + usr[3])
+  }
+  legend.position %<>% norm_trans()
+  xjust = legend.justification[1]
+  yjust = legend.justification[2]
+  legend(legend.position[1], legend.position[2], str_gof, 
+    xjust = xjust, yjust = yjust,
+    text.col = "red", bty = "n")
   # ADD grid
   par(xpd = FALSE)
   grid_date(df_q$date)

@@ -1,0 +1,88 @@
+---
+title: "2. XAJ模型--2021山西暴雨洪水模拟"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{calib_XAJ}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+> 极度简单、皆可掌握的XAJ模型。
+> Rcpp版的XAJ模型为钟睿达师弟所写，使用请正确引用。
+
+# 1. 输入
+
+只需要输入以下三个变量：
+
+- `prcp` : 流域平均降水(mm/d)
+
+- `ET0` : 流域平均潜在蒸散发(ET0)
+
+- `Qobs` : 流域出口点流量(m^3/s)
+
+即可实现径流模拟。模拟过程中，`XAJ_calib`以`KGE`为目标函数，采用`sceua`实现自动率参。
+
+# 2. 模型训练
+
+下文模拟的是2021年10月山西暴雨中心的汾河流域，河津站。以2012-2018年作为率定期，将该时段的所有数据拿来训练。可以看到KGE最终可达0.707。
+
+```{r}
+library(hydroTools) # remotes::install_github("rpkgs/hydroTools")
+
+infile = system.file("extdata/XAJ_input_Hejin_2012-2018.rda", package = "hydroTools")
+load(infile)
+
+df = input$data
+res <- XAJ_calib(df$Qobs, df$prcp, df$ET0, date = df$date,
+    input$area, dt = 24, maxn = 1000)
+
+print(str(res), 2)
+```
+
+从图来看，模型整体模拟结果尚可。但部分洪水过程无法捕捉到（如2018年春秋季节），怀疑是流域内水库放水的人为活动影响所致。
+
+```{r fig.height=5, fig.width=7}
+df_q = res$data[, c("date", "Qobs", "Qsim")]
+df_prcp = res$data[, c("date", "prcp")]
+# plot_calib(res$data, main = input$site)
+plot_runoff(df_q, df_prcp, ylim2 = c(60, 0), legend.position = c(1, 0.6))
+```
+
+# 3. 模型验证
+
+将2021年山西暴雨期间的气象数据输入，即可得到2021年山西暴雨洪水的模拟情况。这里暂且假设2021的气象数据`newdata`已知（用之前的数据d`f`代替）。
+
+`newdata`需包含如下变量:
+
+- `prcp` : 流域平均降水(mm / d)
+
+- `ET0` : 流域平均潜在蒸散发(ET0)
+
+- `date` : (optional) 对应的时间信息
+
+将`newdata`带入即可得到验证期的径流模拟情况：
+
+```{r}
+res_valid = XAJ_predict(res$model, newdata = df)
+head(res_valid)
+```
+
+安装方法
+
+```r
+remotes::install_github("rpkgs/hydroTools")
+```
+
+# 使用请正确引用
+1. Dongdong Kong and Ruida Zhong (2021). hydroTools: Tools for hydrological model. R package version 0.1.4.
+
+2. Ruida Zhong, Dongdong Kong, Xiaohong Chen, Zhaoli Wang and Chengguang Lai (2021). VIC5: The Variable Infiltration Capacity (VIC) Hydrological Model. R package version 0.2.4. https://CRAN.R-project.org/package=VIC5
+
+3. Ruida Zhong (2018). XAJ: An R implementation of three-source Xinanjiang model by Renjun Zhao. R package version 0.0.1. https://github.com/Sibada/XAJ
