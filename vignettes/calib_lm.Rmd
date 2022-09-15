@@ -1,0 +1,93 @@
+---
+title: "优化函数SCEUA率定模型参数"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{calib_lm}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+> 下文以最简单的一元线性回归模型为例，展示了如何采用优化的方法率定模型参数。
+> 该方法完全可以移植、应用于复杂模型的参数优化（如马斯京根、蒸发模型、水文模型的参数率定）。读者可自行触类旁通。
+
+> 谢宇轩&孔冬冬
+
+# 1. Write your simulation function and prepare your inputs
+
+```{r}
+library(hydroTools)
+library(ggplot2)
+
+# simulation function
+# ' @author [Yuxuan Xie](xieyx@cug.edu.cn)
+fun_predict <- function(x, par) {
+  x * par[1] + x * par[2]
+}
+
+#' Goal function
+#' 
+#' Find the parameter corresponding to the minimum value of the objective function
+#' 
+#' @note we need the index, the smaller, the better.
+goal <- function(par, x, yobs, ...) {
+  ysim = fun_predict(x, par) # ysim with the par
+  hydroTools::GOF(yobs, ysim)$RMSE # one of -NSE, -KGE, RMSE
+}
+```
+
+```{r}
+set.seed(1) # Ensure the random numbers generated each time are consistent
+n = 50
+x = 1:n
+par = c(0.5, 2) # real parameter
+yobs = par[1]*x + par[2] + rnorm(n, 1) # 实际应用过程中，yobs是已经提供的
+
+fun_predict(x, par) # test above function
+goal(par, x, yobs)
+```
+
+# 2. Parameter optimization 
+
+```{r}
+par_u = c(6, 6)   # upper boundary of par
+par_l = c(-1, -1) # lower boundary of par
+par0 = c(1, 1)    # initial parameter
+
+# 这里以sceua为例展示如何进行参数优化，其他优化函数可以自行触类旁通
+opt = rtop::sceua(goal, par = par0, lower = par_l, upper = par_u, 
+  x = x, yobs = yobs, # other parameters passed to `goal`
+  maxn = 1e3) 
+par_opt = opt$par # SCEUA生成的最优参数
+```
+
+# 3. Visualization
+```{r}
+ysim = fun_predict(x, par_opt)
+dat = data.frame(x, yobs, ysim)
+
+xx = seq(min(x), max(x), 0.1) # xsim
+yy = fun_predict(xx, par = par_opt)
+
+GOF(dat$yobs, dat$ysim)
+
+if (require(gg.layers)) {
+  # remotes::install_github("rpkgs/gg.layers")
+  suppressWarnings({
+    p = ggplot(dat, aes(yobs, ysim)) + 
+      geom_point() + 
+      stat_gof(show.line = TRUE)
+    print(p)
+  })
+  # Ipaper::write_fig(p, "Figure1_calib_lm.pdf", 6, 5)
+} else {
+  plot(x, yobs)
+  lines(xx, yy, col = "red")
+}
+```

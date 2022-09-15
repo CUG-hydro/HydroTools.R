@@ -22,6 +22,7 @@ examples/
 
 R/VIC5
 *.html
-*.Rmd
+# *.Rmd
 
 */Wuhan_Tair
+inst/doc

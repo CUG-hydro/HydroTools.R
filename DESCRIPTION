@@ -16,11 +16,14 @@ Imports:
     methods
 Suggests: 
     testthat (>= 2.1.0),
-    covr, 
-    scales, 
-    sf
+    covr,
+    scales,
+    sf,
+    knitr,
+    rmarkdown
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
+VignetteBuilder: knitr
