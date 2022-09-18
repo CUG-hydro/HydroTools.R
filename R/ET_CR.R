@@ -77,13 +77,13 @@ ET_CR_Ma2021 <- function(Rn, Tair, D, U2, Pa = atm,
     # lambda = cal_lambda(Tair)
     # slope = cal_slope(Tair)
     # # Rn2 = Rn * 86400 / 1e6 # MJ/d/m2 -> W/m2
-    # rou_a <- 3.486 * Pa / cal_TvK(Tair)
+    # rho_a <- 3.486 * Pa / cal_TvK(Tair)
 
-    # H = (T_ws - Tair) * rou_a * Cp * gH * 1e6
+    # H = (T_ws - Tair) * rho_a * Cp * gH * 1e6
     # d_es1 = cal_es(T_ws) - ea
     # d_es2 = slope * (T_ws - Ta) + D
-    # E1 = lambda * epsilon * rou_a * gw * (cal_es(T_ws) - ea) / Pa * 1e6
-    # E2 = lambda * epsilon * rou_a * gw / Pa * 1e6 * 
+    # E1 = lambda * epsilon * rho_a * gw * (cal_es(T_ws) - ea) / Pa * 1e6
+    # E2 = lambda * epsilon * rho_a * gw / Pa * 1e6 * 
     #     (slope * (T_ws - Ta) + D)
     # tmp = data.table(Rn, H = H, E1, E2)
     # print(tmp)

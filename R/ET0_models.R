@@ -67,9 +67,9 @@ ET0_Penman48 <- function(Rn, Tair, Pa = atm, D,
 {
     dat = ET0_eq(Rn, Tair, Pa)
     U2 = cal_U2(wind, z.wind)
-    # rou_a * Cp * dT / rH (MJ m-2 s-1)
-    # rou_a ≈ 1.225 kg/m3
-    # rou_a * Cp / rH = f(U2)
+    # rho_a * Cp * dT / rH (MJ m-2 s-1)
+    # rho_a ≈ 1.225 kg/m3
+    # rho_a * Cp / rH = f(U2)
     # `f(U2) = 2.6 * (1 + 0.54U2)` is equivalent to Shuttleworth1993
     mutate(dat,
         Evp = gamma / (slope + gamma) * 6.43 * (1 + 0.536 * U2) * D / lambda,
@@ -84,14 +84,14 @@ ET0_Monteith65 <- function(Rn, Tair, Pa = atm, D, wind, z.wind = 2, rs = 70, rH 
     if (is.null(rH)) rH = cal_rH(U2, h = 0.12)
     
     coef_W2mm <- 0.086400 / dat$lambda
-    rou_a = 3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5, kg m-3
+    rho_a = 3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5, kg m-3
     # Cp = 1.013 * 1e-3 # MJ kg-1 degC-1
-    # rou_a * Cp * dT * gH (in MJ m-2 s-1)
+    # rho_a * Cp * dT * gH (in MJ m-2 s-1)
     # = kg m-3 * MJ kg-1 degC-1 * degC * m s-1
     # = MJ m-2 s-1
     dat %>% mutate(
         Eeq = slope / (slope + (gamma * (1 + rs / rH))) * Rn * coef_W2mm,
-        Evp = (rou_a * Cp * D / rH) / (slope + (gamma * (1 + rs / rH))) * 86400 / lambda,
+        Evp = (rho_a * Cp * D / rH) / (slope + (gamma * (1 + rs / rH))) * 86400 / lambda,
         ET0 = Eeq + Evp
     )
 }

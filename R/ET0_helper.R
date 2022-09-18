@@ -15,6 +15,8 @@
 #'      1. Tair + q
 #'      2. Tair + ea/Pa
 #'      3. `1.01 * (Tair + 273)` , FAO56 Eq. 3-7
+#' - `cal_rho_a`: air density (kg/m^3)
+#' 
 #' @references
 #' 1. Allen, R. G., & Luis S. Pereira. (1998). Crop
 #'    evapotranspiration-Guidelines for computing crop water requirements-FAO
@@ -149,10 +151,10 @@ cal_rH <- function(U2, h = 0.12) {
 #' @export
 cal_rH2 <- function(U2, Tair, Pa = atm) {
   # `f(U2) = 2.6 * (1 + 0.54U2)` is equivalent to Shuttleworth1993
-  # rou_a * Cp / rH = f(U2)
+  # rho_a * Cp / rH = f(U2)
   f_U2 <- 2.6 * (1 + 0.54 * U2)
-  rou_a <- 3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5, kg m-3
-  rH <- rou_a * Cp / f_U2 * 86400
+  rho_a <- 3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5, kg m-3
+  rH <- rho_a * Cp / f_U2 * 86400
   rH
 }
 
@@ -176,7 +178,7 @@ cal_TvK <- function(Tair, q = NULL, ea = NULL, Pa = atm) {
 
 #' @rdname ET0_helper
 #' @export
-cal_rou_a <- function(Tair, Pa = atm, q = NULL, ea = NULL) {
+cal_rho_a <- function(Tair, Pa = atm, q = NULL, ea = NULL) {
   # Tv = cal_TvK(Tair)
   # R = 0.287 # kJ kg-1 K-1
   # 是否考虑ea，差别在0.2%

@@ -4,7 +4,12 @@
 \alias{cal_Rli}
 \title{Estimate Incoming longwave radiation.}
 \usage{
-cal_Rli(temp, ea = NULL, s = 1, method = "KON")
+cal_Rli(
+  temp,
+  ea = NULL,
+  s = 1,
+  method = c("MAR", "SWI", "IJ", "BRU", "SAT", "KON")
+)
 }
 \arguments{
 \item{temp}{Near surface air temperature \verb{[deg Celsius]}.}
@@ -23,4 +28,14 @@ Incomming longwave radiation \verb{[W /m2]}.
 \description{
 Estimate Incoming longwave radiation. Not included in FAO56
 paper but added for convinience.
+}
+\references{
+\enumerate{
+\item Satterlund, D. R. (1979), An improved equation for estimating long-wave
+radiation from the atmosphere, Water Resour. Res., 15( 6), 1649– 1650,
+doi:10.1029/WR015i006p01649.
+\item Sedlar, J., & Hock, R. (2009). Testing longwave radiation
+parameterizations under clear and overcast skies at Storglaciären, Sweden.
+The Cryosphere, 3(1), 75-84.
+}
 }

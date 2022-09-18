@@ -13,7 +13,7 @@
 \alias{cal_rH}
 \alias{cal_rH2}
 \alias{cal_TvK}
-\alias{cal_rou_a}
+\alias{cal_rho_a}
 \alias{cal_es}
 \title{helper functions for potential evapotranspiration (ET0)}
 \usage{
@@ -39,7 +39,7 @@ cal_rH2(U2, Tair, Pa = atm)
 
 cal_TvK(Tair, q = NULL, ea = NULL, Pa = atm)
 
-cal_rou_a(Tair, Pa = atm, q = NULL, ea = NULL)
+cal_rho_a(Tair, Pa = atm, q = NULL, ea = NULL)
 
 cal_es(Tair)
 }
@@ -98,6 +98,7 @@ temperature \code{Tair}, \verb{[kPa degC-1]}.
 \item Tair + ea/Pa
 \item \code{1.01 * (Tair + 273)} , FAO56 Eq. 3-7
 }
+\item \code{cal_rho_a}: air density (kg/m^3)
 }
 }
 \examples{

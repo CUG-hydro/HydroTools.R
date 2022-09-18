@@ -1,0 +1,107 @@
+---
+title: "3. 辐射与温度变化"
+output: 
+  rmarkdown::html_vignette:
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{radiation_temp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# 地表净辐射与温度变化
+
+## 地表净辐射
+
+### 净短波辐射$Rsn$
+
+$$
+Rsn = Rs (1 - \alpha)
+$$
+
+### 净长波辐射$Rln$
+
+假定长波入射辐射为$Rl$。根据==霍尔基夫定律==，对于某一特定波长的电磁波，物体对其吸收率等于发射率。因此，长波辐射中吸收的部分为$\epsilon Rl$，未被吸收（反射出去）的部分为$(1-\epsilon)Rl$：
+$$
+Rl_{in} =  Rl \\
+Rl_{out} = (1 - \epsilon) Rl \\
+Rln = Rl_{in} + Rl_{out} = \epsilon Rl - \epsilon \sigma T^4
+$$
+因此，可以得到净辐射的公式为：
+$$
+\begin{align*}
+Rn &= Rsn + Rln \\
+	 &= Rs (1 - \alpha) + \epsilon Rl - \epsilon \sigma T^4
+\end{align*}
+$$
+
+## 地表辐射与温度变化
+
+地表净辐射被划分为感热（sensible heat, 简称$H$）与潜热（latent heat, 简称$\lambda E$）。
+$$
+Rn - G = H + \lambda E
+$$
+**Table 1.** 感热与潜热的定义
+
+|          | 感热$H$                              | 潜热$\lambda E$                          |
+| -------- | ------------------------------------ | ---------------------------------------- |
+| 定义     | 单位质量的物质，温度升高1°所需的能量 | 单位质量的水，从液态转化为其他所需的能力 |
+| 公式     | $m_{air} C_p dT$                     | $\lambda m_v $                           |
+| 单位体积 | $\rho_{air} C_p dT$                  | $\lambda \rho_v$                         |
+
+# 实战应用
+
+## 数据
+
+> 当雄通量站，位于西藏自治区当雄高寒草甸，地处91°05’ E、 30°25’ N，海拔为4333 m。气候属于高原性季风气候,具有太阳辐射强、气温低、日较差大，年较差小的特点。 据当雄县气象站40a气象数据：年均气温 1.7℃，年降雨量459.6 mm,日照时数2838 h，年太阳辐射总量 187.9 kcal/cm2 ,年均≥0℃积温1800℃,无霜期仅62 d,从头年 11月至翌年3月有3个月的土地冻结期 。(张冰松, 2009山地学报)
+
+<https://fluxnet.org/doi/FLUXNET2015/CN-Dan>
+
+
+## 案例1：日温度变化
+
+解析地表温度随时间变化。
+
+> 为简化问题，假设研究区域处于沙漠地区，没有蒸发$E$；同时由于$G$量级较小，也不考虑$G$。
+
+此时地表净辐射公式，可以简化为：
+
+$$
+\begin{align*}
+Rn - G &= H + \lambda E \\
+Rn &= H \\
+[Rs (1 - \alpha) + \epsilon Rl - \epsilon \sigma T^4 ] ~ dt & = \rho_{air} C_p dT \\
+\frac{dT}{dt} = \frac{[Rs (1 - \alpha) + \epsilon Rl - \epsilon \sigma T^4 ]}{\rho_{air} C_p}
+\end{align*}
+$$
+
+$$
+y'=a + by^4 \\
+y = at + 4/5by^5
+$$
+
+设$Rs = 200 ~ W/ m^2$，$Rl = 250 ~ W/ m^2$，$\alpha=0.3$, $\epsilon = 0.95$
+
+Rs随时间的变化，Rl随时间的变化
+
+**联想与简化：**
+
+$$
+[a - bx] dt = c dx \\
+\int [a - bx^4] dt = \int c dx
+(a - bx^4) t = cx \\
+x = \frac{at}{bt + c}
+$$
+为方便求解，将上述公式写成离散形式（==前叉、后叉==）：
+$$
+[Rs (1 - \alpha) + \epsilon Rl - \epsilon \sigma T_t^4 ] ~ \Delta t = \rho_{air} C_p (T_{t+1}-T_t) \\
+T_{t+1} = T_t + \frac{[Rs (1 - \alpha) + \epsilon (Rl - \sigma T_t^4) ] ~ \Delta t}{\rho_{air} C_p}
+$$
+其中$t$为时间、$T$为温度。

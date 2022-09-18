@@ -46,8 +46,8 @@ cal_Ts <- function(Rn, Tair, D, U2, Pa = atm, rH = NULL, rs = 0,
 
     # gamma_star = gamma * (ra + rs) / rH
     gamma_star <- gamma * (1 + rs / rH) # ra ≈ 0.93 rH
-    rou_a <- 3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5, kg m-3
-    # rou_a * Cp * delta_T * gH (in MJ m-2 s-1)
+    rho_a <- 3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5, kg m-3
+    # rho_a * Cp * delta_T * gH (in MJ m-2 s-1)
     # = kg m-3 * MJ kg-1 degC-1 * degC * m s-1
     # = MJ m-2 s-1
 
@@ -58,7 +58,7 @@ cal_Ts <- function(Rn, Tair, D, U2, Pa = atm, rH = NULL, rs = 0,
         ## solution1:
         Rln <- 0
         Tw <- gamma_star / (slope + gamma_star) * (
-            (Rn - Rln) / (rou_a * Cp / rH * 1e6) - D / gamma_star) + Tair
+            (Rn - Rln) / (rho_a * Cp / rH * 1e6) - D / gamma_star) + Tair
     } else if (method == "full") {
         ## solution2: considering Rln emitted by the Tw
         goal <- function(Tw) {
@@ -73,7 +73,7 @@ cal_Ts <- function(Rn, Tair, D, U2, Pa = atm, rH = NULL, rs = 0,
             # delta_Rn = Rln
             ## TODO: bug here, not finished, should use `cal_Rln_yang2019` instead
             Tw_new <- gamma_star / (slope + gamma_star) * (
-                (Rn - Rln) / (rou_a * Cp / rH * 1e6) - D / gamma_star) + Tair
+                (Rn - Rln) / (rho_a * Cp / rH * 1e6) - D / gamma_star) + Tair
             Tw_new - Tw # abs error as the goal function
         }
         Tw <- uniroot(goal, c(-50, 50) + Tair)$root # 不考虑凝结, 则Tw < Tair
@@ -136,9 +136,9 @@ cal_Tw_default <- function(ea, Tair, Pa = atm) {
     # lambda = cal_lambda(Tair)
 
     goal <- function(Tw) {
-        # rou_a = 1 # ignored
-        # f1 = - Cp * rou_a * (Tw - Ta)
-        # f2 = lambda * (q_w - q_a) * rou_a
+        # rho_a = 1 # ignored
+        # f1 = - Cp * rho_a * (Tw - Ta)
+        # f2 = lambda * (q_w - q_a) * rho_a
         f1 <- cal_es(Tw) - ea
         f2 <- -gamma * (Tw - Tair)
         f1 - f2

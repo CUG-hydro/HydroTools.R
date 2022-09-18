@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^data-raw$
+^doc$
 ^OUTPUT$
 ^scripts$
 ^tests$

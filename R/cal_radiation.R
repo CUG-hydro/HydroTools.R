@@ -182,30 +182,43 @@ cal_Rln_yang2019 <- function(Ts, Rsi, Rsi_toa, lat = 30, emiss = 0.96,
 #' 'MAR', 'SWI', 'IJ', 'BRU', 'T', and 'KON'.
 #' 
 #' @return Incomming longwave radiation `[W /m2]`.
+#' 
+#' @references 
+#' 1. Satterlund, D. R. (1979), An improved equation for estimating long-wave
+#'    radiation from the atmosphere, Water Resour. Res., 15( 6), 1649– 1650,
+#'    doi:10.1029/WR015i006p01649.
+#' 2. Sedlar, J., & Hock, R. (2009). Testing longwave radiation
+#'    parameterizations under clear and overcast skies at Storglaciären, Sweden.
+#'    The Cryosphere, 3(1), 75-84. 
 #' @export
-cal_Rli <- function(temp, ea = NULL, s = 1, method = 'KON') {
-  if(!(method %in% c('MAR', 'SWI', 'IJ', 'BRU', 'SAT', 'KON')))
-    stop("method must be one of 'MAR', 'SWI', 'IJ', 'BRU', 'SAT', and 'KON'.")
-  ea <- ea * 10
+cal_Rli <- function(temp, ea = NULL, s = 1, 
+  method = c('MAR', 'SWI', 'IJ', 'BRU', 'SAT', 'KON')) {
+  
+  method = match.arg(method)
+  ea <- ea * 10 # to hPa
   temp <- temp + 273.15
   if(method == 'MAR'){
-    ep_ac <- 0.5893 + 5.351e-2 * sqrt(ea*10)
-  }
-  if(method == 'SWI'){
+    ep_ac <- 0.5893 + 5.351e-2 * sqrt(ea/10)
+  } else if (method == 'SWI'){
     ep_ac <- 9.294e-6 * temp*temp
-  }
-  if(method == 'IJ'){
-    ep_ac <- 1 - 0.26 * exp(-7.77e-4 * (273 - temp)**2)
-  }
-  if(method == 'BRU'){
+  } else if (method == 'IJ'){ # Idso-Jackson, 1969
+    # Satterlund, 1979, WRR, Eq. 3, note ea in hBar
+    # a = 0.261; b = -7.77e-4
+    ep_ac <- 1 - 0.261 * exp(-7.77e-4 * (273 - temp)**2)
+  } else if (method == 'BRU'){
+    # Satterlund, 1979, WRR, Eq. 4
+    # a = 1.24; b = 7
     ep_ac <- 1.24 * (ea/temp)**(1/7)
+  } else if (method == 'SAT'){
+    # Satterlund, 1979, WRR, Eq. 5
+    # a = 1.08
+    ep_ac <- 1.08 * (1 - exp(-ea^(temp/2016))) # `ea/10` in hPa, mbar
+    # ep_ac <- 1.08 * exp(-ea ** (temp/2016))
+  } else if (method == 'KON'){
+    a = 0.4393; b = 7
+    ep_ac <- 0.23 + a * (ea/10 /temp)**(1/b)
   }
-  if(method == 'SAT'){
-    ep_ac <- 1.08 * exp(-ea ** (temp/2016))
-  }
-  if(method == 'KON'){
-    ep_ac <- 0.23 + 0.848 * (ea/temp)**(1/7)
-  }
-  ep_a <- 1 - s + s*ep_ac
+  # 1 - s * (1 - ep_ac)
+  ep_a <- 1 - s + s*ep_ac # 
   ep_a * 5.67e-8 * temp**4
 }
