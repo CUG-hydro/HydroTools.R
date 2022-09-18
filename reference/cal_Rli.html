@@ -38,6 +38,9 @@ paper but added for convinience."><!-- mathjax --><script src="https://cdnjs.clo
     <li>
       <a href="../articles/calim_XAJ.html">2. XAJ模型--2021山西暴雨洪水模拟</a>
     </li>
+    <li>
+      <a href="../articles/radiation_temp.html">3. 辐射与温度变化</a>
+    </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -62,7 +65,12 @@ paper but added for convinience.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cal_Rli</span><span class="op">(</span><span class="va">temp</span>, ea <span class="op">=</span> <span class="cn">NULL</span>, s <span class="op">=</span> <span class="fl">1</span>, method <span class="op">=</span> <span class="st">"KON"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cal_Rli</span><span class="op">(</span></span>
+<span>  <span class="va">temp</span>,</span>
+<span>  ea <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  s <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAR"</span>, <span class="st">"SWI"</span>, <span class="st">"IJ"</span>, <span class="st">"BRU"</span>, <span class="st">"SAT"</span>, <span class="st">"KON"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -91,6 +99,16 @@ radiation and clear sky incoming shortwave radiation.</p></dd>
 
 <p>Incomming longwave radiation <code>[W /m2]</code>.</p>
     </div>
+    <div id="references">
+    <h2>References</h2>
+    
+<ol><li><p>Satterlund, D. R. (1979), An improved equation for estimating long-wave
+radiation from the atmosphere, Water Resour. Res., 15( 6), 1649– 1650,
+doi:10.1029/WR015i006p01649.</p></li>
+<li><p>Sedlar, J., &amp; Hock, R. (2009). Testing longwave radiation
+parameterizations under clear and overcast skies at Storglaciären, Sweden.
+The Cryosphere, 3(1), 75-84.</p></li>
+</ol></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

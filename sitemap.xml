@@ -19,6 +19,9 @@
     <loc>/articles/index.html</loc>
   </url>
   <url>
+    <loc>/articles/radiation_temp.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -64,6 +67,9 @@
     <loc>/reference/XAJ_predict.html</loc>
   </url>
   <url>
+    <loc>/reference/black_radiation.html</loc>
+  </url>
+  <url>
     <loc>/reference/budyko.html</loc>
   </url>
   <url>
@@ -86,6 +92,9 @@
   </url>
   <url>
     <loc>/reference/cal_Tw.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cal_radiation_Ta.html</loc>
   </url>
   <url>
     <loc>/reference/cal_ssd.html</loc>

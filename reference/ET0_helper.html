@@ -16,6 +16,7 @@ Tair + q
 Tair + ea/Pa
 1.01 * (Tair + 273) , FAO56 Eq. 3-7
 
+cal_rho_a: air density (kg/m^3)
 
 "><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -55,6 +56,9 @@ Tair + ea/Pa
     <li>
       <a href="../articles/calim_XAJ.html">2. XAJ模型--2021山西暴雨洪水模拟</a>
     </li>
+    <li>
+      <a href="../articles/radiation_temp.html">3. 辐射与温度变化</a>
+    </li>
   </ul></li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -88,6 +92,7 @@ temperature <code>Tair</code>, <code>[kPa degC-1]</code>.</p></li>
 <li><p>Tair + ea/Pa</p></li>
 <li><p><code>1.01 * (Tair + 273)</code> , FAO56 Eq. 3-7</p></li>
 </ol></li>
+<li><p><code>cal_rho_a</code>: air density (kg/m^3)</p></li>
 </ul></div>
 
     <div id="ref-usage">
@@ -113,7 +118,7 @@ temperature <code>Tair</code>, <code>[kPa degC-1]</code>.</p></li>
 <span></span>
 <span><span class="fu">cal_TvK</span><span class="op">(</span><span class="va">Tair</span>, q <span class="op">=</span> <span class="cn">NULL</span>, ea <span class="op">=</span> <span class="cn">NULL</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">cal_rou_a</span><span class="op">(</span><span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span>, q <span class="op">=</span> <span class="cn">NULL</span>, ea <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">cal_rho_a</span><span class="op">(</span><span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span>, q <span class="op">=</span> <span class="cn">NULL</span>, ea <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">cal_es</span><span class="op">(</span><span class="va">Tair</span><span class="op">)</span></span></code></pre></div>
     </div>
