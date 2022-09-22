@@ -1,5 +1,5 @@
 ---
-title: "3. 辐射与温度变化"
+title: "辐射与温度变化"
 output: 
   rmarkdown::html_vignette:
     number_sections: true
