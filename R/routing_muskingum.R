@@ -74,4 +74,6 @@ calib_routing_muskingum_nL <- function(I, Q0, yobs, maxn = 1e3) {
   listk(par, gof, predict)
 }
 
-# TODO: test those functions
+# TODO: 
+# - 1. test those functions
+# - 2. 与`randomForest`进行对比，`routing_muskingum`不见得会比`randomForest`强

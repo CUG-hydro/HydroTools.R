@@ -26,58 +26,59 @@
 ;   NCEP Reanalysis data provided by the NOAA/OAR/ESRL PSD, Boulder, Colorado, USA, 
 ;   from their Web site at https://www.esrl.noaa.gov/psd/
 ;===================================================================
+undef("print_var")
+procedure print_var(x, name)
+begin
+  print("[" + name + "]" + "-----")
+  printVarSummary(x)                          ; (time,level,lat,lon); m/s
+  printMinMax(x,0)
+end
+
+undef("make_var")
+function make_var(x, units)
+begin
+  x@units = units
+  return(x)
+end
 
 """
 Arguments:
 - `ptop`:
 - `date`: 
-- `indir`:
 - files:
+- `indir`:
 + `f_q`: 
 + `f_u`: 
 + `f_v`: 
 + `f_ps`: 
 
 # Input Data:
-
 - `shum`: https://psl.noaa.gov/repository/entry/show?entryid=eb41bda7-441e-490f-b7db-b7113741c90e
 
 
 """
-
 date  = 20080715        ; NH summer
-ptop = 300              ; 'shum' upper level                  
-ptop@units = "hPa"
-
-TEST = True ; If false, all time will be calculated
-
-; CONSTANTS
-g    = 9.80665          ; m/s2
+debug = True ; If false, all time will be calculated
+ptop = make_var(300, "hPar") ; 'shum' upper level                  
 
 ;---ESRL: CDC data
-
 indir = "./data/"
-f_q = "shum.2008.nc"   ; daily data for current year [366 days]
-f_u = "uwnd.2008.nc"
-f_v = "vwnd.2008.nc"
-f_ps= "pres.sfc.2008.nc"
-
-pthu = indir+f_u      
-pthv = indir+f_v
-pthq = indir+f_q     
-pthps= indir+f_ps   
+f_q = indir + "shum.2008.nc"   ; daily data for current year [366 days]
+f_u = indir + "uwnd.2008.nc"
+f_v = indir + "vwnd.2008.nc"
+f_ps= indir + "pres.sfc.2008.nc"
 
 ; ## 01. READ DATA -------------------------------------------------------------
-fu   = addfile(pthu ,"r")
-fv   = addfile(pthv ,"r")
-fq   = addfile(pthq ,"r")
-fps  = addfile(pthps,"r")
+fu   = addfile(f_u ,"r")
+fv   = addfile(f_v ,"r")
+fq   = addfile(f_q ,"r")
+fps  = addfile(f_ps,"r")
 
 ;---Time
 ymd  = cd_calendar(fu->time, -2)    ; ymd[*]: human readable
 nt   = ind(ymd .eq. date)             ; date for plotting and testing
 
-if (.not.TEST) then                   ; all times                   
+if (.not.debug) then                   ; all times                   
   u    = fu->uwnd(:,{1000:ptop},:,:)  ; m/s, (time,level,lat,lon)
   v    = fv->vwnd(:,{1000:ptop},:,:)
   q    = fq->shum                     ; [kg/kg], 1000-300 levels only
@@ -93,47 +94,13 @@ end if
 ;---Divergence function [used later] requires S->N grid order
 u    = u(:,:,::-1,:)  
 v    = v(:,:,::-1,:)
-q    = q(:,:,::-1,:)     
-ps   = ps(:, ::-1,:)       
+q    = q(:,:,::-1,:)
+ps   = ps(:, ::-1,:)
 
 ;---Vertical levels
 ptop = ptop*100
 ptop@units = "Pa"
 
-plev = q&level                      ; hPa  
-plev = plev*100                     ; [100000,...,30000] Pa [kg/(m-s2)]
-plev@units = "Pa"
-
-;---Change [kg/kg] to [g/kg]; not necessary: but common units for q
-q    = q*1000
-q@units = "g/kg"
-
-;---Layer thickness: ; Pa=>[kg/(m-s2)], (time,level,lat,lon) 
-;---Mass weighting:  (dp/g) => [Pa/(m/s2)] => (Pa-s2)/m => [kg/(m-s2)][s2/m] =>  (kg/m2)
-;---Reference: http://www.cgd.ucar.edu/cas/catalog/newbudgets/
-dp   = dpres_plevel_Wrap(plev, ps, ptop, 0) ; Pa; layar thickness 
-dpg  = dp/g
-dpg@long_name = "Layer Mass Weighting"
-dpg@units     = "kg/m2"                     ; dp/g, Pa/(m s-2), reduce to kg m-2
-
-;---Moisture flux components at each pressure level
-uq   = u*q                                  ; (:,:,:,:)
-uq@long_name = "Zonal Moisture Flux [uq]"
-uq@units = "["+u@units+"]["+q@units+"]"     ; [m/s][g/kg]     
-copy_VarCoords(u,uq)                        ; (time,level,lat,lon)
-
-vq   = v*q                                  ; (:,:,:,:)
-vq@long_name = "Meridional Moisture Flux [vq]"
-vq@units = "["+v@units+"]["+q@units+"]" 
-copy_VarCoords(v,vq)                        ; (time,level,lat,lon)
-
-undef("print_var")
-procedure print_var(x)
-begin
-  print("-----")
-  printVarSummary(x)                          ; (time,level,lat,lon); m/s
-  printMinMax(x,0)
-end
 
 PRINT_RAW = True
 if (PRINT_RAW) then
@@ -151,43 +118,6 @@ if (PRINT_RAW) then
   print(dp(nt,:,{40},{255}))    ; Boulder, CO 
   print("-----")
 end if
-
-;---Integrated mass weighted moisture flux components
-uq_dpg = uq*dpg                ; mass weighted 'uq'; [m/s][g/kg][kg/m2]=>[m/s][g/kg]
-iuq    = dim_sum_n(uq_dpg, 1)
-iuq@long_name = "Integrated Zonal UQ [uq*dpg]" 
-iuq@LONG_NAME = "Sum: Mass Weighted Integrated Zonal Moisture Flux [uq*dpg]" 
-iuq@units     = "[m/s][g/kg]"
-copy_VarCoords(u(:,0,:,:), iuq); (time,lat,lon)
-delete(uq_dpg)
-
-vq_dpg = vq*dpg                ; mass weighted 'vq'; [m/s][g/kg][kg/m2]=>[m/s][g/kg] 
-ivq    = dim_sum_n(vq_dpg, 1)
-ivq@long_name = "Integrated Meridional VQ [vq*dpg]" 
-ivq@LONG_NAME = "Sum: Mass Weighted Integrated Meridional Moisture Flux [vq*dpg]" 
-ivq@units     = "[m/s][g/kg]"
-copy_VarCoords(v(:,0,:,:), ivq); (time,lat,lon)
-delete(vq_dpg)
-
-;---Divergence of moisture flux: uv2dvF => global 'fixed' rectilinear grid
-
-duvq  = uv2dvF_Wrap(uq, vq)    ; (time,level,lat,lon)
-duvq@long_name = "Divergence of Moisture Flux"
-duvq@units     = "g/(kg-s)"    ; (1/m)*[(m/s)(g/kg)] => [g/(kg-s)]
-
-;---Mass weighted integration [sum] of the divergence of moisture flux
-
-duvq_dpg = duvq*dpg            ;  [g/(kg-s)][kg/m2] => [g/(m2-s)]
-iduvq    = dim_sum_n(duvq_dpg, 1)
-iduvq@long_name = "Integrated Mass Wgt MFC" 
-iduvq@LONG_NAME = "Integrated Mass Weighted Moisture Flux Convergence" 
-iduvq@units     = "g/(m2-s)"
-copy_VarCoords(u(:,0,:,:), iduvq)      ; (time,lat,lon)
-delete(duvq_dpg)
-
-VIMFC =  iduvq           ; keep meta data                         
-VIMFC = -VIMFC           ; Note the preceding -1 [negative precedes integration] 
-VIMFC@long_name = "VIMFC"
 
 ;---Another way to compute Integrated divergence of moisture flux [iduvq_1]
 
@@ -212,41 +142,12 @@ if (PRINT_RESULT) then
   print_var(iduvq); (time,lat,lon)
 end if
 
-;*************************************************
-; Calculate divergence: Use Wrap to include meta data
-; Calculate divergent wind components; used for graphics 
-;*************************************************
-div = uv2dvF_Wrap(u,v)                ; u,v ==> divergence; (:,:,:,:)
-
-ud  = new ( dimsizes(u), typeof(u), "No_FillValue")
-vd  = new ( dimsizes(v), typeof(v), "No_FillValue")
-dv2uvf(div,ud,vd)                     ; divergence ==> divergent components  
-
-copy_VarCoords(u, ud ) 
-copy_VarCoords(u, vd ) 
-ud@long_name  = "Zonal Divergent Wind"
-ud@units      = u@units
-vd@long_name  = "Meridional Divergent Wind"
-vd@units      = v@units
 
 if (PRINT_RESULT) then
   print_var(ud) ; (time,level,lat,lon)
   print_var(vd) ; (time,level,lat,lon)
 end if
-
 ; uq, vq, iuq, ivq, duvq, VIMFC, ud, vd
-; ## save data to nefcdf
-system("rm -rf IVT.nc")
-fout=addfile("IVT.nc","c")
-fout->uq = uq
-fout->vq = vq
-fout->iuq = iuq
-fout->ivq = ivq
-fout->duvq = duvq
-fout->VIMFC = VIMFC
-fout->ud = ud
-fout->vd = vd
-delete(fout)
 
 ;*************************************************
 ; plot results
