@@ -77,7 +77,7 @@
 
       
 
-      </header><script src="radiation_temp_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>辐射与温度变化</h1>
@@ -106,7 +106,8 @@ Rsn = Rs (1 - \alpha)
 <div class="section level4">
 <h4 id="净长波辐射rln">净长波辐射<span class="math inline">\(Rln\)</span><a class="anchor" aria-label="anchor" href="#%E5%87%80%E9%95%BF%E6%B3%A2%E8%BE%90%E5%B0%84rln"></a>
 </h4>
-<p>假定长波入射辐射为<span class="math inline">\(Rl\)</span>。根据==霍尔基夫定律==，对于某一特定波长的电磁波，物体对其吸收率等于发射率。因此，长波辐射中吸收的部分为<span class="math inline">\(\epsilon Rl\)</span>，未被吸收（反射出去）的部分为<span class="math inline">\((1-\epsilon)Rl\)</span>： <span class="math display">\[
+<p>假定长波入射辐射为<span class="math inline">\(Rl\)</span>。根据==霍尔基夫定律==，对于某一特定波长的电磁波，物体对其吸收率等于发射率。因此，长波辐射中吸收的部分为<span class="math inline">\(\epsilon
+Rl\)</span>，未被吸收（反射出去）的部分为<span class="math inline">\((1-\epsilon)Rl\)</span>： <span class="math display">\[
 Rl_{in} =  Rl \\
 Rl_{out} = (1 - \epsilon) Rl \\
 Rln = Rl_{in} + Rl_{out} = \epsilon Rl - \epsilon \sigma T^4
@@ -124,7 +125,12 @@ Rn &amp;= Rsn + Rln \\
 <p>地表净辐射被划分为感热（sensible heat, 简称<span class="math inline">\(H\)</span>）与潜热（latent heat, 简称<span class="math inline">\(\lambda E\)</span>）。 <span class="math display">\[
 Rn - G = H + \lambda E
 \]</span> <strong>Table 1.</strong> 感热与潜热的定义</p>
-<table class="table">
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="9%">
+<col width="42%">
+<col width="47%">
+</colgroup>
 <thead><tr class="header">
 <th></th>
 <th>感热<span class="math inline">\(H\)</span>
@@ -159,7 +165,12 @@ Rn - G = H + \lambda E
 <h3 id="数据">数据<a class="anchor" aria-label="anchor" href="#%E6%95%B0%E6%8D%AE"></a>
 </h3>
 <blockquote>
-<p>当雄通量站，位于西藏自治区当雄高寒草甸，地处91°05’ E、 30°25’ N，海拔为4333 m。气候属于高原性季风气候,具有太阳辐射强、气温低、日较差大，年较差小的特点。 据当雄县气象站40a气象数据：年均气温 1.7℃，年降雨量459.6 mm,日照时数2838 h，年太阳辐射总量 187.9 kcal/cm2 ,年均≥0℃积温1800℃,无霜期仅62 d,从头年 11月至翌年3月有3个月的土地冻结期 。(张冰松, 2009山地学报)</p>
+<p>当雄通量站，位于西藏自治区当雄高寒草甸，地处91°05’ E、 30°25’
+N，海拔为4333
+m。气候属于高原性季风气候,具有太阳辐射强、气温低、日较差大，年较差小的特点。
+据当雄县气象站40a气象数据：年均气温 1.7℃，年降雨量459.6 mm,日照时数2838
+h，年太阳辐射总量 187.9 kcal/cm2 ,年均≥0℃积温1800℃,无霜期仅62 d,从头年
+11月至翌年3月有3个月的土地冻结期 。(张冰松, 2009山地学报)</p>
 </blockquote>
 <p><a href="https://fluxnet.org/doi/FLUXNET2015/CN-Dan" class="external-link uri">https://fluxnet.org/doi/FLUXNET2015/CN-Dan</a></p>
 </div>
@@ -175,8 +186,10 @@ Rn - G = H + \lambda E
 \begin{align*}
 Rn - G &amp;= H + \lambda E \\
 Rn &amp;= H \\
-[Rs (1 - \alpha) + \epsilon Rl - \epsilon \sigma T^4 ] ~ dt &amp; = \rho_{air} C_p dT \\
-\frac{dT}{dt} = \frac{[Rs (1 - \alpha) + \epsilon Rl - \epsilon \sigma T^4 ]}{\rho_{air} C_p}
+[Rs (1 - \alpha) + \epsilon Rl - \epsilon \sigma T^4 ] ~ dt &amp; =
+\rho_{air} C_p dT \\
+\frac{dT}{dt} = \frac{[Rs (1 - \alpha) + \epsilon Rl - \epsilon \sigma
+T^4 ]}{\rho_{air} C_p}
 \end{align*}
 \]</span></p>
 <p><span class="math display">\[
@@ -192,8 +205,10 @@ y = at + 4/5by^5
 (a - bx^4) t = cx \\
 x = \frac{at}{bt + c}
 \]</span> 为方便求解，将上述公式写成离散形式（==前叉、后叉==）： <span class="math display">\[
-[Rs (1 - \alpha) + \epsilon Rl - \epsilon \sigma T_t^4 ] ~ \Delta t = \rho_{air} C_p (T_{t+1}-T_t) \\
-T_{t+1} = T_t + \frac{[Rs (1 - \alpha) + \epsilon (Rl - \sigma T_t^4) ] ~ \Delta t}{\rho_{air} C_p}
+[Rs (1 - \alpha) + \epsilon Rl - \epsilon \sigma T_t^4 ] ~ \Delta t =
+\rho_{air} C_p (T_{t+1}-T_t) \\
+T_{t+1} = T_t + \frac{[Rs (1 - \alpha) + \epsilon (Rl - \sigma T_t^4) ]
+~ \Delta t}{\rho_{air} C_p}
 \]</span> 其中<span class="math inline">\(t\)</span>为时间、<span class="math inline">\(T\)</span>为温度。</p>
 </div>
 </div>
