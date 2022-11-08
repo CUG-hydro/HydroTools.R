@@ -8,8 +8,10 @@
 \alias{w2ea}
 \alias{ea2VPD}
 \alias{q2RH}
-\alias{q_from_RH}
 \alias{RH2q}
+\alias{q_from_RH}
+\alias{cal_qs}
+\alias{ea2q}
 \alias{Tdew2q}
 \alias{Tdew2w}
 \alias{Tdew2RH}
@@ -19,31 +21,37 @@
 \usage{
 w2q(w)
 
-q2w(q, Pa)
+q2w(q, Pa = atm)
 
-q2ea(q, Pa)
+q2ea(q, Pa = atm)
 
-w2ea(w, Pa)
+w2ea(w, Pa = atm)
 
 ea2VPD(ea, RH)
 
-vapour_press(q, Pa)
+vapour_press(q, Pa = atm)
 
-q2RH(q, Tair, Pa)
+q2RH(q, Tair, Pa = atm)
 
-q_from_RH(RH, Tair, Pa)
+RH2q(RH, Tair, Pa = atm)
 
-RH2q(RH, Tair, Pa)
+q_from_RH(RH, Tair, Pa = atm)
 
-Tdew2q(Tdew, Pa)
+cal_qs(Tair, Pa = atm)
 
-Tdew2w(Tdew, Pa)
+ea2q(ea, Tair, Pa = atm)
+
+RH2q(RH, Tair, Pa = atm)
+
+Tdew2q(Tdew, Pa = atm)
+
+Tdew2w(Tdew, Pa = atm)
 
 Tdew2RH(Tdew, Tair)
 
-Tdew_from_q(q, Pa)
+Tdew_from_q(q, Pa = atm)
 
-Tdew_from_w(w, Pa)
+Tdew_from_w(w, Pa = atm)
 }
 \arguments{
 \item{w}{mix ratio, m_w / m_d}

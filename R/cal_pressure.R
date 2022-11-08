@@ -29,18 +29,18 @@ w2q <- function(w) w / (w + 1)
 
 #' @rdname vapour_press
 #' @export
-q2w <- function(q, Pa) q / (1 - q)
+q2w <- function(q, Pa = atm) q / (1 - q)
 
 
 #' @rdname vapour_press
 #' @export
-q2ea <- function(q, Pa) {
+q2ea <- function(q, Pa = atm) {
   q * Pa / (epsilon + (1 - epsilon) * q)
 }
 
 #' @rdname vapour_press
 #' @export
-w2ea <- function(w, Pa) {
+w2ea <- function(w, Pa = atm) {
   q = w2q(w)
   q2ea(q, Pa)
 }
@@ -79,7 +79,7 @@ vapour_press <- q2ea
 #' @param Tair air temperature, in degC
 #' @rdname vapour_press
 #' @export
-q2RH <- function(q, Tair, Pa) {
+q2RH <- function(q, Tair, Pa = atm) {
   ea <- vapour_press(q, Pa)
   es <- cal_es(Tair)
   ea / es * 100
@@ -91,14 +91,33 @@ q2RH <- function(q, Tair, Pa) {
 #' 
 #' @rdname vapour_press
 #' @export
-q_from_RH <- function(RH, Tair, Pa) {
+RH2q <- function(RH, Tair, Pa = atm) {
   # ea <- vapour_press(q, Pa)
   es <- cal_es(Tair)
   ea <- es * RH/100
 
   # ws = epsilon * es / (Pa - es)
-  w <- epsilon * ea / (Pa - ea)
+  w <- epsilon * ea / (Pa - ea) # eq. 1.55
   # w = RH/100 * ws 
+  w2q(w) # q: g / g
+}
+
+#' @rdname vapour_press
+#' @export
+q_from_RH = RH2q
+
+#' @rdname vapour_press
+#' @export
+cal_qs <- function(Tair, Pa = atm) {
+  es <- cal_es(Tair)
+  ea2q(es, Tair, Pa) # q
+}
+
+#' @rdname vapour_press
+#' @export
+ea2q <- function(ea, Tair, Pa = atm) {
+  es <- cal_es(Tair)
+  w <- epsilon * ea / (Pa - ea)
   w2q(w) # q: g / g
 }
 
@@ -110,7 +129,7 @@ q_from_RH <- function(RH, Tair, Pa) {
 #' 
 #' @rdname vapour_press
 #' @export
-Tdew2q <- function(Tdew, Pa) {
+Tdew2q <- function(Tdew, Pa = atm) {
   ea <- cal_es(Tdew)
   # es <- cal_es(Tair)
   epsilon * ea / (Pa - (1 - epsilon) * ea)
@@ -118,7 +137,7 @@ Tdew2q <- function(Tdew, Pa) {
 
 #' @rdname vapour_press
 #' @export
-Tdew2w <- function(Tdew, Pa) {
+Tdew2w <- function(Tdew, Pa = atm) {
   ea <- cal_es(Tdew)
   # es <- cal_es(Tair)
   epsilon * ea / (Pa - ea)
@@ -136,17 +155,15 @@ Tdew2RH <- function(Tdew, Tair) {
 
 #' @rdname vapour_press
 #' @export
-Tdew_from_q <- function(q, Pa) {
+Tdew_from_q <- function(q, Pa = atm) {
   ea = q2ea(q, Pa)
   solve_goal(cal_es, ea, c(-100, 100))
 }
 
 #' @rdname vapour_press
 #' @export
-Tdew_from_w <- function(w, Pa) {
+Tdew_from_w <- function(w, Pa = atm) {
   ea = w2ea(w, Pa)
   # solve: cal_es(Tair) ≈ ea
   solve_goal(cal_es, ea, c(-100, 100))
 }
-
-# Tdew, w -> Pa

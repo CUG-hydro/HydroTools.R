@@ -1,0 +1,142 @@
+---
+title: "vapour_press"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vapour_press}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(hydroTools)
+```
+
+为解决的问题：
+
+为何冬天比夏天干？夏天的水汽含量是冬天的多少倍？
+
+冬天，华南地区（如广州）比武汉地区水汽含量多多少倍？
+
+
+# 1. 水汽压$e$
+
+干空气与水汽的相对分子质量，分别用符号$R_d$和$R_v$来表示（下标$_d$表示dry，$_v$表示water）。
+
+根据高中化学可知，$M_d = 28.97 g/mol, M_v = 18 g/mol$。带入上述公式，可得
+
+- 对于干空气，$R_d = R^* / M_d = 8.314 / 28.97 = 0.287\;(J ·g^{-1}K^{-1})$
+  
+- 对于水汽，$R_v = R^* / M_v = 8.314 / 18 = 0.4615 \;(J ·g^{-1}K^{-1})$
+  
+  $$
+  \epsilon = \frac{R_d}{R_v} = \frac{M_v}{M_d} ≈ 0.622 \\
+  \frac{R_v}{R_d} = \frac{1}{\epsilon} ≈ 1.608
+  $$
+
+$$
+R_v = \frac{1}{\epsilon} R_d
+$$
+
+---
+
+$$
+\rho_v = \frac{e}{R_v T} = \frac{\epsilon e}{R_d T} \\
+$$
+
+$$
+\rho_d = \frac{p - e}{R_d T} \\
+$$
+
+$$
+\begin{align}
+\rho &= \rho_d + \rho_v \\
+     &= \frac{p - e}{R_d T} + \frac{e}{R_v T} \\
+     &= \frac{p - e}{R_d T} + \frac{\epsilon e}{R_d T} \\
+     &= \frac{p - (1 - \epsilon)e }{R_d T} \\
+     &= \frac{p}{R_d T} (1 - 0.378 \frac{ e }{p})
+\end{align}
+$$
+
+---
+
+# 2. 水汽压$e$，与比湿$q$
+
+## 2.1. 已知$e$，求$q$
+
+$$
+\begin{align}
+q &= \frac{\rho_v}{\rho_d + \rho_v} \\
+  &= \frac{\epsilon e}{p - e + \epsilon e} \\
+  &= \frac{\epsilon e}{p - (1 - \epsilon)e}
+\end{align}
+$$
+
+## 2.2. 已知$q$，求$e$
+
+$$
+qp = (1 - \epsilon ) e q + \epsilon e \\
+e = \frac{qp}{ \epsilon + (1 - \epsilon) q }
+$$
+
+> 转化的意义：
+- 已知饱和水汽压，求饱和比湿q
+- 已知相对湿度，求比湿（回答为何冬天干）
+
+---
+
+# 3. 水汽压$e$，与混合比$w$
+
+## 3.1. 已知$e$，求$w$
+
+$$
+\begin{align}
+w &= \frac{\rho_v}{\rho_d } \\
+  &= \frac{\epsilon e}{p - e} \\
+\end{align}
+$$
+
+## 3.2. 已知$w$，求$e$
+
+$$
+wp = we + \epsilon e \\
+e = \frac{w p}{w + \epsilon}
+$$
+
+---
+
+# 4. 水汽压$e$，与水汽密度$\rho_v$的转换
+
+## 4.1. 简化版
+
+$$
+\begin{align}
+\frac{e}{P} &= \frac{\rho_v}{\rho} \frac{R_v}{R}, (R_d ≈ R) \\
+ &≈ \frac{\rho_v}{\epsilon \rho}
+\end{align}
+$$
+
+$$
+\rho_v = \epsilon \rho \frac{e}{P}
+$$
+
+## 4.2. 完整版
+
+$$
+\frac{e}{P - e} = \frac{\rho_v}{\rho_d} \frac{R_v}{R_d} \\
+\frac{e}{P - e} = \frac{\rho_v}{\epsilon \rho_d}
+$$
+
+$$
+\frac{e}{P} = \frac{\rho_v}{\epsilon \rho_d + \rho_v} \\
+$$
+
+$$
+\rho_v = \epsilon \rho_d \frac{e}{P - e}
+$$
