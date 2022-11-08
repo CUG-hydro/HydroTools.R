@@ -95,6 +95,9 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">hydroTools</span><span class="op">)</span></span></code></pre></div>
+<p>为解决的问题：</p>
+<p>为何冬天比夏天干？夏天的水汽含量是冬天的多少倍？</p>
+<p>冬天，华南地区（如广州）比武汉地区水汽含量多多少倍？</p>
 <div class="section level2">
 <h2 id="水汽压e">1. 水汽压<span class="math inline">\(e\)</span><a class="anchor" aria-label="anchor" href="#%E6%B0%B4%E6%B1%BD%E5%8E%8Be"></a>
 </h2>
@@ -156,7 +159,8 @@ qp = (1 - \epsilon ) e q + \epsilon e \\
 e = \frac{qp}{ \epsilon + (1 - \epsilon) q }
 \]</span></p>
 <blockquote>
-<p>转化的意义： 已知饱和水汽压，求饱和比湿q</p>
+<p>转化的意义： - 已知饱和水汽压，求饱和比湿q -
+已知相对湿度，求比湿（回答为何冬天干）</p>
 </blockquote>
 <hr>
 </div>

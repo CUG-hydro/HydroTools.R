@@ -71,35 +71,37 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">w2q</span><span class="op">(</span><span class="va">w</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">q2w</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">q2w</span><span class="op">(</span><span class="va">q</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">q2ea</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">q2ea</span><span class="op">(</span><span class="va">q</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">w2ea</span><span class="op">(</span><span class="va">w</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">w2ea</span><span class="op">(</span><span class="va">w</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ea2VPD</span><span class="op">(</span><span class="va">ea</span>, <span class="va">RH</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">vapour_press</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">vapour_press</span><span class="op">(</span><span class="va">q</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">q2RH</span><span class="op">(</span><span class="va">q</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">q2RH</span><span class="op">(</span><span class="va">q</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">RH2q</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">RH2q</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">q_from_RH</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">q_from_RH</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ea2q</span><span class="op">(</span><span class="va">ea</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">cal_qs</span><span class="op">(</span><span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">RH2q</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Tair</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">ea2q</span><span class="op">(</span><span class="va">ea</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">Tdew2q</span><span class="op">(</span><span class="va">Tdew</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">RH2q</span><span class="op">(</span><span class="va">RH</span>, <span class="va">Tair</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">Tdew2w</span><span class="op">(</span><span class="va">Tdew</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">Tdew2q</span><span class="op">(</span><span class="va">Tdew</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">Tdew2w</span><span class="op">(</span><span class="va">Tdew</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">Tdew2RH</span><span class="op">(</span><span class="va">Tdew</span>, <span class="va">Tair</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">Tdew_from_q</span><span class="op">(</span><span class="va">q</span>, <span class="va">Pa</span><span class="op">)</span></span>
+<span><span class="fu">Tdew_from_q</span><span class="op">(</span><span class="va">q</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">Tdew_from_w</span><span class="op">(</span><span class="va">w</span>, <span class="va">Pa</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">Tdew_from_w</span><span class="op">(</span><span class="va">w</span>, Pa <span class="op">=</span> <span class="va">atm</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
