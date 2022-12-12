@@ -99,7 +99,10 @@ fprintf <- function(fmt, ...) cat(sprintf(fmt, ...))
 #' The default location is ZuoLing.
 #' 
 #' @export
-suncalc <- function(time, lon = 114.6053, lat = 30.49694, ..., year = year(Sys.time())) {
+suncalc <- function(time, lon = 114.6053, lat = 30.49694, ..., 
+  year = year(Sys.time()), 
+  verbose = TRUE) 
+{
   if (is.integer(time)) {
     J = time
     time_str = sprintf("%d%03d", year, J)
@@ -125,22 +128,24 @@ suncalc <- function(time, lon = 114.6053, lat = 30.49694, ..., year = year(Sys.t
   time_begin <- time_noon - dhours(ssd / 2)
   time_end <- time_noon + dhours(ssd / 2)
 
-  fprintf("%-13s: %-10.2f\n", "赤纬角", angle_sigma)
-  fprintf("%-13s: %-10.2f\n", "太阳高度角", angle_elev)
-  fprintf("%-13s: %-10.2f\n", "太阳方位角", angle_azimuth)
+  if (verbose) {
+    fprintf("%-13s: %-10.2f\n", "赤纬角", angle_sigma)
+    fprintf("%-13s: %-10.2f\n", "太阳高度角", angle_elev)
+    fprintf("%-13s: %-10.2f\n", "太阳方位角", angle_azimuth)
+
+    fprintf("---\n")
+    fprintf("%-19s: %-10s\n", "北京时间", time)
+    fprintf("%-19s: %-10s\n", "当地时间", time_local)
+
+    fprintf("---\n")
+    fprintf("%-14s: %-10s\n", "日出时间(local)", time_begin)
+    fprintf("%-14s: %-10s\n", "日落时间(local)", time_end)
+
+    fprintf("---\n")
+    fprintf("%-14s: %-10s\n", "日出时间(UTC8) ", time_begin - delta_minute)
+    fprintf("%-14s: %-10s\n", "日落时间(UTC8) ", time_end - delta_minute)
+  }
   
-  fprintf("---\n")
-  fprintf("%-19s: %-10s\n", "北京时间", time)
-  fprintf("%-19s: %-10s\n", "当地时间", time_local)
-
-  fprintf("---\n")
-  fprintf("%-14s: %-10s\n", "日出时间(local)", time_begin)
-  fprintf("%-14s: %-10s\n", "日落时间(local)", time_end)
-
-  fprintf("---\n")
-  fprintf("%-14s: %-10s\n", "日出时间(UTC8) ", time_begin - delta_minute)
-  fprintf("%-14s: %-10s\n", "日落时间(UTC8) ", time_end - delta_minute)
-
   data.table(
     angle_elev, angle_azimuth, angle_sigma, delta_minute,
     time_local, time_begin, time_end)

@@ -4,7 +4,14 @@
 \alias{suncalc}
 \title{suncalc}
 \usage{
-suncalc(time, lon = 114.6053, lat = 30.49694, ..., year = year(Sys.time()))
+suncalc(
+  time,
+  lon = 114.6053,
+  lat = 30.49694,
+  ...,
+  year = year(Sys.time()),
+  verbose = TRUE
+)
 }
 \description{
 The default location is ZuoLing.

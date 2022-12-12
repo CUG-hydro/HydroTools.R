@@ -25,7 +25,7 @@ library(glue)
 lon <- 114 + 36 / 60 + 19 / 3600
 lat <- 30 + 29 / 60 + 49 / 3600
 
-str_time <- "2022-12-12 12:20:00"
+str_time <- "2022-12-12 12:35:00"
 time <- as.POSIXct(str_time)
 
 info <- suncalc(time, lon, lat)
@@ -45,7 +45,10 @@ info <- suncalc(time, lon, lat)
 info
 ```
 
-> 注意，太阳的方位角和影子的方位角，相差180°。
+> **注意：**
+> 1. 太阳的方位角和影子的方位角，相差180°。
+> 2. 太阳方位角到正前方：逆时针则减，顺时针则加
+
 
 ## 3. Reference
 
