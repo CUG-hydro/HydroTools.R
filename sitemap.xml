@@ -25,6 +25,9 @@
     <loc>/articles/routing_muskingum.html</loc>
   </url>
   <url>
+    <loc>/articles/sun_angle.html</loc>
+  </url>
+  <url>
     <loc>/articles/vapour_press.html</loc>
   </url>
   <url>
@@ -100,6 +103,9 @@
     <loc>/reference/cal_Tw.html</loc>
   </url>
   <url>
+    <loc>/reference/cal_angle.html</loc>
+  </url>
+  <url>
     <loc>/reference/cal_radiation_Ta.html</loc>
   </url>
   <url>
@@ -113,6 +119,9 @@
   </url>
   <url>
     <loc>/reference/cv_coef.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_localtime.html</loc>
   </url>
   <url>
     <loc>/reference/grid_date.html</loc>
