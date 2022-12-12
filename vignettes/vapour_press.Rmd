@@ -7,23 +7,32 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>", 
+  fig.width = 8, 
+  fig.height = 5, 
+  dev = "svg"
 )
+Sys.setlocale("LC_ALL", "English.utf8")
 ```
 
-```{r setup}
-library(hydroTools)
-```
+# 前言
 
 为解决的问题：
 
 为何冬天比夏天干？夏天的水汽含量是冬天的多少倍？
 
 冬天，华南地区（如广州）比武汉地区水汽含量多多少倍？
-
 
 # 1. 水汽压$e$
 

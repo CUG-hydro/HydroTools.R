@@ -1,0 +1,131 @@
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", 
+  fig.width = 8, 
+  fig.height = 5, 
+  dev = "svg"
+)
+Sys.setlocale("LC_ALL", "English.utf8")
+```
+
+# 前言
+
+为解决的问题：
+
+为何冬天比夏天干？夏天的水汽含量是冬天的多少倍？
+
+冬天，华南地区（如广州）比武汉地区水汽含量多多少倍？
+
+```{r}
+# Sys.setlocale("LC_ALL", "Chinese (Simplified)_China.utf8")
+library(hydroTools)
+library(Ipaper)
+library(missInfo)
+library(data.table)
+library(ggplot2)
+
+Ipaper::set_font()
+theme_set(theme_bw(base_family = "rTimes"))
+
+fs = dir2("data-raw/MeteData/", "*.csv")
+df_raw = map(fs, fread) %>% do.call(rbind, .)
+
+# convert Pa to kPa
+df = df_raw[, .(site, date, prcp = `Prcp_20-20`/10, 
+  Tavg = Tair_avg/10, Tmin = Tair_min/10, Tmax = Tair_max/10, 
+  RH = RH_avg, Pa = Pa_avg / 1e2)] %>% 
+  .[year(date) == 2019, ] %>% 
+  merge(st_met2481[, .(site, name)])
+data = melt(df, c("site", "date", "name"))
+```
+
+## 草图：四站点所有数据
+
+```{r}
+p <- ggplot(data, aes(date, value)) +
+  # geom_point() +
+  geom_line() +
+  facet_grid(variable ~ name, scales = "free") + 
+  theme(strip.text.x = element_text(family = "rTimes"), 
+    title = element_text(family = "rTimes"))
+p
+# write_fig(p, "Rplot.pdf", 10, 5)
+```
+## 武汉 比湿
+
+```{r}
+st_met2481[name == "武汉"]
+SITE = st_met2481[name == "富阳", site]
+d = df[site == SITE, ]
+d
+
+d %<>% mutate(q = RH2q(RH, Tair = Tavg, Pa = Pa))
+
+p <- ggplot(d, aes(date, q)) + 
+  geom_point() + 
+  geom_line()
+write_fig(p, 'Rplot_2.pdf', 10, 5)
+```
+
+
+## 武汉 相对湿度
+```{r}
+d = data[name == "武汉", ]
+
+p <- ggplot(d, aes(date, value)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~variable, scales = "free") + 
+  theme(strip.text.x = element_text(family = "rTimes"), 
+    title = element_text(family = "rTimes"))
+write_fig(p, "Figure1_武汉2019_气象要素逐日变化.pdf", 10, 5)
+# p
+```
+
+```{r}
+# ea q
+cal_qs(30)
+cal_qs(0)
+```
+
+> 细品相对湿度
+```{r}
+d <- data[name %in% c("武汉", "富阳") & variable == "RH", ]
+
+brks = seq(make_date(2019, 1), make_date(2020, 1), by = "3 month")
+p <- ggplot(d, aes(date, value)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~name, scales = "free", ncol = 1) +
+  scale_x_date(breaks = brks) + 
+  labs(y = "RH (%)") + 
+  theme(
+    strip.text.x = element_text(family = "rTimes"),
+    title = element_text(family = "rTimes")
+  )
+# write_fig(p, "Figure2_武汉2019_RH.pdf", 10, 5)
+p
+```
+
+## 相对湿度变化的原因
+
+```{r}
+d <- data[name %in% c("武汉") & variable %in% c("Tavg", "RH", "prcp", "Pa"), ] %>% 
+  .[month(date) %in% c(10, 11, 12)]
+
+dates = d[variable == "prcp" & value > 10, date]
+p <- ggplot(d, aes(date, value)) +
+  geom_point() +
+  geom_line() +
+  geom_vline(xintercept = dates, linewidth = 0.2, color = "red", linetype = 2) + 
+  facet_wrap(~variable, scales = "free", ncol = 2) +
+  scale_x_date(breaks = brks) +
+  # labs(y = "RH (%)") +
+  theme(
+    strip.text.x = element_text(family = "rTimes"),
+    title = element_text(family = "rTimes")
+  )
+# write_fig(p, "Figure2_武汉2019_RH.pdf", 10, 5)
+write_fig(p, 'Figure3_RH变化的原因.pdf', 10, 5)
+```

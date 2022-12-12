@@ -1,31 +1,3 @@
-#' @name cal_ssd
-#' @title sunset hour angle
-#' @description Calculating sunset hour angle (`ws`) according to Allen Eq. 25.
-#' @inheritParams cal_Rsi_toa
-#' @export
-NULL
-
-#' @rdname cal_ssd
-#' @export
-cal_ws <- function(lat, J) {
-  lat %<>% deg2rad()
-  sigma <- 0.409 * sin(pi * J / 182.5 - 1.39) # Allen, Eq. 24
-
-  tmp <- clamp(-tan(lat) * tan(sigma), c(-1, 1))
-  ws <- acos(tmp) # Eq. 25
-  ws
-}
-
-#' @param ws sunset hour angle
-#' 
-#' @rdname cal_ssd
-#' @export
-ws2ssd <- function(ws) ws / pi * 24 # Ge ChaoXiao, Eq. 2-18
-
-#' @rdname cal_ssd
-#' @export
-cal_ssd <- function(lat, J) cal_ws(lat, J) %>% ws2ssd()
-
 #' Daily extraterrestrial radiation (top of atmosphere)
 #' 
 #' @description Estimate daily extraterrestrial radiation `[MJ m-2 day-1]`.

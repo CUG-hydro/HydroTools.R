@@ -1,0 +1,54 @@
+---
+title: "sun_angle"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{sun_angle}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo=TRUE, message=FALSE}
+library(lubridate)
+library(hydroTools)
+library(magrittr)
+library(glue)
+```
+
+**相关理论：**
+
+> 1. 东八区是指东经120度线的时间。
+> 2. 时角，中午为0，下午为正，1小时为15°
+
+## 1. 案例01
+
+```{r}
+lon <- 114 + 36 / 60 + 19 / 3600
+lat <- 30 + 29 / 60 + 49 / 3600
+
+str_time <- "2022-12-12 12:20:00"
+time <- as.POSIXct(str_time)
+
+info <- suncalc(time, lon, lat)
+info
+```
+
+## 2. 案例02
+
+```{r}
+lon <- 114 + 36 / 60 + 19 / 3600
+lat <- 30 + 29 / 60 + 49 / 3600
+
+str_time <- "2022-12-12 14:46:00"
+time <- as.POSIXct(str_time)
+
+info <- suncalc(time, lon, lat)
+info
+```
+
+> 注意，太阳的方位角和影子的方位角，相差180°。
+
+## 3. Reference
+
+1. <http://ecoursesonline.iasri.res.in/mod/page/view.php?id=1625>
+
+2. <https://physics.stackexchange.com/questions/491896/consistency-with-calculating-the-solar-azimuth-angle>
