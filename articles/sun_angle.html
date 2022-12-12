@@ -109,71 +109,75 @@
 </ol>
 </blockquote>
 <div class="section level2">
-<h2 id="已知条件">1. 已知条件<a class="anchor" aria-label="anchor" href="#%E5%B7%B2%E7%9F%A5%E6%9D%A1%E4%BB%B6"></a>
+<h2 id="案例01">1. 案例01<a class="anchor" aria-label="anchor" href="#%E6%A1%88%E4%BE%8B01"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">calsuns</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">time</span>, <span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">J</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/day.html" class="external-link">yday</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span></span>
-<span>  <span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fu">get_sigma</span><span class="op">(</span><span class="va">J</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="co">## 计算时角</span></span>
-<span>  <span class="co"># 我们这里比北京时间晚了21.6min</span></span>
-<span>  <span class="va">time_local</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_localtime.html">get_localtime</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">lon</span><span class="op">)</span></span>
-<span>  <span class="va">time_noon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">time_local</span>, <span class="st">"%Y-%m-%d 12:00:00"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="va">omega_mins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html" class="external-link">difftime</a></span><span class="op">(</span><span class="va">time_local</span>, <span class="va">time_noon</span>, units <span class="op">=</span> <span class="st">"mins"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="va">omega</span> <span class="op">&lt;-</span> <span class="va">omega_mins</span> <span class="op">/</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">15</span></span>
-<span></span>
-<span>  <span class="va">angle_elev</span> <span class="op">=</span> <span class="fu">SunAngle_Elevation</span><span class="op">(</span><span class="va">lat</span>, <span class="va">sigma</span>, <span class="va">omega</span><span class="op">)</span></span>
-<span>  <span class="va">angle_azimuth</span> <span class="op">&lt;-</span> <span class="fu">SunAngle_Azimuth</span><span class="op">(</span><span class="va">lat</span>, <span class="va">sigma</span>, <span class="va">omega</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"</span></span>
-<span><span class="st">    赤纬角\t：{round(sigma, 2)},</span></span>
-<span><span class="st">    太阳高度角 ：{angle_elev}°,</span></span>
-<span><span class="st">    太阳方位角 ：{angle_azimuth}°</span></span>
-<span><span class="st">  "</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="examples01">Examples01<a class="anchor" aria-label="anchor" href="#examples01"></a>
-</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="fl">114</span> <span class="op">+</span> <span class="fl">36</span> <span class="op">/</span> <span class="fl">60</span> <span class="op">+</span> <span class="fl">19</span> <span class="op">/</span> <span class="fl">3600</span></span>
 <span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fl">30</span> <span class="op">+</span> <span class="fl">29</span> <span class="op">/</span> <span class="fl">60</span> <span class="op">+</span> <span class="fl">49</span> <span class="op">/</span> <span class="fl">3600</span></span>
 <span></span>
 <span><span class="va">str_time</span> <span class="op">&lt;-</span> <span class="st">"2022-12-12 12:20:00"</span></span>
 <span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="va">str_time</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">calsuns</span><span class="op">(</span><span class="va">time</span>, <span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##   赤纬角    ：-23.18,</span></span>
-<span><span class="co">##   太阳高度角 ：36.32°,</span></span>
-<span><span class="co">##   太阳方位角 ：180.45°</span></span></code></pre>
+<span><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/suncalc.html">suncalc</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 赤纬角    : -23.18    </span></span>
+<span><span class="co">## 太阳高度角: 36.32     </span></span>
+<span><span class="co">## 太阳方位角: 180.45    </span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## 北京时间       : 2022-12-12 12:20:00</span></span>
+<span><span class="co">## 当地时间       : 2022-12-12 11:58:25</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## 日出时间(local): 2022-12-12 06:58:26</span></span>
+<span><span class="co">## 日落时间(local): 2022-12-12 17:01:33</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## 日出时间(UTC8) : 2022-12-12 07:20:01</span></span>
+<span><span class="co">## 日落时间(UTC8) : 2022-12-12 17:23:08</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">info</span></span></code></pre></div>
+<pre><code><span><span class="co">##    angle_elev angle_azimuth angle_sigma               delta_minute</span></span>
+<span><span class="co">## 1:      36.32        180.45   -23.18372 -1294.8s (~-21.58 minutes)</span></span>
+<span><span class="co">##             time_local          time_begin            time_end</span></span>
+<span><span class="co">## 1: 2022-12-12 11:58:25 2022-12-12 06:58:26 2022-12-12 17:01:33</span></span></code></pre>
 </div>
-<div class="section level3">
-<h3 id="案例02">案例02<a class="anchor" aria-label="anchor" href="#%E6%A1%88%E4%BE%8B02"></a>
-</h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="section level2">
+<h2 id="案例02">2. 案例02<a class="anchor" aria-label="anchor" href="#%E6%A1%88%E4%BE%8B02"></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="fl">114</span> <span class="op">+</span> <span class="fl">36</span> <span class="op">/</span> <span class="fl">60</span> <span class="op">+</span> <span class="fl">19</span> <span class="op">/</span> <span class="fl">3600</span></span>
 <span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fl">30</span> <span class="op">+</span> <span class="fl">29</span> <span class="op">/</span> <span class="fl">60</span> <span class="op">+</span> <span class="fl">49</span> <span class="op">/</span> <span class="fl">3600</span></span>
 <span></span>
 <span><span class="va">str_time</span> <span class="op">&lt;-</span> <span class="st">"2022-12-12 14:46:00"</span></span>
 <span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="va">str_time</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">calsuns</span><span class="op">(</span><span class="va">time</span>, <span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##   赤纬角    ：-23.18,</span></span>
-<span><span class="co">##   太阳高度角 ：26.11°,</span></span>
-<span><span class="co">##   太阳方位角 ：217.1°</span></span></code></pre>
+<span><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/suncalc.html">suncalc</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 赤纬角    : -23.18    </span></span>
+<span><span class="co">## 太阳高度角: 26.11     </span></span>
+<span><span class="co">## 太阳方位角: 217.10    </span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## 北京时间       : 2022-12-12 14:46:00</span></span>
+<span><span class="co">## 当地时间       : 2022-12-12 14:24:25</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## 日出时间(local): 2022-12-12 06:58:26</span></span>
+<span><span class="co">## 日落时间(local): 2022-12-12 17:01:33</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## 日出时间(UTC8) : 2022-12-12 07:20:01</span></span>
+<span><span class="co">## 日落时间(UTC8) : 2022-12-12 17:23:08</span></span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">info</span></span></code></pre></div>
+<pre><code><span><span class="co">##    angle_elev angle_azimuth angle_sigma               delta_minute</span></span>
+<span><span class="co">## 1:      26.11         217.1   -23.18372 -1294.8s (~-21.58 minutes)</span></span>
+<span><span class="co">##             time_local          time_begin            time_end</span></span>
+<span><span class="co">## 1: 2022-12-12 14:24:25 2022-12-12 06:58:26 2022-12-12 17:01:33</span></span></code></pre>
 <blockquote>
 <p>注意，太阳的方位角和影子的方位角，相差180°。</p>
 </blockquote>
 </div>
-<div class="section level3">
-<h3 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a>
-</h3>
+<div class="section level2">
+<h2 id="reference">3. Reference<a class="anchor" aria-label="anchor" href="#reference"></a>
+</h2>
 <ol style="list-style-type: decimal">
 <li><p><a href="http://ecoursesonline.iasri.res.in/mod/page/view.php?id=1625" class="external-link uri">http://ecoursesonline.iasri.res.in/mod/page/view.php?id=1625</a></p></li>
 <li><p><a href="https://physics.stackexchange.com/questions/491896/consistency-with-calculating-the-solar-azimuth-angle" class="external-link uri">https://physics.stackexchange.com/questions/491896/consistency-with-calculating-the-solar-azimuth-angle</a></p></li>
 </ol>
-</div>
 </div>
   </div>
 

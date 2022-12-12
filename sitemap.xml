@@ -124,6 +124,9 @@
     <loc>/reference/get_localtime.html</loc>
   </url>
   <url>
+    <loc>/reference/get_sigma.html</loc>
+  </url>
+  <url>
     <loc>/reference/grid_date.html</loc>
   </url>
   <url>
@@ -155,6 +158,9 @@
   </url>
   <url>
     <loc>/reference/soil_heat_flux.html</loc>
+  </url>
+  <url>
+    <loc>/reference/suncalc.html</loc>
   </url>
   <url>
     <loc>/reference/unit_convert.html</loc>
