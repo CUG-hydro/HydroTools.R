@@ -115,16 +115,16 @@
 <code class="sourceCode R"><span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="fl">114</span> <span class="op">+</span> <span class="fl">36</span> <span class="op">/</span> <span class="fl">60</span> <span class="op">+</span> <span class="fl">19</span> <span class="op">/</span> <span class="fl">3600</span></span>
 <span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fl">30</span> <span class="op">+</span> <span class="fl">29</span> <span class="op">/</span> <span class="fl">60</span> <span class="op">+</span> <span class="fl">49</span> <span class="op">/</span> <span class="fl">3600</span></span>
 <span></span>
-<span><span class="va">str_time</span> <span class="op">&lt;-</span> <span class="st">"2022-12-12 12:20:00"</span></span>
+<span><span class="va">str_time</span> <span class="op">&lt;-</span> <span class="st">"2022-12-12 12:35:00"</span></span>
 <span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span><span class="va">str_time</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/suncalc.html">suncalc</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 赤纬角    : -23.18    </span></span>
-<span><span class="co">## 太阳高度角: 36.32     </span></span>
-<span><span class="co">## 太阳方位角: 180.45    </span></span>
+<span><span class="co">## 太阳高度角: 36.22     </span></span>
+<span><span class="co">## 太阳方位角: 183.82    </span></span>
 <span><span class="co">## ---</span></span>
-<span><span class="co">## 北京时间       : 2022-12-12 12:20:00</span></span>
-<span><span class="co">## 当地时间       : 2022-12-12 11:58:25</span></span>
+<span><span class="co">## 北京时间       : 2022-12-12 12:35:00</span></span>
+<span><span class="co">## 当地时间       : 2022-12-12 12:13:25</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## 日出时间(local): 2022-12-12 06:58:26</span></span>
 <span><span class="co">## 日落时间(local): 2022-12-12 17:01:33</span></span>
@@ -134,9 +134,9 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">info</span></span></code></pre></div>
 <pre><code><span><span class="co">##    angle_elev angle_azimuth angle_sigma               delta_minute</span></span>
-<span><span class="co">## 1:      36.32        180.45   -23.18372 -1294.8s (~-21.58 minutes)</span></span>
+<span><span class="co">## 1:      36.22        183.82   -23.18372 -1294.8s (~-21.58 minutes)</span></span>
 <span><span class="co">##             time_local          time_begin            time_end</span></span>
-<span><span class="co">## 1: 2022-12-12 11:58:25 2022-12-12 06:58:26 2022-12-12 17:01:33</span></span></code></pre>
+<span><span class="co">## 1: 2022-12-12 12:13:25 2022-12-12 06:58:26 2022-12-12 17:01:33</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="案例02">2. 案例02<a class="anchor" aria-label="anchor" href="#%E6%A1%88%E4%BE%8B02"></a>
@@ -199,7 +199,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
