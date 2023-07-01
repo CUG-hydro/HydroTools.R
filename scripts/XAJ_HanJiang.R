@@ -26,7 +26,7 @@ get_input <- function(site) {
       ea = q2ea(q, Pa),
       # D2 = cal_es(Tavg) - ea,
       D = (cal_es(Tmin) + cal_es(Tmax))/2 - ea,
-      Rn = cal_Rn(lat, date, Rsi, Tmin, Tmax, ea = ea)$Rn,
+      Rn = cal_Rn(lat, date, Tmin, Tmax, ea = ea, Rsi = Rsi)$Rn,
       ET0 = ET0_FAO98(Rn, Tavg, Pa, D, U10, z.wind = 10)$ET0
     )
   data = df_river[name == site][year(date) >= 2002, -(1:2)] %>%
