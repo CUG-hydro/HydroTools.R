@@ -117,6 +117,19 @@ Rcpp版的XAJ模型为钟睿达师弟所写，使用请正确引用。</p>
 <p>下文模拟的是2021年10月山西暴雨中心的汾河流域，河津站。以2012-2018年作为率定期，将该时段的所有数据拿来训练。可以看到KGE最终可达0.707。</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">hydroTools</span><span class="op">)</span> <span class="co"># remotes::install_github("rpkgs/hydroTools")</span></span>
+<span><span class="co">#&gt; The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,</span></span>
+<span><span class="co">#&gt; which was just loaded, will retire in October 2023.</span></span>
+<span><span class="co">#&gt; Please refer to R-spatial evolution reports for details, especially</span></span>
+<span><span class="co">#&gt; https://r-spatial.org/r/2023/05/15/evolution4.html.</span></span>
+<span><span class="co">#&gt; It may be desirable to make the sf package available;</span></span>
+<span><span class="co">#&gt; package maintainers should consider adding sf to Suggests:.</span></span>
+<span><span class="co">#&gt; The sp package is now running under evolution status 2</span></span>
+<span><span class="co">#&gt;      (status 2 uses the sf package in place of rgdal)</span></span>
+<span><span class="co">#&gt; Please note that 'maptools' will be retired during October 2023,</span></span>
+<span><span class="co">#&gt; plan transition at your earliest convenience (see</span></span>
+<span><span class="co">#&gt; https://r-spatial.org/r/2023/05/15/evolution4.html and earlier blogs</span></span>
+<span><span class="co">#&gt; for guidance);some functionality will be moved to 'sp'.</span></span>
+<span><span class="co">#&gt;  Checking rgeos availability: FALSE</span></span>
 <span></span>
 <span><span class="va">infile</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/XAJ_input_Hejin_2012-2018.rda"</span>, package <span class="op">=</span> <span class="st">"hydroTools"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="va">infile</span><span class="op">)</span></span>
@@ -124,40 +137,11 @@ Rcpp版的XAJ模型为钟睿达师弟所写，使用请正确引用。</p>
 <span><span class="va">df</span> <span class="op">=</span> <span class="va">input</span><span class="op">$</span><span class="va">data</span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/XAJ_calib.html">XAJ_calib</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Qobs</span>, <span class="va">df</span><span class="op">$</span><span class="va">prcp</span>, <span class="va">df</span><span class="op">$</span><span class="va">ET0</span>, date <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">date</span>,</span>
 <span>    <span class="va">input</span><span class="op">$</span><span class="va">area</span>, dt <span class="op">=</span> <span class="fl">24</span>, maxn <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 52 best -0.071 function convergence 200 parameter convergence 7798.76 </span></span>
-<span><span class="co">#&gt; 81 best -0.071 function convergence 200 parameter convergence 6580.998 </span></span>
-<span><span class="co">#&gt; 111 best -0.131 function convergence 200 parameter convergence 5480.133 </span></span>
-<span><span class="co">#&gt; 143 best -0.215 function convergence 200 parameter convergence 4733.328 </span></span>
-<span><span class="co">#&gt; 171 best -0.307 function convergence 200 parameter convergence 4350.594 </span></span>
-<span><span class="co">#&gt; 204 best -0.348 function convergence -132 parameter convergence 4276.417 </span></span>
-<span><span class="co">#&gt; 234 best -0.432 function convergence -144 parameter convergence 3623.459 </span></span>
-<span><span class="co">#&gt; 266 best -0.579 function convergence -126 parameter convergence 3126.294 </span></span>
-<span><span class="co">#&gt; 296 best -0.593 function convergence -93.7 parameter convergence 2813.707 </span></span>
-<span><span class="co">#&gt; 327 best -0.63 function convergence -69 parameter convergence 1995.129 </span></span>
-<span><span class="co">#&gt; 356 best -0.65 function convergence -60.4 parameter convergence 1642.616 </span></span>
-<span><span class="co">#&gt; 384 best -0.657 function convergence -41.2 parameter convergence 1447.285 </span></span>
-<span><span class="co">#&gt; 410 best -0.665 function convergence -13.9 parameter convergence 1075.695 </span></span>
-<span><span class="co">#&gt; 437 best -0.671 function convergence -12.3 parameter convergence 887.2404 </span></span>
-<span><span class="co">#&gt; 466 best -0.676 function convergence -7.02 parameter convergence 851.3788 </span></span>
-<span><span class="co">#&gt; 495 best -0.683 function convergence -4.93 parameter convergence 603.4246 </span></span>
-<span><span class="co">#&gt; 522 best -0.685 function convergence -4.18 parameter convergence 568.879 </span></span>
-<span><span class="co">#&gt; 549 best -0.688 function convergence -3.37 parameter convergence 520.1898 </span></span>
-<span><span class="co">#&gt; 580 best -0.694 function convergence -3.35 parameter convergence 538.2989 </span></span>
-<span><span class="co">#&gt; 614 best -0.696 function convergence -2.98 parameter convergence 527.9092 </span></span>
-<span><span class="co">#&gt; 640 best -0.697 function convergence -2.11 parameter convergence 372.9265 </span></span>
-<span><span class="co">#&gt; 669 best -0.7 function convergence -2.09 parameter convergence 361.8326 </span></span>
-<span><span class="co">#&gt; 697 best -0.702 function convergence -2.09 parameter convergence 334.4351 </span></span>
-<span><span class="co">#&gt; 726 best -0.703 function convergence -1.28 parameter convergence 308.2153 </span></span>
-<span><span class="co">#&gt; 755 best -0.706 function convergence -1.37 parameter convergence 285.4627 </span></span>
-<span><span class="co">#&gt; 785 best -0.706 function convergence -1.21 parameter convergence 268.4868 </span></span>
-<span><span class="co">#&gt; 818 best -0.706 function convergence -0.881 parameter convergence 230.1033 </span></span>
-<span><span class="co">#&gt; 847 best -0.706 function convergence -0.569 parameter convergence 178.9205 </span></span>
-<span><span class="co">#&gt; 872 best -0.706 function convergence -0.476 parameter convergence 139.1498 </span></span>
-<span><span class="co">#&gt; 904 best -0.707 function convergence -0.145 parameter convergence 92.73729 </span></span>
-<span><span class="co">#&gt; 930 best -0.707 function convergence -0.166 parameter convergence 70.60406 </span></span>
-<span><span class="co">#&gt; 955 best -0.707 function convergence -0.147 parameter convergence 62.88353 </span></span>
-<span><span class="co">#&gt; 981 best -0.707 function convergence -0.0969 parameter convergence 55.37127 </span></span>
-<span><span class="co">#&gt; 1008 best -0.707 function convergence -0.0591 parameter convergence 34.78426</span></span>
+<span><span class="co">#&gt; 332 best -0.146 function convergence 200 parameter convergence 9806.662 </span></span>
+<span><span class="co">#&gt; 517 best -0.366 function convergence 200 parameter convergence 9521.885 </span></span>
+<span><span class="co">#&gt; 707 best -0.425 function convergence 200 parameter convergence 8104.431 </span></span>
+<span><span class="co">#&gt; 890 best -0.577 function convergence 200 parameter convergence 6517.944 </span></span>
+<span><span class="co">#&gt; 1077 best -0.659 function convergence 200 parameter convergence 5783.561</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 4</span></span>
@@ -166,43 +150,43 @@ Rcpp版的XAJ模型为钟睿达师弟所写，使用请正确引用。</p>
 <span><span class="co">#&gt;   ..$ prcp: num [1:2556] 0 0.02 0.04 0.25 0.01 0 0.87 0.01 0 0 ...</span></span>
 <span><span class="co">#&gt;   ..$ ET0 : num [1:2556] 0.28 0.77 0.715 0.35 0.275 ...</span></span>
 <span><span class="co">#&gt;   ..$ Qobs: num [1:2556] 23.2 21.1 20.5 21.9 19.6 18.5 20.7 20.7 19.3 20.8 ...</span></span>
-<span><span class="co">#&gt;   ..$ Qsim: num [1:2556] 0 12.3 13.6 12.4 10.8 ...</span></span>
+<span><span class="co">#&gt;   ..$ Qsim: num [1:2556] 0 3.44 3.32 2.96 2.63 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, ".internal.selfref")=&lt;externalptr&gt; </span></span>
 <span><span class="co">#&gt;  $ gof         : tibble [1 × 11] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;   ..$ R        : num 0.71</span></span>
-<span><span class="co">#&gt;   ..$ pvalue   : num 0</span></span>
-<span><span class="co">#&gt;   ..$ R2       : num 0.504</span></span>
-<span><span class="co">#&gt;   ..$ NSE      : num 0.413</span></span>
-<span><span class="co">#&gt;   ..$ KGE      : num 0.707</span></span>
-<span><span class="co">#&gt;   ..$ RMSE     : num 24</span></span>
-<span><span class="co">#&gt;   ..$ MAE      : num 14.5</span></span>
-<span><span class="co">#&gt;   ..$ Bias     : num -1.04</span></span>
-<span><span class="co">#&gt;   ..$ Bias_perc: num -0.0391</span></span>
-<span><span class="co">#&gt;   ..$ AI       : num 0.834</span></span>
+<span><span class="co">#&gt;   ..$ R        : num 0.669</span></span>
+<span><span class="co">#&gt;   ..$ pvalue   : num 8.69e-312</span></span>
+<span><span class="co">#&gt;   ..$ R2       : num 0.448</span></span>
+<span><span class="co">#&gt;   ..$ NSE      : num 0.279</span></span>
+<span><span class="co">#&gt;   ..$ KGE      : num 0.658</span></span>
+<span><span class="co">#&gt;   ..$ RMSE     : num 26.6</span></span>
+<span><span class="co">#&gt;   ..$ MAE      : num 15.9</span></span>
+<span><span class="co">#&gt;   ..$ Bias     : num -0.933</span></span>
+<span><span class="co">#&gt;   ..$ Bias_perc: num -0.035</span></span>
+<span><span class="co">#&gt;   ..$ AI       : num 0.806</span></span>
 <span><span class="co">#&gt;   ..$ n_sim    : int 2400</span></span>
 <span><span class="co">#&gt;  $ model       :List of 3</span></span>
-<span><span class="co">#&gt;   ..$ par : Named num [1:15] 1.45202 0.00799 19.03719 79.44638 56.03892 ...</span></span>
+<span><span class="co">#&gt;   ..$ par : Named num [1:15] 1.44554 0.00843 19.80357 85.75426 57.61422 ...</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:15] "KC" "IM" "WUM" "WLM" ...</span></span>
 <span><span class="co">#&gt;   ..$ area: num 38900</span></span>
 <span><span class="co">#&gt;   ..$ dt  : num 24</span></span>
 <span><span class="co">#&gt;  $ intermediate:'data.frame':    2556 obs. of  17 variables:</span></span>
 <span><span class="co">#&gt;   ..$ date: Date[1:2556], format: "2012-01-01" "2012-01-02" ...</span></span>
-<span><span class="co">#&gt;   ..$ E   : num [1:2556] 0.406 1.118 1.039 0.508 0.399 ...</span></span>
-<span><span class="co">#&gt;   ..$ EU  : num [1:2556] 0.406 1.118 1.039 0.508 0.399 ...</span></span>
+<span><span class="co">#&gt;   ..$ E   : num [1:2556] 0.405 1.113 1.034 0.506 0.398 ...</span></span>
+<span><span class="co">#&gt;   ..$ EU  : num [1:2556] 0.405 1.113 1.034 0.506 0.398 ...</span></span>
 <span><span class="co">#&gt;   ..$ EL  : num [1:2556] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
 <span><span class="co">#&gt;   ..$ ED  : num [1:2556] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;   ..$ W   : num [1:2556] 123 122 121 121 120 ...</span></span>
-<span><span class="co">#&gt;   ..$ WU  : num [1:2556] 14.8 13.7 12.7 12.5 12.1 ...</span></span>
-<span><span class="co">#&gt;   ..$ WL  : num [1:2556] 63.6 63.6 63.6 63.6 63.6 ...</span></span>
-<span><span class="co">#&gt;   ..$ WD  : num [1:2556] 44.8 44.8 44.8 44.8 44.8 ...</span></span>
+<span><span class="co">#&gt;   ..$ W   : num [1:2556] 130 129 128 128 127 ...</span></span>
+<span><span class="co">#&gt;   ..$ WU  : num [1:2556] 15.4 14.3 13.4 13.1 12.7 ...</span></span>
+<span><span class="co">#&gt;   ..$ WL  : num [1:2556] 68.6 68.6 68.6 68.6 68.6 ...</span></span>
+<span><span class="co">#&gt;   ..$ WD  : num [1:2556] 46.1 46.1 46.1 46.1 46.1 ...</span></span>
 <span><span class="co">#&gt;   ..$ R   : num [1:2556] 0 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;   ..$ RS  : num [1:2556] 0.00 1.60e-04 3.20e-04 2.00e-03 7.99e-05 ...</span></span>
-<span><span class="co">#&gt;   ..$ RI  : num [1:2556] 0.92766 0.22936 0.05682 0.01426 0.00357 ...</span></span>
-<span><span class="co">#&gt;   ..$ RG  : num [1:2556] 0.7281 0.18 0.0446 0.0112 0.0028 ...</span></span>
-<span><span class="co">#&gt;   ..$ Q   : num [1:2556] 0 12.3 13.6 12.4 10.8 ...</span></span>
-<span><span class="co">#&gt;   ..$ QS  : num [1:2556] 0.00 4.82e-07 1.85e-06 9.43e-06 1.76e-05 ...</span></span>
-<span><span class="co">#&gt;   ..$ QI  : num [1:2556] 0 11.9 13.1 11.9 10.4 ...</span></span>
-<span><span class="co">#&gt;   ..$ QG  : num [1:2556] 0 0.364 0.453 0.474 0.478 ...</span></span>
+<span><span class="co">#&gt;   ..$ RS  : num [1:2556] 0.00 1.69e-04 3.37e-04 2.11e-03 8.43e-05 ...</span></span>
+<span><span class="co">#&gt;   ..$ RI  : num [1:2556] 8.74e-01 7.11e-02 5.80e-03 4.79e-04 3.94e-05 ...</span></span>
+<span><span class="co">#&gt;   ..$ RG  : num [1:2556] 6.57e-01 5.35e-02 4.36e-03 3.60e-04 2.97e-05 ...</span></span>
+<span><span class="co">#&gt;   ..$ Q   : num [1:2556] 0 3.44 3.32 2.96 2.63 ...</span></span>
+<span><span class="co">#&gt;   ..$ QS  : num [1:2556] 0.00 2.23e-10 1.06e-09 5.73e-09 1.60e-08 ...</span></span>
+<span><span class="co">#&gt;   ..$ QI  : num [1:2556] 0 3.07 2.93 2.58 2.25 ...</span></span>
+<span><span class="co">#&gt;   ..$ QG  : num [1:2556] 0 0.363 0.389 0.387 0.383 ...</span></span>
 <span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <p>从图来看，模型整体模拟结果尚可。但部分洪水过程无法捕捉到（如2018年春秋季节），怀疑是流域内水库放水的人为活动影响所致。</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -226,13 +210,13 @@ Rcpp版的XAJ模型为钟睿达师弟所写，使用请正确引用。</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res_valid</span> <span class="op">=</span> <span class="fu"><a href="../reference/XAJ_predict.html">XAJ_predict</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">model</span>, newdata <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res_valid</span><span class="op">)</span></span>
-<span><span class="co">#&gt;          date Qobs prcp       ET0      Qsim</span></span>
-<span><span class="co">#&gt; 1: 2012-01-01 23.2 0.00 0.2798821  0.000000</span></span>
-<span><span class="co">#&gt; 2: 2012-01-02 21.1 0.02 0.7696797 12.292826</span></span>
-<span><span class="co">#&gt; 3: 2012-01-03 20.5 0.04 0.7152260 13.581305</span></span>
-<span><span class="co">#&gt; 4: 2012-01-04 21.9 0.25 0.3498458 12.412039</span></span>
-<span><span class="co">#&gt; 5: 2012-01-05 19.6 0.01 0.2750719 10.844921</span></span>
-<span><span class="co">#&gt; 6: 2012-01-06 18.5 0.00 0.3265188  9.365454</span></span></code></pre></div>
+<span><span class="co">#&gt;          date Qobs prcp       ET0     Qsim</span></span>
+<span><span class="co">#&gt; 1: 2012-01-01 23.2 0.00 0.2798821 0.000000</span></span>
+<span><span class="co">#&gt; 2: 2012-01-02 21.1 0.02 0.7696797 3.435587</span></span>
+<span><span class="co">#&gt; 3: 2012-01-03 20.5 0.04 0.7152260 3.319556</span></span>
+<span><span class="co">#&gt; 4: 2012-01-04 21.9 0.25 0.3498458 2.964277</span></span>
+<span><span class="co">#&gt; 5: 2012-01-05 19.6 0.01 0.2750719 2.632883</span></span>
+<span><span class="co">#&gt; 6: 2012-01-06 18.5 0.00 0.3265188 2.341542</span></span></code></pre></div>
 <p>安装方法</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"rpkgs/hydroTools"</span><span class="op">)</span></span></code></pre></div>

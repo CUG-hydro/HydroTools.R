@@ -108,6 +108,19 @@
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">hydroTools</span><span class="op">)</span></span>
+<span><span class="co">#&gt; The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,</span></span>
+<span><span class="co">#&gt; which was just loaded, will retire in October 2023.</span></span>
+<span><span class="co">#&gt; Please refer to R-spatial evolution reports for details, especially</span></span>
+<span><span class="co">#&gt; https://r-spatial.org/r/2023/05/15/evolution4.html.</span></span>
+<span><span class="co">#&gt; It may be desirable to make the sf package available;</span></span>
+<span><span class="co">#&gt; package maintainers should consider adding sf to Suggests:.</span></span>
+<span><span class="co">#&gt; The sp package is now running under evolution status 2</span></span>
+<span><span class="co">#&gt;      (status 2 uses the sf package in place of rgdal)</span></span>
+<span><span class="co">#&gt; Please note that 'maptools' will be retired during October 2023,</span></span>
+<span><span class="co">#&gt; plan transition at your earliest convenience (see</span></span>
+<span><span class="co">#&gt; https://r-spatial.org/r/2023/05/15/evolution4.html and earlier blogs</span></span>
+<span><span class="co">#&gt; for guidance);some functionality will be moved to 'sp'.</span></span>
+<span><span class="co">#&gt;  Checking rgeos availability: FALSE</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># simulation function</span></span>
@@ -153,40 +166,42 @@
 <span><span class="va">opt</span> <span class="op">=</span> <span class="fu">rtop</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rtop/man/sceua.html" class="external-link">sceua</a></span><span class="op">(</span><span class="va">goal</span>, par <span class="op">=</span> <span class="va">par0</span>, lower <span class="op">=</span> <span class="va">par_l</span>, upper <span class="op">=</span> <span class="va">par_u</span>, </span>
 <span>  x <span class="op">=</span> <span class="va">x</span>, yobs <span class="op">=</span> <span class="va">yobs</span>, <span class="co"># other parameters passed to `goal`</span></span>
 <span>  maxn <span class="op">=</span> <span class="fl">1e3</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; 50 best 3.48 function convergence 200 parameter convergence 4751.175 </span></span>
-<span><span class="co">#&gt; 79 best 2.19 function convergence 200 parameter convergence 3073.55 </span></span>
-<span><span class="co">#&gt; 110 best 1.88 function convergence 200 parameter convergence 2649.375 </span></span>
-<span><span class="co">#&gt; 142 best 1.75 function convergence 200 parameter convergence 2223.659 </span></span>
-<span><span class="co">#&gt; 169 best 1.75 function convergence 200 parameter convergence 1413.179 </span></span>
-<span><span class="co">#&gt; 200 best 1.74 function convergence 66.6 parameter convergence 1208.604 </span></span>
-<span><span class="co">#&gt; 233 best 1.74 function convergence 22.8 parameter convergence 1210.021 </span></span>
-<span><span class="co">#&gt; 261 best 1.74 function convergence 7.39 parameter convergence 732.3515 </span></span>
-<span><span class="co">#&gt; 292 best 1.74 function convergence 0.224 parameter convergence 506.2702 </span></span>
-<span><span class="co">#&gt; 323 best 1.74 function convergence 0.224 parameter convergence 489.2278 </span></span>
-<span><span class="co">#&gt; 353 best 1.74 function convergence 0.0909 parameter convergence 473.0482 </span></span>
-<span><span class="co">#&gt; 382 best 1.74 function convergence 0.0373 parameter convergence 361.5516 </span></span>
-<span><span class="co">#&gt; 409 best 1.74 function convergence 0.000266 parameter convergence 328.5202 </span></span>
-<span><span class="co">#&gt; 441 best 1.74 function convergence 0.000266 parameter convergence 342.0424 </span></span>
-<span><span class="co">#&gt; 468 best 1.74 function convergence 3.55e-05 parameter convergence 328.5202 </span></span>
-<span><span class="co">#&gt; 499 best 1.74 function convergence 1.56e-05 parameter convergence 388.8102 </span></span>
-<span><span class="co">#&gt; 528 best 1.74 function convergence 3.11e-07 parameter convergence 275.6656 </span></span>
-<span><span class="co">#&gt; 559 best 1.74 function convergence 2.38e-09 parameter convergence 176.74 </span></span>
-<span><span class="co">#&gt; 587 best 1.74 function convergence 2.38e-09 parameter convergence 142.3894 </span></span>
-<span><span class="co">#&gt; 619 best 1.74 function convergence 2.15e-09 parameter convergence 138.2319 </span></span>
-<span><span class="co">#&gt; 650 best 1.74 function convergence 1.25e-09 parameter convergence 119.4634 </span></span>
-<span><span class="co">#&gt; 684 best 1.74 function convergence 1.58e-12 parameter convergence 131.0169 </span></span>
-<span><span class="co">#&gt; 715 best 1.74 function convergence 1.58e-12 parameter convergence 83.67649 </span></span>
-<span><span class="co">#&gt; 746 best 1.74 function convergence 1.61e-12 parameter convergence 86.24897 </span></span>
-<span><span class="co">#&gt; 774 best 1.74 function convergence 2.17e-13 parameter convergence 86.24897 </span></span>
-<span><span class="co">#&gt; 799 best 1.74 function convergence 2.17e-13 parameter convergence 86.24897 </span></span>
-<span><span class="co">#&gt; 825 best 1.74 function convergence 2.55e-14 parameter convergence 85.89433 </span></span>
-<span><span class="co">#&gt; 851 best 1.74 function convergence 2.55e-14 parameter convergence 85.89433 </span></span>
-<span><span class="co">#&gt; 877 best 1.74 function convergence 0 parameter convergence 64.83542 </span></span>
-<span><span class="co">#&gt; 903 best 1.74 function convergence 0 parameter convergence 57.87813 </span></span>
-<span><span class="co">#&gt; 934 best 1.74 function convergence 0 parameter convergence 57.87813 </span></span>
-<span><span class="co">#&gt; 960 best 1.74 function convergence 0 parameter convergence 57.87813 </span></span>
-<span><span class="co">#&gt; 991 best 1.74 function convergence 0 parameter convergence 57.87813 </span></span>
-<span><span class="co">#&gt; 1016 best 1.74 function convergence 0 parameter convergence 57.87813</span></span>
+<span><span class="co">#&gt; 51 best 1.84 function convergence 200 parameter convergence 7610.145 </span></span>
+<span><span class="co">#&gt; 79 best 1.76 function convergence 200 parameter convergence 4530.619 </span></span>
+<span><span class="co">#&gt; 105 best 1.75 function convergence 200 parameter convergence 2690.471 </span></span>
+<span><span class="co">#&gt; 131 best 1.74 function convergence 200 parameter convergence 2931.736 </span></span>
+<span><span class="co">#&gt; 159 best 1.74 function convergence 200 parameter convergence 3057.855 </span></span>
+<span><span class="co">#&gt; 184 best 1.74 function convergence 5.71 parameter convergence 2478.465 </span></span>
+<span><span class="co">#&gt; 209 best 1.74 function convergence 1.09 parameter convergence 2314.297 </span></span>
+<span><span class="co">#&gt; 234 best 1.74 function convergence 0.354 parameter convergence 1532.078 </span></span>
+<span><span class="co">#&gt; 259 best 1.74 function convergence 0.000384 parameter convergence 1725.886 </span></span>
+<span><span class="co">#&gt; 284 best 1.74 function convergence 0.000384 parameter convergence 1725.886 </span></span>
+<span><span class="co">#&gt; 309 best 1.74 function convergence 2.79e-06 parameter convergence 1397.07 </span></span>
+<span><span class="co">#&gt; 335 best 1.74 function convergence 4.28e-08 parameter convergence 976.0489 </span></span>
+<span><span class="co">#&gt; 361 best 1.74 function convergence 4.28e-08 parameter convergence 452.3405 </span></span>
+<span><span class="co">#&gt; 387 best 1.74 function convergence 1.32e-08 parameter convergence 355.4915 </span></span>
+<span><span class="co">#&gt; 414 best 1.74 function convergence 6.81e-11 parameter convergence 309.5118 </span></span>
+<span><span class="co">#&gt; 441 best 1.74 function convergence 1.96e-11 parameter convergence 345.5275 </span></span>
+<span><span class="co">#&gt; 469 best 1.74 function convergence 2.19e-12 parameter convergence 356.8678 </span></span>
+<span><span class="co">#&gt; 501 best 1.74 function convergence 8.92e-13 parameter convergence 238.4948 </span></span>
+<span><span class="co">#&gt; 535 best 1.74 function convergence 7.65e-14 parameter convergence 312.2249 </span></span>
+<span><span class="co">#&gt; 562 best 1.74 function convergence 2.55e-14 parameter convergence 247.6701 </span></span>
+<span><span class="co">#&gt; 595 best 1.74 function convergence 2.55e-14 parameter convergence 253.8331 </span></span>
+<span><span class="co">#&gt; 622 best 1.74 function convergence 0 parameter convergence 253.8331 </span></span>
+<span><span class="co">#&gt; 650 best 1.74 function convergence 0 parameter convergence 296.1607 </span></span>
+<span><span class="co">#&gt; 677 best 1.74 function convergence 0 parameter convergence 220.8968 </span></span>
+<span><span class="co">#&gt; 704 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
+<span><span class="co">#&gt; 731 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
+<span><span class="co">#&gt; 756 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
+<span><span class="co">#&gt; 781 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
+<span><span class="co">#&gt; 806 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
+<span><span class="co">#&gt; 835 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
+<span><span class="co">#&gt; 865 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
+<span><span class="co">#&gt; 890 best 1.74 function convergence 0 parameter convergence 200.6591 </span></span>
+<span><span class="co">#&gt; 920 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
+<span><span class="co">#&gt; 953 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
+<span><span class="co">#&gt; 982 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
+<span><span class="co">#&gt; 1008 best 1.74 function convergence 0 parameter convergence 196.6364</span></span>
 <span><span class="va">par_opt</span> <span class="op">=</span> <span class="va">opt</span><span class="op">$</span><span class="va">par</span> <span class="co"># SCEUA生成的最优参数</span></span></code></pre></div>
 </div>
 <div class="section level2">
