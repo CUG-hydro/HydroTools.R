@@ -32,7 +32,6 @@ XAJ_goal <- function(par, Qobs, prcp, ET0, area, date = NULL, dt = 24, index = "
 #' XAJ model Parameter calibration
 #'
 #' @inheritParams VIC5::XAJ
-#' @inheritParams rtop::sceua
 #'
 #' @param Qobs Observed Total runoff, (m^3/s)
 #' @param prcp Precipitation (mm/d)

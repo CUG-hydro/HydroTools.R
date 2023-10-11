@@ -20,8 +20,6 @@ calib_routing_muskingum_nL(I, Q0, yobs, maxn = 1000)
 \item \code{K}  : in the same unit as \code{deltaT}
 \item \code{nt} : divide river into \code{nt} chunks (default 1)
 }}
-
-\item{maxn}{ the maximum number of function evaluations}
 }
 \description{
 routing_muskingum

@@ -75,7 +75,7 @@ plot_runoff <- function(df_q, df_prcp = NULL, xlim = NULL, ylim2 = c(50, 0),
     lines(df_q$date, df_q$Qsim, col = "red")
   } else {
     plot(df_q$date, df_q$Qsim, type = "l", col = "red", xlab = "Date",
-      ylab = expression(bold(Q * "(" * m^3 * ")")),
+      ylab = expression(bold(Q * "(" * m^3 * "/s)")),
       xaxt = "n", 
       xlim = xlim)
   }

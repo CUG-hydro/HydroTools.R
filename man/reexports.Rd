@@ -3,7 +3,6 @@
 \docType{import}
 \name{reexports}
 \alias{reexports}
-\alias{sceua}
 \alias{KGE}
 \title{Objects exported from other packages}
 \keyword{internal}
@@ -13,7 +12,5 @@ below to see their documentation.
 
 \describe{
   \item{hydroGOF}{\code{\link[hydroGOF]{KGE}}}
-
-  \item{rtop}{\code{\link[rtop]{sceua}}}
 }}
 

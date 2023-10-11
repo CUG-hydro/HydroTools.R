@@ -62,7 +62,6 @@ NSE <- function(yobs, ysim, w, ...) {
 #' ysim = yobs + rnorm(100)/4
 #' GOF(yobs, ysim)
 #' 
-#' @importFrom hydroGOF KGE
 #' @importFrom dplyr tibble
 #' @export
 GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
@@ -96,7 +95,7 @@ GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
 
     # R2: the portion of regression explained variance, also known as
     # coefficient of determination
-    KGE = KGE(ysim, yobs)
+    KGE = hydroGOF::KGE(ysim, yobs)
     # https://en.wikipedia.org/wiki/Coefficient_of_determination
     # https://en.wikipedia.org/wiki/Explained_sum_of_squares
     y_mean <- sum(yobs * w) / sum(w)

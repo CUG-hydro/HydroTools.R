@@ -29,8 +29,6 @@ XAJ_calib(
 
 \item{date}{(optional) corresponding date of \code{Qobs}}
 
-\item{maxn}{ the maximum number of function evaluations}
-
 \item{seed}{(can be ignored) starting number of random number generator,
 see \code{\link[base:Random]{base::set.seed()}} for details.
 This parameter is to make sure optimization result is same in different tries.}
