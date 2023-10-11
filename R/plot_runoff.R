@@ -65,17 +65,18 @@ plot_runoff <- function(df_q, df_prcp = NULL, xlim = NULL, ylim2 = c(50, 0),
     ))
   }
 
+  lab_Q = expression(bold(Q * "(" * m^3 * "/s)"))
   par(mar = c(3.5, 3.5, 2, 3.5), mgp = c(1.8, 0.6, 0), xpd = TRUE)
   if (!is.null(df_q$Qobs)) {
     plot(Qobs~date, df_q, type = "l", col = "black", xlab = "Date",
-      ylab = expression(bold(Q * "(" * m^3 * ")")),
+      ylab = lab_Q,
       # font.lab = 2,
       # xaxt = "n", 
       xlim = xlim)
     lines(df_q$date, df_q$Qsim, col = "red")
   } else {
     plot(df_q$date, df_q$Qsim, type = "l", col = "red", xlab = "Date",
-      ylab = expression(bold(Q * "(" * m^3 * "/s)")),
+      ylab = lab_Q,
       xaxt = "n", 
       xlim = xlim)
   }
