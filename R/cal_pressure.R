@@ -53,6 +53,11 @@ cal_es <- function(Tair) {
     # 0.61094 * exp((17.625 * Tair) / (Tair + 243.04))
 }
 
+es2T <- function(es) {
+  es = es * 10 # to hPa
+  (243.5 * log(es) - 440.8) / (19.48 - log(es))
+}
+
 # https://github.com/rpkgs/skew-t/blob/master/thermo_scripts.py#L42
 #' @export
 cal_es_CC <- function(Tair) {
@@ -115,8 +120,16 @@ cal_qs <- function(Tair, Pa = atm) {
 
 #' @rdname vapour_press
 #' @export
-ea2q <- function(ea, Tair, Pa = atm) {
-  es <- cal_es(Tair)
+ea2w <- function(ea, Pa = atm) {
+  # es <- cal_es(Tair)
+  w <- epsilon * ea / (Pa - ea)
+  w # g / g
+}
+
+#' @rdname vapour_press
+#' @export
+ea2q <- function(ea, Pa = atm) {
+  # es <- cal_es(Tair)
   w <- epsilon * ea / (Pa - ea)
   w2q(w) # q: g / g
 }

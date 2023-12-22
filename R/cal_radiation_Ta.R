@@ -54,7 +54,7 @@ cal_radiation_Ta <- function(Ta, Rs, Rl = 0, dt = 3600, method = c("approx", "ex
   Rl_out = cal_Rl_out(Ta) # W m-2
   Rn = Rs * (1 - albedo) + emiss * (Rl - Rl_out) 
   Tnew = Ta + Rn * dt / (rho_a * Cp)
-  tibble(Ta, Rn, Rn * dt / (rho_a * Cp), Rl_out, Tnew) %>% print()
+  # tibble(Ta, Rn, Rn * dt / (rho_a * Cp), Rl_out, Tnew) %>% print()
   Tnew - K0 # to Cdeg
 }
 

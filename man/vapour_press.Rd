@@ -11,6 +11,7 @@
 \alias{RH2q}
 \alias{q_from_RH}
 \alias{cal_qs}
+\alias{ea2w}
 \alias{ea2q}
 \alias{Tdew2q}
 \alias{Tdew2w}
@@ -39,7 +40,9 @@ q_from_RH(RH, Tair, Pa = atm)
 
 cal_qs(Tair, Pa = atm)
 
-ea2q(ea, Tair, Pa = atm)
+ea2w(ea, Pa = atm)
+
+ea2q(ea, Pa = atm)
 
 RH2q(RH, Tair, Pa = atm)
 
