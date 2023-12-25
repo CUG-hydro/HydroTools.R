@@ -1,21 +1,20 @@
-
-# hydroTools
+# HydroTools.R
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/CUG-hydro/hydroTools/workflows/R-CMD-check/badge.svg)](https://github.com/CUG-hydro/hydroTools/actions)
-[![codecov](https://codecov.io/gh/CUG-hydro/hydroTools/branch/master/graph/badge.svg)](https://codecov.io/gh/CUG-hydro/hydroTools)
-[![CRAN](http://www.r-pkg.org/badges/version/hydroTools)](https://cran.r-project.org/package=hydroTools)
+[![R-CMD-check](https://github.com/CUG-hydro/HydroTools.R/workflows/R-CMD-check/badge.svg)](https://github.com/CUG-hydro/HydroTools.R/actions)
+[![codecov](https://codecov.io/gh/CUG-hydro/HydroTools.R/branch/master/graph/badge.svg)](https://codecov.io/gh/CUG-hydro/HydroTools.R)
+[![CRAN](http://www.r-pkg.org/badges/version/HydroTools.R)](https://cran.r-project.org/package=HydroTools.R)
 <!-- badges: end -->
 
-The goal of hydroTools is to ...
+The goal of HydroTools.R is to ...
 
 ## Installation
 
-You can install the released version of hydroTools from github:
+You can install the released version of HydroTools.R from github:
 
 ``` r
-remotes::install_gitlab("r-pkgs/hydroTools")
-# remotes::install_github("CUG-hydro/hydroTools") # github may not work
+# remotes::install_gitlab("r-pkgs/HydroTools.R") # github may not work, use gitlab instead
+remotes::install_github("CUG-hydro/HydroTools.R") 
 ```
 
 ## Example
