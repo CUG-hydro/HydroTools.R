@@ -14,6 +14,7 @@
 NULL
 
 .onLoad <- function(libname, pkgname) {
+  options(rmarkdown.html_vignette.check_title = FALSE)
   
   if (getRversion() >= "2.15.1") {
     utils::globalVariables(

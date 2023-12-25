@@ -20,6 +20,7 @@ Suggests:
     scales, glue,
     rtop, 
     sf,
+    ggplot2,
     knitr,
     rmarkdown
 License: MIT + file LICENSE
