@@ -8,7 +8,7 @@ NULL
 
 #' @rdname cal_ssd
 #' @export
-cal_ws <- function(lat, J) {
+cal_sunset_angle <- function(lat, J) {
   lat %<>% deg2rad()
   sigma <- 0.409 * sin(pi * J / 182.5 - 1.39) # Allen, Eq. 24
 
@@ -25,7 +25,7 @@ ws2ssd <- function(ws) ws / pi * 24 # Ge ChaoXiao, Eq. 2-18
 
 #' @rdname cal_ssd
 #' @export
-cal_ssd <- function(lat, J) cal_ws(lat, J) %>% ws2ssd()
+cal_ssd <- function(lat, J) cal_sunset_angle(lat, J) %>% ws2ssd()
 
 # ------------------------------------------------------------------------------
 
@@ -123,7 +123,7 @@ suncalc <- function(time, lon = 114.6053, lat = 30.49694, ...,
   angle_elev <- SunAngle_Elevation(lat, angle_sigma, omega)
   angle_azimuth <- SunAngle_Azimuth(lat, angle_sigma, omega)
 
-  ws <- cal_ws(lat, yday(time))
+  ws <- cal_sunset_angle(lat, yday(time))
   ssd <- ws2ssd(ws)
   time_begin <- time_noon - dhours(ssd / 2)
   time_end <- time_noon + dhours(ssd / 2)

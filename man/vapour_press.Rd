@@ -41,7 +41,7 @@ q_from_RH(RH, Tair, Pa = atm)
 
 cal_qs(Tair, Pa = atm)
 
-cal_ws(lat, J)
+cal_ws(Tair, Pa = atm)
 
 ea2w(ea, Pa = atm)
 

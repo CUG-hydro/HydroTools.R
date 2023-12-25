@@ -18,7 +18,7 @@ cal_Rsi_toa <- function(lat, J) {
   dr <- 1 + 0.033 * cos(pi * J / 182.5) # Allen, Eq. 23
   sigma <- 0.409 * sin(pi * J / 182.5 - 1.39) # Allen, Eq. 24
 
-  ws <- cal_ws(lat, J)
+  ws <- cal_sunset_angle(lat, J)
   # 24 * 60 * 0.082 = 118.08
   lat %<>% deg2rad()
   Rsi_toa <- 118.08 * dr / pi * (ws * sin(lat) * sin(sigma) + cos(lat) * cos(sigma) * sin(ws)) # Allen, Eq. 21

@@ -2,11 +2,11 @@
 % Please edit documentation in R/cal_sun_angle.R
 \name{cal_ssd}
 \alias{cal_ssd}
-\alias{cal_ws}
+\alias{cal_sunset_angle}
 \alias{ws2ssd}
 \title{sunset hour angle}
 \usage{
-cal_ws(lat, J)
+cal_sunset_angle(lat, J)
 
 ws2ssd(ws)
 
