@@ -74,6 +74,8 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">NSE</span><span class="op">(</span><span class="va">yobs</span>, <span class="va">ysim</span>, <span class="va">w</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">KGE</span><span class="op">(</span><span class="va">yobs</span>, <span class="va">ysim</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">GOF</span><span class="op">(</span><span class="va">yobs</span>, <span class="va">ysim</span>, <span class="va">w</span>, include.cv <span class="op">=</span> <span class="cn">FALSE</span>, include.r <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -136,9 +138,9 @@ calculate. See details in Zhang et al., (2015).</p></li>
 <span class="r-in"><span><span class="va">ysim</span> <span class="op">=</span> <span class="va">yobs</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">/</span><span class="fl">4</span></span></span>
 <span class="r-in"><span><span class="fu">GOF</span><span class="op">(</span><span class="va">yobs</span>, <span class="va">ysim</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       R   pvalue    R2   NSE    KGE  RMSE   MAE   Bias Bias_perc    AI n_sim</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0.965 9.54<span style="color: #949494;">e</span><span style="color: #BB0000;">-59</span> 0.931 0.923 -<span style="color: #BB0000;">0.508</span> 0.283 0.225 0.042<span style="text-decoration: underline;">9</span>      1.51 0.981   100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       R   pvalue    R2   NSE   KGE  RMSE   MAE     Bias Bias_perc    AI n_sim</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0.970 5.19<span style="color: #949494;">e</span><span style="color: #BB0000;">-62</span> 0.941 0.931 0.929 0.252 0.198 -<span style="color: #BB0000;">0.001</span><span style="color: #BB0000; text-decoration: underline;">10</span>   0.007<span style="text-decoration: underline;">06</span> 0.984   100</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

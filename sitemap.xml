@@ -52,6 +52,9 @@
     <loc>/reference/GOF.html</loc>
   </url>
   <url>
+    <loc>/reference/LCL.html</loc>
+  </url>
+  <url>
     <loc>/reference/Mw.html</loc>
   </url>
   <url>
@@ -148,9 +151,6 @@
     <loc>/reference/plot_runoff.html</loc>
   </url>
   <url>
-    <loc>/reference/reexports.html</loc>
-  </url>
-  <url>
     <loc>/reference/routing_muskingum.html</loc>
   </url>
   <url>
@@ -161,6 +161,9 @@
   </url>
   <url>
     <loc>/reference/suncalc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/theta_wet.html</loc>
   </url>
   <url>
     <loc>/reference/unit_convert.html</loc>
