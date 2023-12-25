@@ -26,6 +26,20 @@ NSE <- function(yobs, ysim, w, ...) {
     NSE
 }
 
+#' @rdname GOF
+#' @export
+KGE <- function(yobs, ysim, ...) {
+  ind <- valindex(yobs, ysim)
+  yobs <- yobs[ind]
+  ysim <- ysim[ind]
+  
+  c1 = cor(yobs, ysim)
+  c2 = sd(ysim) / sd(yobs)
+  c3 = mean(ysim) / mean(yobs)  
+  
+  1 - sqrt((c1 - 1)^2 + (c2 - 1)^2 + (c3 - 1)^2)
+}
+
 #' GOF
 #'
 #' Good of fitting
@@ -95,7 +109,7 @@ GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
 
     # R2: the portion of regression explained variance, also known as
     # coefficient of determination
-    KGE = hydroGOF::KGE(ysim, yobs)
+    KGE = KGE(ysim, yobs)
     # https://en.wikipedia.org/wiki/Coefficient_of_determination
     # https://en.wikipedia.org/wiki/Explained_sum_of_squares
     y_mean <- sum(yobs * w) / sum(w)

@@ -23,9 +23,9 @@ XAJ_goal <- function(par, Qobs, prcp, ET0, area, date = NULL, dt = 24, index = "
   }
 
   if (index == "KGE") {
-    -hydroGOF::KGE(Qobs, Q)
+    -KGE(Qobs, Q)
   } else if (index == "NSE") {
-    -hydroGOF::NSE(Qobs, Q)
+    -NSE(Qobs, Q)
   }
 }
 

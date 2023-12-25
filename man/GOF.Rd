@@ -2,10 +2,13 @@
 % Please edit documentation in R/GOF.R
 \name{NSE}
 \alias{NSE}
+\alias{KGE}
 \alias{GOF}
 \title{GOF}
 \usage{
 NSE(yobs, ysim, w, ...)
+
+KGE(yobs, ysim, ...)
 
 GOF(yobs, ysim, w, include.cv = FALSE, include.r = TRUE)
 }
