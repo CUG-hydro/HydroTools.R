@@ -85,7 +85,8 @@ cal_VPD <- function(Tair, Tdew = NULL) {
 #' @export
 cal_lambda <- function(Tair) {
   # MJ kg-1
-  (2500 - Tair * 2.2) / 1000
+  2.501 - 0.00237 * Tair # bolton 1980
+  # (2500 - Tair * 2.2) / 1000
 }
 
 #' @rdname ET0_helper
