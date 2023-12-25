@@ -11,6 +11,7 @@
 \alias{RH2q}
 \alias{q_from_RH}
 \alias{cal_qs}
+\alias{cal_ws}
 \alias{ea2w}
 \alias{ea2q}
 \alias{Tdew2q}
@@ -39,6 +40,8 @@ RH2q(RH, Tair, Pa = atm)
 q_from_RH(RH, Tair, Pa = atm)
 
 cal_qs(Tair, Pa = atm)
+
+cal_ws(lat, J)
 
 ea2w(ea, Pa = atm)
 

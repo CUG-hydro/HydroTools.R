@@ -115,7 +115,14 @@ q_from_RH = RH2q
 #' @export
 cal_qs <- function(Tair, Pa = atm) {
   es <- cal_es(Tair)
-  ea2q(es, Tair, Pa) # q
+  ea2q(es, Pa) # q
+}
+
+#' @rdname vapour_press
+#' @export
+cal_ws <- function(Tair, Pa = atm) {
+  es <- cal_es(Tair)
+  ea2w(es, Pa) # w
 }
 
 #' @rdname vapour_press
