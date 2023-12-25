@@ -2,9 +2,13 @@
 
 #' Lifted Condensation Level (LCL)
 #' 
-#' @param T0 temperature at surface (K)
+#' @description 
+#' - `LCL`   : Bolton 1980, Eq. 15
+#' - `LCL_RH`: Bolton 1980, Eq. 22
+#' 
 #' @param P0 pressure at surface (hPa)
-#' @param Td dew point temperature (K)
+#' @param T0 temperature at surface (C)
+#' @param Td dew point temperature (C)
 #' 
 #' @export
 LCL <- function(P0, T0, Td) {
@@ -22,6 +26,13 @@ LCL <- function(P0, T0, Td) {
   c(P_lcl = P_lcl, T_lcl = T_lcl - K0)
 }
 
+#' @rdname LCL
+#' @export
+LCL_RH <- function(T, RH) {
+  TK = T + K0
+  term2 = 1 / (TK - 55) - log(RH/100) / 2840 
+  1 / term2 + 55 - K0
+}
 
 #' @export
 adiabat_T_dry <- function(P0, T0, P, w=NULL) {
