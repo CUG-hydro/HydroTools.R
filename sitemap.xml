@@ -103,9 +103,6 @@
     <loc>/reference/cal_Ts.html</loc>
   </url>
   <url>
-    <loc>/reference/cal_Tw.html</loc>
-  </url>
-  <url>
     <loc>/reference/cal_angle.html</loc>
   </url>
   <url>
@@ -113,6 +110,9 @@
   </url>
   <url>
     <loc>/reference/cal_ssd.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cal_wetbulb.html</loc>
   </url>
   <url>
     <loc>/reference/constants.html</loc>
