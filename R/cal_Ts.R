@@ -108,45 +108,64 @@ solve_goal <- function(f, goal, interval, ..., tol = 1e-7) {
 }
 
 
+# cal_Tw <- function(ea, Tair, Pa = atm) {
+#     n <- length(Tair)
+#     if (length(ea) < n && length(ea) == 1) ea <- rep(ea, n)
+#     ans <- rep(NA_real_, n)
+#     if (length(Pa) != length(ea) && length(Pa) == 1) Pa <- rep(Pa, n)
+
+#     for (i in 1:n) {
+#         temp <- ea[i] + Tair[i] + Pa[i]
+#         if (!is.na(temp)) {
+#             ans[i] <- cal_Tw_default(ea[i], Tair[i], Pa[i])
+#         }
+#     }
+#     ans
+# }
+
+# #' @rdname cal_Tw
+# #' @export
+# cal_Tw_default <- function(ea, Tair, Pa = atm) {
+#     ea <- pmin(ea, cal_ea(Tair)) # make sure ea in a reasonable range
+#     gamma <- cal_gamma(Tair, Pa) # lambda changes slightly as Tair changes
+#     # lambda = cal_lambda(Tair)
+
+#     goal <- function(Tw) {
+#         # rho_a = 1 # ignored
+#         # f1 = - Cp * rho_a * (Tw - Ta)
+#         # f2 = lambda * (q_w - q_a) * rho_a
+#         f1 <- cal_es(Tw) - ea
+#         f2 <- -gamma * (Tw - Tair)
+#         f1 - f2
+#     }
+#     uniroot(goal, c(-150, 80))$root
+# }
+
+# wet_bulb <- function(w, Tair, Pa) {
+#     ea <- w2ea(w, Pa)
+#     cal_Tw(ea, Tair, Pa)
+# }
+
 #' wetbulb temperature
 #'
 #' @inheritParams ET0_Monteith65
 #' @inheritParams cal_Rn
+#' 
+#' @references 
+#' 1. https://github.com/wrf-model/WRF/blob/master/phys/module_diag_functions.F#L1154
+#' 
 #' @export
+cal_wetbulb <- function(Tair, Tdew, Pa = atm) {
+  # ea <- pmin(ea, cal_ea(Tair)) # make sure ea in a reasonable range
+  slope <- cal_slope(Tair)
+  gamma <- cal_gamma(Tair, Pa) # lambda changes slightly as Tair changes
+  
+  (Tair * gamma + Tdew * slope)/ (slope + gamma)
+}
+
+#' @export
+#' @rdname cal_wetbulb
 cal_Tw <- function(ea, Tair, Pa = atm) {
-    n <- length(Tair)
-    if (length(ea) < n && length(ea) == 1) ea <- rep(ea, n)
-    ans <- rep(NA_real_, n)
-    if (length(Pa) != length(ea) && length(Pa) == 1) Pa <- rep(Pa, n)
-
-    for (i in 1:n) {
-        temp <- ea[i] + Tair[i] + Pa[i]
-        if (!is.na(temp)) {
-            ans[i] <- cal_Tw_default(ea[i], Tair[i], Pa[i])
-        }
-    }
-    ans
-}
-
-#' @rdname cal_Tw
-#' @export
-cal_Tw_default <- function(ea, Tair, Pa = atm) {
-    ea <- pmin(ea, cal_ea(Tair)) # make sure ea in a reasonable range
-    gamma <- cal_gamma(Tair, Pa) # lambda changes slightly as Tair changes
-    # lambda = cal_lambda(Tair)
-
-    goal <- function(Tw) {
-        # rho_a = 1 # ignored
-        # f1 = - Cp * rho_a * (Tw - Ta)
-        # f2 = lambda * (q_w - q_a) * rho_a
-        f1 <- cal_es(Tw) - ea
-        f2 <- -gamma * (Tw - Tair)
-        f1 - f2
-    }
-    uniroot(goal, c(-150, 80))$root
-}
-
-wet_bulb <- function(w, Tair, Pa) {
-    ea <- w2ea(w, Pa)
-    cal_Tw(ea, Tair, Pa)
+  Tdew = ea2T(ea)
+  cal_wetbulb(Tair, Tdew, Pa)
 }

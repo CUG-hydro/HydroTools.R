@@ -9,8 +9,9 @@
 #' @return e in the same unit as Pa
 #' 
 #' @references
-#' https://www.eol.ucar.edu/projects/ceop/dm/documents/refdata_report/eqns.html, Eq-17
-#'
+#' 1. https://www.eol.ucar.edu/projects/ceop/dm/documents/refdata_report/eqns.html, Eq-17
+#' 2. Bolton, David. “The Computation of Equivalent Potential Temperature.” Monthly Weather Review 108, no. 7 (July 1980): 1046–53. <https://doi.org/10.1175/1520-0493(1980)108<1046:TCOEPT>2.0.CO;2>.
+#' 
 #' @examples
 #' RH = 90
 #' Pa = atm
@@ -53,9 +54,16 @@ cal_es <- function(Tair) {
     # 0.61094 * exp((17.625 * Tair) / (Tair + 243.04))
 }
 
+#' @export
 es2T <- function(es) {
   es = es * 10 # to hPa
-  (243.5 * log(es) - 440.8) / (19.48 - log(es))
+  (243.5 * log(es) - 440.8) / (19.48 - log(es)) # bolton 1980, Eq. 11
+}
+
+#' @export
+RH2Tdew <- function(Tair, RH) {
+  ea = cal_es(Tair) * RH / 100
+  es2T(ea)
 }
 
 # https://github.com/rpkgs/skew-t/blob/master/thermo_scripts.py#L42

@@ -90,7 +90,10 @@ e = q2ea(q, Pa)
 es = cal_es(Tair)
 }
 \references{
-https://www.eol.ucar.edu/projects/ceop/dm/documents/refdata_report/eqns.html, Eq-17
+\enumerate{
+\item https://www.eol.ucar.edu/projects/ceop/dm/documents/refdata_report/eqns.html, Eq-17
+\item Bolton, David. “The Computation of Equivalent Potential Temperature.” Monthly Weather Review 108, no. 7 (July 1980): 1046–53. <https://doi.org/10.1175/1520-0493(1980)108<1046:TCOEPT>2.0.CO;2>.
+}
 
 https://earthscience.stackexchange.com/questions/2360/how-do-i-convert-specific-humidity-to-relative-humidity
 }
