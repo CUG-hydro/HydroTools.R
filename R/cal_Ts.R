@@ -166,6 +166,6 @@ cal_wetbulb <- function(Tair, Tdew, Pa = atm) {
 #' @export
 #' @rdname cal_wetbulb
 cal_Tw <- function(ea, Tair, Pa = atm) {
-  Tdew = ea2T(ea)
+  Tdew = es2T(ea)
   cal_wetbulb(Tair, Tdew, Pa)
 }
