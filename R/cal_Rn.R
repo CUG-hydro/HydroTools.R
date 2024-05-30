@@ -24,8 +24,7 @@
 #' - `Rsn` : Surface downward net shortwave radiation
 #' - `Rsi`  : Surface downward shortwave radiation (Rsi)
 #' - `Rsi_o` : Clear-sky surface downward shortwave radiation
-#' - `Rsi_toa`  : Extraterrestrial radiation (top of atmosphere, Rsi_toa)
-#' 
+#' - `Rsi_toa`  : Extraterrestrial radiation (top of atmosphere, Rsi_toa) #' 
 #' @note
 #' `Rn` might <= 0. Users need to constrain the min value by `pmax(Rn, 0)`.
 #' 
@@ -84,7 +83,7 @@ cal_Rn <- function(lat, J, Tmin, Tmax,
 
   T0 = 273.15
   # net outgoing longwave radiation [MJ m-2 day-1]
-  sigma <- 4.903 / (10^9) #  斯蒂芬-玻尔兹曼常数, [MJ K-4 m-2]
+  sigma <- 4.903 * 1e-9 #  斯蒂芬-玻尔兹曼常数, [MJ K-4 m-2]
   Rln = -sigma * ( ((Tmax + T0)^4 + (Tmin + T0)^4) / 2) *
     (0.34 - 0.14 * sqrt(ea)) * (1.35 * Rsi / Rsi_o - 0.35)
   Rn = Rsn + Rln 

@@ -41,6 +41,7 @@ XAJ_goal <- function(par, Qobs, prcp, ET0, area, date = NULL, dt = 24, index = "
 #' @param area basin area (km^2).
 #' @param dt time step (hour)
 #'
+#' @param index KGE or NSE
 #' @param seed (can be ignored) starting number of random number generator,
 #' see [base::set.seed()] for details.
 #' This parameter is to make sure optimization result is same in different tries.
@@ -48,12 +49,12 @@ XAJ_goal <- function(par, Qobs, prcp, ET0, area, date = NULL, dt = 24, index = "
 #'
 #' @export
 XAJ_calib <- function(Qobs, prcp, ET0, area, dt = 24, date = NULL,
-  maxn = 1000, seed = 1, ...)
+  maxn = 1000, index = "KGE", seed = 1, ...)
 {
   set.seed(1)
   l_opt = rtop::sceua(XAJ_goal, par0, lb, ub,
     Qobs = Qobs, prcp = prcp, ET0 = ET0, area = area, dt = dt, date = date,
-    maxn = maxn)
+    maxn = maxn, index=index)
   # The optimized best parameter
   opt = l_opt$par %>% set_names(rownames(d_par))
 

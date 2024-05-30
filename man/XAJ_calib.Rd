@@ -12,6 +12,7 @@ XAJ_calib(
   dt = 24,
   date = NULL,
   maxn = 1000,
+  index = "KGE",
   seed = 1,
   ...
 )
@@ -28,6 +29,8 @@ XAJ_calib(
 \item{dt}{time step (hour)}
 
 \item{date}{(optional) corresponding date of \code{Qobs}}
+
+\item{index}{KGE or NSE}
 
 \item{seed}{(can be ignored) starting number of random number generator,
 see \code{\link[base:Random]{base::set.seed()}} for details.

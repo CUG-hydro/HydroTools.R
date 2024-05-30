@@ -55,7 +55,7 @@ radiation in \verb{[MJ d-1]}
 \item \code{Rsn} : Surface downward net shortwave radiation
 \item \code{Rsi}  : Surface downward shortwave radiation (Rsi)
 \item \code{Rsi_o} : Clear-sky surface downward shortwave radiation
-\item \code{Rsi_toa}  : Extraterrestrial radiation (top of atmosphere, Rsi_toa)
+\item \code{Rsi_toa}  : Extraterrestrial radiation (top of atmosphere, Rsi_toa) #'
 }
 }
 \description{
