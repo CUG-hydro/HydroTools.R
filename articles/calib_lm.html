@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>1. 优化函数SCEUA率定模型参数 • hydroTools</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -137,14 +137,15 @@
 <span><span class="co">#&gt; [13]  32.5  35.0  37.5  40.0  42.5  45.0  47.5  50.0  52.5  55.0  57.5  60.0</span></span>
 <span><span class="co">#&gt; [25]  62.5  65.0  67.5  70.0  72.5  75.0  77.5  80.0  82.5  85.0  87.5  90.0</span></span>
 <span><span class="co">#&gt; [37]  92.5  95.0  97.5 100.0 102.5 105.0 107.5 110.0 112.5 115.0 117.5 120.0</span></span>
-<span><span class="co">#&gt; [49] 122.5 125.0</span></span>
-<span><span class="fu">goal</span><span class="op">(</span><span class="va">par</span>, <span class="va">x</span>, <span class="va">yobs</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [49] 122.5 125.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">goal</span><span class="op">(</span><span class="va">par</span>, <span class="va">x</span>, <span class="va">yobs</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 55.93361</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="参数优化">2. 参数优化<a class="anchor" aria-label="anchor" href="#%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">par_u</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span>   <span class="co"># upper boundary of par</span></span>
 <span><span class="va">par_l</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="co"># lower boundary of par</span></span>
 <span><span class="va">par0</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>    <span class="co"># initial parameter</span></span>
@@ -188,13 +189,14 @@
 <span><span class="co">#&gt; 920 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
 <span><span class="co">#&gt; 953 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
 <span><span class="co">#&gt; 982 best 1.74 function convergence 0 parameter convergence 196.6364 </span></span>
-<span><span class="co">#&gt; 1008 best 1.74 function convergence 0 parameter convergence 196.6364</span></span>
-<span><span class="va">par_opt</span> <span class="op">=</span> <span class="va">opt</span><span class="op">$</span><span class="va">par</span> <span class="co"># SCEUA生成的最优参数</span></span></code></pre></div>
+<span><span class="co">#&gt; 1008 best 1.74 function convergence 0 parameter convergence 196.6364</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">par_opt</span> <span class="op">=</span> <span class="va">opt</span><span class="op">$</span><span class="va">par</span> <span class="co"># SCEUA生成的最优参数</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="结果展示">3. 结果展示<a class="anchor" aria-label="anchor" href="#%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ysim</span> <span class="op">=</span> <span class="fu">fun_predict</span><span class="op">(</span><span class="va">x</span>, <span class="va">par_opt</span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">yobs</span>, <span class="va">ysim</span><span class="op">)</span></span>
 <span></span>
@@ -205,8 +207,9 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
 <span><span class="co">#&gt;       R   pvalue    R2   NSE   KGE  RMSE   MAE   Bias Bias_perc    AI n_sim</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 0.994 4.96<span style="color: #949494;">e</span><span style="color: #BB0000;">-47</span> 0.987 0.942 0.841  1.74  1.45 -<span style="color: #BB0000;">0.756</span>   -<span style="color: #BB0000;">0.047</span><span style="color: #BB0000; text-decoration: underline;">7</span> 0.988    50</span></span>
-<span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 0.994 4.96<span style="color: #949494;">e</span><span style="color: #BB0000;">-47</span> 0.987 0.942 0.841  1.74  1.45 -<span style="color: #BB0000;">0.756</span>   -<span style="color: #BB0000;">0.047</span><span style="color: #BB0000; text-decoration: underline;">7</span> 0.988    50</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va">gg.layers</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># remotes::install_github("rpkgs/gg.layers")</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="op">{</span></span>
@@ -244,7 +247,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>

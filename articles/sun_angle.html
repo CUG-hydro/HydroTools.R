@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>sun_angle • hydroTools</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
@@ -134,8 +134,10 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">info</span></span></code></pre></div>
 <pre><code><span><span class="co">##    angle_elev angle_azimuth angle_sigma               delta_minute</span></span>
+<span><span class="co">##         &lt;num&gt;         &lt;num&gt;       &lt;num&gt;                 &lt;Duration&gt;</span></span>
 <span><span class="co">## 1:      36.22        183.82   -23.18372 -1294.8s (~-21.58 minutes)</span></span>
 <span><span class="co">##             time_local          time_begin            time_end</span></span>
+<span><span class="co">##                 &lt;POSc&gt;              &lt;POSc&gt;              &lt;POSc&gt;</span></span>
 <span><span class="co">## 1: 2022-12-12 12:13:25 2022-12-12 06:58:26 2022-12-12 17:01:33</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -164,8 +166,10 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">info</span></span></code></pre></div>
 <pre><code><span><span class="co">##    angle_elev angle_azimuth angle_sigma               delta_minute</span></span>
+<span><span class="co">##         &lt;num&gt;         &lt;num&gt;       &lt;num&gt;                 &lt;Duration&gt;</span></span>
 <span><span class="co">## 1:      26.11         217.1   -23.18372 -1294.8s (~-21.58 minutes)</span></span>
 <span><span class="co">##             time_local          time_begin            time_end</span></span>
+<span><span class="co">##                 &lt;POSc&gt;              &lt;POSc&gt;              &lt;POSc&gt;</span></span>
 <span><span class="co">## 1: 2022-12-12 14:24:25 2022-12-12 06:58:26 2022-12-12 17:01:33</span></span></code></pre>
 <blockquote>
 <p><strong>注意：</strong> 1. 太阳的方位角和影子的方位角，相差180°。 2.
@@ -199,7 +203,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>
