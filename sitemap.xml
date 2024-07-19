@@ -1,177 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/calib_lm.html</loc>
-  </url>
-  <url>
-    <loc>/articles/calim_XAJ.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/radiation_temp.html</loc>
-  </url>
-  <url>
-    <loc>/articles/routing_muskingum.html</loc>
-  </url>
-  <url>
-    <loc>/articles/sun_angle.html</loc>
-  </url>
-  <url>
-    <loc>/articles/vapour_press.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ET0_helper.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ET0_models.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ET_CR_Xiao2020.html</loc>
-  </url>
-  <url>
-    <loc>/reference/GOF.html</loc>
-  </url>
-  <url>
-    <loc>/reference/LCL.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Mw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PET_hg.html</loc>
-  </url>
-  <url>
-    <loc>/reference/R.html</loc>
-  </url>
-  <url>
-    <loc>/reference/R2_sign.html</loc>
-  </url>
-  <url>
-    <loc>/reference/SPAW.html</loc>
-  </url>
-  <url>
-    <loc>/reference/VIC_soilParam.html</loc>
-  </url>
-  <url>
-    <loc>/reference/XAJ_calib.html</loc>
-  </url>
-  <url>
-    <loc>/reference/XAJ_predict.html</loc>
-  </url>
-  <url>
-    <loc>/reference/budyko.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_Rl_out.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_Rli.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_Rln.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_Rn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_Rsi.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_Rsi_toa.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_Ts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_angle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_radiation_Ta.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_ssd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cal_wetbulb.html</loc>
-  </url>
-  <url>
-    <loc>/reference/constants.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_temperature.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cv_coef.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_localtime.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_sigma.html</loc>
-  </url>
-  <url>
-    <loc>/reference/grid_date.html</loc>
-  </url>
-  <url>
-    <loc>/reference/heat_index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hydroTools-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/kurtosis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_calib.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_runoff.html</loc>
-  </url>
-  <url>
-    <loc>/reference/routing_muskingum.html</loc>
-  </url>
-  <url>
-    <loc>/reference/soil_class.html</loc>
-  </url>
-  <url>
-    <loc>/reference/soil_heat_flux.html</loc>
-  </url>
-  <url>
-    <loc>/reference/suncalc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/theta_wet.html</loc>
-  </url>
-  <url>
-    <loc>/reference/unit_convert.html</loc>
-  </url>
-  <url>
-    <loc>/reference/usda_sf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vapour_press.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/calib_lm.html</loc></url>
+<url><loc>/articles/calim_XAJ.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/radiation_temp.html</loc></url>
+<url><loc>/articles/routing_muskingum.html</loc></url>
+<url><loc>/articles/sun_angle.html</loc></url>
+<url><loc>/articles/vapour_press.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/ET0_helper.html</loc></url>
+<url><loc>/reference/ET0_models.html</loc></url>
+<url><loc>/reference/ET_CR_Xiao2020.html</loc></url>
+<url><loc>/reference/GOF.html</loc></url>
+<url><loc>/reference/LCL.html</loc></url>
+<url><loc>/reference/Mw.html</loc></url>
+<url><loc>/reference/PET_hg.html</loc></url>
+<url><loc>/reference/R.html</loc></url>
+<url><loc>/reference/R2_sign.html</loc></url>
+<url><loc>/reference/SPAW.html</loc></url>
+<url><loc>/reference/VIC_soilParam.html</loc></url>
+<url><loc>/reference/XAJ_calib.html</loc></url>
+<url><loc>/reference/XAJ_predict.html</loc></url>
+<url><loc>/reference/budyko.html</loc></url>
+<url><loc>/reference/cal_Rl_out.html</loc></url>
+<url><loc>/reference/cal_Rli.html</loc></url>
+<url><loc>/reference/cal_Rln.html</loc></url>
+<url><loc>/reference/cal_Rn.html</loc></url>
+<url><loc>/reference/cal_Rsi.html</loc></url>
+<url><loc>/reference/cal_Rsi_toa.html</loc></url>
+<url><loc>/reference/cal_Ts.html</loc></url>
+<url><loc>/reference/cal_angle.html</loc></url>
+<url><loc>/reference/cal_radiation_Ta.html</loc></url>
+<url><loc>/reference/cal_ssd.html</loc></url>
+<url><loc>/reference/cal_wetbulb.html</loc></url>
+<url><loc>/reference/constants.html</loc></url>
+<url><loc>/reference/convert_temperature.html</loc></url>
+<url><loc>/reference/cv_coef.html</loc></url>
+<url><loc>/reference/get_localtime.html</loc></url>
+<url><loc>/reference/get_sigma.html</loc></url>
+<url><loc>/reference/grid_date.html</loc></url>
+<url><loc>/reference/heat_index.html</loc></url>
+<url><loc>/reference/hydroTools-package.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/kurtosis.html</loc></url>
+<url><loc>/reference/plot_calib.html</loc></url>
+<url><loc>/reference/plot_runoff.html</loc></url>
+<url><loc>/reference/routing_muskingum.html</loc></url>
+<url><loc>/reference/soil_class.html</loc></url>
+<url><loc>/reference/soil_heat_flux.html</loc></url>
+<url><loc>/reference/suncalc.html</loc></url>
+<url><loc>/reference/theta_wet.html</loc></url>
+<url><loc>/reference/unit_convert.html</loc></url>
+<url><loc>/reference/usda_sf.html</loc></url>
+<url><loc>/reference/vapour_press.html</loc></url>
 </urlset>
+
