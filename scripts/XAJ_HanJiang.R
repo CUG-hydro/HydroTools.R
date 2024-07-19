@@ -2,8 +2,9 @@ library(hydroTools)
 library(sf)
 library(data.table)
 library(magrittr)
+library(Ipaper)
 
-indir = "F:/CUG-Hydro/ChinaRunoff/basins/China/"
+indir = "Z:/GitHub/cug-hydro/shijiaqi/data/ChinaBasins"
 shp <- read_sf(glue("{indir}/ChinaBasins_(塔河+雅江+长江+黄河+珠江)-sp375_v0.1.0.shp"))
 lst <- readRDS(glue("{indir}/ChinaBasins_气象驱动-sp375.RDS"))                  # meteorological forcing
 load(glue("{indir}/ChinaBasins_(塔河+雅江+长江+黄河+珠江)-sp375_v0.1.0.rda"))   # runoff data
@@ -34,6 +35,10 @@ get_input <- function(site) {
     merge(forcing[, .(date, prcp, ET0)])
   list(data = data, area = area, lat = lat, site = site)
 }
+
+# ET0
+
+
 # srad: `W m-2`
 # lrad: `W m-2`
 # MJ m-2 d-1

@@ -41,6 +41,7 @@ NULL
 #' @param D vapor pressure deficit (kPa)
 #' @param Pa surface air pressure (kPa)
 #' @param wind wind speed at the height of `z.wind`
+#' @param z.wind Height where measure the wind speed `[m]`. Default 2m.
 #' @param alpha albedo `[0-1]`
 #'
 #' @rdname ET0_models
