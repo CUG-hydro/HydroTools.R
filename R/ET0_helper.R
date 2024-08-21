@@ -16,6 +16,7 @@
 #'      2. Tair + ea/Pa
 #'      3. `1.01 * (Tair + 273)` , FAO56 Eq. 3-7
 #' - `cal_rho_a`: air density (kg/m^3)
+#' - `rH`: resistance of aerodynamic (s/m), about `100 s/m`.
 #' 
 #' @references
 #' 1. Allen, R. G., & Luis S. Pereira. (1998). Crop
@@ -153,10 +154,11 @@ cal_rH <- function(U2, h = 0.12) {
 cal_rH2 <- function(U2, Tair, Pa = atm) {
   # `f(U2) = 2.6 * (1 + 0.54U2)` is equivalent to Shuttleworth1993
   # rho_a * Cp / rH = f(U2)
-  f_U2 <- 2.6 * (1 + 0.54 * U2)
+  f_U2 <- 6.43 * (1 + 0.536 * U2) # 2.6 = 6.43 / 2.45
   rho_a <- 3.486 * Pa / cal_TvK(Tair) # FAO56, Eq. 3-5, kg m-3
-  rH <- rho_a * Cp / f_U2 * 86400
-  rH
+  gamma <- cal_gamma(Tair, Pa)
+  rH <- rho_a * Cp / f_U2 / gamma * 86400
+  rH # s-1 m
 }
 
 # vitual temperature

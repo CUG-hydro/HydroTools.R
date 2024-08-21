@@ -99,6 +99,7 @@ temperature \code{Tair}, \verb{[kPa degC-1]}.
 \item \code{1.01 * (Tair + 273)} , FAO56 Eq. 3-7
 }
 \item \code{cal_rho_a}: air density (kg/m^3)
+\item \code{rH}: resistance of aerodynamic (s/m), about \verb{100 s/m}.
 }
 }
 \examples{
