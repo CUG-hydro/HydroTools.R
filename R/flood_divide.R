@@ -11,12 +11,16 @@ get_event_info <- function(date, Q, extend = ddays(5)) {
   )
 }
 
-#' @param gap_max distance smaller than gap_max is considered as a same group
+#' @param gap_max Default `5` days.
+#' - `gaps` (in days) <= `gap_max` is regarded as the same event.
+#' - `gaps > gap_max`, it will be regarded as two events.
+#' @param extend Default `ddays(5)`. Extend `nday` in the left and right of a event
 #'
 #' @rdname flood_divide
 #' @export
 detect_groups <- function(df, inds, gap_max = 5, extend = ddays(5)) {
-  grps <- cumsum(c(0, diff(inds) > gap_max)) # 分组
+  gaps <- as.numeric(diff(df$date[inds]), units = "days")
+  grps <- cumsum(c(0, gaps > gap_max)) # 分组
   info <- cbind(group = grps, df[inds, ]) # 分组
   info[, get_event_info(date, Q, extend), group]
 }
@@ -25,10 +29,6 @@ detect_groups <- function(df, inds, gap_max = 5, extend = ddays(5)) {
 #'
 #' @param Q_min minimum discharge to detect flood events
 #' @param Q_peak peak discharge to detect flood events
-#'
-#' @param gap_max Default `5`. if `index gap > gap_max`, events will be regarded as two.
-#' If Q is hourly, gap_max can be set `5*24`.
-#' @param extend Default `ddays(5)`. Extend `nday` in the left and right of a event
 #'
 #' @rdname flood_divide
 #' @export
@@ -74,6 +74,6 @@ merge_flood <- function(df, info_flood, format = "%Y.%m") {
     date_end <- info$date_end
     df[time >= date_beg & time <= date_end]
   }) %>% melt_list("group")
-  r[, group_name := format(time[1], "%Y.%m.%d"), .(group)]
+  r[, group_name := format(time[1], format), .(group)]
   relocate(r, group, group_name)
 }

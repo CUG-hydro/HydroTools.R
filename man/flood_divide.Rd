@@ -25,8 +25,11 @@ merge_flood(df, info_flood, format = "\%Y.\%m")
 \arguments{
 \item{df}{A data.table with date and Q columns}
 
-\item{gap_max}{Default \code{5}. if \verb{index gap > gap_max}, events will be regarded as two.
-If Q is hourly, gap_max can be set \code{5*24}.}
+\item{gap_max}{Default \code{5} days.
+\itemize{
+\item \code{gaps} (in days) <= \code{gap_max} is regarded as the same event.
+\item \code{gaps > gap_max}, it will be regarded as two events.
+}}
 
 \item{extend}{Default \code{ddays(5)}. Extend \code{nday} in the left and right of a event}
 
