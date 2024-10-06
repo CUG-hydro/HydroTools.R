@@ -96,8 +96,9 @@ flood_divide"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
 
 
 <dt id="arg-gap-max">gap_max<a class="anchor" aria-label="anchor" href="#arg-gap-max"></a></dt>
-<dd><p>Default <code>5</code>. if <code>index gap &gt; gap_max</code>, events will be regarded as two.
-If Q is hourly, gap_max can be set <code>5*24</code>.</p></dd>
+<dd><p>Default <code>5</code> days.</p><ul><li><p><code>gaps</code> (in days) &lt;= <code>gap_max</code> is regarded as the same event.</p></li>
+<li><p><code>gaps &gt; gap_max</code>, it will be regarded as two events.</p></li>
+</ul></dd>
 
 
 <dt id="arg-extend">extend<a class="anchor" aria-label="anchor" href="#arg-extend"></a></dt>
