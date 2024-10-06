@@ -9,7 +9,14 @@
 \usage{
 detect_groups(df, inds, gap_max = 5, extend = ddays(5))
 
-detect_flood_events(date, Q, Q_min = 2, Q_peak = 10, gap_max = 5)
+detect_flood_events(
+  date,
+  Q,
+  Q_min = 2,
+  Q_peak = 10,
+  gap_max = 5,
+  extend = ddays(5)
+)
 
 flood_divide(df, ...)
 
@@ -18,7 +25,10 @@ merge_flood(df, info_flood, format = "\%Y.\%m")
 \arguments{
 \item{df}{A data.table with date and Q columns}
 
-\item{gap_max}{distance smaller than gap_max is considered as a same group}
+\item{gap_max}{Default \code{5}. if \verb{index gap > gap_max}, events will be regarded as two.
+If Q is hourly, gap_max can be set \code{5*24}.}
+
+\item{extend}{Default \code{ddays(5)}. Extend \code{nday} in the left and right of a event}
 
 \item{Q_min}{minimum discharge to detect flood events}
 

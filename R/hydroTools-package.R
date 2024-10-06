@@ -13,6 +13,10 @@
 ## usethis namespace: end
 NULL
 
+#' @importFrom lubridate ddays
+#' @export
+lubridate::ddays
+
 .onLoad <- function(libname, pkgname) {
   options(rmarkdown.html_vignette.check_title = FALSE)
   
