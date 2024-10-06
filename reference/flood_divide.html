@@ -74,9 +74,16 @@ flood_divide"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">detect_groups</span><span class="op">(</span><span class="va">df</span>, <span class="va">inds</span>, gap_max <span class="op">=</span> <span class="fl">5</span>, extend <span class="op">=</span> <span class="fu">ddays</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">detect_groups</span><span class="op">(</span><span class="va">df</span>, <span class="va">inds</span>, gap_max <span class="op">=</span> <span class="fl">5</span>, extend <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/duration.html" class="external-link">ddays</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">detect_flood_events</span><span class="op">(</span><span class="va">date</span>, <span class="va">Q</span>, Q_min <span class="op">=</span> <span class="fl">2</span>, Q_peak <span class="op">=</span> <span class="fl">10</span>, gap_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu">detect_flood_events</span><span class="op">(</span></span>
+<span>  <span class="va">date</span>,</span>
+<span>  <span class="va">Q</span>,</span>
+<span>  Q_min <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  Q_peak <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  gap_max <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  extend <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/duration.html" class="external-link">ddays</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">flood_divide</span><span class="op">(</span><span class="va">df</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
@@ -92,7 +99,12 @@ flood_divide"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
 
 
 <dt id="arg-gap-max">gap_max<a class="anchor" aria-label="anchor" href="#arg-gap-max"></a></dt>
-<dd><p>distance smaller than gap_max is considered as a same group</p></dd>
+<dd><p>Default <code>5</code>. if <code>index gap &gt; gap_max</code>, events will be regarded as two.
+If Q is hourly, gap_max can be set <code>5*24</code>.</p></dd>
+
+
+<dt id="arg-extend">extend<a class="anchor" aria-label="anchor" href="#arg-extend"></a></dt>
+<dd><p>Default <code>ddays(5)</code>. Extend <code>nday</code> in the left and right of a event</p></dd>
 
 
 <dt id="arg-q-min">Q_min<a class="anchor" aria-label="anchor" href="#arg-q-min"></a></dt>
