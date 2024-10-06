@@ -6,7 +6,9 @@
 [![CRAN](http://www.r-pkg.org/badges/version/HydroTools.R)](https://cran.r-project.org/package=HydroTools.R)
 <!-- badges: end -->
 
-The goal of HydroTools.R is to ...
+> 为了获得最佳性能，大部分函数采用Julia进行重写。   
+> 详见：<https://github.com/jl-pkgs/HydroTools.jl>。   
+> 后期开发的重点在Julia版本的HydroTools.jl。
 
 ## Installation
 
@@ -33,7 +35,8 @@ library(hydroTools)
 - [x] 实际蒸发：蒸发互补理论(CR)
 - [x] 辐射与地表能量平衡
 - [x] XAJ水文模型
-- [x] 河网汇流：马斯京根
+- [x] 河网汇流：move to <https://github.com/jl-pkgs/MARRMoT.jl/tree/master/src/Routing>
+  > 线性水库; 马斯京根; 单位线; 运动波
 - [x] 土壤函数库，主要用于制作水文模型的输入数据
 - [x] 气象变量处理函数，RH, q, w的转化, 湿球温度、干球温度、饱和水气压、空气密度
 - [ ] 水汽通量、水汽通量散度
