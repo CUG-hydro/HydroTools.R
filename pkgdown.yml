@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   calib_lm: calib_lm.html
@@ -8,4 +8,4 @@ articles:
   routing_muskingum: routing_muskingum.html
   sun_angle: sun_angle.html
   vapour_press: vapour_press.html
-last_built: 2024-09-07T12:14Z
+last_built: 2024-10-06T11:13Z
