@@ -38,6 +38,7 @@
 <url><loc>/reference/cal_wetbulb.html</loc></url>
 <url><loc>/reference/constants.html</loc></url>
 <url><loc>/reference/convert_temperature.html</loc></url>
+<url><loc>/reference/correct_basin_net_shapefile.html</loc></url>
 <url><loc>/reference/cv_coef.html</loc></url>
 <url><loc>/reference/flood_divide.html</loc></url>
 <url><loc>/reference/get_localtime.html</loc></url>
@@ -47,6 +48,7 @@
 <url><loc>/reference/hydroTools-package.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/kurtosis.html</loc></url>
+<url><loc>/reference/plot_StreamNet.html</loc></url>
 <url><loc>/reference/plot_calib.html</loc></url>
 <url><loc>/reference/plot_runoff.html</loc></url>
 <url><loc>/reference/reexports.html</loc></url>
