@@ -13,6 +13,7 @@ Imports:
     lubridate,
     dplyr, purrr, 
     data.table, 
+    data.tree, DiagrammeR,
     methods
 Suggests: 
     testthat (>= 2.1.0),
