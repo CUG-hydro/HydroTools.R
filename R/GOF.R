@@ -92,26 +92,26 @@ GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
     yobs <- yobs[I]
     w     <- w[I]
 
+    R      <- NA_real_
+    pvalue <- NA_real_
+    
     if (include.cv) {
         CV_obs <- cv_coef(yobs, w)
         CV_sim <- cv_coef(ysim, w)
     }
     if (is_empty(yobs)){
-        out <- c(RMSE = NA_real_, 
-            KGE = NA_real_,
-            NSE = NA_real_, MAE = NA_real_, AI = NA_real_,
-            Bias = NA_real_, Bias_perc = NA_real_, n_sim = NA_real_)
-
-        if (include.r) out <- c(out, R2 = NA_real_, R = NA_real_, pvalue = NA_real_)
-        if (include.cv) out <- c(out, obs = CV_obs, sim = CV_sim)
+        out <- tibble(
+          R, pvalue, R2 = NA_real_,
+          NSE = NA_real_, KGE = NA_real_, RMSE = NA_real_, MAE = NA_real_,
+          Bias = NA_real_, Bias_perc = NA_real_, AI = NA_real_, n_sim = NA_integer_
+        )
+        if (include.cv) out <- cbind(out, CV_obs, CV_sim)
         return(out)
     }
 
     # R2: the portion of regression explained variance, also known as
     # coefficient of determination
     KGE = KGE(ysim, yobs)
-    # https://en.wikipedia.org/wiki/Coefficient_of_determination
-    # https://en.wikipedia.org/wiki/Explained_sum_of_squares
     y_mean <- sum(yobs * w) / sum(w)
 
     SSR    <- sum( (ysim - y_mean)^2 * w)
@@ -131,8 +131,6 @@ GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
     # was meaningless.
     # In the current, I have no idea how to add weights `R`.
     if (include.r){
-        R      <- NA_real_
-        pvalue <- NA_real_
         
         tryCatch({
             cor.obj <- cor.test(yobs, ysim, use = "complete.obs")
