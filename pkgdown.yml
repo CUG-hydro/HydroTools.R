@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   calib_lm: calib_lm.html
@@ -7,4 +7,4 @@ articles:
   radiation_temp: radiation_temp.html
   sun_angle: sun_angle.html
   vapour_press: vapour_press.html
-last_built: 2025-04-21T11:11Z
+last_built: 2025-09-05T11:33Z
