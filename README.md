@@ -16,7 +16,8 @@ You can install the released version of HydroTools.R from github:
 
 ``` r
 # remotes::install_gitlab("r-pkgs/HydroTools.R") # github may not work, use gitlab instead
-remotes::install_github("CUG-hydro/HydroTools.R") 
+remotes::install_github("CUG-hydro/HydroTools.R")
+install.packages("hydroTools", repos = "https://rpkgs.r-universe.dev")
 ```
 
 ## Example
