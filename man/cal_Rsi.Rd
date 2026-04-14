@@ -11,7 +11,7 @@ cal_Rsi(lat, J, ssd = NULL, cld = NULL, Z = 0, a = 0.25, b = 0.5)
 
 \item{J}{day of year}
 
-\item{ssd}{sunshine duration \link{hours}. If \code{ssd = NULL}, \code{Rsi} is the clear-sky
+\item{ssd}{sunshine duration \link[lubridate:period]{lubridate::hours}. If \code{ssd = NULL}, \code{Rsi} is the clear-sky
 solar radiation.}
 
 \item{cld}{Cloud cover \verb{[fraction]}. If provided it would be directly used to
@@ -39,7 +39,7 @@ providing sunshine duration (SSD) in hours or cloud cover in fraction.
 \enumerate{
 \item Martinezlozano J A, Tena F, Onrubia J E, et al. The historical
 evolution of the Angstrom formula and its modifications: review and
-bibliography.\link{J}. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
+bibliography.\link[data.table:J]{data.table::J}. Agricultural & Forest Meteorology, 1985, 33(2):109-128.
 \item https://github.com/sbegueria/SPEI/blob/master/R/penman.R
 }
 }

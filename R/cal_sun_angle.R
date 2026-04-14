@@ -1,4 +1,3 @@
-
 #' @name cal_ssd
 #' @title sunset hour angle
 #' @description Calculating sunset hour angle (`ws`) according to Allen Eq. 25.
@@ -31,21 +30,19 @@ cal_ssd <- function(lat, J) cal_sunset_angle(lat, J) %>% ws2ssd()
 
 # 赤纬角
 #' Sun Declination angle
-#' 
+#'
 #' @importFrom lubridate yday dhours dminutes
-#' @export 
+#' @export
 get_sigma <- function(J) {
   if (inherits(J, "Date")) J %<>% yday()
   sigma <- 0.409 * sin(2 * pi / 365 * J - 1.39)
   rad2deg(sigma)
 }
 
-local2UTC <- function() {
-}
 
 deltaT_UTC <- function(lon, timeZone = 8) {
   lon_center <- timeZone * 15
-  delta_lon <- (lon - 120)
+  delta_lon <- (lon_center - lon)
   delta_minute <- round(delta_lon / 15 * 60, 2)
   dminutes(delta_minute)
 }
@@ -60,8 +57,16 @@ get_localtime <- function(time, lon, timeZone = 8) {
   time + deltaT_UTC(lon, timeZone)
 }
 
+utc2local <- function(time, lon, timeZone = 8) {
+  time + deltaT_UTC(lon, timeZone)
+}
+
+local2utc <- function(time, lon, timeZone = 8) {
+  time - deltaT_UTC(lon, timeZone)
+}
+
 # 太阳高度角
-#' @export 
+#' @export
 SunAngle_Elevation <- function(lat, sigma, omega) {
   lat %<>% deg2rad()
   sigma %<>% deg2rad()
@@ -73,7 +78,7 @@ SunAngle_Elevation <- function(lat, sigma, omega) {
     round(2)
 }
 
-#' @export 
+#' @export
 SunAngle_Azimuth <- function(lat, sigma, omega) {
   lat %<>% deg2rad()
   sigma %<>% deg2rad()
@@ -95,23 +100,28 @@ SunAngle_Azimuth <- function(lat, sigma, omega) {
 fprintf <- function(fmt, ...) cat(sprintf(fmt, ...))
 
 #' suncalc
-#' 
+#'
 #' The default location is ZuoLing.
-#' 
+#'
+#' @examples
+#' suncalc(Sys.Date())
+#'
 #' @export
-suncalc <- function(time, lon = 114.6053, lat = 30.49694, ..., 
-  year = year(Sys.time()), 
-  verbose = TRUE) 
+suncalc <- function(
+  time, lon = 114.6053, lat = 30.49694, ...,
+  year = year(Sys.time()),
+  verbose = TRUE
+)
 {
   if (is.integer(time)) {
-    J = time
-    time_str = sprintf("%d%03d", year, J)
+    J <- time
+    time_str <- sprintf("%d%03d", year, J)
     time <- as.Date(time_str, "%Y%j")
   }
   J <- yday(time)
   angle_sigma <- get_sigma(J)
 
-  delta_minute = deltaT_UTC(lon, timeZone = 8)
+  delta_minute <- deltaT_UTC(lon, timeZone = 8)
 
   # 我们这里比北京时间晚了21.6min
   time_local <- get_localtime(time, lon)
@@ -145,8 +155,29 @@ suncalc <- function(time, lon = 114.6053, lat = 30.49694, ...,
     fprintf("%-14s: %-10s\n", "日出时间(UTC8) ", time_begin - delta_minute)
     fprintf("%-14s: %-10s\n", "日落时间(UTC8) ", time_end - delta_minute)
   }
-  
+
   data.table(
     angle_elev, angle_azimuth, angle_sigma, delta_minute,
-    time_local, time_begin, time_end)
+    time_local, time_begin, time_end
+  )
+}
+
+#' sunrise
+#' 
+#' @examples
+#' sunrise(Sys.Date())
+#' 
+#' @rdname suncalc
+#' @export
+sunrise <- function(date = Sys.Date(), lon = 80., lat = 30., timeZone = 8) {
+  ws <- cal_sunset_angle(lat, yday(date))
+  ssd <- ws2ssd(ws)
+
+  time_noon <- format(date, "%Y-%m-%d 12:00:00") %>%
+    as.POSIXct() %>%
+    utc2local(lon = lon, timeZone = timeZone)
+
+  time_beg <- time_noon - dhours(ssd / 2)
+  time_end <- time_noon + dhours(ssd / 2)
+  data.table(date, time_noon, time_beg, time_end)
 }

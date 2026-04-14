@@ -2,6 +2,7 @@
 % Please edit documentation in R/cal_sun_angle.R
 \name{suncalc}
 \alias{suncalc}
+\alias{sunrise}
 \title{suncalc}
 \usage{
 suncalc(
@@ -12,7 +13,15 @@ suncalc(
   year = year(Sys.time()),
   verbose = TRUE
 )
+
+sunrise(date = Sys.Date(), lon = 80, lat = 30, timeZone = 8)
 }
 \description{
 The default location is ZuoLing.
+}
+\examples{
+suncalc(Sys.Date())
+
+sunrise(Sys.Date())
+
 }
