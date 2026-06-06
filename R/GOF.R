@@ -52,6 +52,7 @@ KGE <- function(yobs, ysim, ...) {
 #' @param include.r If true, r and R2 will be included.
 #' 
 #' @return
+#' * `ubRMSE` unbiased root mean square error
 #' * `RMSE` root mean square error
 #' * `NSE` NASH coefficient
 #' * `MAE` mean absolute error
@@ -102,8 +103,8 @@ GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
     if (is_empty(yobs)){
         out <- tibble(
           R, pvalue, R2 = NA_real_,
-          NSE = NA_real_, KGE = NA_real_, RMSE = NA_real_, MAE = NA_real_,
-          Bias = NA_real_, Bias_perc = NA_real_, AI = NA_real_, n_sim = NA_integer_
+          NSE = NA_real_, KGE = NA_real_, ubRMSE = NA_real_, RMSE = NA_real_, MAE = NA_real_,
+          Bias = NA_real_, Bias_perc = NA_real_, n_sim = NA_integer_
         )
         if (include.cv) out <- cbind(out, CV_obs, CV_sim)
         return(out)
@@ -123,9 +124,11 @@ GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
     Bias_perc <- Bias/y_mean                              # bias percentage
     MAE    <- sum ( w*abs(RE))/sum(w)                     # mean absolute error
     RMSE   <- sqrt( sum(w*(RE)^2)/sum(w) )                # root mean sqrt error
+    ubRMSE <- sqrt( sum(w*(RE - Bias)^2)/sum(w) )         # unbiased root mean sqrt error
 
     # https://en.wikipedia.org/wiki/Nash%E2%80%93Sutcliffe_model_efficiency_coefficient
     NSE  <- 1  - sum( (RE)^2 * w) / SST # NSE coefficient
+
 
     # Observations number are not same, so comparing correlation coefficient
     # was meaningless.
@@ -144,18 +147,17 @@ GOF <- function(yobs, ysim, w, include.cv = FALSE, include.r = TRUE){
     # In Linear regression, R2 = R^2 (R is pearson cor)
     # R2     <- summary(lm(ysim ~ yobs))$r.squared # low efficient
 
-    # AI: Agreement Index (only good values(w==1) calculate AI)
-    AI <- NA_real_
-    I2 <- which(w == 1)
-    if (length(I2) >= 2) {
-        yobs = yobs[I2]
-        ysim = ysim[I2]
-        y_mean = mean(yobs)
-        AI = 1 - sum( (ysim - yobs)^2 ) / sum( (abs(ysim - y_mean) + abs(yobs - y_mean))^2 )
-    }
-
-    out <- tibble(R, pvalue, R2, NSE, KGE, RMSE, MAE, 
-             Bias, Bias_perc, AI = AI, n_sim = n_sim)
+    # # AI: Agreement Index (only good values(w==1) calculate AI)
+    # AI <- NA_real_
+    # I2 <- which(w == 1)
+    # if (length(I2) >= 2) {
+    #     yobs = yobs[I2]
+    #     ysim = ysim[I2]
+    #     y_mean = mean(yobs)
+    #     AI = 1 - sum( (ysim - yobs)^2 ) / sum( (abs(ysim - y_mean) + abs(yobs - y_mean))^2 )
+    # }
+    out <- tibble(R, pvalue, R2, NSE, KGE, ubRMSE, RMSE, MAE, 
+             Bias, Bias_perc, n_sim = n_sim)
     if (include.cv) out <- cbind(out, CV_obs, CV_sim)
     return(out)
 }
